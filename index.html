@@ -4,79 +4,51 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Berlin AI Labs — KI-Lösungen für KMU</title>
-  <meta name="description" content="Berlin AI Labs — Praktische, erschwingliche KI-Lösungen für kleine und mittlere Unternehmen: Übersetzungen, Automatisierung und Beratung." />
+  <meta name="description" content="Berlin AI Labs — KI-Automatisierung und Sprachlösungen für kleine und mittlere Unternehmen: Kundenservice-Bots, Workflow-Automatisierung und Übersetzung." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <meta name="theme-color" content="#0f172a">
-
-  <!-- Calendly stylesheet -->
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-  
   <style>
     :root{
-      --bg:#f8fafc; /* gray-50 */
+      --bg:#f8fafc;
       --card:#ffffff;
       --muted:#6b7280;
-      --accent:#0ea5a4; /* teal-500 */
+      --accent:#0ea5a4;
       --accent-600:#0d9488;
       --glass: rgba(255,255,255,0.6);
       --maxwidth:1100px;
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      color-scheme: light;
+      font-family: 'Inter', system-ui;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:linear-gradient(180deg,#f8fafc 0%, #ffffff 100%);color:#0f172a;line-height:1.45;-webkit-font-smoothing:antialiased}
+    body{margin:0;background:linear-gradient(180deg,#f8fafc 0%, #ffffff 100%);color:#0f172a;line-height:1.5;-webkit-font-smoothing:antialiased}
     .container{max-width:var(--maxwidth);margin:0 auto;padding:28px}
-
-    /* Navbar */
     .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
     .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit}
     .logo{width:56px;height:56px;border-radius:10px;display:inline-grid;place-items:center}
     .logo img{width:100%;height:100%;object-fit:contain;border-radius:10px}
     nav a{margin-left:20px;text-decoration:none;color:var(--muted);font-weight:600}
-    .cta{background:var(--accent);color:white;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700;cursor:pointer;}
-
-    /* Hero */
+    .cta{background:var(--accent);color:white;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700;cursor:pointer}
     .hero{display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:center;padding:46px 0}
-    .eyebrow{display:inline-block;background:rgba(14,165,164,0.12);color:var(--accent-600);padding:6px 10px;border-radius:999px;font-weight:600;font-size:13px}
     h1{font-size:40px;margin:16px 0 12px}
     p.lead{color:var(--muted);font-size:18px;margin:0 0 20px}
-
-    /* Feature cards */
     .features{display:flex;gap:16px;margin-top:24px}
     .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 20px rgba(15,23,42,0.06);flex:1}
     .card h3{margin:8px 0 6px}
     .card p{margin:0;color:var(--muted);font-size:14px}
-
-    /* Right promo */
-    .promo{background:linear-gradient(180deg, rgba(14,165,164,0.06), rgba(15, 23, 42, 0.02));border-radius:12px;padding:22px}
+    .promo{background:linear-gradient(180deg, rgba(14,165,164,0.06), rgba(15,23,42,0.02));border-radius:12px;padding:22px}
     .stat{display:flex;align-items:center;gap:12px}
     .stat strong{font-size:20px}
-
-    /* About & Testimonials */
     .split{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:56px 0}
     .testimonial{background:linear-gradient(180deg,#ffffff,#fbfdff);padding:18px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.04)}
-    blockquote{margin:0;color:var(--muted);font-style:italic}
-
-    /* Contact */
     .contact{background:var(--card);padding:22px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.04)}
     .contact form{display:flex;flex-direction:column;gap:10px}
     .input,textarea{padding:12px;border:1px solid #e6edf0;border-radius:8px;font-size:14px}
-    .btn{background:var(--accent);color:white;padding:12px 16px;border-radius:10px;border:0;font-weight:700;cursor:pointer;}
-
+    .btn{background:var(--accent);color:white;padding:12px 16px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
     footer{padding:40px 0;color:var(--muted);font-size:14px;text-align:center}
     .footer-logo{width:44px;height:44px;border-radius:10px;display:inline-grid;place-items:center}
     .footer-logo img{width:100%;height:100%;object-fit:contain;border-radius:10px}
-
-    /* Responsive */
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr;}
-      .split{grid-template-columns:1fr}
-      nav a{display:none}
-      .nav{gap:12px}
-    }
+    @media (max-width:900px){.hero{grid-template-columns:1fr;}.split{grid-template-columns:1fr}nav a{display:none}.nav{gap:12px}}
   </style>
 </head>
 <body>
@@ -95,7 +67,7 @@
           <a href="#about">Über uns</a>
           <a href="#contact">Kontakt</a>
         </nav>
-        <a class="cta" onclick="openCalendly()">Termin vereinbaren</a>
+        <a class="cta" onclick="openCalendly()">Jetzt Erstgespräch buchen</a>
       </div>
     </div>
   </header>
@@ -103,39 +75,35 @@
   <main class="container">
     <section class="hero" id="home">
       <div>
-        <div class="eyebrow">Von kleinen Teams vertraut</div>
-        <h1>Praktische KI, die Ergebnisse für KMU liefert</h1>
-        <p class="lead">Wir entwickeln einfache, wartbare KI-Lösungen – von mehrsprachigen Sprachübersetzern bis hin zu Workflow-Automatisierungen – damit kleine Teams ohne technischen Aufwand skalieren können.</p>
+        <h1>KI-Lösungen für KMU: Weniger Kosten, schnellere Prozesse, mehr Wachstum</h1>
+        <p class="lead">Wir helfen kleinen und mittleren Unternehmen, Routinearbeiten zu automatisieren, Kundenservice zu verbessern und sofort messbare Einsparungen zu erzielen.</p>
         <div style="display:flex;gap:12px;align-items:center;margin-top:16px">
           <button class="btn" onclick="openCalendly()">Kostenloses Gespräch vereinbaren</button>
-          <a style="text-decoration:none;color:var(--muted);font-weight:700" href="#services">Leistungen ansehen →</a>
+          <a style="text-decoration:none;color:var(--muted);font-weight:700" href="#services">Unsere Leistungen →</a>
         </div>
 
         <div class="features" style="margin-top:28px">
           <div class="card">
-            <div style="font-size:20px;font-weight:700">KI-Übersetzung</div>
-            <p>Präzise, on-device oder Cloud-Übersetzungen und Sprachübersetzer, die auf Ihre Sprachpaare und Compliance-Anforderungen zugeschnitten sind.</p>
+            <div style="font-size:20px;font-weight:700">Kundenservice-Bots</div>
+            <p>Mehrsprachige Chat- & Voicebots (Deutsch, Englisch, Französisch, Kreolisch), die Wartezeiten senken und Kundenzufriedenheit steigern.</p>
           </div>
           <div class="card">
-            <div style="font-size:20px;font-weight:700">Automatisierung</div>
-            <p>Automatisieren Sie repetitive Workflows mit schlanken, wartungsarmen KI-Agenten, die sich in Ihre bestehenden Tools integrieren.</p>
+            <div style="font-size:20px;font-weight:700">Workflow-Automatisierung</div>
+            <p>Automatisieren Sie Dokumente, Rechnungen und Prozesse mit schlanken Workflows, weniger Fehlern und mehr Zeit fürs Wesentliche.</p>
           </div>
           <div class="card">
-            <div style="font-size:20px;font-weight:700">Beratung</div>
-            <p>Praktische KI-Strategie, ROI-orientierte Roadmaps und praktische Implementierungsunterstützung für schnelle Wirkung.</p>
+            <div style="font-size:20px;font-weight:700">Übersetzungs-Tools</div>
+            <p>KI-gestützte Sprachübersetzer für Schulen, Trainingsprogramme und internationale Teams – mehr Inklusion, weniger Barrieren.</p>
           </div>
         </div>
       </div>
 
       <aside class="promo" aria-hidden>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div style="font-weight:700">Warum KMU uns wählen</div>
-          <div style="font-size:12px;color:var(--muted)">Berlin • Remote</div>
-        </div>
+        <div style="font-weight:700;margin-bottom:12px">Warum KMU mit uns arbeiten</div>
         <div style="display:flex;flex-direction:column;gap:12px">
-          <div class="stat"><div style="font-size:28px;color:var(--accent);font-weight:800">0,5–3x</div><div style="font-size:13px;color:var(--muted)">schnellere Workflows in Pilotprojekten</div></div>
-          <div class="stat"><div style="font-size:28px;color:var(--accent);font-weight:800">5.000 €+</div><div style="font-size:13px;color:var(--muted)">durchschnittliche jährliche Kosteneinsparungen</div></div>
-          <div style="font-size:13px;color:var(--muted)">Maßgeschneiderte Demos verfügbar — Demo in 5 Tagen.</div>
+          <div class="stat"><div style="font-size:28px;color:var(--accent);font-weight:800">2–4 Wochen</div><div style="font-size:13px;color:var(--muted)">bis zum ersten Pilotprojekt</div></div>
+          <div class="stat"><div style="font-size:28px;color:var(--accent);font-weight:800">5.000 €+</div><div style="font-size:13px;color:var(--muted)">jährliche Einsparungen pro Prozess</div></div>
+          <div class="stat"><div style="font-size:28px;color:var(--accent);font-weight:800">100%</div><div style="font-size:13px;color:var(--muted)">Datensicherheit & Compliance in EU/UK</div></div>
         </div>
       </aside>
     </section>
@@ -145,16 +113,16 @@
       <p style="color:var(--muted);margin-top:6px">Fokussierte Pakete für schnelle, messbare Ergebnisse.</p>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px">
         <div class="card">
-          <h3>Sprach- & Textübersetzung</h3>
-          <p>Einsetzbare Sprachübersetzer (On-Premise/Cloud) mit benutzerdefinierter Terminologie und Datenschutzoptionen für regulierte Branchen.</p>
+          <h3>Kundenservice-Bots</h3>
+          <p>Automatisierte Antworten rund um die Uhr – spart Zeit, reduziert Anrufvolumen und steigert die Kundenzufriedenheit.</p>
         </div>
         <div class="card">
-          <h3>KI-Automatisierung</h3>
-          <p>Aufgabenautomatisierung, Datenerfassung und Dokumentenverarbeitung mit Human-in-the-Loop für sichere Rollouts.</p>
+          <h3>Workflow-Automatisierung</h3>
+          <p>Dokumente, Buchhaltung und interne Freigaben effizient digitalisieren und beschleunigen.</p>
         </div>
         <div class="card">
-          <h3>Proofs of Value</h3>
-          <p>Schnelle 2–4-wöchige Pilotprojekte, die den ROI nachweisen und einen skalierbaren Einführungsplan für Ihr Team skizzieren.</p>
+          <h3>Pilot-Projekte</h3>
+          <p>Schnelle 2–4-wöchige Projekte, die den ROI sichtbar machen und den Weg zur Skalierung aufzeigen. Ab €1.900.</p>
         </div>
       </div>
     </section>
@@ -162,33 +130,29 @@
     <section class="split" id="about" aria-labelledby="about-heading">
       <div>
         <h2 id="about-heading">Über Berlin AI Labs</h2>
-        <p style="color:var(--muted);margin-top:8px">Wir sind ein kleines Berliner Team, das pragmatische KI-Lösungen für wachsende Unternehmen entwickelt. Wir priorisieren einfache Integrationen, Datensicherheit und messbare Erträge. Wenn Sie KI wollen, die Ihrem Team hilft – und nicht eine, die ständige Betreuung benötigt – sollten wir reden.</p>
-
+        <p style="color:var(--muted);margin-top:8px">Wir sind ein Berliner Team, das pragmatische KI-Lösungen für kleine und mittlere Unternehmen entwickelt. Unser Fokus: schnelle Resultate, einfache Integration und messbare Ergebnisse.</p>
         <ul style="margin-top:12px;color:var(--muted);">
-          <li>Praktische Implementierungen – keine Forschungsexperimente.</li>
-          <li>Transparente Preise und schnelle Pilotprojekte.</li>
-          <li>Erfahrung mit Compliance in EU/UK-Märkten.</li>
+          <li>10+ Jahre Erfahrung in Software & Coaching (USA, Europa, Asien).</li>
+          <li>Transparente Preise und klar definierte Pilot-Projekte.</li>
+          <li>Mehrsprachige Lösungen für den internationalen Markt.</li>
         </ul>
-
         <div style="margin-top:18px">
           <button class="btn" onclick="openCalendly()">Pilotprojekt anfragen</button>
         </div>
       </div>
-
       <div>
         <div class="testimonial">
-          <strong>„Wir haben unseren Durchsatz während des Piloten verdoppelt und die Integration war reibungslos – empfehlenswert."</strong>
+          <strong>„Wir haben unseren Durchsatz während des Piloten verdoppelt – empfehlenswert.“</strong>
           <blockquote style="margin-top:10px">— Betriebsleiter, Logistik-KMU</blockquote>
         </div>
-
         <div style="display:flex;gap:12px;margin-top:14px">
           <div style="flex:1" class="testimonial">
             <strong>Schnelle Demo</strong>
-            <p style="color:var(--muted);margin-top:8px">Sehen Sie eine funktionierende Übersetzer-Demo in weniger als 5 Tagen, zugeschnitten auf Ihr Sprachpaar.</p>
+            <p style="color:var(--muted);margin-top:8px">Eine funktionierende Demo in weniger als 5 Tagen – zugeschnitten auf Ihr Business.</p>
           </div>
           <div style="flex:1" class="testimonial">
-            <strong>Support & Wissenstransfer</strong>
-            <p style="color:var(--muted);margin-top:8px">Wir stellen Dokumentation und eine kurze Schulung bereit, damit Ihr Team die Lösung eigenständig betreiben kann.</p>
+            <strong>Wissenstransfer</strong>
+            <p style="color:var(--muted);margin-top:8px">Wir schulen Ihr Team und übergeben Dokumentation für eigenständigen Betrieb.</p>
           </div>
         </div>
       </div>
@@ -198,18 +162,10 @@
       <div style="display:grid;grid-template-columns:1fr 420px;gap:22px;align-items:start">
         <div>
           <h2>Kontakt & nächste Schritte</h2>
-          <p style="color:var(--muted);">Bevorzugen Sie ein kurzes Gespräch? Buchen Sie ein 20-minütiges Intro und wir skopieren einen Piloten und erstellen einen groben Kostenrahmen. Keine Verpflichtung.</p>
-
-          <ol style="color:var(--muted);">
-            <li>Kurzes Intro-Gespräch — 18:00 Uhr MESZ, 18.09.2025</li>
-            <li>Problem- & Datenüberprüfung</li>
-            <li>Pilotvorschlag mit klaren KPIs</li>
-          </ol>
-
+          <p style="color:var(--muted);">Buchen Sie ein 20-minütiges Intro-Gespräch. Gemeinsam wählen wir einen Prozess, erstellen einen Pilot-Vorschlag mit klaren KPIs und definieren die nächsten Schritte.</p>
           <p style="margin-top:12px;color:var(--muted);">E-Mail: <a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></p>
           <p style="margin-top:8px;color:var(--muted);">Calendly: <a href="#" onclick="openCalendly(); return false;">Jetzt Termin buchen</a></p>
         </div>
-
         <aside class="contact" aria-label="Kontaktformular">
           <form action="mailto:sales@berlinailabs.de" method="post" enctype="text/plain">
             <label style="font-weight:700;font-size:13px">Ihr Name</label>
@@ -237,37 +193,23 @@
             <div class="footer-logo"><img src="logo.svg" alt="Berlin AI Labs Logo"></div>
             <div style="font-weight:700">Berlin AI Labs</div>
           </div>
-          <div style="color:var(--muted)">© <span id="year"></span> Berlin AI Labs — Entwickelt für KMU</div>
+          <div style="color:var(--muted)">© <span id="year"></span> Berlin AI Labs — KI-Lösungen für KMU</div>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Calendly script -->
   <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-  
   <script>
-    // small helpers
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Smooth scroll for in-page links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
+        document.querySelector(this.getAttribute('href')).scrollIntoView({behavior: 'smooth'});
       });
     });
-    
-    // Calendly integration
     function openCalendly() {
-      // Replace with your actual Calendly URL
-      Calendly.initPopupWidget({ 
-        url: 'https://calendly.com/berlin-ai-labs',
-        prefill: {},
-        utm: {}
-      });
+      Calendly.initPopupWidget({ url: 'https://calendly.com/berlin-ai-labs' });
       return false;
     }
   </script>
