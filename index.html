@@ -10,6 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <meta name="theme-color" content="#0f172a">
 
+  <!-- Calendly stylesheet -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  
   <style>
     :root{
       --bg:#f8fafc; /* gray-50 */
@@ -33,7 +36,7 @@
     .logo{width:56px;height:56px;border-radius:10px;display:inline-grid;place-items:center}
     .logo img{width:100%;height:100%;object-fit:contain;border-radius:10px}
     nav a{margin-left:20px;text-decoration:none;color:var(--muted);font-weight:600}
-    .cta{background:var(--accent);color:white;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700}
+    .cta{background:var(--accent);color:white;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700;cursor:pointer;}
 
     /* Hero */
     .hero{display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:center;padding:46px 0}
@@ -61,7 +64,7 @@
     .contact{background:var(--card);padding:22px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.04)}
     .contact form{display:flex;flex-direction:column;gap:10px}
     .input,textarea{padding:12px;border:1px solid #e6edf0;border-radius:8px;font-size:14px}
-    .btn{background:var(--accent);color:white;padding:12px 16px;border-radius:10px;border:0;font-weight:700}
+    .btn{background:var(--accent);color:white;padding:12px 16px;border-radius:10px;border:0;font-weight:700;cursor:pointer;}
 
     footer{padding:40px 0;color:var(--muted);font-size:14px;text-align:center}
     .footer-logo{width:44px;height:44px;border-radius:10px;display:inline-grid;place-items:center}
@@ -92,7 +95,7 @@
           <a href="#about">Über uns</a>
           <a href="#contact">Kontakt</a>
         </nav>
-        <a class="cta" href="mailto:sales@berlinailabs.de?subject=Beratungsanfrage">Termin vereinbaren</a>
+        <a class="cta" onclick="openCalendly()">Termin vereinbaren</a>
       </div>
     </div>
   </header>
@@ -104,7 +107,7 @@
         <h1>Praktische KI, die Ergebnisse für KMU liefert</h1>
         <p class="lead">Wir entwickeln einfache, wartbare KI-Lösungen – von mehrsprachigen Sprachübersetzern bis hin zu Workflow-Automatisierungen – damit kleine Teams ohne technischen Aufwand skalieren können.</p>
         <div style="display:flex;gap:12px;align-items:center;margin-top:16px">
-          <a class="btn" href="mailto:sales@berlinailabs.de?subject=Kostenlose%20Beratung%20buchen">Kostenloses Gespräch vereinbaren</a>
+          <button class="btn" onclick="openCalendly()">Kostenloses Gespräch vereinbaren</button>
           <a style="text-decoration:none;color:var(--muted);font-weight:700" href="#services">Leistungen ansehen →</a>
         </div>
 
@@ -168,7 +171,7 @@
         </ul>
 
         <div style="margin-top:18px">
-          <a class="btn" href="mailto:sales@berlinailabs.de?subject=Pilotanfrage">Pilotprojekt anfragen</a>
+          <button class="btn" onclick="openCalendly()">Pilotprojekt anfragen</button>
         </div>
       </div>
 
@@ -203,8 +206,8 @@
             <li>Pilotvorschlag mit klaren KPIs</li>
           </ol>
 
-          <p style="margin-top:12px;color:var(--muted);">E-Mail: <a href="mailto:sales@berlinailabs.de">sales@berlinaillabs.de</a></p>
-          <p style="margin-top:8px;color:var(--muted);">Calendly: <a href="https://calendly.com/your-calendly-name">(Ihren Calendly-Link hier einfügen)</a></p>
+          <p style="margin-top:12px;color:var(--muted);">E-Mail: <a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></p>
+          <p style="margin-top:8px;color:var(--muted);">Calendly: <a href="#" onclick="openCalendly(); return false;">Jetzt Termin buchen</a></p>
         </div>
 
         <aside class="contact" aria-label="Kontaktformular">
@@ -240,6 +243,9 @@
     </div>
   </footer>
 
+  <!-- Calendly script -->
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  
   <script>
     // small helpers
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -253,6 +259,17 @@
         });
       });
     });
+    
+    // Calendly integration
+    function openCalendly() {
+      // Replace with your actual Calendly URL
+      Calendly.initPopupWidget({ 
+        url: 'https://calendly.com/your-username/30min',
+        prefill: {},
+        utm: {}
+      });
+      return false;
+    }
   </script>
 </body>
 </html>
