@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+  <!-- Gradient Definitions -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb"/>
+      <stop offset="100%" style="stop-color:#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="20" cy="20" r="18" fill="url(#logoGradient)" stroke="#1e40af" stroke-width="1"/>
+  
+  <!-- AI Brain/Network Symbol -->
+  <g transform="translate(20, 20)">
+    <!-- Central Node -->
+    <circle cx="0" cy="-4" r="3" fill="white"/>
+    
+    <!-- Neural Network Connections -->
+    <g stroke="white" stroke-width="1.5" fill="none" opacity="0.9">
+      <path d="M-8 -8 L-3 -6"/>
+      <path d="M8 -8 L3 -6"/>
+      <path d="M-8 4 L-3 2"/>
+      <path d="M8 4 L3 2"/>
+      <path d="M0 -1 L0 6"/>
+      <path d="M-6 0 L6 0"/>
+    </g>
+    
+    <!-- Outer Nodes -->
+    <circle cx="-8" cy="-8" r="1.5" fill="url(#accentGradient)"/>
+    <circle cx="8" cy="-8" r="1.5" fill="url(#accentGradient)"/>
+    <circle cx="-8" cy="4" r="1.5" fill="url(#accentGradient)"/>
+    <circle cx="8" cy="4" r="1.5" fill="url(#accentGradient)"/>
+    <circle cx="0" cy="8" r="1.5" fill="url(#accentGradient)"/>
+    
+    <!-- Data Flow Indicators -->
+    <g fill="white" opacity="0.8">
+      <circle cx="-4" cy="-6" r="0.5">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="4" cy="-2" r="0.5">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-2" cy="2" r="0.5">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="1s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+  
+  <!-- Subtle Border Highlight -->
+  <circle cx="20" cy="20" r="17" fill="none" stroke="url(#accentGradient)" stroke-width="0.5" opacity="0.6"/>
+</svg>
