@@ -61,6 +61,36 @@ a:hover {
     color: #1d4ed8;
 }
 
+/* Profile Image Styles */
+.profile-image {
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.profile-image:hover {
+    transform: scale(1.02);
+}
+
+/* Responsive adjustments for profile image */
+@media (max-width: 768px) {
+    .profile-image {
+        max-width: 300px;
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-image {
+        max-width: 280px;
+        height: 200px;
+    }
+}
+
 /* Buttons */
 .btn {
     display: inline-block;
