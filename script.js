@@ -320,7 +320,7 @@ function openCalendly() {
     showNotification('Kalendly-Integration würde hier geöffnet. Bitte kontaktieren Sie uns direkt per E-Mail oder Telefon.', 'info');
     
     // Example: Open Calendly in new window
-    // window.open('https://calendly.com/your-calendar-link', '_blank');
+     window.open('https://calendly.com/berlin-ai-labs', '_blank');
 }
 
 function openPrivacyPolicy() {
