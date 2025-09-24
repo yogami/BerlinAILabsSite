@@ -1,522 +1,154 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fallstudie: Besserer Unterricht für Sprachschulen - Berlin AI Labs</title>
-    <meta name="description" content="Wie eine Berliner Sprachschule ihren Unterricht 40% effizienter machte und die Schülerzufriedenheit auf 95% steigerte – mit KI-Übersetzungen.">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Case Study Specific Styles */
-        .case-study-hero {
-            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
-            color: white;
-            padding: 8rem 0 6rem;
-            text-align: center;
-        }
-        
-        .case-study-hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-        
-        .case-study-hero .subtitle {
-            font-size: 1.25rem;
-            color: #d1d5db;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .case-study-meta {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            margin-top: 3rem;
-        }
-        
-        .meta-item {
-            text-align: center;
-        }
-        
-        .meta-value {
-            display: block;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #60a5fa;
-            margin-bottom: 0.25rem;
-        }
-        
-        .meta-label {
-            font-size: 0.875rem;
-            color: #9ca3af;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .case-study-content {
-            padding: 6rem 0;
-        }
-        
-        .case-study-section {
-            margin-bottom: 4rem;
-        }
-        
-        .case-study-section h2 {
-            font-size: 2.5rem;
-            color: #1f2937;
-            margin-bottom: 2rem;
-            border-bottom: 3px solid #2563eb;
-            padding-bottom: 0.5rem;
-        }
-        
-        .case-study-section h3 {
-            font-size: 1.75rem;
-            color: #374151;
-            margin-bottom: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .challenge-solution {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin: 3rem 0;
-        }
-        
-        .challenge-box, .solution-box {
-            padding: 2rem;
-            border-radius: 1rem;
-            border-left: 4px solid;
-        }
-        
-        .challenge-box {
-            background: #fef2f2;
-            border-left-color: #ef4444;
-        }
-        
-        .solution-box {
-            background: #f0fdf4;
-            border-left-color: #10b981;
-        }
-        
-        .challenge-box h4, .solution-box h4 {
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-        }
-        
-        .challenge-box h4 {
-            color: #dc2626;
-        }
-        
-        .solution-box h4 {
-            color: #059669;
-        }
-        
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .result-card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 1rem;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-        }
-        
-        .result-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .result-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #2563eb;
-            margin-bottom: 0.5rem;
-        }
-        
-        .result-label {
-            color: #6b7280;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .testimonial-quote {
-            background: #f8fafc;
-            border-left: 4px solid #2563eb;
-            padding: 2rem;
-            margin: 3rem 0;
-            border-radius: 0 1rem 1rem 0;
-            font-style: italic;
-            font-size: 1.125rem;
-            line-height: 1.6;
-        }
-        
-        .testimonial-author {
-            margin-top: 1rem;
-            font-weight: 600;
-            color: #1f2937;
-        }
-        
-        .testimonial-role {
-            color: #6b7280;
-            font-size: 0.875rem;
-        }
-        
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        
-        .tech-tag {
-            background: #e0f2fe;
-            color: #0369a1;
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-        
-        .cta-section {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-            margin-top: 4rem;
-        }
-        
-        .cta-section h2 {
-            color: white;
-            margin-bottom: 1rem;
-        }
-        
-        .cta-section p {
-            color: #dbeafe;
-            font-size: 1.125rem;
-            margin-bottom: 2rem;
-        }
-        
-        .breadcrumb {
-            background: #f8fafc;
-            padding: 1rem 0;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        
-        .breadcrumb a {
-            color: #6b7280;
-            text-decoration: none;
-        }
-        
-        .breadcrumb a:hover {
-            color: #2563eb;
-        }
-        
-        @media (max-width: 768px) {
-            .case-study-hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .challenge-solution {
-                grid-template-columns: 1fr;
-            }
-            
-            .case-study-meta {
-                gap: 2rem;
-            }
-            
-            .meta-value {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fallstudie: Sprachschule spart Zeit & Kosten mit KI - Berlin AI Labs</title>
+  <meta name="description" content="Wie eine Berliner Sprachschule ihren Unterricht 40% effizienter machte und €15.000 jährlich sparte – mit Echtzeit-KI-Übersetzungen.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <img src="logo.svg" alt="Berlin AI Labs" class="logo">
-                <span class="logo-text">Berlin AI Labs</span>
-            </div>
-            <div class="nav-menu" id="nav-menu">
-                <a href="index.html" class="nav-link">Startseite</a>
-                <a href="index.html#services" class="nav-link">Services</a>
-                <a href="index.html#about" class="nav-link">Über uns</a>
-                <a href="index.html#testimonials" class="nav-link">Referenzen</a>
-                <a href="index.html#case-studies" class="nav-link">Fallstudien</a>
-                <a href="index.html#contact" class="nav-link">Kontakt</a>
-                <a href="index.html#contact" class="nav-cta">Kostenloses Erstgespräch</a>
-            </div>
-            <div class="nav-toggle" id="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Breadcrumb -->
-    <div class="breadcrumb">
-        <div class="container">
-            <a href="index.html">Startseite</a> / <a href="index.html#case-studies">Fallstudien</a> / <span>Besserer Unterricht für Sprachschulen</span>
-        </div>
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="index.html">Startseite</a> / <a href="index.html#case-studies">Fallstudien</a> / <span>Sprachschule</span>
     </div>
+  </div>
 
-    <!-- Case Study Hero -->
-    <section class="case-study-hero">
-        <div class="container">
-            <h1>Fallstudie: Besserer Unterricht für Sprachschulen</h1>
-            <p class="subtitle">
-                Wie eine Berliner Sprachschule ihren Unterricht 40% effizienter machte und die Schülerzufriedenheit auf 95% steigerte
-            </p>
-            <div class="case-study-meta">
-                <div class="meta-item">
-                    <span class="meta-value">40%</span>
-                    <span class="meta-label">Effizienzsteigerung</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-value">95%</span>
-                    <span class="meta-label">Schülerzufriedenheit</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-value">2 Wochen</span>
-                    <span class="meta-label">Implementierung</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-value">€15.000</span>
-                    <span class="meta-label">Jährliche Einsparungen</span>
-                </div>
-            </div>
+  <!-- Hero -->
+  <section class="case-study-hero">
+    <div class="container">
+      <h1>Fallstudie: 40% effizienterer Unterricht</h1>
+      <p class="subtitle">
+        Eine Berliner Sprachschule überwindet Sprachbarrieren, steigert die Schülerzufriedenheit auf 95% und spart €15.000 jährlich mit KI-Übersetzungen.
+      </p>
+      <div class="case-study-meta">
+        <div class="meta-item">
+          <span class="meta-value">40%</span>
+          <span class="meta-label">Effizienterer Unterricht</span>
         </div>
-    </section>
-
-    <!-- Case Study Content -->
-    <section class="case-study-content">
-        <div class="container">
-            <!-- Client Overview -->
-            <div class="case-study-section">
-                <h2>Der Kunde</h2>
-                <p>
-                    Die <strong>Sprachschule Internationale Kommunikation</strong> in Berlin unterrichtet über 200 Schüler aus 15 Ländern. Sie bietet Deutschkurse für alle Niveaus und kämpft mit Sprachbarrieren in vielfältigen Klassen.
-                </p>
-                <div class="challenge-solution">
-                    <div class="challenge-box">
-                        <h4>🚫 Die Herausforderung</h4>
-                        <ul>
-                            <li>Sprachbarrieren in gemischten Klassen</li>
-                            <li>Lange Übersetzungen unterbrechen den Unterricht</li>
-                            <li>Frustration bei Schülern mit wenig Deutsch</li>
-                            <li>Hoher Aufwand für Lehrer bei Erklärungen</li>
-                        </ul>
-                    </div>
-                    <div class="solution-box">
-                        <h4>✅ Unsere Lösung</h4>
-                        <ul>
-                            <li>Lehreransprache in Echtzeit übersetzt</li>
-                            <li>Automatische Sprachübersetzung für 12 Sprachen</li>
-                            <li>Einfach in den Unterricht integriert</li>
-                            <li>Leicht für Lehrer und Schüler zu nutzen</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Implementation -->
-            <div class="case-study-section">
-                <h2>Implementierung</h2>
-                <h3>Phase 1: Analyse und Planung (3 Tage)</h3>
-                <p>
-                    Wir analysierten den Unterrichtsablauf und die Probleme mit Sprachbarrieren. Zusammen mit den Lehrern planten wir eine Lösung, die sich in den Unterricht einfügt.
-                </p>
-
-                <h3>Phase 2: Einrichtung (1 Woche)</h3>
-                <p>
-                    Wir richteten die Übersetzungslösung in der IT der Schule ein, mit Unterstützung für 12 Sprachen. Tests stellten sicher, dass alles reibungslos funktioniert.
-                </p>
-
-                <div class="tech-stack">
-                    <span class="tech-tag">Echtzeit-Übersetzung</span>
-                    <span class="tech-tag">Spracherkennung</span>
-                    <span class="tech-tag">Klassenzimmer-Integration</span>
-                    <span class="tech-tag">Mehrsprachigkeit</span>
-                </div>
-
-                <h3>Phase 3: Schulung und Start (4 Tage)</h3>
-                <p>
-                    Wir schulten alle Lehrer intensiv und starteten die Lösung in den Klassen. Unser Support sorgte für einen reibungslosen Übergang.
-                </p>
-            </div>
-
-            <!-- Results -->
-            <div class="case-study-section">
-                <h2>Messbare Ergebnisse</h2>
-                <div class="results-grid">
-                    <div class="result-card">
-                        <div class="result-number">40%</div>
-                        <div class="result-label">Effizienterer Unterricht</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-number">95%</div>
-                        <div class="result-label">Schülerzufriedenheit</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-number">60%</div>
-                        <div class="result-label">Weniger Unterbrechungen</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-number">€15.000</div>
-                        <div class="result-label">Jährliche Einsparungen</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-number">85%</div>
-                        <div class="result-label">Lehrer-Zeitersparnis</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-number">12</div>
-                        <div class="result-label">Unterstützte Sprachen</div>
-                    </div>
-                </div>
-
-                <h3>Weitere Vorteile</h3>
-                <ul>
-                    <li><strong>Unterbrechungsfreier Unterricht:</strong> Lehrer unterrichten ohne Pausen</li>
-                    <li><strong>Engagierte Schüler:</strong> Alle verstehen den Unterrichtsinhalt</li>
-                    <li><strong>Entlastete Lehrer:</strong> Weniger Zeit für Übersetzungen</li>
-                    <li><strong>Bessere Ergebnisse:</strong> Schüler lernen schneller</li>
-                    <li><strong>Wachstum:</strong> Lösung passt sich wachsender Schülerzahl an</li>
-                </ul>
-            </div>
-
-            <!-- Testimonial -->
-            <div class="case-study-section">
-                <h2>Kundenstimme</h2>
-                <div class="testimonial-quote">
-                    "Berlin AI Labs hat unseren Unterricht 40% effizienter gemacht. Schüler verstehen alles in Echtzeit, Lehrer sind entlastet, und wir sparen €15K pro Jahr. Die Lösung war in zwei Wochen einsatzbereit."
-                    <div class="testimonial-author">
-                        Dr. Maria Schmidt
-                        <div class="testimonial-role">Schulleiterin, Sprachschule Internationale Kommunikation</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ROI Analysis -->
-            <div class="case-study-section">
-                <h2>Ihr Gewinn</h2>
-                <h3>Investition</h3>
-                <ul>
-                    <li>Lösung einrichten: €25.000</li>
-                    <li>Schulung und Support: €5.000</li>
-                    <li>Jährliche Wartung: €3.000</li>
-                </ul>
-
-                <h3>Einsparungen (jährlich)</h3>
-                <ul>
-                    <li>Weniger Zeit für Übersetzungen: €12.000</li>
-                    <li>Reduzierte Betreuungsstunden: €8.000</li>
-                    <li>Mehr Schülerplätze: €5.000</li>
-                    <li>Weniger Abbrüche: €3.000</li>
-                </ul>
-
-                <h3>Ihr Gewinn</h3>
-                <p>
-                    <strong>Gesamtinvestition:</strong> €30.000 (einmalig) + €3.000 (jährlich)<br>
-                    <strong>Jährliche Einsparungen:</strong> €28.000<br>
-                    <strong>Gewinn nach 12 Monaten:</strong> 83%<br>
-                    <strong>Amortisation:</strong> 14 Monate
-                </p>
-            </div>
-
-            <!-- Future Plans -->
-            <div class="case-study-section">
-                <h2>Mehr Möglichkeiten</h2>
-                <p>
-                    Nach dem Erfolg plant die Sprachschule, mit uns weiter zu optimieren:
-                </p>
-                <ul>
-                    <li>Automatische Bewertung von Hausaufgaben</li>
-                    <li>Personalisierte Lernvorschläge für Schüler</li>
-                    <li>Verbesserung der Aussprache mit KI</li>
-                    <li>Anbindung an Lernplattformen</li>
-                </ul>
-            </div>
+        <div class="meta-item">
+          <span class="meta-value">95%</span>
+          <span class="meta-label">zufriedene Schüler</span>
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Bereit, Ihren Unterricht zu verbessern?</h2>
-            <p>
-                Sprechen Sie mit uns – kostenlos und unverbindlich. In 30 Minuten zeigen wir Ihnen, wie KI Ihre Arbeit erleichtert. Rufen Sie an: <a href="tel:+493012345678">+49 30 123 456 78</a>.
-            </p>
-            <a href="index.html#contact" class="btn btn-primary" style="background: white; color: #2563eb; margin-right: 1rem;">Kostenloses Erstgespräch buchen</a>
-            <a href="index.html#services" class="btn btn-secondary" style="border-color: white; color: white;">Unsere Services</a>
+        <div class="meta-item">
+          <span class="meta-value">2 Wochen</span>
+          <span class="meta-label">Implementierung</span>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <img src="logo.svg" alt="Berlin AI Labs" class="logo">
-                        <span class="logo-text">Berlin AI Labs</span>
-                    </div>
-                    <p class="footer-description">
-                        Einfache KI-Lösungen für KMU. Sparen Sie Zeit, reduzieren Sie Kosten und steigern Sie Ihren Erfolg – alles DSGVO-sicher.
-                    </p>
-                </div>
-                <div class="footer-section">
-                    <h4>Services</h4>
-                    <ul class="footer-links">
-                        <li><a href="index.html#services">Übersetzungen für den Export</a></li>
-                        <li><a href="index.html#services">Rechnungen automatisch verarbeiten</a></li>
-                        <li><a href="index.html#services">Testen Sie KI kostenlos</a></li>
-                        <li><a href="index.html#services">Bessere Kunden mit Marketing</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Unternehmen</h4>
-                    <ul class="footer-links">
-                        <li><a href="index.html#about">Über uns</a></li>
-                        <li><a href="index.html#testimonials">Referenzen</a></li>
-                        <li><a href="index.html#case-studies">Fallstudien</a></li>
-                        <li><a href="index.html#contact">Kontakt</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Kontakt</h4>
-                    <ul class="footer-contact">
-                        <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
-                        <li><a href="tel:+493012345678">+49 30 123 456 78</a></li>
-                        <li>Berlin, Deutschland</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Berlin AI Labs. Alle Rechte vorbehalten.</p>
-            </div>
+        <div class="meta-item">
+          <span class="meta-value">€15.000</span>
+          <span class="meta-label">jährlich gespart</span>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <script src="script.js"></script>
+  <!-- Content -->
+  <section class="case-study-content">
+    <div class="container">
+      <!-- Challenge & Solution -->
+      <div class="case-study-section">
+        <h2>Die Ausgangslage</h2>
+        <p>
+          Die <strong>Sprachschule Internationale Kommunikation</strong> in Berlin betreut 200 Schüler aus 15 Ländern. Unterschiedliche Muttersprachen führten zu häufigen Unterbrechungen und verlangsamtem Unterricht.
+        </p>
+        <div class="challenge-solution">
+          <div class="challenge-box">
+            <h4>🚫 Herausforderung</h4>
+            <ul>
+              <li>Lehrer mussten ständig übersetzen</li>
+              <li>Unterricht oft durch Sprachbarrieren unterbrochen</li>
+              <li>Frust bei Schülern mit wenig Deutsch</li>
+              <li>Hoher Zeitaufwand für Lehrkräfte</li>
+            </ul>
+          </div>
+          <div class="solution-box">
+            <h4>✅ Lösung</h4>
+            <ul>
+              <li>Echtzeit-Übersetzung von Lehreransprachen</li>
+              <li>Unterstützung für 12 Sprachen</li>
+              <li>Direkt im Klassenzimmer nutzbar</li>
+              <li>Einfach & intuitiv für Lehrer und Schüler</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Implementation -->
+      <div class="case-study-section">
+        <h2>Umsetzung</h2>
+        <p>
+          Innerhalb von 2 Wochen integrierten wir ein KI-gestütztes Übersetzungssystem. Nach Schulungen für die Lehrkräfte war die Lösung sofort einsatzbereit und störte den Unterrichtsablauf nicht.
+        </p>
+        <div class="tech-stack">
+          <span class="tech-tag">Echtzeit-Übersetzung</span>
+          <span class="tech-tag">Spracherkennung</span>
+          <span class="tech-tag">Mehrsprachigkeit</span>
+          <span class="tech-tag">Klassenzimmer-Integration</span>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="case-study-section">
+        <h2>Ergebnisse</h2>
+        <div class="results-grid">
+          <div class="result-card">
+            <div class="result-number">40%</div>
+            <div class="result-label">effizienterer Unterricht</div>
+          </div>
+          <div class="result-card">
+            <div class="result-number">95%</div>
+            <div class="result-label">zufriedene Schüler</div>
+          </div>
+          <div class="result-card">
+            <div class="result-number">€15.000</div>
+            <div class="result-label">jährlich gespart</div>
+          </div>
+          <div class="result-card">
+            <div class="result-number">12</div>
+            <div class="result-label">Sprachen unterstützt</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial -->
+      <div class="case-study-section">
+        <h2>Kundenstimme</h2>
+        <div class="testimonial-quote">
+          „Dank Berlin AI Labs können wir gemischte Klassen endlich ohne Unterbrechungen unterrichten. Schüler fühlen sich integriert, Lehrer sind entlastet, und wir sparen jedes Jahr mehrere Tausend Euro.“
+          <div class="testimonial-author">
+            Dr. Maria Schmidt
+            <div class="testimonial-role">Schulleiterin, Sprachschule Internationale Kommunikation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROI -->
+      <div class="case-study-section">
+        <h2>Ihr Gewinn</h2>
+        <p><strong>Investition:</strong> €30.000 einmalig + €3.000 jährlich</p>
+        <p><strong>Jährliche Einsparungen:</strong> €28.000</p>
+        <p><strong>Amortisation:</strong> 14 Monate</p>
+      </div>
+
+      <!-- CTA -->
+      <section class="cta-section">
+        <div class="container">
+          <h2>Möchten Sie Ihren Unterricht modernisieren?</h2>
+          <p>In einem kostenlosen Gespräch zeigen wir Ihnen, wie KI auch Ihre Schule effizienter und inklusiver machen kann.</p>
+          <a href="index.html#contact" class="btn btn-primary" style="background: white; color: #2563eb; margin-right: 1rem;">Kostenloses Erstgespräch buchen</a>
+          <a href="index.html#services" class="btn btn-secondary" style="border-color: white; color: white;">Unsere Services</a>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="impressum.html">Impressum</a></p>
+    </div>
+  </footer>
 </body>
 </html>
