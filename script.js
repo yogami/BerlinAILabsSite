@@ -180,6 +180,8 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
+// External integrations
 function openCalendly() {
+    // Open Calendly in new window
     window.open('https://calendly.com/berlin-ai-labs', '_blank');
 }
