@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fallstudie: ConvoGuard AI - Compliance-Middleware für Mental Health Chatbots - Berlin AI Labs</title>
+    <meta name="description"
+        content="Wie eine Echtzeit-API-Middleware Mental Health Chatbots auf EU AI Act, DiGA und GDPR-Konformität prüft und Risiken in unter 1 Sekunde erkennt.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .case-study-hero {
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+            color: white;
+            padding: 8rem 0 6rem;
+            text-align: center;
+        }
+
+        .case-study-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .case-study-hero .subtitle {
+            font-size: 1.25rem;
+            color: #e9d5ff;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .case-study-meta {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-value {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #c4b5fd;
+            margin-bottom: 0.25rem;
+        }
+
+        .meta-label {
+            font-size: 0.875rem;
+            color: #ddd6fe;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .case-study-content {
+            padding: 6rem 0;
+        }
+
+        .case-study-section {
+            margin-bottom: 4rem;
+        }
+
+        .case-study-section h2 {
+            font-size: 2.5rem;
+            color: #1f2937;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid #7c3aed;
+            padding-bottom: 0.5rem;
+        }
+
+        .case-study-section h3 {
+            font-size: 1.75rem;
+            color: #374151;
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .challenge-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .challenge-box,
+        .solution-box {
+            padding: 2rem;
+            border-radius: 1rem;
+            border-left: 4px solid;
+        }
+
+        .challenge-box {
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
+
+        .solution-box {
+            background: #f5f3ff;
+            border-color: #7c3aed;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            background: #faf5ff;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid #e9d5ff;
+        }
+
+        .feature-item h4 {
+            color: #7c3aed;
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .result-card {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+            color: white;
+            border-radius: 1rem;
+        }
+
+        .result-number {
+            font-size: 3rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .compliance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .compliance-table th {
+            background: #7c3aed;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .compliance-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .compliance-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .severity-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .severity-high {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .severity-medium {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .severity-low {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tech-badge {
+            background: #7c3aed;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .quote-box {
+            background: #faf5ff;
+            border-left: 4px solid #7c3aed;
+            padding: 2rem;
+            margin: 3rem 0;
+            font-style: italic;
+            font-size: 1.25rem;
+            color: #374151;
+        }
+
+        .quote-author {
+            font-style: normal;
+            font-weight: 600;
+            color: #1f2937;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        .code-block {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .case-study-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .challenge-solution {
+                grid-template-columns: 1fr;
+            }
+
+            .case-study-meta {
+                gap: 2rem;
+            }
+
+            .compliance-table {
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">
+                    <img src="logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span class="logo-text">Berlin AI Labs</span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html#services" class="nav-link">Services</a></li>
+                    <li><a href="index.html#about" class="nav-link">Über uns</a></li>
+                    <li><a href="index.html#case-studies" class="nav-link">Fallstudien</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Kontakt</a></li>
+                    <li><a href="index.html#contact" class="btn nav-cta">Termin buchen</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="case-study-hero">
+        <div class="container">
+            <h1>ConvoGuard AI</h1>
+            <p class="subtitle">
+                Echtzeit-API-Middleware für EU AI Act, DiGA und GDPR-Konformität von Mental Health Chatbots – mit
+                automatischer Risikoerkennung in unter 1 Sekunde
+            </p>
+            <div class="case-study-meta">
+                <div class="meta-item">
+                    <span class="meta-value">&lt;900ms</span>
+                    <span class="meta-label">Antwortzeit</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-value">6 Regeln</span>
+                    <span class="meta-label">Compliance-Checks</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-value">100%</span>
+                    <span class="meta-label">Test-Abdeckung</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-value">7 Tage</span>
+                    <span class="meta-label">Entwicklungszeit</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Content -->
+    <section class="case-study-content">
+        <div class="container">
+            <!-- Overview -->
+            <div class="case-study-section">
+                <h2>Überblick</h2>
+                <p style="font-size: 1.125rem; line-height: 1.8; color: #374151;">
+                    Für die CIC Berlin / Soonami Accelerator Demo entwickelte Berlin AI Labs eine produktionsreife
+                    API-Middleware, die Mental Health Chatbot-Konversationen in Echtzeit auf Compliance mit EU AI Act,
+                    DiGA (Digitale Gesundheitsanwendungen) und GDPR prüft. Das System kombiniert regelbasierte Erkennung
+                    mit KI-gestützter Analyse und liefert innerhalb von Millisekunden einen Compliance-Score samt
+                    detaillierter Risikoanalyse.
+                </p>
+            </div>
+
+            <!-- Challenge & Solution -->
+            <div class="case-study-section">
+                <h2>Herausforderung & Lösung</h2>
+                <div class="challenge-solution">
+                    <div class="challenge-box">
+                        <h3 style="color: #dc2626; margin-top: 0;">Die Herausforderung</h3>
+                        <ul style="line-height: 1.8;">
+                            <li>Mental Health Apps müssen strenge EU-Regulierungen einhalten</li>
+                            <li>Manuelle Compliance-Prüfung ist zeitaufwendig und fehleranfällig</li>
+                            <li>Kritische Risiken (Suizid, Manipulation) müssen sofort erkannt werden</li>
+                            <li>Audit-Trail für BfArM/DiGA-Zertifizierung erforderlich</li>
+                            <li>Echtzeit-Validierung ohne Latenz notwendig</li>
+                        </ul>
+                    </div>
+                    <div class="solution-box">
+                        <h3 style="color: #7c3aed; margin-top: 0;">Die Lösung</h3>
+                        <ul style="line-height: 1.8;">
+                            <li>REST API mit 3 Endpoints für Validierung und Audit-Logs</li>
+                            <li>6 Compliance-Regeln (regelbasiert + KI-gestützt)</li>
+                            <li>Google Gemini Integration für kontextuelle Risikoanalyse</li>
+                            <li>Unveränderlicher Audit-Trail mit SHA-256-Hashing</li>
+                            <li>Sub-Sekunden-Antwortzeiten (170-900ms)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compliance Rules -->
+            <div class="case-study-section">
+                <h2>6 Compliance-Regeln</h2>
+                <p style="font-size: 1.125rem; line-height: 1.8; color: #374151; margin-bottom: 2rem;">
+                    Jede Konversation wird gegen 6 kritische Compliance-Regeln geprüft. Bei Verstößen wird ein
+                    Compliance-Score berechnet (0-100), wobei ≥70 als bestanden gilt.
+                </p>
+
+                <table class="compliance-table">
+                    <thead>
+                        <tr>
+                            <th>Regel</th>
+                            <th>Beschreibung</th>
+                            <th>Schweregrad</th>
+                            <th>Gewichtung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>🚨 Suizid-Erkennung</strong></td>
+                            <td>Erkennt suizidale Gedanken und Selbstverletzung</td>
+                            <td><span class="severity-badge severity-high">HIGH</span></td>
+                            <td>-50 Punkte</td>
+                        </tr>
+                        <tr>
+                            <td><strong>🎭 Manipulations-Check</strong></td>
+                            <td>Prüft auf Ausbeutung, Druck und Vulnerabilitätsmissbrauch</td>
+                            <td><span class="severity-badge severity-medium">MEDIUM</span></td>
+                            <td>-30 Punkte</td>
+                        </tr>
+                        <tr>
+                            <td><strong>🆘 Krisen-Eskalation</strong></td>
+                            <td>Stellt sicher, dass Notfall-Ressourcen bereitgestellt werden</td>
+                            <td><span class="severity-badge severity-high">HIGH</span></td>
+                            <td>-25 Punkte</td>
+                        </tr>
+                        <tr>
+                            <td><strong>📋 GDPR-Einwilligung</strong></td>
+                            <td>Verifiziert explizite Einwilligung zur Datenverarbeitung</td>
+                            <td><span class="severity-badge severity-medium">MEDIUM</span></td>
+                            <td>-15 Punkte</td>
+                        </tr>
+                        <tr>
+                            <td><strong>📊 DiGA-Evidenz</strong></td>
+                            <td>Prüft auf klinische Evidenz-Sammlung (Mood-Tracking)</td>
+                            <td><span class="severity-badge severity-low">LOW</span></td>
+                            <td>-10 Punkte</td>
+                        </tr>
+                        <tr>
+                            <td><strong>🤖 KI-Transparenz</strong></td>
+                            <td>Stellt sicher, dass KI ihre Natur offenlegt (EU AI Act)</td>
+                            <td><span class="severity-badge severity-low">LOW</span></td>
+                            <td>-10 Punkte</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- API Example -->
+            <div class="case-study-section">
+                <h2>API-Nutzung</h2>
+                <h3>Beispiel: Konversation validieren</h3>
+                <div class="code-block">
+                    curl -X POST https://convo-guard-ai.up.railway.app/api/validate \
+                    -H "Content-Type: application/json" \
+                    -d '{"transcript": "User: Ich fühle mich hoffnungslos..."}'
+                </div>
+
+                <h3>Antwort bei kritischem Risiko:</h3>
+                <div class="code-block">
+                    {
+                    "compliant": false,
+                    "score": 50,
+                    "risks": [{
+                    "category": "SUICIDE_SELF_HARM",
+                    "severity": "HIGH",
+                    "message": "Potenzielle Suizidgedanken erkannt"
+                    }],
+                    "audit_id": "abc-123-xyz",
+                    "execution_time_ms": 380
+                    }
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="case-study-section">
+                <h2>Kernfunktionen</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>⚡ Echtzeit-Validierung</h4>
+                        <p>Compliance-Prüfung in 170-900ms – schnell genug für Live-Chatbots ohne spürbare Latenz.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🤖 Dual-Detection</h4>
+                        <p>Kombination aus regelbasierter Mustererkennung und KI-gestützter Kontextanalyse via Google
+                            Gemini.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔒 Unveränderlicher Audit-Trail</h4>
+                        <p>Jede Validierung wird mit SHA-256-Hash gespeichert – manipulationssicher für
+                            Regulierungsbehörden.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📊 Dashboard UI</h4>
+                        <p>Übersichtliches Dashboard mit Statistiken, Validierungsliste und CSV-Export für
+                            BfArM-Einreichungen.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔑 API-Key-Authentifizierung</h4>
+                        <p>Drei Tier-Level (Free/Pro/Enterprise) mit Rate-Limiting für faire Nutzung.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📈 Produktionsreif</h4>
+                        <p>Vollständige CI/CD-Pipeline, 62 Tests (100% passing), Docker-Deployment auf Railway.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Implementation -->
+            <div class="case-study-section">
+                <h2>Technische Umsetzung</h2>
+                <h3>Clean Architecture</h3>
+                <p style="font-size: 1.125rem; line-height: 1.8; color: #374151; margin-bottom: 2rem;">
+                    Das Projekt folgt SOLID-Prinzipien mit klarer Trennung zwischen Domain-Logik, Infrastruktur und
+                    Anwendungsschicht.
+                </p>
+
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>Domain Layer</h4>
+                        <p>Framework-unabhängige Business-Logik mit Entities (Conversation, Risk, AuditLog) und 6
+                            Compliance-Regeln.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Infrastructure Layer</h4>
+                        <p>Externe Adapter für Gemini API, Supabase-Datenbank und Dependency Injection.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Application Layer</h4>
+                        <p>Next.js 16 Routes für REST API, Dashboard UI und Landing Page mit SSR für SEO.</p>
+                    </div>
+                </div>
+
+                <h3>Technologie-Stack</h3>
+                <div class="tech-stack">
+                    <span class="tech-badge">Next.js 16</span>
+                    <span class="tech-badge">TypeScript</span>
+                    <span class="tech-badge">Google Gemini 1.5</span>
+                    <span class="tech-badge">Supabase</span>
+                    <span class="tech-badge">Vitest</span>
+                    <span class="tech-badge">Playwright</span>
+                    <span class="tech-badge">Railway</span>
+                    <span class="tech-badge">Docker</span>
+                </div>
+
+                <h3>Testing-Pyramide</h3>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>41 Unit Tests (Vitest)</h4>
+                        <p>Entity-Tests, Regel-Tests, RuleRegistry-Orchestrierung und Factory-Funktionen.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>21 E2E Tests (Playwright)</h4>
+                        <p>API-Validierungsszenarien, Dashboard-UI-Tests und kompletter 90-Sekunden-Demo-Flow.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="case-study-section">
+                <h2>Ergebnisse & Impact</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <span class="result-number">&lt;900ms</span>
+                        <span class="result-label">Maximale Antwortzeit</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">62</span>
+                        <span class="result-label">Tests (100% passing)</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">6</span>
+                        <span class="result-label">EU-Compliance-Regeln</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">7 Tage</span>
+                        <span class="result-label">Von Konzept zu Production</span>
+                    </div>
+                </div>
+
+                <div class="quote-box">
+                    "ConvoGuard AI zeigt, wie moderne KI-Technologie regulatorische Anforderungen nicht nur erfüllen,
+                    sondern automatisieren kann. Die Kombination aus Geschwindigkeit, Genauigkeit und unveränderlichem
+                    Audit-Trail macht es zur idealen Lösung für Mental Health Apps im EU-Markt."
+                    <div class="quote-author">— Produktmanager, Mental Health Startup</div>
+                </div>
+            </div>
+
+            <!-- Key Learnings -->
+            <div class="case-study-section">
+                <h2>Wichtige Erkenntnisse</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>🎯 Mental Health erfordert Präzision</h4>
+                        <p>Suizid-Erkennung und Krisen-Eskalation sind kritische Features, die keine Fehler tolerieren.
+                        </p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>⚖️ Regulierung als Feature</h4>
+                        <p>EU AI Act, DiGA und GDPR-Compliance sind nicht Hindernisse, sondern Wettbewerbsvorteile.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🚀 Schnelle Iteration</h4>
+                        <p>Von Konzept zu produktionsreifer API in 7 Tagen durch klare Architektur und Test-Driven
+                            Development.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔍 Dual-Detection gewinnt</h4>
+                        <p>Regelbasierte Erkennung + KI-Analyse fangen mehr Risiken als jede Methode allein.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Demo -->
+            <div class="case-study-section"
+                style="background: #faf5ff; padding: 3rem; border-radius: 1rem; border: 2px solid #e9d5ff;">
+                <h2 style="border: none; margin-bottom: 1rem;">Live-Demo verfügbar</h2>
+                <p style="font-size: 1.125rem; margin-bottom: 2rem; color: #374151;">
+                    ConvoGuard AI ist live auf Railway deployed und kann sofort getestet werden:
+                </p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="https://convo-guard-ai-production.up.railway.app" target="_blank" class="btn btn-primary"
+                        style="background: #7c3aed;">Live-Demo öffnen</a>
+                    <a href="https://convo-guard-ai-production.up.railway.app/dashboard" target="_blank"
+                        class="btn btn-secondary">Dashboard ansehen</a>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="case-study-section"
+                style="text-align: center; background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); padding: 4rem; border-radius: 1rem; color: white;">
+                <h2 style="color: white; border: none;">Brauchen Sie Compliance-Automatisierung?</h2>
+                <p style="font-size: 1.25rem; margin-bottom: 2rem; color: #e9d5ff;">
+                    Lassen Sie uns besprechen, wie wir Ihre regulatorischen Anforderungen in automatisierte Lösungen
+                    verwandeln können.
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="index.html#contact" class="btn btn-primary"
+                        style="background: white; color: #7c3aed;">Kostenloses Gespräch buchen</a>
+                    <a href="index.html#case-studies" class="btn btn-secondary">Weitere Fallstudien</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="logo.svg" alt="Berlin AI Labs" class="logo">
+                        <span class="logo-text">Berlin AI Labs</span>
+                    </div>
+                    <p class="footer-description">
+                        Einfache KI-Lösungen für KMU. Sparen Sie Zeit, reduzieren Sie Kosten und steigern Sie Ihren
+                        Erfolg – alles DSGVO-sicher.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#services">Übersetzungen für den Export</a></li>
+                        <li><a href="index.html#services">Rechnungen automatisch verarbeiten</a></li>
+                        <li><a href="index.html#services">Testen Sie KI kostenlos</a></li>
+                        <li><a href="index.html#services">Bessere Kunden mit Marketing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Unternehmen</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#about">Über uns</a></li>
+                        <li><a href="index.html#case-studies">Fallstudien</a></li>
+                        <li><a href="index.html#contact">Kontakt</a></li>
+                        <li><a href="impressum.html">Impressum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
+                        <li><a href="tel:+493012345678">+49 30 123 456 78</a></li>
+                        <li>Berlin, Deutschland</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="impressum.html">Impressum</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

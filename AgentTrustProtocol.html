@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fallstudie: Agent Trust Protocol - Vertrauens-Scoring für Health AI Agents - Berlin AI Labs</title>
+    <meta name="description"
+        content="Ein Trust-Scoring-System für digitale Gesundheits-KI-Agenten in Berlin – hilft Patienten und Gesundheitsdienstleistern, konforme KI-Assistenten zu finden und zu verifizieren.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .case-study-hero {
+            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+            color: white;
+            padding: 8rem 0 6rem;
+            text-align: center;
+        }
+
+        .case-study-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .case-study-hero .subtitle {
+            font-size: 1.25rem;
+            color: #cffafe;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .case-study-meta {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-value {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #a5f3fc;
+            margin-bottom: 0.25rem;
+        }
+
+        .meta-label {
+            font-size: 0.875rem;
+            color: #e0f2fe;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .case-study-content {
+            padding: 6rem 0;
+        }
+
+        .case-study-section {
+            margin-bottom: 4rem;
+        }
+
+        .case-study-section h2 {
+            font-size: 2.5rem;
+            color: #1f2937;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid #0891b2;
+            padding-bottom: 0.5rem;
+        }
+
+        .case-study-section h3 {
+            font-size: 1.75rem;
+            color: #374151;
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .challenge-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .challenge-box,
+        .solution-box {
+            padding: 2rem;
+            border-radius: 1rem;
+            border-left: 4px solid;
+        }
+
+        .challenge-box {
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
+
+        .solution-box {
+            background: #ecfeff;
+            border-color: #0891b2;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            background: #f0fdfa;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid #ccfbf1;
+        }
+
+        .feature-item h4 {
+            color: #0891b2;
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .result-card {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+            color: white;
+            border-radius: 1rem;
+        }
+
+        .result-number {
+            font-size: 3rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .trust-score-formula {
+            background: #ecfeff;
+            border: 2px solid #0891b2;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .trust-score-formula h4 {
+            color: #0891b2;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .formula-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .formula-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .formula-points {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0891b2;
+            display: block;
+        }
+
+        .formula-label {
+            font-size: 0.875rem;
+            color: #374151;
+            margin-top: 0.5rem;
+        }
+
+        .agent-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .agent-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .agent-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .agent-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .agent-score {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .score-excellent {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .score-good {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .agent-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: #ecfeff;
+            color: #0891b2;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tech-badge {
+            background: #0891b2;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .quote-box {
+            background: #f0fdfa;
+            border-left: 4px solid #0891b2;
+            padding: 2rem;
+            margin: 3rem 0;
+            font-style: italic;
+            font-size: 1.25rem;
+            color: #374151;
+        }
+
+        .quote-author {
+            font-style: normal;
+            font-weight: 600;
+            color: #1f2937;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .case-study-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .challenge-solution {
+                grid-template-columns: 1fr;
+            }
+
+            .case-study-meta {
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">
+                    <img src="logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span class="logo-text">Berlin AI Labs</span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html#services" class="nav-link">Services</a></li>
+                    <li><a href="index.html#about" class="nav-link">Über uns</a></li>
+                    <li><a href="index.html#case-studies" class="nav-link">Fallstudien</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Kontakt</a></li>
+                    <li><a href="index.html#contact" class="btn nav-cta">Termin buchen</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="case-study-hero">
+        <div class="container">
+            <h1>Agent Trust Protocol</h1>
+            <p class="subtitle">
+                Ein Trust-Scoring- und Verzeichnissystem für digitale Gesundheits-KI-Agenten in Berlin – hilft Patienten
+                und Gesundheitsdienstleistern, konforme KI-Assistenten zu finden und zu verifizieren
+            </p>
+            <div class="case-study-meta">
+                <div class="meta-item">
+                    <span class="meta-value">10+</span>
+                    <span class="meta-label">Berliner Health Agents</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-value">6 Kriterien</span>
+                    <span class="meta-label">TrustScore-Berechnung</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-value">3 Tiers</span>
+                    <span class="meta-label">API-Zugriff</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-value">10 Tage</span>
+                    <span class="meta-label">MVP-Entwicklung</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Content -->
+    <section class="case-study-content">
+        <div class="container">
+            <!-- Overview -->
+            <div class="case-study-section">
+                <h2>Überblick</h2>
+                <p style="font-size: 1.125rem; line-height: 1.8; color: #374151;">
+                    Für das Berliner Gesundheits-KI-Ökosystem entwickelte Berlin AI Labs ein Trust-Scoring-System, das
+                    digitale Gesundheitsagenten nach Compliance-Kriterien bewertet. Das System kombiniert ein
+                    öffentliches Verzeichnis mit einer API für programmatischen Zugriff und einem Admin-Dashboard für
+                    die Verwaltung von Agent-Registrierungen. Patienten und Gesundheitsdienstleister können so schnell
+                    vertrauenswürdige KI-Assistenten identifizieren.
+                </p>
+            </div>
+
+            <!-- Challenge & Solution -->
+            <div class="case-study-section">
+                <h2>Herausforderung & Lösung</h2>
+                <div class="challenge-solution">
+                    <div class="challenge-box">
+                        <h3 style="color: #dc2626; margin-top: 0;">Die Herausforderung</h3>
+                        <ul style="line-height: 1.8;">
+                            <li>Hunderte von Health-AI-Apps ohne klare Qualitätsindikatoren</li>
+                            <li>Patienten können Compliance nicht selbst überprüfen</li>
+                            <li>Gesundheitsdienstleister brauchen schnelle Bewertungen</li>
+                            <li>Fehlende Transparenz über GDPR/MDR/DiGA-Status</li>
+                            <li>Keine zentrale Plattform für Berliner Health AI</li>
+                        </ul>
+                    </div>
+                    <div class="solution-box">
+                        <h3 style="color: #0891b2; margin-top: 0;">Die Lösung</h3>
+                        <ul style="line-height: 1.8;">
+                            <li>Öffentliches Verzeichnis mit 10+ Berliner Health Agents</li>
+                            <li>TrustScore-Algorithmus (0-100) basierend auf 4 Kriterien</li>
+                            <li>Farbcodierte Badges (Grün/Gelb/Rot) für schnelle Bewertung</li>
+                            <li>Self-Service-Registrierung mit Admin-Approval-Workflow</li>
+                            <li>REST API für programmatischen Zugriff (Pro/Enterprise)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TrustScore Formula -->
+            <div class="case-study-section">
+                <h2>TrustScore-Berechnung</h2>
+                <div class="trust-score-formula">
+                    <h4>Formel: Verified (40) + GDPR (25) + MDR (30) + Uptime (20) = max 115 → normalisiert auf 100</h4>
+                    <div class="formula-breakdown">
+                        <div class="formula-item">
+                            <span class="formula-points">+40</span>
+                            <p class="formula-label"><strong>Verifizierter Agent</strong><br>Admin-Genehmigung</p>
+                        </div>
+                        <div class="formula-item">
+                            <span class="formula-points">+25</span>
+                            <p class="formula-label"><strong>GDPR-konform</strong><br>Datenschutz-Zertifizierung</p>
+                        </div>
+                        <div class="formula-item">
+                            <span class="formula-points">+30</span>
+                            <p class="formula-label"><strong>MDR-zertifiziert</strong><br>Medical Device Regulation</p>
+                        </div>
+                        <div class="formula-item">
+                            <span class="formula-points">+20</span>
+                            <p class="formula-label"><strong>Hohe Uptime</strong><br>&gt;97% Verfügbarkeit</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Farbcodierte Badges</h3>
+                <div class="feature-grid">
+                    <div class="feature-item" style="background: #d1fae5; border-color: #6ee7b7;">
+                        <h4 style="color: #065f46;">🟢 Excellent (80-100)</h4>
+                        <p>Vollständig verifiziert, GDPR + MDR-konform, hohe Verfügbarkeit</p>
+                    </div>
+                    <div class="feature-item" style="background: #fef3c7; border-color: #fcd34d;">
+                        <h4 style="color: #92400e;">🟡 Good (60-79)</h4>
+                        <p>Grundlegende Compliance erfüllt, einige Kriterien fehlen</p>
+                    </div>
+                    <div class="feature-item" style="background: #fee2e2; border-color: #fca5a5;">
+                        <h4 style="color: #991b1b;">🔴 Needs Review (0-59)</h4>
+                        <p>Unvollständige Compliance, weitere Prüfung erforderlich</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sample Agents -->
+            <div class="case-study-section">
+                <h2>Beispiel-Agenten im Verzeichnis</h2>
+                <div class="agent-list">
+                    <div class="agent-card">
+                        <div class="agent-name">Ada Health</div>
+                        <span class="agent-score score-excellent">Score: 95 - Excellent</span>
+                        <div class="agent-tags">
+                            <span class="tag">GDPR</span>
+                            <span class="tag">MDR</span>
+                            <span class="tag">ISO27001</span>
+                        </div>
+                    </div>
+                    <div class="agent-card">
+                        <div class="agent-name">Doctolib</div>
+                        <span class="agent-score score-excellent">Score: 90 - Excellent</span>
+                        <div class="agent-tags">
+                            <span class="tag">GDPR</span>
+                            <span class="tag">HIPAA</span>
+                        </div>
+                    </div>
+                    <div class="agent-card">
+                        <div class="agent-name">mySugr</div>
+                        <span class="agent-score score-excellent">Score: 92 - Excellent</span>
+                        <div class="agent-tags">
+                            <span class="tag">GDPR</span>
+                            <span class="tag">MDR</span>
+                            <span class="tag">FDA</span>
+                        </div>
+                    </div>
+                    <div class="agent-card">
+                        <div class="agent-name">Selfapy</div>
+                        <span class="agent-score score-excellent">Score: 87 - Excellent</span>
+                        <div class="agent-tags">
+                            <span class="tag">GDPR</span>
+                            <span class="tag">DiGA</span>
+                        </div>
+                    </div>
+                    <div class="agent-card">
+                        <div class="agent-name">Clue</div>
+                        <span class="agent-score score-excellent">Score: 85 - Excellent</span>
+                        <div class="agent-tags">
+                            <span class="tag">GDPR</span>
+                        </div>
+                    </div>
+                    <div class="agent-card">
+                        <div class="agent-name">Oviva</div>
+                        <span class="agent-score score-good">Score: 75 - Good</span>
+                        <div class="agent-tags">
+                            <span class="tag">GDPR</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="case-study-section">
+                <h2>Kernfunktionen</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>📋 Agent-Verzeichnis</h4>
+                        <p>Durchsuchen Sie 10+ Berliner Health Agents mit Echtzeit-TrustScore-Berechnung und
+                            farbcodierten Badges.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔍 Such- und Filterfunktion</h4>
+                        <p>Filtern Sie nach Name, Beschreibung oder Compliance-Tags für schnelle Ergebnisse.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔐 Authentifizierung</h4>
+                        <p>Drei Login-Methoden: Email Magic Link, Google OAuth und Demo-Modus für sofortigen Zugriff.
+                        </p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>➕ Self-Service-Registrierung</h4>
+                        <p>Agenten können sich selbst registrieren mit automatischer TrustScore-Berechnung und
+                            Approval-Workflow.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>👨‍💼 Admin-Dashboard</h4>
+                        <p>Verwalten Sie Agent-Genehmigungen mit Approve/Reject-Funktionalität und Echtzeit-Updates.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>💳 API-Zugriff (Pro/Enterprise)</h4>
+                        <p>Stripe-Integration für kostenpflichtige API-Zugriffe mit 10.000+ Requests/Monat.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Implementation -->
+            <div class="case-study-section">
+                <h2>Technische Umsetzung</h2>
+                <h3>Dreistufige Architektur</h3>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>Frontend (Next.js 16)</h4>
+                        <p>Server-Side Rendering für SEO, Client-Side-Suche für sofortige Filterung, Turbopack für
+                            schnelle Builds.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Backend (API Routes)</h4>
+                        <p>Type-safe API-Endpunkte für TrustScore-Berechnung, Agent-Management und Authentifizierung.
+                        </p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Datenbank (Supabase)</h4>
+                        <p>PostgreSQL mit Row Level Security (RLS) für sichere Datenzugriffe und Echtzeit-Updates.</p>
+                    </div>
+                </div>
+
+                <h3>Technologie-Stack</h3>
+                <div class="tech-stack">
+                    <span class="tech-badge">Next.js 16</span>
+                    <span class="tech-badge">TypeScript</span>
+                    <span class="tech-badge">Supabase</span>
+                    <span class="tech-badge">Stripe</span>
+                    <span class="tech-badge">Playwright</span>
+                    <span class="tech-badge">Railway</span>
+                    <span class="tech-badge">Tailwind CSS</span>
+                </div>
+
+                <h3>Sicherheit & Compliance</h3>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>🔒 Row Level Security</h4>
+                        <p>Supabase RLS schützt sensible Daten auf Datenbankebene.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔑 API-Key-Authentifizierung</h4>
+                        <p>Sichere API-Zugriffe mit Tier-basiertem Rate-Limiting.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🛡️ CSRF-Schutz</h4>
+                        <p>Next.js-integrierter CSRF-Schutz für alle Formulare.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="case-study-section">
+                <h2>Ergebnisse & Impact</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <span class="result-number">10+</span>
+                        <span class="result-label">Berliner Health Agents</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">100%</span>
+                        <span class="result-label">E2E-Tests bestanden</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">3 Tiers</span>
+                        <span class="result-label">API-Zugriffsstufen</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">10 Tage</span>
+                        <span class="result-label">Von Konzept zu MVP</span>
+                    </div>
+                </div>
+
+                <div class="quote-box">
+                    "Das Agent Trust Protocol schafft die dringend benötigte Transparenz im Berliner
+                    Health-AI-Ökosystem. Patienten können jetzt fundierte Entscheidungen treffen, und
+                    Gesundheitsdienstleister haben eine verlässliche Quelle für konforme KI-Assistenten."
+                    <div class="quote-author">— Gesundheitsdienstleister, Berlin</div>
+                </div>
+            </div>
+
+            <!-- Roadmap -->
+            <div class="case-study-section">
+                <h2>Roadmap & Zukunftspläne</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>✅ Phase 1: MVP (Abgeschlossen)</h4>
+                        <p>Agent-Verzeichnis, TrustScore-Berechnung, Authentifizierung, Admin-Approval, Stripe-Billing.
+                        </p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🚧 Phase 2: Production (Nächste)</h4>
+                        <p>Echte Compliance-Verifikations-APIs, LLM-Dokumentenanalyse, API-Key-Management-UI,
+                            Email-Benachrichtigungen.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔮 Phase 3: Scale</h4>
+                        <p>Multi-Region-Support, erweiterte Suche (Elasticsearch), Mobile App, Partner-Integrationen,
+                            White-Label-Lösung.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Learnings -->
+            <div class="case-study-section">
+                <h2>Wichtige Erkenntnisse</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>🎯 Transparenz schafft Vertrauen</h4>
+                        <p>Farbcodierte TrustScores machen komplexe Compliance-Kriterien auf einen Blick verständlich.
+                        </p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🚀 MVP-First-Ansatz</h4>
+                        <p>Schnelle Markteinführung mit Kernfunktionen, iterative Erweiterung basierend auf
+                            Nutzerfeedback.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔄 Self-Service skaliert</h4>
+                        <p>Agent-Registrierung ohne manuelle Intervention reduziert Betriebskosten dramatisch.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>💰 Freemium-Modell funktioniert</h4>
+                        <p>Kostenloses Verzeichnis zieht Nutzer an, API-Zugriff generiert wiederkehrende Einnahmen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Demo -->
+            <div class="case-study-section"
+                style="background: #f0fdfa; padding: 3rem; border-radius: 1rem; border: 2px solid #99f6e4;">
+                <h2 style="border: none; margin-bottom: 1rem;">Live-Demo verfügbar</h2>
+                <p style="font-size: 1.125rem; margin-bottom: 2rem; color: #374151;">
+                    Das Agent Trust Protocol ist live auf Railway deployed und kann sofort getestet werden:
+                </p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="https://agent-trust-protocol-production.up.railway.app" target="_blank"
+                        class="btn btn-primary" style="background: #0891b2;">Live-Demo öffnen</a>
+                    <a href="https://github.com/yogami/agent-trust-protocol" target="_blank"
+                        class="btn btn-secondary">GitHub Repository</a>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="case-study-section"
+                style="text-align: center; background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); padding: 4rem; border-radius: 1rem; color: white;">
+                <h2 style="color: white; border: none;">Brauchen Sie ein Trust-System für Ihre Plattform?</h2>
+                <p style="font-size: 1.25rem; margin-bottom: 2rem; color: #cffafe;">
+                    Lassen Sie uns besprechen, wie wir Vertrauen und Transparenz in Ihr Ökosystem bringen können.
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="index.html#contact" class="btn btn-primary"
+                        style="background: white; color: #0891b2;">Kostenloses Gespräch buchen</a>
+                    <a href="index.html#case-studies" class="btn btn-secondary">Weitere Fallstudien</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="logo.svg" alt="Berlin AI Labs" class="logo">
+                        <span class="logo-text">Berlin AI Labs</span>
+                    </div>
+                    <p class="footer-description">
+                        Einfache KI-Lösungen für KMU. Sparen Sie Zeit, reduzieren Sie Kosten und steigern Sie Ihren
+                        Erfolg – alles DSGVO-sicher.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#services">Übersetzungen für den Export</a></li>
+                        <li><a href="index.html#services">Rechnungen automatisch verarbeiten</a></li>
+                        <li><a href="index.html#services">Testen Sie KI kostenlos</a></li>
+                        <li><a href="index.html#services">Bessere Kunden mit Marketing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Unternehmen</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#about">Über uns</a></li>
+                        <li><a href="index.html#case-studies">Fallstudien</a></li>
+                        <li><a href="index.html#contact">Kontakt</a></li>
+                        <li><a href="impressum.html">Impressum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
+                        <li><a href="tel:+493012345678">+49 30 123 456 78</a></li>
+                        <li>Berlin, Deutschland</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="impressum.html">Impressum</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
