@@ -55,7 +55,7 @@
                     </div>
                     <div class="article-details">
                         <span class="publish-date">December 25, 2024</span>
-                        <span class="reading-time">8 min read</span>
+                        <span class="reading-time">12 min read</span>
                     </div>
                 </div>
             </div>
@@ -182,6 +182,106 @@
                     After implementation, we apply our refactoring and quality gate process. Finally, we run the full
                     regression test suite to ensure nothing else broke. Only after all checks pass do we commit and
                     push.
+                </p>
+
+                <h2>Prompt Engineering: Testing the Logic You Cannot See</h2>
+
+                <p>
+                    In AI systems, prompts are often the most critical pieces of logic. They determine how the model
+                    interprets input, what format it produces, and how it handles edge cases. Yet many teams treat
+                    prompts as configuration strings rather than code that deserves the same rigor.
+                </p>
+
+                <p>
+                    At Berlin AI Labs, we treat prompts as first class citizens. We write acceptance criteria for them.
+                    We test their outputs. We version them. And we catch regressions before they reach production.
+                </p>
+
+                <h3>Define Acceptance Criteria for Your Prompts</h3>
+
+                <p>
+                    Before writing a prompt, we define what a successful output looks like. For example, if a prompt
+                    generates a content script, we might specify: the output must contain exactly four sections, each
+                    section must have a narration field longer than ten characters, the total estimated duration must
+                    exceed thirty seconds, and any character names from the input must appear in the output.
+                </p>
+
+                <p>
+                    These criteria become executable tests. We write unit tests that validate prompt outputs against
+                    these contracts. When the LLM returns a response, we check that it meets every criterion. If a
+                    future prompt edit accidentally breaks the structure, the test fails immediately.
+                </p>
+
+                <h3>Test Output Structure Without Calling the API</h3>
+
+                <p>
+                    One powerful technique is to test prompt output validation logic without invoking the actual LLM. We
+                    create test cases using known good outputs and verify that our parsing and validation code handles
+                    them correctly.
+                </p>
+
+                <p>
+                    For instance, we might have a valid output object representing what a successful prompt response
+                    should look like. Our tests verify that this object has the correct number of elements, that
+                    required fields exist, that values fall within acceptable ranges, and that type guards pass. This
+                    gives us confidence that our system correctly processes well formed responses.
+                </p>
+
+                <h3>Test Edge Cases and Malformed Responses</h3>
+
+                <p>
+                    LLMs do not always return perfect JSON. They sometimes omit fields, return arrays as strings, or
+                    forget delimiters. We write explicit tests for these scenarios. If the model returns hashtags as a
+                    single space separated string instead of an array, does our parsing code recover gracefully? If a
+                    required field is missing, do we provide sensible defaults?
+                </p>
+
+                <p>
+                    By testing these edge cases, we make our systems resilient to the inherent variability of language
+                    model outputs.
+                </p>
+
+                <h3>Mock API Responses for Fast Iteration</h3>
+
+                <p>
+                    Calling the actual LLM API during tests is slow and expensive. Instead, we use mock responses that
+                    represent realistic API outputs. This allows our test suite to run in seconds rather than minutes,
+                    and we do not burn tokens on every test run.
+                </p>
+
+                <p>
+                    We create mock responses for various scenarios: the happy path where everything works, edge cases
+                    where fields are malformed, and failure modes where the API returns errors. Each scenario has
+                    corresponding tests that verify our code handles it correctly.
+                </p>
+
+                <h3>Validate Semantic Quality Criteria</h3>
+
+                <p>
+                    Beyond structural validation, we sometimes test semantic properties. For example, if our prompt is
+                    supposed to generate engaging hooks, we might check that the first sentence is under a certain
+                    number of characters (short hooks grab attention faster). If we want simple language, we might
+                    verify that average sentence length stays below a threshold.
+                </p>
+
+                <p>
+                    These tests encode our domain expertise into automated checks. When someone modifies a prompt, the
+                    tests enforce that quality standards are maintained.
+                </p>
+
+                <h3>The Prompt Testing Loop</h3>
+
+                <p>
+                    Our workflow for prompt development mirrors our code development workflow. First, we write
+                    acceptance criteria as tests. Then we craft the prompt to meet those criteria. We run tests against
+                    real API calls during development to verify the prompt works. Once satisfied, we add the prompt to
+                    our codebase with its tests. Future changes must pass all tests, preventing regressions.
+                </p>
+
+                <p>
+                    This discipline is especially valuable in production systems where prompts may be modified to
+                    improve performance. Without tests, it is easy for a well intentioned edit to break an edge case
+                    that was working before.
                 </p>
 
                 <h2>Why This Matters for AI Systems</h2>
