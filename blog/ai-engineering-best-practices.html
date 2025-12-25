@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Engineering Best Practices: Building Reliable Systems | Berlin AI Labs</title>
+    <meta name="description"
+        content="Learn how structured planning, test driven development, and code quality standards create AI systems you can trust. A practical engineering guide.">
+    <meta name="author" content="Chris Igel, Berlin AI Labs">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-brand">
+                    <img src="../logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span>Berlin AI Labs</span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="../index.html#services" class="nav-link">Services</a></li>
+                    <li><a href="../index.html#about" class="nav-link">Über uns</a></li>
+                    <li><a href="../index.html#case-studies" class="nav-link">Fallstudien</a></li>
+                    <li><a href="../blog.html" class="nav-link active">Blog</a></li>
+                    <li><a href="../index.html#contact" class="nav-link">Kontakt</a></li>
+                    <li><a href="../index.html#contact" class="btn nav-cta btn-primary">Termin buchen</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <article class="blog-article">
+        <header class="article-header">
+            <div class="container">
+                <a href="../blog.html" class="back-to-blog">← Back to Blog</a>
+                <h1 class="article-title">AI Engineering Best Practices: Building Reliable Systems with Craftsmanship
+                </h1>
+                <div class="article-meta">
+                    <div class="author-info">
+                        <span class="author-name">Chris Igel</span>
+                        <span class="author-company">Berlin AI Labs</span>
+                    </div>
+                    <div class="article-details">
+                        <span class="publish-date">December 25, 2024</span>
+                        <span class="reading-time">8 min read</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Article Content -->
+        <div class="article-content">
+            <div class="container article-container">
+
+                <p class="article-intro">
+                    Building AI systems that actually work in production requires more than clever algorithms. It
+                    demands engineering discipline, systematic thinking, and a commitment to craftsmanship. At Berlin AI
+                    Labs, we have developed a set of practices that help us deliver reliable AI solutions for our
+                    clients. Today, I want to share the core principles that guide our work.
+                </p>
+
+                <h2>The Art of Planning: Think Before You Build</h2>
+
+                <p>
+                    Every successful project starts with thoughtful planning. But planning is not just about creating
+                    documents that collect dust. It is about deeply understanding the problem before writing a single
+                    line of code.
+                </p>
+
+                <p>
+                    We use what we call the "peer planner" approach. When facing a complex challenge, we first draft a
+                    detailed plan. Then we step back and critique it from a different perspective, looking for gaps,
+                    risks, and overly optimistic assumptions. Finally, we synthesize both views into a refined plan that
+                    acknowledges real world constraints.
+                </p>
+
+                <p>
+                    This process might seem like extra work upfront, but it saves countless hours of rework down the
+                    line. The best code you will ever write is the code you do not have to write because you planned
+                    well.
+                </p>
+
+                <h2>Code Quality: Your Future Self Will Thank You</h2>
+
+                <p>
+                    At the heart of reliable software lies code quality. We believe in two fundamental principles: test
+                    first development and leaving code better than you found it.
+                </p>
+
+                <h3>Test First Is Not Optional</h3>
+
+                <p>
+                    For new features, we write tests before writing the implementation. This is not bureaucracy; it
+                    forces clarity. If you cannot write a test for something, you probably do not understand it well
+                    enough to build it.
+                </p>
+
+                <p>
+                    For legacy code, we scaffold tests around existing behavior before making changes. This gives us a
+                    safety net and helps us understand what the code actually does, not just what we think it does.
+                </p>
+
+                <h3>The Clean Code Philosophy</h3>
+
+                <p>
+                    We follow the principles outlined by Robert Martin and Martin Fowler. Small functions that do one
+                    thing. Clear, meaningful names. Code that reads like well written prose. These are not luxuries;
+                    they are necessities for maintaining systems over time.
+                </p>
+
+                <p>
+                    We enforce these standards through automated checks: no circular dependencies, low cyclomatic
+                    complexity (we aim for three or fewer branches per function), zero linter warnings, and small,
+                    focused methods. If a function is trying to do too much, we split it.
+                </p>
+
+                <h2>Fixing Bugs the Right Way</h2>
+
+                <p>
+                    Everyone encounters bugs. What separates professional engineering from hacking is how you handle
+                    them. We follow a structured protocol that ensures bugs are truly fixed, not just patched over.
+                </p>
+
+                <h3>Red, Green, Refactor</h3>
+
+                <p>
+                    First, we write a minimal failing test that reproduces the bug. This is the "red" phase. We run the
+                    test to confirm it actually fails. This step is crucial because it proves you understand the
+                    problem.
+                </p>
+
+                <p>
+                    Next comes "green": we fix the code until the test passes. We apply clean code principles while
+                    doing so. No quick hacks that will haunt us later.
+                </p>
+
+                <p>
+                    Finally, "refactor": we improve the structure and readability of the code while keeping all tests
+                    green. This is where craftsmanship shines.
+                </p>
+
+                <h3>Quality Gates Before Every Commit</h3>
+
+                <p>
+                    Before any code leaves a developer's machine, it must pass our quality gates. We check for circular
+                    dependencies, verify complexity is under control, ensure linting passes, and confirm all tests run
+                    successfully.
+                </p>
+
+                <p>
+                    We also perform an independent code review, looking specifically for violations of SOLID principles,
+                    common code smells from Fowler's catalog, and any security or performance concerns. If we find
+                    issues, we iterate until the code is clean.
+                </p>
+
+                <h2>Feature Development: Building with Confidence</h2>
+
+                <p>
+                    New features follow a similar discipline. We start by writing tests that define the expected
+                    behavior. This creates a clear specification that both humans and machines can verify.
+                </p>
+
+                <p>
+                    Then we implement incrementally, making tests pass one at a time. Each passing test is a small
+                    victory and a checkpoint we can return to if things go wrong.
+                </p>
+
+                <p>
+                    After implementation, we apply our refactoring and quality gate process. Finally, we run the full
+                    regression test suite to ensure nothing else broke. Only after all checks pass do we commit and
+                    push.
+                </p>
+
+                <h2>Why This Matters for AI Systems</h2>
+
+                <p>
+                    AI systems are particularly sensitive to engineering quality. They often have subtle bugs that only
+                    manifest under specific conditions. They interact with uncertain real world data. They can fail
+                    silently in ways that damage trust.
+                </p>
+
+                <p>
+                    By applying rigorous engineering practices, we catch problems early. Our test suites include edge
+                    cases that exercise model behavior in unusual situations. Our code reviews question assumptions
+                    about data quality and model reliability. Our quality gates prevent technical debt from
+                    accumulating.
+                </p>
+
+                <p>
+                    The result is AI systems that our clients can rely on. Systems that work correctly not just in
+                    demos, but in production, day after day, processing real data from real users.
+                </p>
+
+                <h2>Continuous Improvement</h2>
+
+                <p>
+                    These practices are not static. We continuously refine our approach based on what we learn. When
+                    something goes wrong, we perform a blameless retrospective. We ask what process improvement would
+                    have caught this earlier.
+                </p>
+
+                <p>
+                    We also stay current with industry best practices. The field of software engineering continues to
+                    evolve, and staying curious is essential. What worked five years ago may not be the best approach
+                    today.
+                </p>
+
+                <h2>Getting Started</h2>
+
+                <p>
+                    If you are building AI systems, consider adopting these practices step by step. Start with testing:
+                    even a few well chosen tests dramatically improve reliability. Add quality gates to your CI/CD
+                    pipeline. Introduce code reviews focused on maintainability, not just correctness.
+                </p>
+
+                <p>
+                    The investment pays dividends over time. Bugs become rarer. Deployments become less stressful. New
+                    team members can understand the code faster. The system remains malleable even as it grows more
+                    complex.
+                </p>
+
+                <p>
+                    At Berlin AI Labs, we are always happy to discuss engineering practices with fellow builders. If you
+                    are working on AI systems and want to improve your development process, <a
+                        href="../index.html#contact">reach out</a>. We love helping teams build software they can be
+                    proud of.
+                </p>
+
+                <div class="article-footer">
+                    <div class="author-bio">
+                        <h3>About the Author</h3>
+                        <p>
+                            <strong>Chris Igel</strong> is an AI engineer at Berlin AI Labs, where he focuses on
+                            building reliable, production grade AI systems. He is passionate about software
+                            craftsmanship, test driven development, and helping teams adopt engineering best practices.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Related Articles or CTA -->
+    <section class="article-cta">
+        <div class="container">
+            <h2>Ready to Build Reliable AI?</h2>
+            <p>Let's discuss how Berlin AI Labs can help your team deliver AI systems with confidence.</p>
+            <a href="../index.html#contact" class="btn btn-primary">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../logo.svg" alt="Berlin AI Labs" class="logo">
+                        <span class="logo-text">Berlin AI Labs</span>
+                    </div>
+                    <p class="footer-description">
+                        Einfache KI-Lösungen für KMU. Sparen Sie Zeit, reduzieren Sie Kosten und steigern Sie Ihren
+                        Erfolg – alles DSGVO-sicher.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#services">Übersetzungen für den Export</a></li>
+                        <li><a href="../index.html#services">Rechnungen automatisch verarbeiten</a></li>
+                        <li><a href="../index.html#services">Testen Sie KI kostenlos</a></li>
+                        <li><a href="../index.html#services">Bessere Kunden mit Marketing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Unternehmen</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#about">Über uns</a></li>
+                        <li><a href="../index.html#case-studies">Fallstudien</a></li>
+                        <li><a href="../blog.html">Blog</a></li>
+                        <li><a href="../index.html#contact">Kontakt</a></li>
+                        <li><a href="../impressum.html">Impressum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
+                        <li><a href="tel:+4917614619226">+49 176 146 19 226</a></li>
+                        <li>Berlin, Deutschland</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="../impressum.html">Impressum</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
