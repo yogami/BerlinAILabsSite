@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From URL to Video: The "Setlist" Architecture | Berlin AI Labs</title>
+    <meta name="description"
+        content="I'm a musician turned engineer. Here is how I used the concept of a 'Setlist' to stop AI from hallucinating and build a video generator that actually works.">
+    <meta name="author" content="Yami Gopal, Berlin AI Labs">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-brand">
+                    <img src="../logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span>Berlin AI Labs</span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="../index.html#services" class="nav-link">Services</a></li>
+                    <li><a href="../index.html#about" class="nav-link">Über uns</a></li>
+                    <li><a href="../index.html#case-studies" class="nav-link">Fallstudien</a></li>
+                    <li><a href="../blog.html" class="nav-link active">Blog</a></li>
+                    <li><a href="../index.html#contact" class="nav-link">Kontakt</a></li>
+                    <li><a href="../index.html#contact" class="btn nav-cta btn-primary">Termin buchen</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <article class="blog-article">
+        <header class="article-header">
+            <div class="container">
+                <a href="../blog.html" class="back-to-blog">← Back to Blog</a>
+                <h1 class="article-title">From URL to Video: The "Setlist" Architecture</h1>
+                <div class="article-meta">
+                    <div class="author-info">
+                        <span class="author-name">Yami Gopal</span>
+                        <span class="author-company">Berlin AI Labs</span>
+                    </div>
+                    <div class="article-details">
+                        <span class="publish-date">December 31, 2024</span>
+                        <span class="reading-time">10 min read</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Article Content -->
+        <div class="article-content">
+            <div class="container article-container">
+
+                <p class="article-intro">
+                    I'm a musician first, engineer second. When I'm on stage, I don't just improvise everything from
+                    scratch. I have a setlist. I know where the breaks are, where the drops hit, and when to let the
+                    crowd breathe.
+                </p>
+                <p>
+                    So when I started building this AI tool to turn websites into promo videos, I realized something: AI
+                    is a terrible improviser. If you just give it a URL and say "make a video," it's like a drummer
+                    playing a solo for 20 minutes. It's technically impressive, but nobody wants to listen to it.
+                </p>
+                <p>
+                    I had to teach the AI how to follow a setlist. Here is how I did it.
+                </p>
+
+                <figure class="article-figure">
+                    <img src="sota-architecture-diagram.png" alt="The Setlist Architecture Diagram">
+                    <figcaption>Sketching out the flow: Keep it simple, keep it moving.</figcaption>
+                </figure>
+
+                <h2>The Problem: Too Much Noise</h2>
+
+                <p>
+                    A lot of "text-to-video" tools these days are overcomplicated. You paste a link, and the AI goes off
+                    and hallucinates a bunch of corporate jargon. It doesn't <em>feel</em> right.
+                </p>
+                <p>
+                    I realized that before we generate a single frame of video, we need to understand the rhythm of the
+                    business. Is it a high-energy e-commerce shop? Or a chill local cafe? You can't play death metal at
+                    a wedding, and you can't put a techno beat on a funeral home website.
+                </p>
+
+                <h2>Step 1: The Vibe Check</h2>
+
+                <p>
+                    First, we scrape the site. But I'm not just looking for text. I'm looking for the vibe.
+                </p>
+                <p>
+                    We check the "Hero" section. What's the main hook? Who are they talking to? If it's a SaaS tool, I'm
+                    looking for the "Problem" they solve. If it's a portfolio, I'm looking for the "Work". It's pretty
+                    basic stuff, but if you get this wrong, the whole video feels off-beat.
+                </p>
+
+                <h2>Step 2: Building The Blueprint (The Setlist)</h2>
+
+                <p>
+                    This is the secret sauce. I don't let the AI write the script yet. First, I generate a
+                    <strong>Blueprint</strong>.
+                </p>
+                <p>
+                    Think of this like a song structure: Intro -> Verse -> Chorus -> Bridge -> Outro.
+                </p>
+                <p>
+                    For a video, it looks like this:
+                </p>
+
+                <pre><code class="language-json">{
+  "beats": [
+    { "kind": "HOOK", "duration": 3, "style": "kinetic_text" },
+    { "kind": "PROBLEM", "duration": 5, "style": "black_white_filter" },
+    { "kind": "SOLUTION", "duration": 4, "style": "screen_capture" },
+    { "kind": "CTA", "duration": 3, "style": "big_font" }
+  ]
+}</code></pre>
+
+                <p>
+                    See? No script yet. Just timing. I'm telling the AI: "You have exactly 3 seconds to catch their
+                    attention. Make it count."
+                </p>
+
+                <h2>Step 3: The Jam Session</h2>
+
+                <p>
+                    Now that we have the structure, we bring in the "Creative" layer (the LLM).
+                </p>
+                <p>
+                    Because we locked down the structure, the AI can't ramble. It has to fit the lyrics to the beat. It
+                    writes a script that fits exactly into those 3-second slots. It's not perfect every time, but it's
+                    way better than let it run wild.
+                </p>
+
+                <h2>Step 4: Putting It Together</h2>
+
+                <p>
+                    Finally, we render it. We match the voiceover to the visuals. We add the cuts. We make sure the
+                    audio levels are right. It's just like mixing a track. You tweak the EQ until it sits right in the
+                    mix.
+                </p>
+
+                <h2>Why I Built It This Way</h2>
+
+                <p>
+                    I'm just a guy trying to make cool stuff that helps people. I see a lot of engineers getting lost in
+                    the complexity, trying to make the biggest, smartest model. But honestly? Sometimes you just need a
+                    better plan.
+                </p>
+                <p>
+                    Structure beats raw power. rhythm beats complexity. And a good setlist beats a 20-minute drum solo
+                    every time.
+                </p>
+
+                <div class="article-footer">
+                    <div class="author-bio">
+                        <h3>About the Author</h3>
+                        <p>
+                            <strong>Yami Gopal</strong> is a musician and engineer at Berlin AI Labs. He likes building
+                            things that work and keeping it simple.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Related Articles -->
+    <section class="article-cta">
+        <div class="container">
+            <h2>Want to jam on some ideas?</h2>
+            <p>I'm always down to chat about tech, music, or how to automate the boring stuff.</p>
+            <a href="../index.html#contact" class="btn btn-primary">Let's Talk</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../logo.svg" alt="Berlin AI Labs" class="logo">
+                        <span class="logo-text">Berlin AI Labs</span>
+                    </div>
+                    <p class="footer-description">
+                        Einfache KI-Lösungen für KMU. Sparen Sie Zeit, reduzieren Sie Kosten und steigern Sie Ihren
+                        Erfolg – alles DSGVO-sicher.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#services">Übersetzungen für den Export</a></li>
+                        <li><a href="../index.html#services">Rechnungen automatisch verarbeiten</a></li>
+                        <li><a href="../index.html#services">Testen Sie KI kostenlos</a></li>
+                        <li><a href="../index.html#services">Bessere Kunden mit Marketing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Unternehmen</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#about">Über uns</a></li>
+                        <li><a href="../index.html#case-studies">Fallstudien</a></li>
+                        <li><a href="../blog.html">Blog</a></li>
+                        <li><a href="../index.html#contact">Kontakt</a></li>
+                        <li><a href="../impressum.html">Impressum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
+                        <li><a href="tel:+4917614619226">+49 176 146 19 226</a></li>
+                        <li>Berlin, Deutschland</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="../impressum.html">Impressum</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
