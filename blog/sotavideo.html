@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>From URL to Video: The "Setlist" Architecture | Berlin AI Labs</title>
+    <title>From URL to Video: The Setlist Architecture | Berlin AI Labs</title>
     <meta name="description"
         content="I'm a musician turned engineer. Here is how I used the concept of a 'Setlist' to stop AI from hallucinating and build a video generator that actually works.">
     <meta name="author" content="Yami Gopal, Berlin AI Labs">
@@ -46,7 +46,7 @@
         <header class="article-header">
             <div class="container">
                 <a href="../blog.html" class="back-to-blog">← Back to Blog</a>
-                <h1 class="article-title">From URL to Video: The "Setlist" Architecture</h1>
+                <h1 class="article-title">From URL to Video: The Setlist Architecture</h1>
                 <div class="article-meta">
                     <div class="author-info">
                         <span class="author-name">Yami Gopal</span>
@@ -79,19 +79,19 @@
                 </p>
 
                 <figure class="article-figure">
-                    <img src="sota-architecture-diagram.png" alt="The Setlist Architecture Diagram">
+                    <img src="sotadiagram.png" alt="The Setlist Architecture Diagram">
                     <figcaption>Sketching out the flow: Keep it simple, keep it moving.</figcaption>
                 </figure>
 
                 <h2>The Problem: Too Much Noise</h2>
 
                 <p>
-                    A lot of "text-to-video" tools these days are overcomplicated. You paste a link, and the AI goes off
+                    A lot of tools these days are overcomplicated. You paste a link, and the AI goes off
                     and hallucinates a bunch of corporate jargon. It doesn't <em>feel</em> right.
                 </p>
                 <p>
                     I realized that before we generate a single frame of video, we need to understand the rhythm of the
-                    business. Is it a high-energy e-commerce shop? Or a chill local cafe? You can't play death metal at
+                    business. Is it a high energy e-commerce shop? Or a chill local cafe? You can't play death metal at
                     a wedding, and you can't put a techno beat on a funeral home website.
                 </p>
 
@@ -103,7 +103,7 @@
                 <p>
                     We check the "Hero" section. What's the main hook? Who are they talking to? If it's a SaaS tool, I'm
                     looking for the "Problem" they solve. If it's a portfolio, I'm looking for the "Work". It's pretty
-                    basic stuff, but if you get this wrong, the whole video feels off-beat.
+                    basic stuff, but if you get this wrong, the whole video feels off beat.
                 </p>
 
                 <h2>Step 2: Building The Blueprint (The Setlist)</h2>
@@ -113,7 +113,7 @@
                     <strong>Blueprint</strong>.
                 </p>
                 <p>
-                    Think of this like a song structure: Intro -> Verse -> Chorus -> Bridge -> Outro.
+                    Think of this like a song structure: Intro Verse Chorus Bridge Outro.
                 </p>
                 <p>
                     For a video, it looks like this:
@@ -140,7 +140,7 @@
                 </p>
                 <p>
                     Because we locked down the structure, the AI can't ramble. It has to fit the lyrics to the beat. It
-                    writes a script that fits exactly into those 3-second slots. It's not perfect every time, but it's
+                    writes a script that fits exactly into those 3 second slots. It's not perfect every time, but it's
                     way better than let it run wild.
                 </p>
 
@@ -160,7 +160,7 @@
                     better plan.
                 </p>
                 <p>
-                    Structure beats raw power. rhythm beats complexity. And a good setlist beats a 20-minute drum solo
+                    Structure beats raw power. rhythm beats complexity. And a good setlist beats a 20 minute drum solo
                     every time.
                 </p>
 
