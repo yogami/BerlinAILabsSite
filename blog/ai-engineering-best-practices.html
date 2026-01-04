@@ -30,12 +30,12 @@
                     <span class="bar"></span>
                 </button>
                 <ul class="nav-menu">
+                    <li><a href="../index.html#products" class="nav-link">Products</a></li>
                     <li><a href="../index.html#services" class="nav-link">Services</a></li>
-                    <li><a href="../index.html#about" class="nav-link">Über uns</a></li>
-                    <li><a href="../index.html#case-studies" class="nav-link">Fallstudien</a></li>
+                    <li><a href="../index.html#about" class="nav-link">About</a></li>
                     <li><a href="../blog.html" class="nav-link active">Blog</a></li>
-                    <li><a href="../index.html#contact" class="nav-link">Kontakt</a></li>
-                    <li><a href="../index.html#contact" class="btn nav-cta btn-primary">Termin buchen</a></li>
+                    <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+                    <li><a href="../index.html#contact" class="btn nav-cta btn-primary">Partner with Us</a></li>
                 </ul>
             </div>
         </div>
@@ -131,7 +131,8 @@
 
                 <p>
                     Everyone encounters bugs. What separates professional engineering from hacking is how you handle
-                    them. We follow a strict protocol that ensures bugs are truly fixed, not just patched over, through a rigorous TDD cycle.
+                    them. We follow a strict protocol that ensures bugs are truly fixed, not just patched over, through
+                    a rigorous TDD cycle.
                 </p>
 
                 <h3>1. RED: Reproduce with a Test</h3>
@@ -145,7 +146,8 @@
                 <h3>2. GREEN: Fix the Code</h3>
 
                 <p>
-                    Next comes "green": we fix the code until the test passes. We apply SOLID and Clean Code principles while
+                    Next comes "green": we fix the code until the test passes. We apply SOLID and Clean Code principles
+                    while
                     doing so. No quick hacks.
                 </p>
 
@@ -153,21 +155,24 @@
 
                 <p>
                     Once the test is green, we improve the structure and readability of the code while keeping all tests
-                    green. We run our internal quality gates, ensuring no circular dependencies and keeping cyclomatic 
+                    green. We run our internal quality gates, ensuring no circular dependencies and keeping cyclomatic
                     complexity at or below 3.
                 </p>
 
                 <h3>4. REGRESSION: Full Test Suite</h3>
 
                 <p>
-                    We run ALL tests, including unit and prompt tests, to ensure the fix hasn't introduced regressions elsewhere in the system.
+                    We run ALL tests, including unit and prompt tests, to ensure the fix hasn't introduced regressions
+                    elsewhere in the system.
                 </p>
 
                 <h3>5. CODE REVIEW & Verification</h3>
 
                 <p>
-                    An independent review checks for SOLID violations, code smells, and security issues. We also deploy and 
-                    run E2E tests using Playwright against production whenever possible. If anything is found, we repeat the cycle.
+                    An independent review checks for SOLID violations, code smells, and security issues. We also deploy
+                    and
+                    run E2E tests using Playwright against production whenever possible. If anything is found, we repeat
+                    the cycle.
                 </p>
 
                 <h2>Feature Development: Building with Confidence</h2>
@@ -191,39 +196,41 @@
                 <h2>Prompt Engineering: Treating Prompts as Code</h2>
 
                 <p>
-                    In AI systems, prompts are the logic we cannot see, but they are logic nonetheless. At Berlin AI Labs, 
-                    we treat prompts as first-class code. They are versioned, tested, and held to the same craftsmanship 
+                    In AI systems, prompts are the logic we cannot see, but they are logic nonetheless. At Berlin AI
+                    Labs,
+                    we treat prompts as first-class code. They are versioned, tested, and held to the same craftsmanship
                     standards as our TypeScript or Python code.
                 </p>
 
                 <h3>1. Define Acceptance Criteria FIRST</h3>
 
                 <p>
-                    Before writing a single line of a prompt, we define exactly what we expect. This includes the output 
-                    structure (e.g., JSON schema, field presence), content rules (length constraints, specific keywords), 
+                    Before writing a single line of a prompt, we define exactly what we expect. This includes the output
+                    structure (e.g., JSON schema, field presence), content rules (length constraints, specific
+                    keywords),
                     and edge-case handling.
                 </p>
 
                 <h3>2. Write Executable Tests for Prompts</h3>
 
                 <p>
-                    We write tests that validate the prompt's output. These are not just unit tests; they are "semantic" 
-                    tests that check for structural validation, semantic quality (like hook engagement or simplicity), 
+                    We write tests that validate the prompt's output. These are not just unit tests; they are "semantic"
+                    tests that check for structural validation, semantic quality (like hook engagement or simplicity),
                     and resilience to malformed model responses.
                 </p>
 
                 <h3>3. The Prompt Test Loop</h3>
 
                 <p>
-                    Our workflow follows a strict cycle: write acceptance tests, craft the prompt, validate with real 
-                    API calls, and only then add it to the codebase. Future changes to any prompt MUST pass all existing 
+                    Our workflow follows a strict cycle: write acceptance tests, craft the prompt, validate with real
+                    API calls, and only then add it to the codebase. Future changes to any prompt MUST pass all existing
                     tests before they are committed.
                 </p>
 
                 <h3>4. Versioning and Maintenance</h3>
 
                 <p>
-                    Prompts are versioned just like code. We never edit a prompt without having protect behavior tests 
+                    Prompts are versioned just like code. We never edit a prompt without having protect behavior tests
                     in place. This prevents the "silent regression" problem that plagues many AI applications.
                 </p>
 

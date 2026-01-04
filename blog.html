@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog | Berlin AI Labs</title>
     <meta name="description"
-        content="Insights, best practices, and thought leadership from Berlin AI Labs on AI engineering, automation, and software craftsmanship.">
+        content="Insights on AI engineering, automation, and building reliable software systems. From the Berlin AI Labs team.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -29,12 +30,12 @@
                     <span class="bar"></span>
                 </button>
                 <ul class="nav-menu">
+                    <li><a href="index.html#products" class="nav-link">Products</a></li>
                     <li><a href="index.html#services" class="nav-link">Services</a></li>
-                    <li><a href="index.html#about" class="nav-link">Über uns</a></li>
-                    <li><a href="index.html#case-studies" class="nav-link">Fallstudien</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
                     <li><a href="blog.html" class="nav-link active">Blog</a></li>
-                    <li><a href="index.html#contact" class="nav-link">Kontakt</a></li>
-                    <li><a href="index.html#contact" class="btn nav-cta btn-primary">Termin buchen</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                    <li><a href="index.html#contact" class="btn nav-cta btn-primary">Partner with Us</a></li>
                 </ul>
             </div>
         </div>
@@ -44,6 +45,7 @@
     <section class="blog-header">
         <div class="container">
             <div class="section-header">
+                <span class="section-badge">Insights</span>
                 <h1 class="section-title">Blog</h1>
                 <p class="section-subtitle">
                     Insights on AI engineering, automation, and building reliable software systems
@@ -56,86 +58,65 @@
     <section class="blog-posts">
         <div class="container">
             <div class="blog-grid">
-                <!-- Article 5: Self-Healing Automation -->
-                <a href="blog/unleash-your-inner-artist.html" class="blog-card">
-                    <div class="blog-card-meta">
-                        <span class="blog-date">January 3, 2026</span>
-                        <span class="blog-reading-time">5 min read</span>
-                    </div>
-                    <h2 class="blog-card-title">Unleash Your Inner Artist: Stopping the 'Nerd-Loop' with Self-Healing AI
-                    </h2>
-                    <p class="blog-card-excerpt">
-                        How our self-healing AI loop frees you from the corporate cubicle and back into the arms of
-                        creativity, dancing, and music.
-                    </p>
-                    <div class="blog-card-author">
-                        <span class="author-name">Yami Gopal</span>
-                        <span class="author-company">Berlin AI Labs</span>
-                    </div>
-                </a>
-                <!-- Article 4: Berlin AI Orchestra DDD -->
-                <a href="blog/berlin-ai-orchestra-ddd.html" class="blog-card">
-                    <div class="blog-card-meta">
-                        <span class="blog-date">January 3, 2026</span>
-                        <span class="blog-reading-time">15 min read</span>
-                    </div>
-                    <h2 class="blog-card-title">Orchestrating the Agentic Symphony: A Deep Dive into DDD-Driven
-                        Microservice Independence</h2>
-                    <p class="blog-card-excerpt">
-                        Comprehensive architectural breakdown of how we applied Domain-Driven Design and Hexagonal
-                        Architecture to decouple our AgentOps suite.
-                    </p>
-                    <div class="blog-card-author">
-                        <span class="author-name">Yami Gopal</span>
-                        <span class="author-company">Berlin AI Labs</span>
-                    </div>
-                </a>
-                <!-- Article 3: SOTA Video Architecture -->
-                <a href="blog/sotavideo.html" class="blog-card">
-                    <div class="blog-card-meta">
-                        <span class="blog-date">December 31, 2024</span>
-                        <span class="blog-reading-time">10 min read</span>
-                    </div>
-                    <h2 class="blog-card-title">From URL to Video: A SOTA Architecture for Automated Promo Reels</h2>
-                    <p class="blog-card-excerpt">
-                        Deep dive into the architecture of an intelligent system that turns any website into a
-                        high-converting video reel using a "Blueprint First" approach.
-                    </p>
-                    <div class="blog-card-footer">
-                        <span class="read-more">Read Article →</span>
-                    </div>
-                </a>
                 <a href="blog/tiered-model-ladder.html" class="blog-card">
-                    <div class="blog-card-meta">
-                        <span class="blog-date">December 25, 2024</span>
-                        <span class="blog-reading-time">10 min read</span>
+                    <div class="blog-card-image">
+                        <img src="images/blog-model-ladder.png" alt="Tiered Model Ladder visualization">
                     </div>
-                    <h2 class="blog-card-title">Improving LLM Response Quality with a Tiered Model Ladder</h2>
-                    <p class="blog-card-excerpt">
-                        How to orchestrate multiple LLM capability tiers for higher quality at lower cost. Start with
-                        high reasoning models for framing, then transition to lightweight models for execution.
-                    </p>
-                    <div class="blog-card-author">
-                        <span class="author-name">Chris Igel</span>
-                        <span class="author-company">Berlin AI Labs</span>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span class="blog-date">December 25, 2024</span>
+                            <span class="blog-reading-time">10 min read</span>
+                        </div>
+                        <h2 class="blog-card-title">Improving LLM Response Quality with a Tiered Model Ladder</h2>
+                        <p class="blog-card-excerpt">
+                            How to orchestrate multiple LLM capability tiers for higher quality at lower cost. Start
+                            with
+                            high reasoning models for framing, then transition to lightweight models for execution.
+                        </p>
+                        <div class="blog-card-author">
+                            <span class="author-name">Chris Igel</span>
+                            <span class="author-company">Berlin AI Labs</span>
+                        </div>
                     </div>
                 </a>
                 <a href="blog/ai-engineering-best-practices.html" class="blog-card">
-                    <div class="blog-card-meta">
-                        <span class="blog-date">December 25, 2024</span>
-                        <span class="blog-reading-time">12 min read</span>
+                    <div class="blog-card-image">
+                        <img src="images/blog-ai-engineering.png" alt="AI Engineering Best Practices visualization">
                     </div>
-                    <h2 class="blog-card-title">AI Engineering Best Practices: Building Reliable Systems with
-                        Craftsmanship</h2>
-                    <p class="blog-card-excerpt">
-                        How structured planning, test driven development, and code quality standards create AI systems
-                        you can trust. A practical guide from our engineering team.
-                    </p>
-                    <div class="blog-card-author">
-                        <span class="author-name">Yami Gopal</span>
-                        <span class="author-company">Berlin AI Labs</span>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span class="blog-date">December 25, 2024</span>
+                            <span class="blog-reading-time">12 min read</span>
+                        </div>
+                        <h2 class="blog-card-title">AI Engineering Best Practices: Building Reliable Systems with
+                            Craftsmanship</h2>
+                        <p class="blog-card-excerpt">
+                            How structured planning, test driven development, and code quality standards create AI
+                            systems
+                            you can trust. A practical guide from our engineering team.
+                        </p>
+                        <div class="blog-card-author">
+                            <span class="author-name">Yami Gopal</span>
+                            <span class="author-company">Berlin AI Labs</span>
+                        </div>
                     </div>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <section class="funding-cta">
+        <div class="container">
+            <div class="funding-content">
+                <h2 class="funding-title">Stay Updated</h2>
+                <p class="funding-description">
+                    Get insights on AI engineering, compliance, and automation delivered to your inbox.
+                </p>
+                <div class="funding-cta-buttons">
+                    <a href="index.html#contact" class="btn btn-primary btn-glow">Contact Us</a>
+                    <a href="index.html#products" class="btn btn-secondary btn-glass">Explore Products</a>
+                </div>
             </div>
         </div>
     </section>
@@ -150,31 +131,37 @@
                         <span class="logo-text">Berlin AI Labs</span>
                     </div>
                     <p class="footer-description">
-                        Einfache KI-Lösungen für KMU. Sparen Sie Zeit, reduzieren Sie Kosten und steigern Sie Ihren
-                        Erfolg – alles DSGVO-sicher.
+                        AI Innovation Lab building breakthrough products for compliance, governance, and automation.
+                        Enterprise services for German SMBs. 100% DSGVO-konform.
                     </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <ul class="footer-links">
+                        <li><a href="ConvoGuardAI.html">ConvoGuard AI</a></li>
+                        <li><a href="AgentTrustProtocol.html">AgentOps Suite</a></li>
+                        <li><a href="AIVoiceTranslator.html">Voice Translator</a></li>
+                    </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Services</h4>
                     <ul class="footer-links">
-                        <li><a href="index.html#services">Übersetzungen für den Export</a></li>
-                        <li><a href="index.html#services">Rechnungen automatisch verarbeiten</a></li>
-                        <li><a href="index.html#services">Testen Sie KI kostenlos</a></li>
-                        <li><a href="index.html#services">Bessere Kunden mit Marketing</a></li>
+                        <li><a href="index.html#services">Übersetzungen</a></li>
+                        <li><a href="index.html#services">Rechnungsverarbeitung</a></li>
+                        <li><a href="index.html#services">Lead Automation</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Unternehmen</h4>
+                    <h4>Company</h4>
                     <ul class="footer-links">
-                        <li><a href="index.html#about">Über uns</a></li>
-                        <li><a href="index.html#case-studies">Fallstudien</a></li>
+                        <li><a href="index.html#about">About</a></li>
                         <li><a href="blog.html">Blog</a></li>
-                        <li><a href="index.html#contact">Kontakt</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
                         <li><a href="impressum.html">Impressum</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Kontakt</h4>
+                    <h4>Contact</h4>
                     <ul class="footer-contact">
                         <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
                         <li><a href="tel:+4917614619226">+49 176 146 19 226</a></li>
@@ -183,7 +170,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="impressum.html">Impressum</a></p>
+                <p>&copy; 2026 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="impressum.html">Impressum</a></p>
             </div>
         </div>
     </footer>
