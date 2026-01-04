@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free AI Tools | Berlin AI Labs</title>
+    <meta name="description"
+        content="Free AI tools for content creators and solopreneurs. Reel Viral Predictor, Compliance Quick-Check, and Digital Twin Demo. Built in Berlin.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .tool-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .tool-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-title {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .tool-link:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">
+                    <img src="logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span>Berlin AI Labs</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html#services" class="nav-link">Services</a></li>
+                    <li><a href="index.html#case-studies" class="nav-link">Fallstudien</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" style="padding: 4rem 0;">
+        <div class="container">
+            <div class="hero-content" style="text-align: center;">
+                <span class="hero-badge">Kostenlose Tools</span>
+                <h1 class="hero-title">Free AI Tools</h1>
+                <p class="hero-subtitle">
+                    Try our AI tools for free. No signup required. No credit card. Built in Berlin.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" style="padding: 3rem 0;">
+        <div class="container">
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">🎬</div>
+                    <h2 class="tool-title">Reel Viral Predictor</h2>
+                    <p class="tool-description">
+                        Paste your Instagram reel caption and get an instant viral score with AI-powered improvement
+                        suggestions.
+                    </p>
+                    <a href="https://tools.berlinailabs.de/reel-predictor" class="tool-link" target="_blank">
+                        Try Free →
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">🛡️</div>
+                    <h2 class="tool-title">Compliance Quick-Check</h2>
+                    <p class="tool-description">
+                        Check your AI chatbot responses for GDPR and EU AI Act compliance risks in seconds.
+                    </p>
+                    <a href="https://tools.berlinailabs.de/compliance-check" class="tool-link" target="_blank">
+                        Try Free →
+                    </a>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">🤖</div>
+                    <h2 class="tool-title">Digital Twin Demo</h2>
+                    <p class="tool-description">
+                        See how an AI version of you could handle conversations. Paste your bio and chat with your twin.
+                    </p>
+                    <a href="https://tools.berlinailabs.de/twin-demo" class="tool-link" target="_blank">
+                        Try Free →
+                    </a>
+                </div>
+            </div>
+
+            <div
+                style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 1rem;">
+                <h3 style="color: white; margin-bottom: 1rem;">Want the Full Versions?</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    These free tools are previews of our production products. Get unlimited access with a beta
+                    subscription.
+                </p>
+                <a href="https://pay.berlinailabs.de" class="btn btn-primary">
+                    View All Products – Starting €99/mo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Berlin AI Labs. <a href="impressum.html">Impressum</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

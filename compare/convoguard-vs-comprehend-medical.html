@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConvoGuard vs Amazon Comprehend Medical – AI Compliance Comparison | Berlin AI Labs</title>
+    <meta name="description"
+        content="Compare ConvoGuard and Amazon Comprehend Medical for AI chatbot compliance. GDPR, EU AI Act compliance for mental health and healthcare applications.">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .comparison-table td {
+            color: var(--text-secondary);
+        }
+
+        .check {
+            color: #22c55e;
+        }
+
+        .cross {
+            color: #ef4444;
+        }
+
+        .winner-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-brand">
+                    <img src="../logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span>Berlin AI Labs</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" style="padding: 4rem 0;">
+        <div class="container">
+            <div class="hero-content" style="text-align: center;">
+                <span class="hero-badge">Compliance Comparison 2026</span>
+                <h1 class="hero-title">ConvoGuard vs Amazon Comprehend Medical</h1>
+                <p class="hero-subtitle">
+                    Which AI compliance solution is right for your healthcare or mental health chatbot in Germany?
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" style="padding: 3rem 0;">
+        <div class="container">
+            <h2 class="section-title" style="font-size: 1.5rem;">Feature Comparison</h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>ConvoGuard</th>
+                        <th>Amazon Comprehend Medical</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Primary Purpose</td>
+                        <td>AI conversation compliance scanning</td>
+                        <td>Medical entity extraction from text</td>
+                    </tr>
+                    <tr>
+                        <td>GDPR Compliance Built-in</td>
+                        <td><span class="check">✓</span> Yes, core feature</td>
+                        <td><span class="cross">✗</span> You must implement</td>
+                    </tr>
+                    <tr>
+                        <td>EU AI Act Ready</td>
+                        <td><span class="check">✓</span> High-risk AI checks</td>
+                        <td><span class="cross">✗</span> Not designed for this</td>
+                    </tr>
+                    <tr>
+                        <td>Zero Data Retention</td>
+                        <td><span class="check">✓</span> No customer data stored</td>
+                        <td>❓ AWS data policies apply</td>
+                    </tr>
+                    <tr>
+                        <td>Data Location</td>
+                        <td><span class="check">✓</span> EU (Berlin)</td>
+                        <td>AWS Regions (you choose)</td>
+                    </tr>
+                    <tr>
+                        <td>Response Time</td>
+                        <td>&lt;100ms</td>
+                        <td>Varies by load</td>
+                    </tr>
+                    <tr>
+                        <td>Pricing Model</td>
+                        <td>€99/mo flat (10K calls)</td>
+                        <td>Pay-per-character</td>
+                    </tr>
+                    <tr>
+                        <td>Mental Health Specialization</td>
+                        <td><span class="check">✓</span> Crisis detection, DiGA ready</td>
+                        <td><span class="cross">✗</span> General medical only</td>
+                    </tr>
+                    <tr>
+                        <td>Audit Log Export</td>
+                        <td><span class="check">✓</span> Compliance-ready exports</td>
+                        <td>Via CloudWatch (setup required)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="service-card" style="margin: 2rem 0; padding: 2rem; text-align: center;">
+                <span class="winner-badge">Best for EU Mental Health Apps</span>
+                <h3 class="service-title" style="margin-top: 1rem;">ConvoGuard wins for GDPR/EU AI Act compliance</h3>
+                <p class="service-description">
+                    Amazon Comprehend Medical is powerful for extracting medical entities from text. But if you're
+                    building a chatbot that needs real-time compliance checking against GDPR, EU AI Act, and DiGA
+                    requirements, ConvoGuard is purpose-built for this use case.
+                </p>
+            </div>
+
+            <h2 class="section-title" style="font-size: 1.5rem; margin-top: 3rem;">When to Choose Each</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="service-card">
+                    <h3 class="service-title">Choose ConvoGuard if:</h3>
+                    <ul class="service-features">
+                        <li>You're building a mental health chatbot in the EU</li>
+                        <li>GDPR/EU AI Act compliance is required</li>
+                        <li>You need zero data retention guarantees</li>
+                        <li>You want predictable monthly pricing</li>
+                        <li>DiGA certification is on your roadmap</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3 class="service-title">Choose Comprehend Medical if:</h3>
+                    <ul class="service-features">
+                        <li>You need medical entity extraction (NER)</li>
+                        <li>You're building on AWS infrastructure</li>
+                        <li>HIPAA compliance is more important than GDPR</li>
+                        <li>You have existing AWS billing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <h3 style="color: white; margin-bottom: 1rem;">Try ConvoGuard Free</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    Use our free Compliance Quick-Check to scan your chatbot responses instantly.
+                </p>
+                <a href="https://tools.berlinailabs.de/compliance-check" class="btn btn-primary">
+                    Try Free Tool →
+                </a>
+                <a href="https://pay.berlinailabs.de/convoguard" class="btn btn-secondary" style="margin-left: 1rem;">
+                    Start Beta – €99/mo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Berlin AI Labs. <a href="../impressum.html">Impressum</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
