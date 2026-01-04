@@ -39,10 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Scroll Reveal Animation
     // Elements with class 'reveal' will fade in when scrolled into view
-    const revealElements = document.querySelectorAll('.service-card, .case-card, .section-title, .about-content, .contact-content');
-
-    // Add reveal class to these elements initially
-    revealElements.forEach(el => el.classList.add('reveal'));
+    const revealElements = document.querySelectorAll('.reveal, .service-card, .case-card, .section-title, .about-content, .contact-content');
 
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
