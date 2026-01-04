@@ -32,57 +32,78 @@
                     <span class="bar"></span>
                 </button>
                 <ul class="nav-menu">
-                    <li><a href="#products" class="nav-link">Products</a></li>
-                    <li><a href="#services" class="nav-link">Services</a></li>
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                    <li><a href="#contact" class="btn nav-cta btn-primary">Partner with Us</a></li>
+                    <li><a href="#products" class="nav-link" data-i18n="nav.products">Products</a></li>
+                    <li><a href="#services" class="nav-link" data-i18n="nav.services">Services</a></li>
+                    <li><a href="#about" class="nav-link" data-i18n="nav.about">About</a></li>
+                    <li><a href="blog.html" class="nav-link" data-i18n="nav.blog">Blog</a></li>
+                    <li><a href="#contact" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+                    <li><button id="lang-toggle" class="lang-toggle" aria-label="Switch language">EN</button></li>
+                    <li><a href="#contact" class="btn nav-cta btn-primary" data-i18n="nav.cta">Partner with Us</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero hero-enhanced">
-        <div class="hero-background">
-            <img src="images/hero-abstract.png" alt="" class="hero-bg-image" aria-hidden="true">
-            <div class="hero-overlay"></div>
-        </div>
+    <section class="hero hero-enhanced" id="hero">
+        <!-- Particle Animation Canvas -->
+        <canvas id="particle-canvas" class="hero-particles"></canvas>
+        <!-- Noise Texture Overlay -->
+        <div class="noise-overlay"></div>
+        <div class="hero-gradient-overlay"></div>
+
         <div class="container">
             <div class="hero-content">
                 <span class="hero-badge">
                     <span class="badge-dot"></span>
-                    AI Innovation Lab • Berlin 2026
+                    <span data-i18n="hero.badge">DSGVO-konform • EU AI Act Ready • Made in Berlin</span>
                 </span>
-                <h1 class="hero-title">Building the <span class="text-gradient-electric">Future of AI</span></h1>
-                <p class="hero-subtitle">
-                    We create breakthrough AI products and deliver enterprise automation for German SMBs.
-                    From compliance middleware to multi-agent governance — all DSGVO-konform.
+                <h1 class="hero-title">
+                    <span data-i18n="hero.title1">KI-Reels für Berliner Unternehmen</span><br>
+                    <span class="text-gradient-electric" data-i18n="hero.title2">— in Sekunden</span>
+                </h1>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">
+                    Automatisierte Promo-Videos. Guardian-geprüfte Compliance. Zero Retention.
+                    Von der URL zum fertigen Reel in unter 2 Minuten.
                 </p>
-                <div class="hero-cta">
-                    <a href="#products" class="btn btn-primary btn-glow">Explore Products</a>
-                    <a href="#services" class="btn btn-secondary btn-glass">Enterprise Services</a>
+
+                <!-- Interactive Demo Input -->
+                <div class="hero-demo">
+                    <div class="demo-input-wrapper">
+                        <input type="url" id="demo-url-input" class="demo-input"
+                            placeholder="Ihre Website-URL eingeben..." aria-label="Website URL für Demo">
+                        <button class="btn btn-primary btn-glow demo-btn" id="demo-generate-btn">
+                            <span class="btn-text" data-i18n="hero.cta">Kostenlosen Reel testen</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                    <p class="demo-hint" data-i18n="hero.hint">Keine Anmeldung • Sofort-Vorschau • 100% DSGVO-sicher</p>
                 </div>
+
                 <div class="hero-stats">
                     <div class="stat">
-                        <span class="stat-number">5+</span>
-                        <span class="stat-text">AI Products</span>
+                        <span class="stat-number" data-count="50">&lt;50ms</span>
+                        <span class="stat-text" data-i18n="stats.latency">Compliance Check</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number">€85B+</span>
-                        <span class="stat-text">Combined TAM</span>
+                        <span class="stat-number">Zero</span>
+                        <span class="stat-text" data-i18n="stats.retention">Data Retention</span>
                     </div>
                     <div class="stat">
                         <span class="stat-number">100%</span>
-                        <span class="stat-text">DSGVO-Konform</span>
+                        <span class="stat-text" data-i18n="stats.gdpr">DSGVO-Konform</span>
                     </div>
                     <div class="stat">
                         <span class="stat-number">Berlin</span>
-                        <span class="stat-text">Made in Germany</span>
+                        <span class="stat-text" data-i18n="stats.origin">Made in Germany</span>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
         </div>
     </section>
 
@@ -191,31 +212,53 @@
         </div>
     </section>
 
-    <!-- Trust Signals Section -->
-    <section class="trust-signals">
+    <!-- Trust & Compliance Section -->
+    <section class="trust-signals" id="trust">
         <div class="container">
+            <!-- Guardian Engine Callout -->
+            <div class="guardian-callout">
+                <div class="guardian-icon">🛡️</div>
+                <div class="guardian-content">
+                    <h3 class="guardian-title">Powered by Guardian Engine</h3>
+                    <p class="guardian-description">
+                        Jede KI-Ausgabe wird in Echtzeit auf DSGVO- und EU AI Act-Konformität geprüft.
+                        <strong>&lt;50ms Latenz. Zero Retention. 100% auditierbar.</strong>
+                    </p>
+                </div>
+                <div class="guardian-badge">
+                    <span class="badge-glow">Enterprise Ready</span>
+                </div>
+            </div>
+
+            <!-- Trust Badges -->
             <div class="trust-content">
                 <div class="trust-stats">
-                    <div class="trust-stat">
+                    <div class="trust-stat trust-stat-glow">
                         <span class="trust-icon">🛡️</span>
                         <span class="trust-label">EU AI Act Ready</span>
                     </div>
-                    <div class="trust-stat">
+                    <div class="trust-stat trust-stat-glow">
                         <span class="trust-icon">🏥</span>
-                        <span class="trust-label">DiGA Compliant</span>
+                        <span class="trust-label">DiGA-Konform</span>
                     </div>
-                    <div class="trust-stat">
+                    <div class="trust-stat trust-stat-glow">
                         <span class="trust-icon">🔒</span>
                         <span class="trust-label">DSGVO-Konform</span>
                     </div>
-                    <div class="trust-stat">
+                    <div class="trust-stat trust-stat-glow">
+                        <span class="trust-icon">🚫</span>
+                        <span class="trust-label">Zero Retention</span>
+                    </div>
+                    <div class="trust-stat trust-stat-glow">
                         <span class="trust-icon">🇩🇪</span>
                         <span class="trust-label">Made in Berlin</span>
                     </div>
                 </div>
                 <div class="trust-cta">
-                    <p class="trust-message">Seeking strategic partnerships and funding opportunities</p>
-                    <a href="#contact" class="btn btn-primary btn-glow">Contact for Funding</a>
+                    <p class="trust-message" data-i18n="trust.message">
+                        Suchen Sie strategische Partnerschaften oder Fördermöglichkeiten?
+                    </p>
+                    <a href="#contact" class="btn btn-primary btn-glow" data-i18n="trust.cta">Kontakt für Partner</a>
                 </div>
             </div>
         </div>
@@ -455,7 +498,43 @@
         </div>
     </footer>
 
+    <!-- Smooth Scrolling -->
+    <script src="lenis.min.js"></script>
+    <!-- Particle Animation -->
+    <script src="particles.js"></script>
+    <!-- Translations -->
+    <script src="translations.js"></script>
+    <!-- Main Script -->
     <script src="script.js"></script>
+    <!-- Lenis Initialization -->
+    <script>
+        // Initialize Lenis for smooth scrolling
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                orientation: 'vertical',
+                smoothWheel: true,
+            });
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+        }
+
+        // Demo button handler
+        document.getElementById('demo-generate-btn')?.addEventListener('click', () => {
+            const url = document.getElementById('demo-url-input')?.value;
+            if (url) {
+                // For now, scroll to demo section with video examples
+                document.getElementById('case-studies')?.scrollIntoView({ behavior: 'smooth' });
+                showNotification('Demo-Vorschau wird geladen...', 'info');
+            } else {
+                showNotification('Bitte geben Sie eine URL ein', 'info');
+            }
+        });
+    </script>
 </body>
 
 </html>
