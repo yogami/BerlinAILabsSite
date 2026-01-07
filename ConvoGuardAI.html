@@ -67,9 +67,7 @@
         .case-study-content p,
         .case-study-content li,
         .case-study-content span:not(.meta-value, .meta-label, .logo-text, .nav-link, .btn),
-        .case-study-content td {
-            
-        }
+        .case-study-content td {}
 
         .case-study-section {
             margin-bottom: 4rem;
@@ -102,26 +100,21 @@
             border-left: 4px solid;
         }
 
-        .challenge-box {
-            
-            
-        }
+        .challenge-box {}
 
         .challenge-box ul,
         .challenge-box li,
-        .challenge-box p {
-            
-        }
+        .challenge-box p {}
 
         .solution-box {
-            background: #f5f3ff;
+            background: #1e293b;
+            border-left-color: #7c3aed;
         }
+
 
         .solution-box ul,
         .solution-box li,
-        .solution-box p {
-            
-        }
+        .solution-box p {}
 
         .feature-grid {
             display: grid;
@@ -131,17 +124,17 @@
         }
 
         .feature-item {
-            
+            background: #1e293b;
             padding: 1.5rem;
             border-radius: 0.75rem;
-            border: 1px solid #e9d5ff;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            color: #f1f5f9;
         }
 
-        .feature-item h4 {
-        }
 
-        .feature-item p {
-        }
+        .feature-item h4 {}
+
+        .feature-item p {}
 
         /* Light-box contrast overrides - Aggressive */
         .challenge-box,
@@ -157,8 +150,7 @@
         .case-study-section[style*="background: #faf5ff"],
         .case-study-section[style*="background:#faf5ff"],
         .product-section[style*="background: #f8fafc"],
-        .case-study-section[style*="background: white"] {
-        }
+        .case-study-section[style*="background: white"] {}
 
         .challenge-box *,
         .solution-box *,
@@ -172,38 +164,41 @@
         .demo-note *,
         .meta-item *,
         .case-study-section[style*="background: #faf5ff"] *,
-        .case-study-section[style*="background: white"] * {
-        }
+        .case-study-section[style*="background: white"] * {}
 
         /* Specific Badge Fixes */
-        .severity-badge {
-        }
+        .severity-badge {}
 
         .severity-high {
-            background: #fee2e2 !important;
+            background: rgba(239, 68, 68, 0.15) !important;
+            border: 1px solid #ef4444 !important;
+            color: #fca5a5 !important;
         }
 
-        .severity-high * {
-        }
+
+        .severity-high * {}
 
         .severity-medium {
-            background: #fef3c7 !important;
+            background: rgba(245, 158, 11, 0.15) !important;
+            border: 1px solid #f59e0b !important;
+            color: #fcd34d !important;
         }
 
-        .severity-medium * {
-        }
+
+        .severity-medium * {}
 
         .severity-low {
-            background: #dbeafe !important;
+            background: rgba(59, 130, 246, 0.15) !important;
+            border: 1px solid #3b82f6 !important;
+            color: #93c5fd !important;
         }
 
-        .severity-low * {
-        }
+
+        .severity-low * {}
 
         /* Ensure Headings on light backgrounds are also dark */
         .case-study-section[style*="background: #faf5ff"] h2,
-        .case-study-section[style*="background: #faf5ff"] h3 {
-        }
+        .case-study-section[style*="background: #faf5ff"] h3 {}
 
         .results-grid {
             display: grid;
@@ -236,11 +231,12 @@
             width: 100%;
             border-collapse: collapse;
             margin: 2rem 0;
-            
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            background: #1e293b;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             border-radius: 0.5rem;
             overflow: hidden;
         }
+
 
         .compliance-table th {
             background: #7c3aed;
@@ -252,14 +248,15 @@
 
         .compliance-table td {
             padding: 1rem;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #f1f5f9;
+            background: #1e293b;
         }
 
-        .compliance-table td strong {
-        }
 
-        .compliance-table td * {
-        }
+        .compliance-table td strong {}
+
+        .compliance-table td * {}
 
         .compliance-table tr:last-child td {
             border-bottom: none;
@@ -274,17 +271,11 @@
             text-transform: uppercase;
         }
 
-        .severity-high {
-            
-        }
+        .severity-high {}
 
-        .severity-medium {
-            
-        }
+        .severity-medium {}
 
-        .severity-low {
-            
-        }
+        .severity-low {}
 
         .tech-stack {
             display: flex;
@@ -303,13 +294,13 @@
         }
 
         .quote-box {
-            
+
             border-left: 4px solid #7c3aed;
             padding: 2rem;
             margin: 3rem 0;
             font-style: italic;
             font-size: 1.25rem;
-            
+
         }
 
         .quote-author {
@@ -662,8 +653,7 @@
             </div>
 
             <!-- Demo Video -->
-            <div class="case-study-section"
-                style=" padding: 3rem; border-radius: 1rem; border: 2px solid #e9d5ff;">
+            <div class="case-study-section" style=" padding: 3rem; border-radius: 1rem; border: 2px solid #e9d5ff;">
                 <h2 style="border: none; margin-bottom: 1rem;">Demo-Video</h2>
                 <p style="font-size: 1.125rem; margin-bottom: 2rem; ">
                     Eine Video-Demonstration der ConvoGuard AI Funktionen wird in Kürze hier verfügbar sein.
@@ -676,12 +666,12 @@
             <div class="case-study-section"
                 style="text-align: center; background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); padding: 4rem; border-radius: 1rem; color: white;">
                 <h2 style="color: white; border: none;">Brauchen Sie Compliance-Automatisierung?</h2>
-                    Lassen Sie uns besprechen, wie wir Ihre regulatorischen Anforderungen in automatisierte Lösungen
-                    verwandeln können.
+                Lassen Sie uns besprechen, wie wir Ihre regulatorischen Anforderungen in automatisierte Lösungen
+                verwandeln können.
                 </p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="index.html#contact" class="btn btn-primary"
-                    <a href="index.html#case-studies" class="btn btn-secondary">Weitere Fallstudien</a>
+                    <a href="index.html#contact" class="btn btn-primary" <a href="index.html#case-studies"
+                        class="btn btn-secondary">Weitere Fallstudien</a>
                 </div>
             </div>
         </div>

@@ -67,9 +67,7 @@
         .case-study-content p,
         .case-study-content li,
         .case-study-content span:not(.meta-value, .meta-label, .logo-text, .nav-link, .btn),
-        .case-study-content td {
-            
-        }
+        .case-study-content td {}
 
         .case-study-section {
             margin-bottom: 4rem;
@@ -100,29 +98,24 @@
             padding: 2rem;
             border-radius: 1rem;
             border-left: 4px solid;
-            
+            background: #1e293b;
+            color: #f1f5f9;
         }
 
-        .challenge-box {
-            
-            
-        }
+
+        .challenge-box {}
 
         .challenge-box ul,
         .challenge-box li,
         .challenge-box h3,
-        .challenge-box p {
-        }
+        .challenge-box p {}
 
-        .solution-box {
-            
-        }
+        .solution-box {}
 
         .solution-box ul,
         .solution-box li,
         .solution-box h3,
-        .solution-box p {
-        }
+        .solution-box p {}
 
         .feature-grid {
             display: grid;
@@ -132,14 +125,15 @@
         }
 
         .feature-item {
-            
+            background: #1e293b;
             padding: 1.5rem;
             border-radius: 0.75rem;
-            border: 1px solid #ccfbf1;
+            border: 1px solid rgba(8, 145, 178, 0.3);
+            color: #f1f5f9;
         }
 
-        .feature-item p {
-        }
+
+        .feature-item p {}
 
         /* High-Contrast Visibility Patch */
         .challenge-box,
@@ -152,8 +146,7 @@
         .demo-note,
         .trust-score-formula,
         .case-study-section[style*="background: white"],
-        .case-study-section[style*="background:#faf5ff"] {
-        }
+        .case-study-section[style*="background:#faf5ff"] {}
 
         .challenge-box *,
         .solution-box *,
@@ -162,38 +155,32 @@
         .meta-item *,
         .formula-item *,
         .demo-note *,
-        .trust-score-formula * {
-        }
+        .trust-score-formula * {}
 
         .challenge-box h3,
         .solution-box h3,
-        .formula-item h4 {
-        }
+        .formula-item h4 {}
 
         .feature-item h4 {
             margin-bottom: 0.75rem;
             font-size: 1.125rem;
         }
 
-        .feature-item p {
-            
-        }
+        .feature-item p {}
+
+        .trust-score-formula {}
+
+        .formula-item p {}
 
         .trust-score-formula {
-            
-        }
-
-        .formula-item p {
-            
-        }
-
-        .trust-score-formula {
-            
+            background: #1e293b;
             border: 2px solid #0891b2;
             border-radius: 1rem;
             padding: 2rem;
             margin: 2rem 0;
+            color: #f1f5f9;
         }
+
 
         .trust-score-formula h4 {
             margin-bottom: 1rem;
@@ -208,11 +195,13 @@
         }
 
         .formula-item {
-            
+            background: #334155;
             padding: 1rem;
             border-radius: 0.5rem;
             text-align: center;
+            color: #f1f5f9;
         }
+
 
         .formula-points {
             font-size: 2rem;
@@ -242,15 +231,16 @@
         }
 
         .demo-note {
-            background: #fef3c7;
+            background: rgba(245, 158, 11, 0.1);
             border: 2px solid #f59e0b;
             border-radius: 1rem;
             padding: 1.5rem;
             margin: 2rem 0;
+            color: #fbbf24;
         }
 
-        .demo-note * {
-        }
+
+        .demo-note * {}
 
         .demo-note h4 {
             margin-bottom: 0.5rem;
@@ -398,140 +388,139 @@
 
                 <h3>Farbcodierte Stufen</h3>
                 <div class="feature-grid">
-                        <p>Vollständig verifiziert, alle Compliance-Kriterien erfüllt</p>
-                    </div>
-                        <p>Grundlegende Compliance, einige Kriterien ausstehend</p>
-                    </div>
-                        <p>Unvollständige Compliance, weitere Prüfung erforderlich</p>
-                    </div>
+                    <p>Vollständig verifiziert, alle Compliance-Kriterien erfüllt</p>
+                </div>
+                <p>Grundlegende Compliance, einige Kriterien ausstehend</p>
+            </div>
+            <p>Unvollständige Compliance, weitere Prüfung erforderlich</p>
+        </div>
+        </div>
+        </div>
+
+        <!-- Features -->
+        <div class="case-study-section">
+            <h2>System-Funktionen</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>📋 Agent-Verzeichnis</h4>
+                    <p>Durchsuchbare Liste von KI-Agenten mit Echtzeit-TrustScore-Berechnung.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🔍 Such- und Filterfunktion</h4>
+                    <p>Filtern nach Name, Beschreibung oder Compliance-Tags.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🔐 Authentifizierung</h4>
+                    <p>Sichere Login-Methoden für Agent-Anbieter und Administratoren.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>➕ Self-Service-Registrierung</h4>
+                    <p>Agenten können sich registrieren, Bewertung erfolgt nach Überprüfung.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>👨‍💼 Admin-Dashboard</h4>
+                    <p>Verwaltung von Registrierungen mit Approve/Reject-Workflow.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>💻 REST API</h4>
+                    <p>Programmatischer Zugriff auf TrustScores für Integration in eigene Systeme.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Implementation -->
+        <div class="case-study-section">
+            <h2>Technische Umsetzung</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>Frontend (Next.js)</h4>
+                    <p>Server-Side Rendering für SEO, Client-Side-Suche für sofortige Filterung.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Backend (API Routes)</h4>
+                    <p>Type-safe API-Endpunkte für Score-Berechnung und Agent-Management.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Datenbank (Supabase)</h4>
+                    <p>PostgreSQL mit Row Level Security für sichere Datenzugriffe.</p>
                 </div>
             </div>
 
-            <!-- Features -->
-            <div class="case-study-section">
-                <h2>System-Funktionen</h2>
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <h4>📋 Agent-Verzeichnis</h4>
-                        <p>Durchsuchbare Liste von KI-Agenten mit Echtzeit-TrustScore-Berechnung.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>🔍 Such- und Filterfunktion</h4>
-                        <p>Filtern nach Name, Beschreibung oder Compliance-Tags.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>🔐 Authentifizierung</h4>
-                        <p>Sichere Login-Methoden für Agent-Anbieter und Administratoren.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>➕ Self-Service-Registrierung</h4>
-                        <p>Agenten können sich registrieren, Bewertung erfolgt nach Überprüfung.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>👨‍💼 Admin-Dashboard</h4>
-                        <p>Verwaltung von Registrierungen mit Approve/Reject-Workflow.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>💻 REST API</h4>
-                        <p>Programmatischer Zugriff auf TrustScores für Integration in eigene Systeme.</p>
-                    </div>
+            <h3>Technologie-Stack</h3>
+            <div class="tech-stack">
+                <span class="tech-badge">Next.js</span>
+                <span class="tech-badge">TypeScript</span>
+                <span class="tech-badge">Supabase</span>
+                <span class="tech-badge">Playwright</span>
+                <span class="tech-badge">Cloud</span>
+            </div>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="case-study-section">
+            <h2>Potenzielle Anwendungsfälle</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>🏥 Krankenhäuser & Kliniken</h4>
+                    <p>Schnelle Bewertung von KI-Tools vor der Einführung in klinische Workflows.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>💊 Pharma & MedTech</h4>
+                    <p>Compliance-Check für Partner und Zulieferer im KI-Bereich.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🏛️ Regulierungsbehörden</h4>
+                    <p>Standardisierte Darstellung des Compliance-Status für Überprüfungen.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>👨‍⚕️ Gesundheitsdienstleister</h4>
+                    <p>Verlässliche Quelle für konforme KI-Assistenten.</p>
                 </div>
             </div>
+        </div>
 
-            <!-- Technical Implementation -->
-            <div class="case-study-section">
-                <h2>Technische Umsetzung</h2>
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <h4>Frontend (Next.js)</h4>
-                        <p>Server-Side Rendering für SEO, Client-Side-Suche für sofortige Filterung.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>Backend (API Routes)</h4>
-                        <p>Type-safe API-Endpunkte für Score-Berechnung und Agent-Management.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>Datenbank (Supabase)</h4>
-                        <p>PostgreSQL mit Row Level Security für sichere Datenzugriffe.</p>
-                    </div>
+        <!-- Roadmap -->
+        <div class="case-study-section">
+            <h2>Entwicklungs-Roadmap</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>✅ Phase 1: Proof of Concept</h4>
+                    <p>Agent-Verzeichnis-UI, TrustScore-Berechnung, Authentifizierung, Admin-Dashboard.</p>
                 </div>
-
-                <h3>Technologie-Stack</h3>
-                <div class="tech-stack">
-                    <span class="tech-badge">Next.js</span>
-                    <span class="tech-badge">TypeScript</span>
-                    <span class="tech-badge">Supabase</span>
-                    <span class="tech-badge">Playwright</span>
-                    <span class="tech-badge">Cloud</span>
+                <div class="feature-item">
+                    <h4>🔮 Phase 2: Production</h4>
+                    <p>Echte Compliance-Verifikations-APIs, LLM-Dokumentenanalyse, Email-Benachrichtigungen.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🔮 Phase 3: Scale</h4>
+                    <p>Multi-Region-Support, erweiterte Suche, Partner-Integrationen.</p>
                 </div>
             </div>
+        </div>
 
-            <!-- Use Cases -->
-            <div class="case-study-section">
-                <h2>Potenzielle Anwendungsfälle</h2>
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <h4>🏥 Krankenhäuser & Kliniken</h4>
-                        <p>Schnelle Bewertung von KI-Tools vor der Einführung in klinische Workflows.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>💊 Pharma & MedTech</h4>
-                        <p>Compliance-Check für Partner und Zulieferer im KI-Bereich.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>🏛️ Regulierungsbehörden</h4>
-                        <p>Standardisierte Darstellung des Compliance-Status für Überprüfungen.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>👨‍⚕️ Gesundheitsdienstleister</h4>
-                        <p>Verlässliche Quelle für konforme KI-Assistenten.</p>
-                    </div>
-                </div>
+        <!-- Live Demo -->
+        <div class="case-study-section" style=" padding: 3rem; border-radius: 1rem; border: 2px solid #99f6e4;">
+            <h2 style="border: none; margin-bottom: 1rem;">Demo verfügbar</h2>
+            <p style="font-size: 1.125rem; margin-bottom: 2rem; ">
+                Der Proof of Concept ist als Demo deploybar. Die Demo zeigt die Funktionalität mit
+                Beispieldaten — keine echten, verifizierten Agent-Einträge.
+            </p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="index.html#contact" class="btn btn-primary" style="background: #0891b2;">Demo anfragen</a>
             </div>
+        </div>
 
-            <!-- Roadmap -->
-            <div class="case-study-section">
-                <h2>Entwicklungs-Roadmap</h2>
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <h4>✅ Phase 1: Proof of Concept</h4>
-                        <p>Agent-Verzeichnis-UI, TrustScore-Berechnung, Authentifizierung, Admin-Dashboard.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>🔮 Phase 2: Production</h4>
-                        <p>Echte Compliance-Verifikations-APIs, LLM-Dokumentenanalyse, Email-Benachrichtigungen.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>🔮 Phase 3: Scale</h4>
-                        <p>Multi-Region-Support, erweiterte Suche, Partner-Integrationen.</p>
-                    </div>
-                </div>
+        <!-- CTA -->
+        <div class="case-study-section"
+            style="text-align: center; background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); padding: 4rem; border-radius: 1rem; color: white;">
+            <h2 style="color: white; border: none;">Interesse an einem Trust-System?</h2>
+            Wir können dieses Konzept für Ihre Plattform oder Branche anpassen.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="index.html#contact" class="btn btn-primary" <a href="index.html#case-studies"
+                    class="btn btn-secondary">Weitere Projekte</a>
             </div>
-
-            <!-- Live Demo -->
-            <div class="case-study-section"
-                style=" padding: 3rem; border-radius: 1rem; border: 2px solid #99f6e4;">
-                <h2 style="border: none; margin-bottom: 1rem;">Demo verfügbar</h2>
-                <p style="font-size: 1.125rem; margin-bottom: 2rem; ">
-                    Der Proof of Concept ist als Demo deploybar. Die Demo zeigt die Funktionalität mit
-                    Beispieldaten — keine echten, verifizierten Agent-Einträge.
-                </p>
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <a href="index.html#contact" class="btn btn-primary" style="background: #0891b2;">Demo anfragen</a>
-                </div>
-            </div>
-
-            <!-- CTA -->
-            <div class="case-study-section"
-                style="text-align: center; background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); padding: 4rem; border-radius: 1rem; color: white;">
-                <h2 style="color: white; border: none;">Interesse an einem Trust-System?</h2>
-                    Wir können dieses Konzept für Ihre Plattform oder Branche anpassen.
-                </p>
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="index.html#contact" class="btn btn-primary"
-                    <a href="index.html#case-studies" class="btn btn-secondary">Weitere Projekte</a>
-                </div>
-            </div>
+        </div>
         </div>
     </section>
 
