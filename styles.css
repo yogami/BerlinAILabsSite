@@ -1371,16 +1371,21 @@ body [style*="background: #faf5ff"],
 body [style*="background: #f8fafc"],
 body [style*="background: #ecfeff"],
 body [style*="background: #f0fdfa"] {
-    background: #1e293b !important;
-    /* Premium Slate-800 Card Background */
+    background-color: rgba(30, 41, 59, 0.5) !important;
+    /* Semi-transparent Slate-800 */
+    backdrop-filter: blur(8px) !important;
     color: #f1f5f9 !important;
-    /* Slate-100 High-Contrast Text */
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 12px !important;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3) !important;
-    padding: 2rem !important;
-    margin-bottom: 2rem !important;
+    /* Slate-100 */
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2) !important;
+    padding: 3rem !important;
+    margin-top: 2rem !important;
+    margin-bottom: 3.5rem !important;
+    display: block;
 }
+
+
 
 /* Force light text on ALL children within the UTM zones */
 body .impressum-container *,
