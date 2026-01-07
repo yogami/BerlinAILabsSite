@@ -1,7 +1,7 @@
 # Berlin AI Labs Website Update - December 8, 2025
 
 ## Summary
-Successfully updated the Berlin AI Labs website with 3 new case studies showcasing recent work. All changes have been committed to GitHub and will automatically deploy to Railway.
+Successfully updated the Berlin AI Labs website with 3 new case studies showcasing recent work. All changes have been committed to GitHub and will automatically deploy to Cloud.
 
 ## New Case Studies Added
 
@@ -35,8 +35,8 @@ Successfully updated the Berlin AI Labs website with 3 new case studies showcasi
   - REST API with 3 endpoints
   - Dashboard UI with CSV export
   - API key authentication with tier-based rate limiting
-- **Tech Stack:** Next.js 16, TypeScript, Google Gemini 1.5, Supabase, Vitest, Playwright, Railway, Docker
-- **Live Demo:** https://convo-guard-ai-production.up.railway.app
+- **Tech Stack:** Next.js 16, TypeScript, Google Gemini 1.5, Supabase, Vitest, Playwright, Cloud, Docker
+- **Live Demo:** https://convo-guard-ai-production.up.cloud.app
 
 ### 3. Agent Trust Protocol - Trust Scoring for Health AI Agents
 **File:** `AgentTrustProtocol.html`
@@ -54,8 +54,8 @@ Successfully updated the Berlin AI Labs website with 3 new case studies showcasi
   - Stripe billing integration
   - Authentication (Email Magic Link, Google OAuth, Demo Mode)
 - **TrustScore Formula:** Verified (40) + GDPR (25) + MDR (30) + Uptime (20) = max 115 → normalized to 100
-- **Tech Stack:** Next.js 16, TypeScript, Supabase, Stripe, Playwright, Railway, Tailwind CSS
-- **Live Demo:** https://agent-trust-protocol-production.up.railway.app
+- **Tech Stack:** Next.js 16, TypeScript, Supabase, Stripe, Playwright, Cloud, Tailwind CSS
+- **Live Demo:** https://agent-trust-protocol-production.up.cloud.app
 
 ## Changes to Main Website
 
@@ -98,10 +98,10 @@ All three new case study pages follow the same design pattern as existing case s
 - **Status:** Successfully pushed to GitHub (main branch)
 
 ## Deployment
-The website is configured to auto-deploy from GitHub to Railway. The changes should be live within a few minutes of the push.
+The website is configured to auto-deploy from GitHub to Cloud. The changes should be live within a few minutes of the push.
 
 ## Next Steps (Optional)
-1. Monitor Railway deployment to ensure successful update
+1. Monitor Cloud deployment to ensure successful update
 2. Test all new case study pages on the live site
 3. Verify all internal links work correctly
 4. Consider adding project screenshots/images to case studies

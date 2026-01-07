@@ -113,7 +113,7 @@ Duplicating code is a critical failure.</code></pre>
 
                 <h2>Live Service Discovery: The Studio Phonebook</h2>
                 <p>
-                    But how does a project on my laptop know about a microservice running live on Railway? We solved this by treating our <strong>Studio Service Directory</strong> as a live API. 
+                    But how does a project on my laptop know about a microservice running live on Cloud? We solved this by treating our <strong>Studio Service Directory</strong> as a live API. 
                 </p>
                 <p>
                     Every time a service is verified, it registers its OpenAPI manifest with the directory. Our local agents can run a <code>sync-catalog.sh</code> script to fetch the latest "Phonebook," bridging the gap between local development and live production infrastructure. 
