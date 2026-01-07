@@ -64,14 +64,10 @@
             /* Light off-white for main content on dark background */
         }
 
-        .case-study-content p,
-        .case-study-content li,
-        .case-study-content span:not(.meta-value, .meta-label, .logo-text, .nav-link, .btn),
-        .case-study-content td {}
-
         .case-study-section {
             margin-bottom: 4rem;
         }
+
 
         .case-study-section h2 {
             font-size: 2.5rem;
@@ -100,11 +96,14 @@
             border-left: 4px solid;
         }
 
-        .challenge-box {}
 
-        .challenge-box ul,
-        .challenge-box li,
-        .challenge-box p {}
+
+
+
+        .challenge-box {
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
 
         .solution-box {
             background: #1e293b;
@@ -112,9 +111,8 @@
         }
 
 
-        .solution-box ul,
-        .solution-box li,
-        .solution-box p {}
+
+
 
         .feature-grid {
             display: grid;
@@ -132,42 +130,17 @@
         }
 
 
-        .feature-item h4 {}
 
-        .feature-item p {}
+
+
 
         /* Light-box contrast overrides - Aggressive */
-        .challenge-box,
-        .solution-box,
-        .feature-item,
-        .use-case-box,
-        .problem-box,
-        .workflow-step,
-        .benefit-card,
-        .compliance-table td,
-        .quote-box,
-        .demo-note,
-        .case-study-section[style*="background: #faf5ff"],
-        .case-study-section[style*="background:#faf5ff"],
-        .product-section[style*="background: #f8fafc"],
-        .case-study-section[style*="background: white"] {}
 
-        .challenge-box *,
-        .solution-box *,
-        .feature-item *,
-        .use-case-box *,
-        .problem-box *,
-        .workflow-step *,
-        .benefit-card *,
-        .compliance-table td *,
-        .quote-box *,
-        .demo-note *,
-        .meta-item *,
-        .case-study-section[style*="background: #faf5ff"] *,
-        .case-study-section[style*="background: white"] * {}
+
+
 
         /* Specific Badge Fixes */
-        .severity-badge {}
+
 
         .severity-high {
             background: rgba(239, 68, 68, 0.15) !important;
@@ -176,7 +149,7 @@
         }
 
 
-        .severity-high * {}
+
 
         .severity-medium {
             background: rgba(245, 158, 11, 0.15) !important;
@@ -185,7 +158,7 @@
         }
 
 
-        .severity-medium * {}
+
 
         .severity-low {
             background: rgba(59, 130, 246, 0.15) !important;
@@ -194,11 +167,10 @@
         }
 
 
-        .severity-low * {}
+
 
         /* Ensure Headings on light backgrounds are also dark */
-        .case-study-section[style*="background: #faf5ff"] h2,
-        .case-study-section[style*="background: #faf5ff"] h3 {}
+
 
         .results-grid {
             display: grid;
@@ -254,9 +226,9 @@
         }
 
 
-        .compliance-table td strong {}
 
-        .compliance-table td * {}
+
+
 
         .compliance-table tr:last-child td {
             border-bottom: none;
@@ -414,7 +386,9 @@
                 <h2>Herausforderung & Lösung</h2>
                 <div class="challenge-solution">
                     <div class="challenge-box">
+                        <h3 style="margin-top: 0; margin-bottom: 1rem; color: #fca5a5;">Problem</h3>
                         <ul style="line-height: 1.8;">
+
                             <li>Mental Health Apps müssen strenge EU-Regulierungen einhalten</li>
                             <li>Manuelle Compliance-Prüfung ist zeitaufwendig und fehleranfällig</li>
                             <li>Kritische Risiken (Suizid, Manipulation) müssen sofort erkannt werden</li>
@@ -423,7 +397,9 @@
                         </ul>
                     </div>
                     <div class="solution-box">
+                        <h3 style="margin-top: 0; margin-bottom: 1rem; color: #f1f5f9;">Lösung</h3>
                         <ul style="line-height: 1.8;">
+
                             <li>REST API mit 3 Endpoints für Validierung und Audit-Logs</li>
                             <li>6 Compliance-Regeln (regelbasiert + KI-gestützt)</li>
                             <li>Google Gemini Integration für kontextuelle Risikoanalyse</li>

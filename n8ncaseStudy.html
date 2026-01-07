@@ -69,10 +69,7 @@
             /* Light off-white for main content on dark background */
         }
 
-        .product-content p,
-        .product-content li,
-        .product-content span:not(.meta-value, .meta-label, .logo-text, .nav-link, .btn),
-        .product-content td {}
+
 
         .product-section {
             margin-bottom: 4rem;
@@ -115,18 +112,14 @@
             border-left-color: #ef4444;
         }
 
-        .problem-box ul,
-        .problem-box li,
-        .problem-box p {}
+
 
         .solution-box {
 
             border-left-color: #10b981;
         }
 
-        .solution-box ul,
-        .solution-box li,
-        .solution-box p {}
+
 
         .problem-box h4,
         .solution-box h4 {
@@ -134,28 +127,14 @@
             font-size: 1.25rem;
         }
 
-        .problem-box h4 {}
 
-        .solution-box h4 {}
+
+
 
         /* High-Contrast Visibility Patch */
-        .problem-box,
-        .solution-box,
-        .workflow-step,
-        .benefit-card,
-        .breadcrumb,
-        .meta-item,
-        .product-section[style*="background: #f8fafc"],
-        .product-section[style*="background: white"] {}
 
-        .problem-box *,
-        .solution-box *,
-        .workflow-step *,
-        .benefit-card *,
-        .breadcrumb *,
-        .meta-item *,
-        .product-section[style*="background: #f8fafc"] *,
-        .product-section[style*="background: white"] * {}
+
+
 
         .workflow-steps {
             display: grid;
@@ -174,9 +153,9 @@
         }
 
 
-        .workflow-step h4 {}
 
-        .workflow-step p {}
+
+
 
         .workflow-step::before {
             content: attr(data-step);
@@ -373,8 +352,9 @@
                 <h2>Das Problem mit manueller Lead-Bearbeitung</h2>
                 <div class="problem-solution">
                     <div class="problem-box">
-                        <h4>🚫 Typische Probleme</h4>
+                        <h3 style="margin-top: 0; margin-bottom: 1rem; color: #fca5a5;">Problem</h3>
                         <ul>
+
                             <li>Leads aus verschiedenen Quellen müssen manuell zusammengeführt werden</li>
                             <li>Daten müssen in mehrere Systeme eingegeben werden</li>
                             <li>Häufige Tippfehler bei der Datenübertragung</li>
@@ -383,8 +363,9 @@
                         </ul>
                     </div>
                     <div class="solution-box">
-                        <h4>✅ Die Automatisierung</h4>
+                        <h3 style="margin-top: 0; margin-bottom: 1rem; color: #f1f5f9;">Lösung</h3>
                         <ul>
+
                             <li>Alle Lead-Quellen automatisch verbunden</li>
                             <li>Daten werden einmal erfasst und überall synchronisiert</li>
                             <li>Automatische Datenprüfung und -korrektur</li>

@@ -98,6 +98,16 @@
             color: #f1f5f9;
         }
 
+        .challenge-box {
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .solution-box {
+            border-left-color: #0891b2;
+        }
+
+
 
 
 
@@ -128,29 +138,20 @@
         /* High-Contrast Visibility Patch */
 
 
-        .challenge-box *,
-        .solution-box *,
-        .feature-item *,
-        .breadcrumb *,
-        .meta-item *,
-        .formula-item *,
-        .demo-note *,
-        .trust-score-formula * {}
 
-        .challenge-box h3,
-        .solution-box h3,
-        .formula-item h4 {}
+
+
 
         .feature-item h4 {
             margin-bottom: 0.75rem;
             font-size: 1.125rem;
         }
 
-        .feature-item p {}
 
-        .trust-score-formula {}
 
-        .formula-item p {}
+
+
+
 
         .trust-score-formula {
             background: #1e293b;
@@ -220,7 +221,7 @@
         }
 
 
-        .demo-note * {}
+
 
         .demo-note h4 {
             margin-bottom: 0.5rem;
@@ -377,7 +378,9 @@
                 <h2>Problem & Lösungsansatz</h2>
                 <div class="challenge-solution">
                     <div class="challenge-box">
+                        <h3 style="margin-top: 0; margin-bottom: 1rem; color: #fca5a5;">Problem</h3>
                         <ul style="line-height: 1.8;">
+
                             <li>Viele Health-AI-Apps ohne klare Qualitätsindikatoren</li>
                             <li>Patienten können Compliance nicht selbst überprüfen</li>
                             <li>Fehlende Transparenz über GDPR/MDR/DiGA-Status</li>
@@ -386,7 +389,9 @@
                         </ul>
                     </div>
                     <div class="solution-box">
+                        <h3 style="margin-top: 0; margin-bottom: 1rem; color: #f1f5f9;">Lösung</h3>
                         <ul style="line-height: 1.8;">
+
                             <li>Standardisierter TrustScore-Algorithmus (0-100)</li>
                             <li>Farbcodierte Badges für schnelle Bewertung</li>
                             <li>Transparente Bewertungskriterien</li>

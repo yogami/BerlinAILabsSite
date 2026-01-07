@@ -63,10 +63,7 @@
             /* Light off-white for main content on dark background */
         }
 
-        .product-content p,
-        .product-content li,
-        .product-content span:not(.meta-value, .meta-label, .logo-text, .nav-link, .btn),
-        .product-content td {}
+
 
         .product-section {
             margin-bottom: 4rem;
@@ -84,6 +81,31 @@
             margin-bottom: 1.5rem;
             margin-top: 2rem;
         }
+
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .problem-box,
+        .solution-box {
+            padding: 2rem;
+            border-radius: 1rem;
+            border-left: 4px solid;
+            background: #1e293b;
+            color: #f1f5f9;
+        }
+
+        .problem-box {
+            border-left-color: #ef4444;
+        }
+
+        .solution-box {
+            border-left-color: #10b981;
+        }
+
 
         .use-cases {
             display: grid;
@@ -107,8 +129,7 @@
             font-size: 1.25rem;
         }
 
-        .use-case-box ul,
-        .use-case-box li {}
+
 
 
         .feature-grid {
@@ -133,26 +154,15 @@
             font-size: 1.125rem;
         }
 
-        .feature-item p {}
+
 
 
         /* High-Contrast Visibility Patch */
-        .use-case-box,
-        .feature-item,
-        .tech-badge,
-        .breadcrumb,
-        .meta-item,
-        .product-section[style*="background: #f8fafc"],
-        .product-section[style*="background: white"] {}
 
-        .use-case-box *,
-        .feature-item *,
-        .breadcrumb *,
-        .meta-item *,
-        .product-section[style*="background: #f8fafc"] *,
-        .product-section[style*="background: white"] * {}
 
-        .use-case-box h4 {}
+
+
+
 
         .tech-stack {
             display: flex;
@@ -202,7 +212,7 @@
             text-decoration: none;
         }
 
-        .breadcrumb a:hover {}
+
 
         @media (max-width: 768px) {
             .product-hero h1 {
@@ -294,6 +304,35 @@
                     internationale Teams, Schulungen mit mehrsprachigen Teilnehmern oder Kundenkommunikation.
                 </p>
             </div>
+
+            <!-- Problem & Solution -->
+            <div class="product-section">
+                <h2>Herausforderung & Lösung</h2>
+                <div class="problem-solution">
+                    <div class="problem-box">
+                        <h3 style="margin-top: 0; margin-bottom: 1rem; color: #fca5a5;">Problem</h3>
+                        <ul style="line-height: 1.8;">
+                            <li>Sprachbarrieren verhindern effektive Zusammenarbeit</li>
+                            <li>Dolmetscher sind teuer und schwer kurzfristig zu buchen</li>
+                            <li>Wichtige Details gehen in der Übersetzung verloren</li>
+                            <li>Meetings dauern durch manuelle Übersetzung doppelt so lange</li>
+                            <li>Teilnehmer fühlen sich ausgeschlossen oder unsicher</li>
+                        </ul>
+                    </div>
+                    <div class="solution-box">
+                        <h3 style="margin-top: 0; margin-bottom: 1rem; color: #f1f5f9;">Lösung</h3>
+                        <ul style="line-height: 1.8;">
+                            <li>Echtzeit-Übersetzung in über 12 Sprachen</li>
+                            <li>Sofort einsatzbereit ohne Vorlaufzeit</li>
+                            <li>KI-Präzision für technische und geschäftliche Begriffe</li>
+                            <li>Nahtlose Integration in bestehende Meeting-Tools</li>
+                            <li>DSGVO-konforme Verarbeitung Ihrer Audiodaten</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
 
             <!-- Use Cases -->
             <div class="product-section">
