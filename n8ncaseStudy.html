@@ -4,39 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fallstudie: Schnellere Leads für Agenturen - Berlin AI Labs</title>
+    <title>Lead-Automatisierung für Agenturen - Berlin AI Labs</title>
     <meta name="description"
-        content="Wie eine Berliner Marketing-Agentur ihre Leads in Minuten statt Stunden bearbeitet und €8K jährlich spart – mit KI-Automatisierung.">
+        content="Automatische Lead-Bearbeitung mit n8n-Workflows. Von der Erfassung bis zur CRM-Integration — in Sekunden statt Stunden.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Case Study Specific Styles */
-        .case-study-hero {
+        .product-hero {
             background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
             color: white;
             padding: 8rem 0 6rem;
             text-align: center;
         }
 
-        .case-study-hero h1 {
+        .product-hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
             color: white;
         }
 
-        .case-study-hero .subtitle {
+        .product-hero .subtitle {
             font-size: 1.25rem;
             color: #d1d5db;
             margin-bottom: 2rem;
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .case-study-meta {
+        .product-meta {
             display: flex;
             justify-content: center;
             gap: 3rem;
@@ -63,15 +62,15 @@
             letter-spacing: 0.5px;
         }
 
-        .case-study-content {
+        .product-content {
             padding: 6rem 0;
         }
 
-        .case-study-section {
+        .product-section {
             margin-bottom: 4rem;
         }
 
-        .case-study-section h2 {
+        .product-section h2 {
             font-size: 2.5rem;
             color: #1f2937;
             margin-bottom: 2rem;
@@ -79,28 +78,28 @@
             padding-bottom: 0.5rem;
         }
 
-        .case-study-section h3 {
+        .product-section h3 {
             font-size: 1.75rem;
             color: #374151;
             margin-bottom: 1.5rem;
             margin-top: 2rem;
         }
 
-        .challenge-solution {
+        .problem-solution {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
             margin: 3rem 0;
         }
 
-        .challenge-box,
+        .problem-box,
         .solution-box {
             padding: 2rem;
             border-radius: 1rem;
             border-left: 4px solid;
         }
 
-        .challenge-box {
+        .problem-box {
             background: #fef2f2;
             border-left-color: #ef4444;
         }
@@ -110,13 +109,13 @@
             border-left-color: #10b981;
         }
 
-        .challenge-box h4,
+        .problem-box h4,
         .solution-box h4 {
             margin-bottom: 1rem;
             font-size: 1.25rem;
         }
 
-        .challenge-box h4 {
+        .problem-box h4 {
             color: #dc2626;
         }
 
@@ -124,62 +123,42 @@
             color: #059669;
         }
 
-        .results-grid {
+        .workflow-steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
 
-        .result-card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 1rem;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-        }
-
-        .result-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        .result-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #2563eb;
-            margin-bottom: 0.5rem;
-        }
-
-        .result-label {
-            color: #6b7280;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .testimonial-quote {
+        .workflow-step {
             background: #f8fafc;
-            border-left: 4px solid #2563eb;
-            padding: 2rem;
-            margin: 3rem 0;
-            border-radius: 0 1rem 1rem 0;
-            font-style: italic;
-            font-size: 1.125rem;
-            line-height: 1.6;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid #e2e8f0;
+            position: relative;
         }
 
-        .testimonial-author {
-            margin-top: 1rem;
-            font-weight: 600;
-            color: #1f2937;
-        }
-
-        .testimonial-role {
-            color: #6b7280;
+        .workflow-step::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -0.75rem;
+            left: 1rem;
+            background: #2563eb;
+            color: white;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .workflow-step h4 {
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            margin-top: 0.5rem;
         }
 
         .tech-stack {
@@ -198,17 +177,51 @@
             font-weight: 500;
         }
 
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .benefit-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-description {
+            color: #6b7280;
+            font-size: 0.95rem;
+        }
+
         .cta-section {
             background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
             color: white;
-            padding: 4rem 0;
+            padding: 4rem;
             text-align: center;
             margin-top: 4rem;
+            border-radius: 1rem;
         }
 
         .cta-section h2 {
             color: white;
             margin-bottom: 1rem;
+            border: none;
         }
 
         .cta-section p {
@@ -233,15 +246,15 @@
         }
 
         @media (max-width: 768px) {
-            .case-study-hero h1 {
+            .product-hero h1 {
                 font-size: 2.5rem;
             }
 
-            .challenge-solution {
+            .problem-solution {
                 grid-template-columns: 1fr;
             }
 
-            .case-study-meta {
+            .product-meta {
                 gap: 2rem;
             }
 
@@ -280,305 +293,187 @@
     <!-- Breadcrumb -->
     <div class="breadcrumb">
         <div class="container">
-            <a href="index.html">Startseite</a> / <a href="index.html#case-studies">Fallstudien</a> / <span>Schnellere
-                Leads für Agenturen</span>
+            <a href="index.html">Startseite</a> / <a href="index.html#services">Services</a> /
+            <span>Lead-Automatisierung</span>
         </div>
     </div>
 
-    <!-- Case Study Hero -->
-    <section class="case-study-hero">
+    <!-- Product Hero -->
+    <section class="product-hero">
         <div class="container">
-            <h1>Fallstudie: Schnellere Leads für Agenturen</h1>
+            <h1>Lead-Automatisierung</h1>
             <p class="subtitle">
-                Wie eine Berliner Marketing-Agentur ihre Leads in Minuten statt Stunden bearbeitet und €8K jährlich
-                spart
+                Automatische Erfassung, Prüfung und Verteilung von Leads —
+                von der Anfrage bis zum CRM in Sekunden statt Stunden
             </p>
-            <div class="case-study-meta">
+            <div class="product-meta">
                 <div class="meta-item">
-                    <span class="meta-value">75%</span>
-                    <span class="meta-label">Zeitersparnis</span>
+                    <span class="meta-value">5+</span>
+                    <span class="meta-label">Lead-Quellen</span>
                 </div>
                 <div class="meta-item">
-                    <span class="meta-value">90%</span>
-                    <span class="meta-label">Datenqualität</span>
+                    <span class="meta-value">Echtzeit</span>
+                    <span class="meta-label">Verarbeitung</span>
                 </div>
                 <div class="meta-item">
-                    <span class="meta-value">1 Wochenende</span>
-                    <span class="meta-label">Implementierung</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-value">€8.000</span>
-                    <span class="meta-label">Jährliche Einsparungen</span>
+                    <span class="meta-value">24/7</span>
+                    <span class="meta-label">Verfügbarkeit</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Case Study Content -->
-    <section class="case-study-content">
+    <!-- Product Content -->
+    <section class="product-content">
         <div class="container">
-            <!-- Client Overview -->
-            <div class="case-study-section">
-                <h2>Der Kunde</h2>
-                <p>
-                    Creative Solutions ist eine Berliner Marketing-Agentur mit 15 Mitarbeitern.
-                    Sie bearbeitet täglich 50-100 Leads aus verschiedenen Quellen und verteilt diese an Account Manager.
-                </p>
-                <div class="challenge-solution">
-                    <div class="challenge-box">
-                        <h4>🚫 Die Herausforderung</h4>
+            <!-- Overview -->
+            <div class="product-section">
+                <h2>Das Problem mit manueller Lead-Bearbeitung</h2>
+                <div class="problem-solution">
+                    <div class="problem-box">
+                        <h4>🚫 Typische Probleme</h4>
                         <ul>
-                            <li>Lead-Bearbeitung dauert 15-20 Minuten pro Lead</li>
-                            <li>Leads aus 5 Quellen (Website, LinkedIn, Google Ads, etc.)</li>
+                            <li>Leads aus verschiedenen Quellen müssen manuell zusammengeführt werden</li>
                             <li>Daten müssen in mehrere Systeme eingegeben werden</li>
-                            <li>Häufige Fehler bei der Datenübertragung</li>
-                            <li>Account Manager warten auf Leads</li>
-                            <li>Keine einheitliche Lead-Bewertung</li>
+                            <li>Häufige Tippfehler bei der Datenübertragung</li>
+                            <li>Verzögerungen bis Vertrieb die Leads erhält</li>
+                            <li>Keine einheitliche Bewertung der Lead-Qualität</li>
                         </ul>
                     </div>
                     <div class="solution-box">
-                        <h4>✅ Unsere Lösung</h4>
+                        <h4>✅ Die Automatisierung</h4>
                         <ul>
-                            <li>Leads in Sekunden automatisch bearbeitet</li>
-                            <li>Alle Quellen in Echtzeit verbunden</li>
-                            <li>Fehlerfreie Daten durch automatische Prüfung</li>
-                            <li>KI priorisiert hochwertige Leads</li>
-                            <li>Sofortige Benachrichtigungen an Manager</li>
-                            <li>Alle Daten in einer zentralen Datenbank</li>
+                            <li>Alle Lead-Quellen automatisch verbunden</li>
+                            <li>Daten werden einmal erfasst und überall synchronisiert</li>
+                            <li>Automatische Datenprüfung und -korrektur</li>
+                            <li>Sofortige Benachrichtigung an den richtigen Mitarbeiter</li>
+                            <li>KI-gestützte Lead-Priorisierung</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- Implementation -->
-            <div class="case-study-section">
-                <h2>Implementierung (Ein Wochenende)</h2>
-                <h3>Freitag Abend: Einrichtung (4 Stunden)</h3>
-                <p>
-                    Wir richteten die Automatisierung auf einem Server ein und verbanden sie mit den Systemen der
-                    Agentur. Erste Tests liefen sofort erfolgreich.
-                </p>
-
-                <h3>Samstag: Prozesse entwickeln (8 Stunden)</h3>
-                <p>
-                    Wir bauten die Hauptprozesse für Lead-Bearbeitung, Datenprüfung und Benachrichtigungen. Die Systeme
-                    wurden mit CRM, E-Mail und Team-Chat verbunden.
-                </p>
-
-                <div class="tech-stack">
-                    <span class="tech-tag">Automatisierung</span>
-                    <span class="tech-tag">CRM-Integration</span>
-                    <span class="tech-tag">Datenbank</span>
-                    <span class="tech-tag">E-Mail</span>
-                    <span class="tech-tag">Team-Chat</span>
-                    <span class="tech-tag">KI-Scoring</span>
-                </div>
-
-                <h3>Sonntag: Testen und Start (4 Stunden)</h3>
-                <p>
-                    Wir testeten mit echten Daten, optimierten die Leistung und schulten das Team. Das System war am
-                    Sonntag Abend einsatzbereit.
-                </p>
-
-                <!-- Workflow Steps -->
-                <h3>Wie die Automatisierung funktioniert</h3>
+            <!-- Workflow -->
+            <div class="product-section">
+                <h2>So funktioniert die Automatisierung</h2>
                 <div class="workflow-steps">
                     <div class="workflow-step" data-step="1">
                         <h4>Lead-Eingang</h4>
-                        <p>Leads von Website, LinkedIn oder Google Ads werden automatisch erfasst.</p>
+                        <p>Leads von Website, LinkedIn, Google Ads oder E-Mail werden automatisch erfasst.</p>
                     </div>
                     <div class="workflow-step" data-step="2">
                         <h4>Datenprüfung</h4>
-                        <p>E-Mails, Telefonnummern und Firmennamen werden automatisch korrigiert.</p>
+                        <p>E-Mails, Telefonnummern und Firmennamen werden auf Gültigkeit geprüft und korrigiert.</p>
                     </div>
                     <div class="workflow-step" data-step="3">
-                        <h4>Lead-Priorisierung</h4>
-                        <p>KI bewertet Leads nach Branche und Potenzial.</p>
+                        <h4>Anreicherung</h4>
+                        <p>Firmendaten werden automatisch ergänzt (Branche, Größe, Website).</p>
                     </div>
                     <div class="workflow-step" data-step="4">
-                        <h4>CRM-Speicherung</h4>
-                        <p>Leads werden automatisch im CRM als Kontakte gespeichert.</p>
+                        <h4>Priorisierung</h4>
+                        <p>KI bewertet Leads nach Potenzial und ordnet sie der richtigen Kategorie zu.</p>
                     </div>
                     <div class="workflow-step" data-step="5">
-                        <h4>Benachrichtigung</h4>
-                        <p>Manager erhalten sofort eine Nachricht mit Lead-Details.</p>
+                        <h4>CRM-Speicherung</h4>
+                        <p>Leads werden automatisch als Kontakte im CRM angelegt.</p>
                     </div>
                     <div class="workflow-step" data-step="6">
-                        <h4>Nachverfolgung</h4>
-                        <p>Automatische E-Mails mit Infos und Terminvorschlägen an Leads.</p>
+                        <h4>Benachrichtigung</h4>
+                        <p>Der zuständige Mitarbeiter erhält sofort eine Nachricht mit allen Details.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Implementation Guide -->
-            <div class="case-study-section">
-                <h2>Ihr Weg zur Automatisierung</h2>
-                <div class="implementation-guide">
-                    <h3>Schritt 1: System einrichten</h3>
-                    <div class="code-block">
-                        # Beispiel: Automatisierung einrichten
-                        1. Server für die Automatisierung starten
-                        2. Verbindungen zu Ihren Systemen herstellen
-                        3. Erste Testläufe durchführen
+            <!-- Benefits -->
+            <div class="product-section">
+                <h2>Vorteile</h2>
+                <div class="benefit-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">⚡</div>
+                        <div class="benefit-title">Schnellere Reaktionszeit</div>
+                        <div class="benefit-description">Leads erreichen den Vertrieb in Sekunden statt Stunden</div>
                     </div>
-
-                    <h3>Schritt 2: Verbindungen konfigurieren</h3>
-                    <div class="code-block">
-                        # Beispiel: Lead-Quellen verbinden
-                        - Website-Formular: Daten automatisch erfassen
-                        - LinkedIn: Leads direkt übernehmen
-                        - Google Ads: Anzeigen-Daten einbinden
+                    <div class="benefit-card">
+                        <div class="benefit-icon">✅</div>
+                        <div class="benefit-title">Bessere Datenqualität</div>
+                        <div class="benefit-description">Automatische Prüfung eliminiert Tippfehler</div>
                     </div>
-
-                    <h3>Schritt 3: Systeme verbinden</h3>
-                    <ul>
-                        <li><strong>CRM:</strong> Leads automatisch speichern</li>
-                        <li><strong>Team-Chat:</strong> Benachrichtigungen an Mitarbeiter</li>
-                        <li><strong>E-Mail:</strong> Automatische Kunden-Kommunikation</li>
-                        <li><strong>Datenbank:</strong> Alle Daten zentral speichern</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Results -->
-            <div class="case-study-section">
-                <h2>Messbare Ergebnisse</h2>
-                <div class="results-grid">
-                    <div class="result-card">
-                        <div class="result-number">75%</div>
-                        <div class="result-label">Zeitersparnis bei Lead-Bearbeitung</div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🎯</div>
+                        <div class="benefit-title">Intelligente Priorisierung</div>
+                        <div class="benefit-description">KI identifiziert die vielversprechendsten Leads</div>
                     </div>
-                    <div class="result-card">
-                        <div class="result-number">90%</div>
-                        <div class="result-label">Verbesserung der Datenqualität</div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🔄</div>
+                        <div class="benefit-title">24/7 Betrieb</div>
+                        <div class="benefit-description">Leads werden auch nachts und am Wochenende verarbeitet</div>
                     </div>
-                    <div class="result-card">
-                        <div class="result-number">5 Min</div>
-                        <div class="result-label">Durchschnittliche Verarbeitungszeit</div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📊</div>
+                        <div class="benefit-title">Zentrale Übersicht</div>
+                        <div class="benefit-description">Alle Leads aus allen Quellen an einem Ort</div>
                     </div>
-                    <div class="result-card">
-                        <div class="result-number">€8.000</div>
-                        <div class="result-label">Jährliche Kosteneinsparungen</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-number">98%</div>
-                        <div class="result-label">Automatisierungsgrad</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-number">24/7</div>
-                        <div class="result-label">Verfügbarkeit</div>
-                    </div>
-                </div>
-
-                <h3>Weitere Vorteile</h3>
-                <ul>
-                    <li><strong>Sofortige Bearbeitung:</strong> Leads erreichen Manager ohne Verzögerung</li>
-                    <li><strong>Fehlerfreie Daten:</strong> Keine Tippfehler oder falsche Einträge</li>
-                    <li><strong>Bessere Leads:</strong> KI priorisiert die besten Kunden</li>
-                    <li><strong>Weniger Fehler:</strong> Automatisierung stoppt menschliche Fehler</li>
-                    <li><strong>Wachstum:</strong> System funktioniert auch bei mehr Leads</li>
-                </ul>
-            </div>
-
-            <!-- Testimonial -->
-            <div class="case-study-section">
-                <h2>Kundenstimme</h2>
-                <div class="testimonial-quote">
-                    "Berlin AI Labs hat unsere Leads in Minuten statt Stunden bearbeitbar gemacht. Wir sparen €8K pro
-                    Jahr, und das System war in einem Wochenende fertig."
-                    <div class="testimonial-author">
-                        Sarah Klein
-                        <div class="testimonial-role">Geschäftsführerin, Creative Solutions</div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🔗</div>
+                        <div class="benefit-title">Nahtlose Integration</div>
+                        <div class="benefit-description">Funktioniert mit Ihrem bestehenden CRM und Tools</div>
                     </div>
                 </div>
             </div>
 
-            <!-- ROI Analysis -->
-            <div class="case-study-section">
-                <h2>Ihr Gewinn</h2>
-                <h3>Investition</h3>
-                <ul>
-                    <li>Automatisierung einrichten: €3.500</li>
-                    <li>Laufende Kosten: €200/Monat</li>
-                    <li>Server: €50/Monat</li>
-                    <li>Team-Schulung: €500</li>
-                </ul>
-
-                <h3>Einsparungen (jährlich)</h3>
-                <ul>
-                    <li>Zeitersparnis bei Leads: €12.000</li>
-                    <li>Weniger Fehlerkosten: €2.000</li>
-                    <li>Höhere Abschlüsse durch Schnelligkeit: €4.000</li>
-                    <li>Eingesparte Software-Kosten: €1.200</li>
-                </ul>
-
-                <h3>Ihr Gewinn</h3>
-                <p>
-                    <strong>Gesamtinvestition:</strong> €4.000 (einmalig) + €3.000 (jährlich)<br>
-                    <strong>Jährliche Einsparungen:</strong> €19.200<br>
-                    <strong>Gewinn nach 12 Monaten:</strong> 280%<br>
-                    <strong>Amortisation:</strong> 4 Monate
+            <!-- Technical -->
+            <div class="product-section">
+                <h2>Technische Umsetzung</h2>
+                <p style="font-size: 1.125rem; line-height: 1.8; color: #374151; margin-bottom: 2rem;">
+                    Wir nutzen n8n als Automatisierungsplattform — Open Source, selbst gehostet und
+                    DSGVO-konform. Die Workflows verbinden Ihre bestehenden Systeme ohne Programmierung.
                 </p>
-            </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">n8n Automation</span>
+                    <span class="tech-tag">CRM-Integration</span>
+                    <span class="tech-tag">E-Mail-Parsing</span>
+                    <span class="tech-tag">Webhook-Trigger</span>
+                    <span class="tech-tag">KI-Scoring</span>
+                    <span class="tech-tag">Slack/Teams</span>
+                </div>
 
-            <!-- Future Plans -->
-            <div class="case-study-section">
-                <h2>Mehr Möglichkeiten</h2>
-                <p>
-                    Nach dem Erfolg plant Creative Solutions, mit uns weiter zu automatisieren:
-                </p>
-                <ul>
-                    <li>E-Mail-Kampagnen nach Kundenverhalten</li>
-                    <li>Social-Media-Tracking für Leads</li>
-                    <li>Automatische Berichte für Kunden</li>
-                    <li>Vorschläge für Inhalte</li>
-                    <li>Automatische Rechnungen und Nachverfolgung</li>
+                <h3>Unterstützte Systeme</h3>
+                <ul style="line-height: 1.8; color: #374151;">
+                    <li><strong>CRM:</strong> HubSpot, Salesforce, Pipedrive, Notion, Airtable</li>
+                    <li><strong>Lead-Quellen:</strong> Website-Formulare, LinkedIn, Google Ads, Facebook Ads, E-Mail
+                    </li>
+                    <li><strong>Benachrichtigungen:</strong> Slack, Microsoft Teams, E-Mail, WhatsApp</li>
+                    <li><strong>Datenanreicherung:</strong> Clearbit, Hunter, eigene Datenbanken</li>
                 </ul>
             </div>
 
-            <!-- Weekend Implementation Plan -->
-            <div class="case-study-section">
-                <h2>Ihr Wochenende-Plan</h2>
-                <div class="implementation-guide">
-                    <h3>Freitag Abend (19:00-23:00)</h3>
-                    <ul>
-                        <li>✅ Automatisierung auf Server einrichten</li>
-                        <li>✅ Erste Prozesse erstellen</li>
-                        <li>✅ Systemverbindungen testen</li>
-                    </ul>
-
-                    <h3>Samstag (09:00-17:00)</h3>
-                    <ul>
-                        <li>✅ Hauptprozesse entwickeln</li>
-                        <li>✅ CRM verbinden</li>
-                        <li>✅ Benachrichtigungen einrichten</li>
-                        <li>✅ Datenprüfung aktivieren</li>
-                    </ul>
-
-                    <h3>Sonntag (10:00-14:00)</h3>
-                    <ul>
-                        <li>✅ Komplette Tests durchführen</li>
-                        <li>✅ Leistung verbessern</li>
-                        <li>✅ Team schulen</li>
-                        <li>✅ System starten</li>
-                    </ul>
-                </div>
+            <!-- Implementation -->
+            <div class="product-section">
+                <h2>Implementierung</h2>
+                <p style="font-size: 1.125rem; line-height: 1.8; color: #374151;">
+                    Eine typische Lead-Automatisierung kann innerhalb weniger Tage eingerichtet werden:
+                </p>
+                <ol style="line-height: 2; color: #374151; margin-top: 1rem;">
+                    <li><strong>Analyse:</strong> Wir verstehen Ihren aktuellen Lead-Prozess</li>
+                    <li><strong>Design:</strong> Wir entwerfen den automatisierten Workflow</li>
+                    <li><strong>Setup:</strong> Wir richten n8n ein und verbinden Ihre Systeme</li>
+                    <li><strong>Test:</strong> Wir testen mit echten Leads und optimieren</li>
+                    <li><strong>Schulung:</strong> Wir zeigen Ihrem Team, wie alles funktioniert</li>
+                </ol>
             </div>
-        </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Bereit, Ihre Leads schneller zu bearbeiten?</h2>
-            <p>
-                Sprechen Sie mit uns – kostenlos und unverbindlich. In 30 Minuten zeigen wir Ihnen, wie KI Ihre Arbeit
-                erleichtert. Rufen Sie an: <a href="tel:+4917614619226">+49 176 146 19 226</a>.
-            </p>
-            <a href="index.html#contact" class="btn btn-primary"
-                style="background: white; color: #2563eb; margin-right: 1rem;">Kostenloses Erstgespräch buchen</a>
-            <a href="index.html#services" class="btn btn-secondary" style="border-color: white; color: white;">Unsere
-                Services</a>
+            <!-- CTA -->
+            <div class="cta-section">
+                <h2>Bereit, Ihre Leads zu automatisieren?</h2>
+                <p>
+                    Sprechen Sie mit uns — kostenlos und unverbindlich. Wir zeigen Ihnen,
+                    wie Lead-Automatisierung für Ihr Unternehmen aussehen kann.
+                </p>
+                <a href="index.html#contact" class="btn btn-primary"
+                    style="background: white; color: #2563eb; margin-right: 1rem;">Gespräch vereinbaren</a>
+                <a href="index.html#services" class="btn btn-secondary" style="border-color: white; color: white;">Alle
+                    Services</a>
+            </div>
         </div>
     </section>
 
@@ -609,22 +504,22 @@
                     <h4>Unternehmen</h4>
                     <ul class="footer-links">
                         <li><a href="index.html#about">Über uns</a></li>
-                        <li><a href="index.html#testimonials">Referenzen</a></li>
                         <li><a href="index.html#case-studies">Fallstudien</a></li>
                         <li><a href="index.html#contact">Kontakt</a></li>
+                        <li><a href="impressum.html">Impressum</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Kontakt</h4>
                     <ul class="footer-contact">
-                        <li><a href="mailto:gopal.yami@gmail.com">sales@berlinailabs.de</a></li>
+                        <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
                         <li><a href="tel:+4917614619226">+49 176 146 19 226</a></li>
                         <li>Berlin, Deutschland</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Berlin AI Labs. Alle Rechte vorbehalten.</p>
+                <p>&copy; 2026 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="impressum.html">Impressum</a></p>
             </div>
         </div>
     </footer>

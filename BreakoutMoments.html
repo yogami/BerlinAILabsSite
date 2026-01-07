@@ -4,38 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fallstudie: WhatsApp AI Bot für Event-Management - Berlin AI Labs</title>
+    <title>WhatsApp Chatbot für Event-Koordination - Berlin AI Labs</title>
     <meta name="description"
-        content="Wie ein Event-Unternehmen mit einem intelligenten WhatsApp-Bot die Kommunikation automatisierte und 70% Zeit bei der Crew-Koordination sparte.">
+        content="Intelligenter WhatsApp-Bot für Event-Management und Crew-Koordination. Automatische Verfügbarkeitsabfragen, Schichtplanung und Q&A.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        .case-study-hero {
+        .product-hero {
             background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
             color: white;
             padding: 8rem 0 6rem;
             text-align: center;
         }
 
-        .case-study-hero h1 {
+        .product-hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
             color: white;
         }
 
-        .case-study-hero .subtitle {
+        .product-hero .subtitle {
             font-size: 1.25rem;
             color: #d1d5db;
             margin-bottom: 2rem;
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .case-study-meta {
+        .product-meta {
             display: flex;
             justify-content: center;
             gap: 3rem;
@@ -62,15 +62,15 @@
             letter-spacing: 0.5px;
         }
 
-        .case-study-content {
+        .product-content {
             padding: 6rem 0;
         }
 
-        .case-study-section {
+        .product-section {
             margin-bottom: 4rem;
         }
 
-        .case-study-section h2 {
+        .product-section h2 {
             font-size: 2.5rem;
             color: #1f2937;
             margin-bottom: 2rem;
@@ -78,28 +78,28 @@
             padding-bottom: 0.5rem;
         }
 
-        .case-study-section h3 {
+        .product-section h3 {
             font-size: 1.75rem;
             color: #374151;
             margin-bottom: 1.5rem;
             margin-top: 2rem;
         }
 
-        .challenge-solution {
+        .problem-solution {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
             margin: 3rem 0;
         }
 
-        .challenge-box,
+        .problem-box,
         .solution-box {
             padding: 2rem;
             border-radius: 1rem;
             border-left: 4px solid;
         }
 
-        .challenge-box {
+        .problem-box {
             background: #fef2f2;
             border-color: #ef4444;
         }
@@ -111,7 +111,7 @@
 
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
         }
@@ -127,33 +127,6 @@
             color: #2563eb;
             margin-bottom: 0.75rem;
             font-size: 1.125rem;
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .result-card {
-            text-align: center;
-            padding: 2rem;
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            color: white;
-            border-radius: 1rem;
-        }
-
-        .result-number {
-            font-size: 3rem;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .result-label {
-            font-size: 1rem;
-            opacity: 0.9;
         }
 
         .tech-stack {
@@ -172,34 +145,29 @@
             font-weight: 500;
         }
 
-        .quote-box {
-            background: #f8fafc;
-            border-left: 4px solid #2563eb;
-            padding: 2rem;
-            margin: 3rem 0;
-            font-style: italic;
-            font-size: 1.25rem;
-            color: #374151;
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            padding: 4rem;
+            border-radius: 1rem;
+            color: white;
         }
 
-        .quote-author {
-            font-style: normal;
-            font-weight: 600;
-            color: #1f2937;
-            margin-top: 1rem;
-            font-size: 1rem;
+        .cta-section h2 {
+            color: white;
+            border: none;
         }
 
         @media (max-width: 768px) {
-            .case-study-hero h1 {
+            .product-hero h1 {
                 font-size: 2.5rem;
             }
 
-            .challenge-solution {
+            .problem-solution {
                 grid-template-columns: 1fr;
             }
 
-            .case-study-meta {
+            .product-meta {
                 gap: 2rem;
             }
         }
@@ -232,137 +200,124 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="case-study-hero">
+    <section class="product-hero">
         <div class="container">
-            <h1>WhatsApp AI Bot für Event-Management</h1>
+            <h1>WhatsApp Chatbot für Events</h1>
             <p class="subtitle">
-                Wie ein Event-Unternehmen mit einem intelligenten WhatsApp-Bot die Kommunikation automatisierte und 70%
-                Zeit bei der Crew-Koordination sparte
+                Automatische Crew-Koordination, Verfügbarkeitsabfragen und Q&A —
+                direkt in WhatsApp-Gruppen
             </p>
-            <div class="case-study-meta">
-                <div class="meta-item">
-                    <span class="meta-value">70%</span>
-                    <span class="meta-label">Zeitersparnis</span>
-                </div>
+            <div class="product-meta">
                 <div class="meta-item">
                     <span class="meta-value">24/7</span>
                     <span class="meta-label">Verfügbarkeit</span>
                 </div>
                 <div class="meta-item">
-                    <span class="meta-value">€20K</span>
-                    <span class="meta-label">Jährliche Einsparung</span>
+                    <span class="meta-value">WhatsApp</span>
+                    <span class="meta-label">Integration</span>
                 </div>
                 <div class="meta-item">
-                    <span class="meta-value">10 Wochen</span>
-                    <span class="meta-label">Entwicklungszeit</span>
+                    <span class="meta-value">KI</span>
+                    <span class="meta-label">Gestützt</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Case Study Content -->
-    <section class="case-study-content">
+    <!-- Product Content -->
+    <section class="product-content">
         <div class="container">
             <!-- Overview -->
-            <div class="case-study-section">
-                <h2>Überblick</h2>
+            <div class="product-section">
+                <h2>Das Problem bei der Event-Koordination</h2>
                 <p style="font-size: 1.125rem; line-height: 1.8; color: #374151;">
-                    Ein Berliner Event-Management-Unternehmen stand vor der Herausforderung, die Kommunikation mit
-                    Crew-Mitgliedern während großer Events zu koordinieren. Hunderte von Fragen zu Schichtzeiten,
-                    Crew-Verfügbarkeit und Event-Details mussten manuell beantwortet werden. Berlin AI Labs entwickelte
-                    einen intelligenten WhatsApp-Bot, der diese Prozesse automatisiert und die Effizienz dramatisch
-                    steigerte.
+                    Event-Manager verbringen viel Zeit damit, Crew-Mitglieder zu koordinieren:
+                    Verfügbarkeiten abfragen, Schichten planen, immer wieder die gleichen Fragen
+                    beantworten. Ein intelligenter WhatsApp-Bot kann diese Aufgaben übernehmen.
                 </p>
-            </div>
-
-            <!-- Challenge & Solution -->
-            <div class="case-study-section">
-                <h2>Herausforderung & Lösung</h2>
-                <div class="challenge-solution">
-                    <div class="challenge-box">
+                <div class="problem-solution">
+                    <div class="problem-box">
                         <h3 style="color: #dc2626; margin-top: 0;">Die Herausforderung</h3>
                         <ul style="line-height: 1.8;">
-                            <li>Manuelle Beantwortung von 200+ Fragen pro Event</li>
-                            <li>Crew-Koordination über mehrere Kanäle verteilt</li>
-                            <li>Verzögerungen bei der Informationsweitergabe</li>
-                            <li>Hoher Zeitaufwand für repetitive Anfragen</li>
-                            <li>Fehlende Integration mit CrewBrain-System</li>
+                            <li>Manuelle Beantwortung von Routine-Fragen</li>
+                            <li>Crew-Kommunikation über mehrere Kanäle verteilt</li>
+                            <li>Verfügbarkeitsabfragen per Hand auswerten</li>
+                            <li>Schichtpläne umständlich verteilen</li>
+                            <li>Keine schnelle Übersicht über Crew-Status</li>
                         </ul>
                     </div>
                     <div class="solution-box">
                         <h3 style="color: #059669; margin-top: 0;">Die Lösung</h3>
                         <ul style="line-height: 1.8;">
-                            <li>Intelligenter WhatsApp-Bot mit KI-Integration</li>
-                            <li>Automatische Beantwortung häufiger Fragen</li>
-                            <li>Echtzeit-Integration mit CrewBrain API</li>
-                            <li>Automatische Umfragen und Abstimmungen</li>
-                            <li>Nahtlose Weiterleitung an menschliche Mitarbeiter</li>
+                            <li>Bot beantwortet häufige Fragen automatisch</li>
+                            <li>Zentrale Kommunikation in WhatsApp-Gruppen</li>
+                            <li>Automatische Umfragen mit Auswertung</li>
+                            <li>Schichtpläne werden automatisch verteilt</li>
+                            <li>Echtzeit-Übersicht über alle Rückmeldungen</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <!-- Features -->
-            <div class="case-study-section">
-                <h2>Kernfunktionen</h2>
+            <div class="product-section">
+                <h2>Funktionen</h2>
                 <div class="feature-grid">
                     <div class="feature-item">
-                        <h4>🤖 Q&A System</h4>
-                        <p>Automatische Beantwortung von Event-Fragen mit KI-gestützter Kontextverarbeitung und Fallback
-                            zu menschlichem Support.</p>
+                        <h4>🤖 Q&A-System</h4>
+                        <p>Automatische Beantwortung von Event-Fragen wie Treffpunkt, Dresscode oder Zeitplan.
+                            Bei unbekannten Fragen wird an einen Menschen weitergeleitet.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>📊 Umfrage-Management</h4>
-                        <p>Erstellen und Verwalten von Umfragen direkt in WhatsApp-Gruppen für schnelle
-                            Crew-Abstimmungen.</p>
+                        <h4>📊 Umfragen</h4>
+                        <p>Erstellen Sie Umfragen direkt in WhatsApp-Gruppen. Die Ergebnisse werden
+                            automatisch gesammelt und ausgewertet.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>👥 CrewBrain Integration</h4>
-                        <p>Direkter Zugriff auf Crew-Verfügbarkeit und Informationen aus dem bestehenden
-                            CrewBrain-System.</p>
+                        <h4>📅 Verfügbarkeitsabfragen</h4>
+                        <p>Fragen Sie Crew-Verfügbarkeit für Events ab und erhalten Sie eine
+                            übersichtliche Zusammenfassung.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>🔄 Message Routing</h4>
-                        <p>Intelligente Weiterleitung von Nachrichten an die richtigen Handler mit Kontext-Erhaltung.
-                        </p>
+                        <h4>🔔 Benachrichtigungen</h4>
+                        <p>Automatische Erinnerungen an Schichtbeginn, Event-Updates oder
+                            wichtige Änderungen.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>⚡ Echtzeit-Monitoring</h4>
-                        <p>Zuverlässige Session-Verwaltung mit automatischer Wiederverbindung und Fehlerbehandlung.</p>
+                        <h4>👥 Crew-Verwaltung</h4>
+                        <p>Integration mit CrewBrain oder ähnlichen Systemen für
+                            automatischen Datenabgleich.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>📱 n8n Integration</h4>
-                        <p>Nahtlose Anbindung an bestehende Workflow-Automatisierung für erweiterte Funktionalität.</p>
+                        <h4>📱 WhatsApp-native</h4>
+                        <p>Läuft direkt in WhatsApp — keine zusätzliche App für die Crew nötig.</p>
                     </div>
                 </div>
             </div>
 
             <!-- Technical Implementation -->
-            <div class="case-study-section">
+            <div class="product-section">
                 <h2>Technische Umsetzung</h2>
-                <h3>Zweiphasiger Ansatz</h3>
                 <p style="font-size: 1.125rem; line-height: 1.8; color: #374151; margin-bottom: 2rem;">
-                    Das Projekt wurde in zwei Phasen umgesetzt, um schnelle Ergebnisse zu liefern und gleichzeitig eine
-                    langfristige, skalierbare Lösung zu gewährleisten.
+                    Der Bot kann über verschiedene Wege umgesetzt werden — von schnellen MVP-Lösungen
+                    bis zu produktionsreifen WhatsApp Business API Integrationen.
                 </p>
 
-                <div class="challenge-solution">
+                <div class="problem-solution">
                     <div class="solution-box">
-                        <h4 style="color: #059669; margin-top: 0;">Phase 1: Selenium-basiertes MVP</h4>
+                        <h4 style="color: #059669; margin-top: 0;">Option 1: Schneller Start</h4>
                         <ul style="line-height: 1.8;">
-                            <li>Schnelle Implementierung in 10 Wochen</li>
-                            <li>Browser-Automatisierung für WhatsApp Web</li>
-                            <li>Alle Kernfunktionen außer Echtzeit-Umfrage-Tracking</li>
-                            <li>Sofortige Kosteneinsparungen</li>
+                            <li>Basiert auf WhatsApp Web Automatisierung</li>
+                            <li>Schnelle Implementierung möglich</li>
+                            <li>Ideal zum Testen des Konzepts</li>
                         </ul>
                     </div>
                     <div class="solution-box" style="background: #eff6ff; border-color: #3b82f6;">
-                        <h4 style="color: #2563eb; margin-top: 0;">Phase 2: WhatsApp Business API</h4>
+                        <h4 style="color: #2563eb; margin-top: 0;">Option 2: WhatsApp Business API</h4>
                         <ul style="line-height: 1.8;">
-                            <li>Migration zu offizieller Business API</li>
-                            <li>Echtzeit-Umfrage-Tracking</li>
-                            <li>Produktionsreife Zuverlässigkeit</li>
-                            <li>Sub-Sekunden-Antwortzeiten</li>
+                            <li>Offizielle API für Produktionseinsatz</li>
+                            <li>Zuverlässiger und stabiler</li>
+                            <li>Bessere Skalierbarkeit</li>
                         </ul>
                     </div>
                 </div>
@@ -370,82 +325,46 @@
                 <h3>Technologie-Stack</h3>
                 <div class="tech-stack">
                     <span class="tech-badge">Node.js</span>
-                    <span class="tech-badge">Selenium WebDriver</span>
-                    <span class="tech-badge">WhatsApp Web.js</span>
-                    <span class="tech-badge">CrewBrain API</span>
-                    <span class="tech-badge">n8n Workflow</span>
-                    <span class="tech-badge">Express.js</span>
                     <span class="tech-badge">WhatsApp Business API</span>
+                    <span class="tech-badge">n8n Workflow</span>
+                    <span class="tech-badge">OpenAI/Gemini</span>
+                    <span class="tech-badge">CrewBrain API</span>
                 </div>
             </div>
 
-            <!-- Results -->
-            <div class="case-study-section">
-                <h2>Ergebnisse & Impact</h2>
-                <div class="results-grid">
-                    <div class="result-card">
-                        <span class="result-number">70%</span>
-                        <span class="result-label">Weniger Zeit für Kommunikation</span>
-                    </div>
-                    <div class="result-card">
-                        <span class="result-number">200+</span>
-                        <span class="result-label">Automatisierte Anfragen pro Event</span>
-                    </div>
-                    <div class="result-card">
-                        <span class="result-number">€20K</span>
-                        <span class="result-label">Jährliche Einsparung</span>
-                    </div>
-                    <div class="result-card">
-                        <span class="result-number">24/7</span>
-                        <span class="result-label">Verfügbarkeit ohne Mehrkosten</span>
-                    </div>
-                </div>
-
-                <div class="quote-box">
-                    "Der WhatsApp-Bot hat unsere Event-Koordination revolutioniert. Was früher Stunden an manueller
-                    Arbeit erforderte, läuft jetzt automatisch. Unser Team kann sich auf wichtigere Aufgaben
-                    konzentrieren, während der Bot die Routine-Kommunikation übernimmt."
-                    <div class="quote-author">— Event Manager, BreakoutMoments</div>
-                </div>
-            </div>
-
-            <!-- Key Learnings -->
-            <div class="case-study-section">
-                <h2>Wichtige Erkenntnisse</h2>
+            <!-- Use Cases -->
+            <div class="product-section">
+                <h2>Einsatzbereiche</h2>
                 <div class="feature-grid">
                     <div class="feature-item">
-                        <h4>🚀 Agile Entwicklung zahlt sich aus</h4>
-                        <p>Zweiwöchige Sprints ermöglichten schnelles Feedback und Anpassungen basierend auf echten
-                            Nutzererfahrungen.</p>
+                        <h4>🎪 Veranstaltungen</h4>
+                        <p>Festivals, Messen, Konferenzen — überall, wo viele Helfer koordiniert werden müssen.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>🎯 MVP-First-Ansatz</h4>
-                        <p>Phase 1 lieferte sofortige Ergebnisse, während Phase 2 langfristige Stabilität sicherte.</p>
+                        <h4>🍴 Gastronomie</h4>
+                        <p>Schichtplanung und Kommunikation für Servicepersonal bei Catering-Events.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>🔄 Integration ist der Schlüssel</h4>
-                        <p>Die Anbindung an bestehende Systeme (CrewBrain, n8n) maximierte den Nutzen ohne Doppelarbeit.
-                        </p>
+                        <h4>🎬 Film & TV</h4>
+                        <p>Crew-Koordination am Set mit automatischen Call-Sheet-Reminders.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>📊 Transparente Kommunikation</h4>
-                        <p>Wöchentliche Updates und detaillierte Zeiterfassung sorgten für Vertrauen und klare
-                            Erwartungen.</p>
+                        <h4>🏗️ Projektarbeit</h4>
+                        <p>Freelancer-Koordination für Projekt-basierte Arbeit.</p>
                     </div>
                 </div>
             </div>
 
             <!-- CTA -->
-            <div class="case-study-section"
-                style="text-align: center; background: linear-gradient(135deg, #1f2937 0%, #374151 100%); padding: 4rem; border-radius: 1rem; color: white;">
-                <h2 style="color: white; border: none;">Bereit für Ihre eigene Erfolgsgeschichte?</h2>
+            <div class="cta-section">
+                <h2>Interessiert an einem WhatsApp-Bot?</h2>
                 <p style="font-size: 1.25rem; margin-bottom: 2rem; color: #d1d5db;">
-                    Lassen Sie uns besprechen, wie KI-Automatisierung Ihr Unternehmen transformieren kann.
+                    Wir zeigen Ihnen, wie ein Bot Ihre Crew-Koordination vereinfachen kann.
                 </p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="index.html#contact" class="btn btn-primary"
-                        style="background: white; color: #2563eb;">Kostenloses Gespräch buchen</a>
-                    <a href="index.html#case-studies" class="btn btn-secondary">Weitere Fallstudien</a>
+                    <a href="index.html#contact" class="btn btn-primary" style="background: white; color: #2563eb;">Demo
+                        vereinbaren</a>
+                    <a href="index.html#case-studies" class="btn btn-secondary">Weitere Projekte</a>
                 </div>
             </div>
         </div>
@@ -486,14 +405,14 @@
                 <div class="footer-section">
                     <h4>Kontakt</h4>
                     <ul class="footer-contact">
-                        <li><a href="mailto:gopal.yami@gmail.com">sales@berlinailabs.de</a></li>
+                        <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
                         <li><a href="tel:+4917614619226">+49 176 146 19 226</a></li>
                         <li>Berlin, Deutschland</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="impressum.html">Impressum</a></p>
+                <p>&copy; 2026 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="impressum.html">Impressum</a></p>
             </div>
         </div>
     </footer>

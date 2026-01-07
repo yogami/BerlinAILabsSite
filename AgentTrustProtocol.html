@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fallstudie: Agent Trust Protocol - Vertrauens-Scoring für Health AI Agents - Berlin AI Labs</title>
+    <title>Agent Trust Protocol - Vertrauens-Scoring für KI-Agenten - Berlin AI Labs</title>
     <meta name="description"
-        content="Ein Trust-Scoring-System für digitale Gesundheits-KI-Agenten in Berlin – hilft Patienten und Gesundheitsdienstleistern, konforme KI-Assistenten zu finden und zu verifizieren.">
+        content="Trust-Scoring-System für KI-Agenten im Gesundheitsbereich — verifizierte Compliance, transparente Bewertung, DSGVO-konform.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -129,33 +129,6 @@
             font-size: 1.125rem;
         }
 
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .result-card {
-            text-align: center;
-            padding: 2rem;
-            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
-            color: white;
-            border-radius: 1rem;
-        }
-
-        .result-number {
-            font-size: 3rem;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .result-label {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
         .trust-score-formula {
             background: #ecfeff;
             border: 2px solid #0891b2;
@@ -197,66 +170,6 @@
             margin-top: 0.5rem;
         }
 
-        .agent-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .agent-card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .agent-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .agent-name {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 0.5rem;
-        }
-
-        .agent-score {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .score-excellent {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .score-good {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .agent-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tag {
-            background: #ecfeff;
-            color: #0891b2;
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
@@ -273,22 +186,22 @@
             font-weight: 500;
         }
 
-        .quote-box {
-            background: #f0fdfa;
-            border-left: 4px solid #0891b2;
-            padding: 2rem;
-            margin: 3rem 0;
-            font-style: italic;
-            font-size: 1.25rem;
-            color: #374151;
+        .demo-note {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
         }
 
-        .quote-author {
-            font-style: normal;
-            font-weight: 600;
-            color: #1f2937;
-            margin-top: 1rem;
-            font-size: 1rem;
+        .demo-note h4 {
+            color: #b45309;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-note p {
+            color: #92400e;
+            margin: 0;
         }
 
         @media (max-width: 768px) {
@@ -337,25 +250,21 @@
         <div class="container">
             <h1>Agent Trust Protocol</h1>
             <p class="subtitle">
-                Ein Trust-Scoring- und Verzeichnissystem für digitale Gesundheits-KI-Agenten in Berlin – hilft Patienten
-                und Gesundheitsdienstleistern, konforme KI-Assistenten zu finden und zu verifizieren
+                Ein Konzept für Trust-Scoring und Verzeichnissysteme für KI-Agenten im Gesundheitsbereich —
+                transparente Bewertung von Compliance und Zuverlässigkeit
             </p>
             <div class="case-study-meta">
                 <div class="meta-item">
-                    <span class="meta-value">10+</span>
-                    <span class="meta-label">Berliner Health Agents</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-value">6 Kriterien</span>
+                    <span class="meta-value">4 Kriterien</span>
                     <span class="meta-label">TrustScore-Berechnung</span>
                 </div>
                 <div class="meta-item">
-                    <span class="meta-value">3 Tiers</span>
-                    <span class="meta-label">API-Zugriff</span>
+                    <span class="meta-value">3 Stufen</span>
+                    <span class="meta-label">Vertrauens-Level</span>
                 </div>
                 <div class="meta-item">
-                    <span class="meta-value">10 Tage</span>
-                    <span class="meta-label">MVP-Entwicklung</span>
+                    <span class="meta-value">API</span>
+                    <span class="meta-label">Programmatischer Zugriff</span>
                 </div>
             </div>
         </div>
@@ -364,40 +273,45 @@
     <!-- Case Study Content -->
     <section class="case-study-content">
         <div class="container">
+            <!-- Demo Note -->
+            <div class="demo-note">
+                <h4>⚠️ Proof of Concept</h4>
+                <p>Dies ist ein Technologie-Demonstrator. Das System zeigt, wie ein Trust-Scoring für KI-Agenten
+                    funktionieren könnte — es ist kein produktives Verzeichnis mit echten, verifizierten Einträgen.</p>
+            </div>
+
             <!-- Overview -->
             <div class="case-study-section">
-                <h2>Überblick</h2>
+                <h2>Das Konzept</h2>
                 <p style="font-size: 1.125rem; line-height: 1.8; color: #374151;">
-                    Für das Berliner Gesundheits-KI-Ökosystem entwickelte Berlin AI Labs ein Trust-Scoring-System, das
-                    digitale Gesundheitsagenten nach Compliance-Kriterien bewertet. Das System kombiniert ein
-                    öffentliches Verzeichnis mit einer API für programmatischen Zugriff und einem Admin-Dashboard für
-                    die Verwaltung von Agent-Registrierungen. Patienten und Gesundheitsdienstleister können so schnell
-                    vertrauenswürdige KI-Assistenten identifizieren.
+                    Mit zunehmender Verbreitung von KI-Agenten im Gesundheitsbereich wird es für Nutzer schwieriger
+                    zu erkennen, welche Systeme vertrauenswürdig und compliant sind. Das Agent Trust Protocol
+                    demonstriert, wie ein standardisiertes Bewertungssystem aussehen könnte.
                 </p>
             </div>
 
             <!-- Challenge & Solution -->
             <div class="case-study-section">
-                <h2>Herausforderung & Lösung</h2>
+                <h2>Problem & Lösungsansatz</h2>
                 <div class="challenge-solution">
                     <div class="challenge-box">
-                        <h3 style="color: #dc2626; margin-top: 0;">Die Herausforderung</h3>
+                        <h3 style="color: #dc2626; margin-top: 0;">Das Problem</h3>
                         <ul style="line-height: 1.8;">
-                            <li>Hunderte von Health-AI-Apps ohne klare Qualitätsindikatoren</li>
+                            <li>Viele Health-AI-Apps ohne klare Qualitätsindikatoren</li>
                             <li>Patienten können Compliance nicht selbst überprüfen</li>
-                            <li>Gesundheitsdienstleister brauchen schnelle Bewertungen</li>
                             <li>Fehlende Transparenz über GDPR/MDR/DiGA-Status</li>
-                            <li>Keine zentrale Plattform für Berliner Health AI</li>
+                            <li>Keine standardisierte Bewertungsmethodik</li>
+                            <li>Gesundheitsdienstleister brauchen schnelle Einschätzungen</li>
                         </ul>
                     </div>
                     <div class="solution-box">
-                        <h3 style="color: #0891b2; margin-top: 0;">Die Lösung</h3>
+                        <h3 style="color: #0891b2; margin-top: 0;">Der Lösungsansatz</h3>
                         <ul style="line-height: 1.8;">
-                            <li>Öffentliches Verzeichnis mit 10+ Berliner Health Agents</li>
-                            <li>TrustScore-Algorithmus (0-100) basierend auf 4 Kriterien</li>
-                            <li>Farbcodierte Badges (Grün/Gelb/Rot) für schnelle Bewertung</li>
-                            <li>Self-Service-Registrierung mit Admin-Approval-Workflow</li>
-                            <li>REST API für programmatischen Zugriff (Pro/Enterprise)</li>
+                            <li>Standardisierter TrustScore-Algorithmus (0-100)</li>
+                            <li>Farbcodierte Badges für schnelle Bewertung</li>
+                            <li>Transparente Bewertungskriterien</li>
+                            <li>API für programmatischen Zugriff</li>
+                            <li>Self-Service-Registrierung mit Verifizierung</li>
                         </ul>
                     </div>
                 </div>
@@ -411,11 +325,11 @@
                     <div class="formula-breakdown">
                         <div class="formula-item">
                             <span class="formula-points">+40</span>
-                            <p class="formula-label"><strong>Verifizierter Agent</strong><br>Admin-Genehmigung</p>
+                            <p class="formula-label"><strong>Verifizierter Agent</strong><br>Manuelle Prüfung</p>
                         </div>
                         <div class="formula-item">
                             <span class="formula-points">+25</span>
-                            <p class="formula-label"><strong>GDPR-konform</strong><br>Datenschutz-Zertifizierung</p>
+                            <p class="formula-label"><strong>GDPR-konform</strong><br>Datenschutz-Nachweis</p>
                         </div>
                         <div class="formula-item">
                             <span class="formula-points">+30</span>
@@ -428,15 +342,15 @@
                     </div>
                 </div>
 
-                <h3>Farbcodierte Badges</h3>
+                <h3>Farbcodierte Stufen</h3>
                 <div class="feature-grid">
                     <div class="feature-item" style="background: #d1fae5; border-color: #6ee7b7;">
                         <h4 style="color: #065f46;">🟢 Excellent (80-100)</h4>
-                        <p>Vollständig verifiziert, GDPR + MDR-konform, hohe Verfügbarkeit</p>
+                        <p>Vollständig verifiziert, alle Compliance-Kriterien erfüllt</p>
                     </div>
                     <div class="feature-item" style="background: #fef3c7; border-color: #fcd34d;">
                         <h4 style="color: #92400e;">🟡 Good (60-79)</h4>
-                        <p>Grundlegende Compliance erfüllt, einige Kriterien fehlen</p>
+                        <p>Grundlegende Compliance, einige Kriterien ausstehend</p>
                     </div>
                     <div class="feature-item" style="background: #fee2e2; border-color: #fca5a5;">
                         <h4 style="color: #991b1b;">🔴 Needs Review (0-59)</h4>
@@ -445,91 +359,33 @@
                 </div>
             </div>
 
-            <!-- Sample Agents -->
-            <div class="case-study-section">
-                <h2>Beispiel-Agenten im Verzeichnis</h2>
-                <div class="agent-list">
-                    <div class="agent-card">
-                        <div class="agent-name">Ada Health</div>
-                        <span class="agent-score score-excellent">Score: 95 - Excellent</span>
-                        <div class="agent-tags">
-                            <span class="tag">GDPR</span>
-                            <span class="tag">MDR</span>
-                            <span class="tag">ISO27001</span>
-                        </div>
-                    </div>
-                    <div class="agent-card">
-                        <div class="agent-name">Doctolib</div>
-                        <span class="agent-score score-excellent">Score: 90 - Excellent</span>
-                        <div class="agent-tags">
-                            <span class="tag">GDPR</span>
-                            <span class="tag">HIPAA</span>
-                        </div>
-                    </div>
-                    <div class="agent-card">
-                        <div class="agent-name">mySugr</div>
-                        <span class="agent-score score-excellent">Score: 92 - Excellent</span>
-                        <div class="agent-tags">
-                            <span class="tag">GDPR</span>
-                            <span class="tag">MDR</span>
-                            <span class="tag">FDA</span>
-                        </div>
-                    </div>
-                    <div class="agent-card">
-                        <div class="agent-name">Selfapy</div>
-                        <span class="agent-score score-excellent">Score: 87 - Excellent</span>
-                        <div class="agent-tags">
-                            <span class="tag">GDPR</span>
-                            <span class="tag">DiGA</span>
-                        </div>
-                    </div>
-                    <div class="agent-card">
-                        <div class="agent-name">Clue</div>
-                        <span class="agent-score score-excellent">Score: 85 - Excellent</span>
-                        <div class="agent-tags">
-                            <span class="tag">GDPR</span>
-                        </div>
-                    </div>
-                    <div class="agent-card">
-                        <div class="agent-name">Oviva</div>
-                        <span class="agent-score score-good">Score: 75 - Good</span>
-                        <div class="agent-tags">
-                            <span class="tag">GDPR</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Features -->
             <div class="case-study-section">
-                <h2>Kernfunktionen</h2>
+                <h2>System-Funktionen</h2>
                 <div class="feature-grid">
                     <div class="feature-item">
                         <h4>📋 Agent-Verzeichnis</h4>
-                        <p>Durchsuchen Sie 10+ Berliner Health Agents mit Echtzeit-TrustScore-Berechnung und
-                            farbcodierten Badges.</p>
+                        <p>Durchsuchbare Liste von KI-Agenten mit Echtzeit-TrustScore-Berechnung.</p>
                     </div>
                     <div class="feature-item">
                         <h4>🔍 Such- und Filterfunktion</h4>
-                        <p>Filtern Sie nach Name, Beschreibung oder Compliance-Tags für schnelle Ergebnisse.</p>
+                        <p>Filtern nach Name, Beschreibung oder Compliance-Tags.</p>
                     </div>
                     <div class="feature-item">
                         <h4>🔐 Authentifizierung</h4>
-                        <p>Drei Login-Methoden: Email Magic Link, Google OAuth und Demo-Modus für sofortigen Zugriff.
-                        </p>
+                        <p>Sichere Login-Methoden für Agent-Anbieter und Administratoren.</p>
                     </div>
                     <div class="feature-item">
                         <h4>➕ Self-Service-Registrierung</h4>
-                        <p>Agenten können sich selbst registrieren mit automatischer TrustScore-Berechnung und
-                            Approval-Workflow.</p>
+                        <p>Agenten können sich registrieren, Bewertung erfolgt nach Überprüfung.</p>
                     </div>
                     <div class="feature-item">
                         <h4>👨‍💼 Admin-Dashboard</h4>
-                        <p>Verwalten Sie Agent-Genehmigungen mit Approve/Reject-Funktionalität und Echtzeit-Updates.</p>
+                        <p>Verwaltung von Registrierungen mit Approve/Reject-Workflow.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>💳 API-Zugriff (Pro/Enterprise)</h4>
-                        <p>Stripe-Integration für kostenpflichtige API-Zugriffe mit 10.000+ Requests/Monat.</p>
+                        <h4>💻 REST API</h4>
+                        <p>Programmatischer Zugriff auf TrustScores für Integration in eigene Systeme.</p>
                     </div>
                 </div>
             </div>
@@ -537,125 +393,69 @@
             <!-- Technical Implementation -->
             <div class="case-study-section">
                 <h2>Technische Umsetzung</h2>
-                <h3>Dreistufige Architektur</h3>
                 <div class="feature-grid">
                     <div class="feature-item">
-                        <h4>Frontend (Next.js 16)</h4>
-                        <p>Server-Side Rendering für SEO, Client-Side-Suche für sofortige Filterung, Turbopack für
-                            schnelle Builds.</p>
+                        <h4>Frontend (Next.js)</h4>
+                        <p>Server-Side Rendering für SEO, Client-Side-Suche für sofortige Filterung.</p>
                     </div>
                     <div class="feature-item">
                         <h4>Backend (API Routes)</h4>
-                        <p>Type-safe API-Endpunkte für TrustScore-Berechnung, Agent-Management und Authentifizierung.
-                        </p>
+                        <p>Type-safe API-Endpunkte für Score-Berechnung und Agent-Management.</p>
                     </div>
                     <div class="feature-item">
                         <h4>Datenbank (Supabase)</h4>
-                        <p>PostgreSQL mit Row Level Security (RLS) für sichere Datenzugriffe und Echtzeit-Updates.</p>
+                        <p>PostgreSQL mit Row Level Security für sichere Datenzugriffe.</p>
                     </div>
                 </div>
 
                 <h3>Technologie-Stack</h3>
                 <div class="tech-stack">
-                    <span class="tech-badge">Next.js 16</span>
+                    <span class="tech-badge">Next.js</span>
                     <span class="tech-badge">TypeScript</span>
                     <span class="tech-badge">Supabase</span>
-                    <span class="tech-badge">Stripe</span>
                     <span class="tech-badge">Playwright</span>
                     <span class="tech-badge">Railway</span>
-                    <span class="tech-badge">Tailwind CSS</span>
-                </div>
-
-                <h3>Sicherheit & Compliance</h3>
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <h4>🔒 Row Level Security</h4>
-                        <p>Supabase RLS schützt sensible Daten auf Datenbankebene.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>🔑 API-Key-Authentifizierung</h4>
-                        <p>Sichere API-Zugriffe mit Tier-basiertem Rate-Limiting.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>🛡️ CSRF-Schutz</h4>
-                        <p>Next.js-integrierter CSRF-Schutz für alle Formulare.</p>
-                    </div>
                 </div>
             </div>
 
-            <!-- Results -->
+            <!-- Use Cases -->
             <div class="case-study-section">
-                <h2>Ergebnisse & Impact</h2>
-                <div class="results-grid">
-                    <div class="result-card">
-                        <span class="result-number">10+</span>
-                        <span class="result-label">Berliner Health Agents</span>
+                <h2>Potenzielle Anwendungsfälle</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>🏥 Krankenhäuser & Kliniken</h4>
+                        <p>Schnelle Bewertung von KI-Tools vor der Einführung in klinische Workflows.</p>
                     </div>
-                    <div class="result-card">
-                        <span class="result-number">100%</span>
-                        <span class="result-label">E2E-Tests bestanden</span>
+                    <div class="feature-item">
+                        <h4>💊 Pharma & MedTech</h4>
+                        <p>Compliance-Check für Partner und Zulieferer im KI-Bereich.</p>
                     </div>
-                    <div class="result-card">
-                        <span class="result-number">3 Tiers</span>
-                        <span class="result-label">API-Zugriffsstufen</span>
+                    <div class="feature-item">
+                        <h4>🏛️ Regulierungsbehörden</h4>
+                        <p>Standardisierte Darstellung des Compliance-Status für Überprüfungen.</p>
                     </div>
-                    <div class="result-card">
-                        <span class="result-number">10 Tage</span>
-                        <span class="result-label">Von Konzept zu MVP</span>
+                    <div class="feature-item">
+                        <h4>👨‍⚕️ Gesundheitsdienstleister</h4>
+                        <p>Verlässliche Quelle für konforme KI-Assistenten.</p>
                     </div>
-                </div>
-
-                <div class="quote-box">
-                    "Das Agent Trust Protocol schafft die dringend benötigte Transparenz im Berliner
-                    Health-AI-Ökosystem. Patienten können jetzt fundierte Entscheidungen treffen, und
-                    Gesundheitsdienstleister haben eine verlässliche Quelle für konforme KI-Assistenten."
-                    <div class="quote-author">— Gesundheitsdienstleister, Berlin</div>
                 </div>
             </div>
 
             <!-- Roadmap -->
             <div class="case-study-section">
-                <h2>Roadmap & Zukunftspläne</h2>
+                <h2>Entwicklungs-Roadmap</h2>
                 <div class="feature-grid">
                     <div class="feature-item">
-                        <h4>✅ Phase 1: MVP (Abgeschlossen)</h4>
-                        <p>Agent-Verzeichnis, TrustScore-Berechnung, Authentifizierung, Admin-Approval, Stripe-Billing.
-                        </p>
+                        <h4>✅ Phase 1: Proof of Concept</h4>
+                        <p>Agent-Verzeichnis-UI, TrustScore-Berechnung, Authentifizierung, Admin-Dashboard.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>🚧 Phase 2: Production (Nächste)</h4>
-                        <p>Echte Compliance-Verifikations-APIs, LLM-Dokumentenanalyse, API-Key-Management-UI,
-                            Email-Benachrichtigungen.</p>
+                        <h4>🔮 Phase 2: Production</h4>
+                        <p>Echte Compliance-Verifikations-APIs, LLM-Dokumentenanalyse, Email-Benachrichtigungen.</p>
                     </div>
                     <div class="feature-item">
                         <h4>🔮 Phase 3: Scale</h4>
-                        <p>Multi-Region-Support, erweiterte Suche (Elasticsearch), Mobile App, Partner-Integrationen,
-                            White-Label-Lösung.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Key Learnings -->
-            <div class="case-study-section">
-                <h2>Wichtige Erkenntnisse</h2>
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <h4>🎯 Transparenz schafft Vertrauen</h4>
-                        <p>Farbcodierte TrustScores machen komplexe Compliance-Kriterien auf einen Blick verständlich.
-                        </p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>🚀 MVP-First-Ansatz</h4>
-                        <p>Schnelle Markteinführung mit Kernfunktionen, iterative Erweiterung basierend auf
-                            Nutzerfeedback.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>🔄 Self-Service skaliert</h4>
-                        <p>Agent-Registrierung ohne manuelle Intervention reduziert Betriebskosten dramatisch.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>💰 Freemium-Modell funktioniert</h4>
-                        <p>Kostenloses Verzeichnis zieht Nutzer an, API-Zugriff generiert wiederkehrende Einnahmen.</p>
+                        <p>Multi-Region-Support, erweiterte Suche, Partner-Integrationen.</p>
                     </div>
                 </div>
             </div>
@@ -663,29 +463,27 @@
             <!-- Live Demo -->
             <div class="case-study-section"
                 style="background: #f0fdfa; padding: 3rem; border-radius: 1rem; border: 2px solid #99f6e4;">
-                <h2 style="border: none; margin-bottom: 1rem;">Live-Demo verfügbar</h2>
+                <h2 style="border: none; margin-bottom: 1rem;">Demo verfügbar</h2>
                 <p style="font-size: 1.125rem; margin-bottom: 2rem; color: #374151;">
-                    Das Agent Trust Protocol ist live auf Railway deployed und kann sofort getestet werden:
+                    Der Proof of Concept ist als Demo deploybar. Die Demo zeigt die Funktionalität mit
+                    Beispieldaten — keine echten, verifizierten Agent-Einträge.
                 </p>
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <a href="https://agent-trust-protocol-production.up.railway.app" target="_blank"
-                        class="btn btn-primary" style="background: #0891b2;">Live-Demo öffnen</a>
-                    <a href="https://github.com/yogami/agent-trust-protocol" target="_blank"
-                        class="btn btn-secondary">GitHub Repository</a>
+                    <a href="index.html#contact" class="btn btn-primary" style="background: #0891b2;">Demo anfragen</a>
                 </div>
             </div>
 
             <!-- CTA -->
             <div class="case-study-section"
                 style="text-align: center; background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); padding: 4rem; border-radius: 1rem; color: white;">
-                <h2 style="color: white; border: none;">Brauchen Sie ein Trust-System für Ihre Plattform?</h2>
+                <h2 style="color: white; border: none;">Interesse an einem Trust-System?</h2>
                 <p style="font-size: 1.25rem; margin-bottom: 2rem; color: #cffafe;">
-                    Lassen Sie uns besprechen, wie wir Vertrauen und Transparenz in Ihr Ökosystem bringen können.
+                    Wir können dieses Konzept für Ihre Plattform oder Branche anpassen.
                 </p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                     <a href="index.html#contact" class="btn btn-primary"
-                        style="background: white; color: #0891b2;">Kostenloses Gespräch buchen</a>
-                    <a href="index.html#case-studies" class="btn btn-secondary">Weitere Fallstudien</a>
+                        style="background: white; color: #0891b2;">Gespräch vereinbaren</a>
+                    <a href="index.html#case-studies" class="btn btn-secondary">Weitere Projekte</a>
                 </div>
             </div>
         </div>
@@ -726,14 +524,14 @@
                 <div class="footer-section">
                     <h4>Kontakt</h4>
                     <ul class="footer-contact">
-                        <li><a href="mailto:gopal.yami@gmail.com">sales@berlinailabs.de</a></li>
+                        <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
                         <li><a href="tel:+4917614619226">+49 176 146 19 226</a></li>
                         <li>Berlin, Deutschland</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="impressum.html">Impressum</a></p>
+                <p>&copy; 2026 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="impressum.html">Impressum</a></p>
             </div>
         </div>
     </footer>
