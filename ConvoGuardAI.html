@@ -64,6 +64,15 @@
 
         .case-study-content {
             padding: 6rem 0;
+            color: #374151;
+            /* Dark gray for main content */
+        }
+
+        .case-study-content p,
+        .case-study-content li,
+        .case-study-content span:not(.meta-value, .meta-label, .logo-text, .nav-link, .btn),
+        .case-study-content td {
+            color: #374151 !important;
         }
 
         .case-study-section {
@@ -452,7 +461,7 @@
                 <h2>API-Nutzung</h2>
                 <h3>Beispiel: Konversation validieren</h3>
                 <div class="code-block">
-                    curl -X POST https://convo-guard-ai.up.railway.app/api/validate \
+                    curl -X POST https://api.berlinailabs.de/v1/validate \
                     -H "Content-Type: application/json" \
                     -d '{"transcript": "User: Ich fühle mich hoffnungslos..."}'
                 </div>
@@ -607,18 +616,15 @@
                 </div>
             </div>
 
-            <!-- Live Demo -->
+            <!-- Demo Video -->
             <div class="case-study-section"
                 style="background: #faf5ff; padding: 3rem; border-radius: 1rem; border: 2px solid #e9d5ff;">
-                <h2 style="border: none; margin-bottom: 1rem;">Live-Demo verfügbar</h2>
+                <h2 style="border: none; margin-bottom: 1rem;">Demo-Video</h2>
                 <p style="font-size: 1.125rem; margin-bottom: 2rem; color: #374151;">
-                    ConvoGuard AI ist live auf Railway deployed und kann sofort getestet werden:
+                    Eine Video-Demonstration der ConvoGuard AI Funktionen wird in Kürze hier verfügbar sein.
                 </p>
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <a href="https://convo-guard-ai-production.up.railway.app" target="_blank" class="btn btn-primary"
-                        style="background: #7c3aed;">Live-Demo öffnen</a>
-                    <a href="https://convo-guard-ai-production.up.railway.app/dashboard" target="_blank"
-                        class="btn btn-secondary">Dashboard ansehen</a>
+                <div style="background: #1f2937; border-radius: 0.5rem; padding: 4rem; text-align: center;">
+                    <p style="color: #9ca3af; margin: 0;">📹 Demo-Video kommt bald</p>
                 </div>
             </div>
 

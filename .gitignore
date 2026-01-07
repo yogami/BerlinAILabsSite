@@ -1,2 +1,6 @@
 node_modules/
 .env
+
+# Agent Context Injections
+.agent_rules.md
+.agent_catalog.md
