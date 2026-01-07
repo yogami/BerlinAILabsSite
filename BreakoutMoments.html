@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         .product-hero {
-            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
             color: white;
             padding: 8rem 0 6rem;
             text-align: center;
@@ -106,7 +106,7 @@
             padding: 2rem;
             border-radius: 1rem;
             border-left: 4px solid;
-            color: #374151 !important;
+            color: #cbd5e1 !important;
         }
 
         .problem-box {
@@ -116,7 +116,8 @@
 
         .problem-box ul,
         .problem-box li,
-        .problem-box h3 {
+        .problem-box h3,
+        .problem-box p {
             color: #374151 !important;
         }
 
@@ -127,7 +128,8 @@
 
         .solution-box ul,
         .solution-box li,
-        .solution-box h3 {
+        .solution-box h3,
+        .solution-box p {
             color: #374151 !important;
         }
 
@@ -143,7 +145,25 @@
             padding: 1.5rem;
             border-radius: 0.75rem;
             border: 1px solid #e2e8f0;
+            color: #1a202c !important;
+        }
+
+        .feature-item p {
             color: #374151 !important;
+        }
+
+        /* Light-box contrast overrides */
+        .problem-box,
+        .solution-box,
+        .feature-item,
+        .tech-badge {
+            color: #1a202c !important;
+        }
+
+        .problem-box *,
+        .solution-box *,
+        .feature-item * {
+            color: #1a202c !important;
         }
 
         .feature-item h4 {
@@ -153,7 +173,7 @@
         }
 
         .feature-item p {
-            color: #4b5563 !important;
+            color: #cbd5e1 !important;
         }
 
         .tech-stack {
@@ -174,7 +194,7 @@
 
         .cta-section {
             text-align: center;
-            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
             padding: 4rem;
             border-radius: 1rem;
             color: white;
@@ -257,7 +277,7 @@
             <!-- Overview -->
             <div class="product-section">
                 <h2>Das Problem bei der Event-Koordination</h2>
-                <p style="font-size: 1.125rem; line-height: 1.8; color: #374151;">
+                <p style="font-size: 1.125rem; line-height: 1.8; color: #cbd5e1;">
                     Event-Manager verbringen viel Zeit damit, Crew-Mitglieder zu koordinieren:
                     Verfügbarkeiten abfragen, Schichten planen, immer wieder die gleichen Fragen
                     beantworten. Ein intelligenter WhatsApp-Bot kann diese Aufgaben übernehmen.
@@ -325,7 +345,7 @@
             <!-- Technical Implementation -->
             <div class="product-section">
                 <h2>Technische Umsetzung</h2>
-                <p style="font-size: 1.125rem; line-height: 1.8; color: #374151; margin-bottom: 2rem;">
+                <p style="font-size: 1.125rem; line-height: 1.8; color: #cbd5e1; margin-bottom: 2rem;">
                     Der Bot kann über verschiedene Wege umgesetzt werden — von schnellen MVP-Lösungen
                     bis zu produktionsreifen WhatsApp Business API Integrationen.
                 </p>
