@@ -14,21 +14,22 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         .product-hero {
-            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-            color: #1a202c;
+            background: linear-gradient(135deg, #050810 0%, #0f172a 100%);
+            color: #ffffff;
             padding: 8rem 0 6rem;
             text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .product-hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            color: #1a202c;
+            color: #ffffff;
         }
 
         .product-hero .subtitle {
             font-size: 1.25rem;
-            color: #374151;
+            color: #94a3b8;
             margin-bottom: 2rem;
             max-width: 700px;
             margin-left: auto;
@@ -71,9 +72,7 @@
         .product-content p,
         .product-content li,
         .product-content span:not(.meta-value, .meta-label, .logo-text, .nav-link, .btn),
-        .product-content td {
-            color: #f1f5f9 !important;
-        }
+        .product-content td {}
 
         .product-section {
             margin-bottom: 4rem;
@@ -106,31 +105,29 @@
             padding: 2rem;
             border-radius: 1rem;
             border-left: 4px solid;
-            color: #cbd5e1 !important;
+
         }
 
         .problem-box {
-            background: #fef2f2;
-            border-color: #ef4444;
+            
+            
         }
 
         .problem-box ul,
         .problem-box li,
         .problem-box h3,
         .problem-box p {
-            color: #374151 !important;
         }
 
         .solution-box {
-            background: #f0fdf4;
-            border-color: #10b981;
+            
+            
         }
 
         .solution-box ul,
         .solution-box li,
         .solution-box h3,
         .solution-box p {
-            color: #374151 !important;
         }
 
         .feature-grid {
@@ -141,40 +138,46 @@
         }
 
         .feature-item {
-            background: #f8fafc;
+            
             padding: 1.5rem;
             border-radius: 0.75rem;
-            border: 1px solid #e2e8f0;
-            color: #1a202c !important;
+            
         }
 
         .feature-item p {
-            color: #374151 !important;
         }
 
-        /* Light-box contrast overrides */
+        /* High-Contrast Visibility Patch */
         .problem-box,
         .solution-box,
         .feature-item,
-        .tech-badge {
-            color: #1a202c !important;
+        .tech-badge,
+        .breadcrumb,
+        .meta-item,
+        .product-section[style*="background: #f8fafc"],
+        .product-section[style*="background: white"] {
         }
 
         .problem-box *,
         .solution-box *,
-        .feature-item * {
-            color: #1a202c !important;
+        .feature-item *,
+        .breadcrumb *,
+        .meta-item *,
+        .product-section[style*="background: #f8fafc"] *,
+        .product-section[style*="background: white"] * {
+        }
+
+        .problem-box h3,
+        .solution-box h3,
+        .feature-item h4 {
         }
 
         .feature-item h4 {
-            color: #2563eb !important;
             margin-bottom: 0.75rem;
             font-size: 1.125rem;
         }
 
-        .feature-item p {
-            color: #cbd5e1 !important;
-        }
+        .feature-item p {}
 
         .tech-stack {
             display: flex;
@@ -277,7 +280,7 @@
             <!-- Overview -->
             <div class="product-section">
                 <h2>Das Problem bei der Event-Koordination</h2>
-                <p style="font-size: 1.125rem; line-height: 1.8; color: #cbd5e1;">
+                <p style="font-size: 1.125rem; line-height: 1.8; ">
                     Event-Manager verbringen viel Zeit damit, Crew-Mitglieder zu koordinieren:
                     Verfügbarkeiten abfragen, Schichten planen, immer wieder die gleichen Fragen
                     beantworten. Ein intelligenter WhatsApp-Bot kann diese Aufgaben übernehmen.
@@ -345,7 +348,7 @@
             <!-- Technical Implementation -->
             <div class="product-section">
                 <h2>Technische Umsetzung</h2>
-                <p style="font-size: 1.125rem; line-height: 1.8; color: #cbd5e1; margin-bottom: 2rem;">
+                <p style="font-size: 1.125rem; line-height: 1.8;  margin-bottom: 2rem;">
                     Der Bot kann über verschiedene Wege umgesetzt werden — von schnellen MVP-Lösungen
                     bis zu produktionsreifen WhatsApp Business API Integrationen.
                 </p>

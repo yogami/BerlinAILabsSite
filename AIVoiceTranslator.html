@@ -14,21 +14,19 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         .product-hero {
-            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-            color: white;
+            background: linear-gradient(135deg, #050810 0%, #0f172a 100%);
             padding: 8rem 0 6rem;
             text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .product-hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            color: white;
         }
 
         .product-hero .subtitle {
             font-size: 1.25rem;
-            color: #d1d5db;
             margin-bottom: 2rem;
             max-width: 700px;
             margin-left: auto;
@@ -51,29 +49,24 @@
             display: block;
             font-size: 2rem;
             font-weight: 700;
-            color: #60a5fa;
             margin-bottom: 0.25rem;
         }
 
         .meta-label {
             font-size: 0.875rem;
-            color: #9ca3af;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .product-content {
             padding: 6rem 0;
-            color: #f1f5f9;
             /* Light off-white for main content on dark background */
         }
 
         .product-content p,
         .product-content li,
         .product-content span:not(.meta-value, .meta-label, .logo-text, .nav-link, .btn),
-        .product-content td {
-            color: #f1f5f9 !important;
-        }
+        .product-content td {}
 
         .product-section {
             margin-bottom: 4rem;
@@ -81,7 +74,6 @@
 
         .product-section h2 {
             font-size: 2.5rem;
-            color: #ffffff;
             margin-bottom: 2rem;
             border-bottom: 3px solid #2563eb;
             padding-bottom: 0.5rem;
@@ -89,7 +81,6 @@
 
         .product-section h3 {
             font-size: 1.75rem;
-            color: #ffffff;
             margin-bottom: 1.5rem;
             margin-top: 2rem;
         }
@@ -104,21 +95,18 @@
         .use-case-box {
             padding: 2rem;
             border-radius: 1rem;
-            border-left: 4px solid #2563eb;
-            background: #f0f9ff;
-            color: #cbd5e1 !important;
+            border-left: 4px solid #3b82f6;
         }
 
+
         .use-case-box h4 {
-            color: #2563eb !important;
             margin-bottom: 1rem;
             font-size: 1.25rem;
         }
 
         .use-case-box ul,
-        .use-case-box li {
-            color: #374151 !important;
-        }
+        .use-case-box li {}
+
 
         .feature-grid {
             display: grid;
@@ -128,33 +116,38 @@
         }
 
         .feature-item {
-            background: #f8fafc;
             padding: 1.5rem;
             border-radius: 0.75rem;
-            border: 1px solid #e2e8f0;
-            color: #1a202c !important;
         }
 
+
         .feature-item h4 {
-            color: #2563eb !important;
             margin-bottom: 0.75rem;
             font-size: 1.125rem;
         }
 
-        .feature-item p {
-            color: #374151 !important;
-        }
+        .feature-item p {}
 
-        /* Light-box contrast overrides */
+
+        /* High-Contrast Visibility Patch */
         .use-case-box,
         .feature-item,
-        .tech-badge {
-            color: #1a202c !important;
+        .tech-badge,
+        .breadcrumb,
+        .meta-item,
+        .product-section[style*="background: #f8fafc"],
+        .product-section[style*="background: white"] {
         }
 
         .use-case-box *,
-        .feature-item * {
-            color: #1a202c !important;
+        .feature-item *,
+        .breadcrumb *,
+        .meta-item *,
+        .product-section[style*="background: #f8fafc"] *,
+        .product-section[style*="background: white"] * {
+        }
+
+        .use-case-box h4 {
         }
 
         .tech-stack {
@@ -165,8 +158,7 @@
         }
 
         .tech-tag {
-            background: #e0f2fe;
-            color: #0369a1;
+            
             padding: 0.5rem 1rem;
             border-radius: 2rem;
             font-size: 0.875rem;
@@ -189,24 +181,21 @@
         }
 
         .cta-section p {
-            color: #dbeafe;
             font-size: 1.125rem;
             margin-bottom: 2rem;
         }
 
         .breadcrumb {
-            background: #f8fafc;
+            
             padding: 1rem 0;
             border-bottom: 1px solid #e5e7eb;
         }
 
         .breadcrumb a {
-            color: #6b7280;
             text-decoration: none;
         }
 
         .breadcrumb a:hover {
-            color: #2563eb;
         }
 
         @media (max-width: 768px) {
@@ -293,7 +282,7 @@
             <!-- Overview -->
             <div class="product-section">
                 <h2>Was ist KI-Sprachübersetzung?</h2>
-                <p style="font-size: 1.125rem; line-height: 1.8; color: #cbd5e1;">
+                <p style="font-size: 1.125rem; line-height: 1.8; ">
                     Unsere KI-Sprachübersetzung ermöglicht Echtzeit-Kommunikation über Sprachbarrieren hinweg.
                     Die Technologie wandelt gesprochene Sprache direkt in eine andere Sprache um — ideal für
                     internationale Teams, Schulungen mit mehrsprachigen Teilnehmern oder Kundenkommunikation.
@@ -384,7 +373,7 @@
                 </div>
 
                 <h3>Integration</h3>
-                <p style="font-size: 1.125rem; line-height: 1.8; color: #cbd5e1;">
+                <p style="font-size: 1.125rem; line-height: 1.8; ">
                     Die Lösung lässt sich in bestehende Systeme integrieren — als eigenständige Anwendung,
                     Browser-Erweiterung oder API für Ihre eigene Software. Wir passen die Integration an
                     Ihre Infrastruktur an.
@@ -399,7 +388,6 @@
                     kostenlos und unverbindlich.
                 </p>
                 <a href="index.html#contact" class="btn btn-primary"
-                    style="background: white; color: #2563eb; margin-right: 1rem;">Demo vereinbaren</a>
                 <a href="index.html#services" class="btn btn-secondary" style="border-color: white; color: white;">Alle
                     Services</a>
             </div>

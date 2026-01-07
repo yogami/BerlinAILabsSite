@@ -28,7 +28,6 @@
 
         .case-study-hero .subtitle {
             font-size: 1.25rem;
-            color: #e9d5ff;
             margin-bottom: 2rem;
             max-width: 700px;
             margin-left: auto;
@@ -51,20 +50,17 @@
             display: block;
             font-size: 2rem;
             font-weight: 700;
-            color: #c4b5fd;
             margin-bottom: 0.25rem;
         }
 
         .meta-label {
             font-size: 0.875rem;
-            color: #ddd6fe;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .case-study-content {
             padding: 6rem 0;
-            color: #f1f5f9;
             /* Light off-white for main content on dark background */
         }
 
@@ -72,7 +68,7 @@
         .case-study-content li,
         .case-study-content span:not(.meta-value, .meta-label, .logo-text, .nav-link, .btn),
         .case-study-content td {
-            color: #f1f5f9 !important;
+            
         }
 
         .case-study-section {
@@ -81,7 +77,6 @@
 
         .case-study-section h2 {
             font-size: 2.5rem;
-            color: #ffffff;
             margin-bottom: 2rem;
             border-bottom: 3px solid #7c3aed;
             padding-bottom: 0.5rem;
@@ -89,7 +84,6 @@
 
         .case-study-section h3 {
             font-size: 1.75rem;
-            color: #ffffff;
             margin-bottom: 1.5rem;
             margin-top: 2rem;
         }
@@ -106,29 +100,27 @@
             padding: 2rem;
             border-radius: 1rem;
             border-left: 4px solid;
-            color: #ffffff !important;
         }
 
         .challenge-box {
-            background: #fef2f2;
-            border-color: #ef4444;
+            
+            
         }
 
         .challenge-box ul,
         .challenge-box li,
         .challenge-box p {
-            color: #cbd5e1 !important;
+            
         }
 
         .solution-box {
             background: #f5f3ff;
-            border-color: #7c3aed;
         }
 
         .solution-box ul,
         .solution-box li,
         .solution-box p {
-            color: #cbd5e1 !important;
+            
         }
 
         .feature-grid {
@@ -139,22 +131,19 @@
         }
 
         .feature-item {
-            background: #faf5ff;
+            
             padding: 1.5rem;
             border-radius: 0.75rem;
             border: 1px solid #e9d5ff;
-            color: #1a202c !important;
         }
 
         .feature-item h4 {
-            color: #7c3aed !important;
         }
 
         .feature-item p {
-            color: #374151 !important;
         }
 
-        /* Light-box contrast overrides */
+        /* Light-box contrast overrides - Aggressive */
         .challenge-box,
         .solution-box,
         .feature-item,
@@ -163,8 +152,12 @@
         .workflow-step,
         .benefit-card,
         .compliance-table td,
-        .quote-box {
-            color: #1a202c !important;
+        .quote-box,
+        .demo-note,
+        .case-study-section[style*="background: #faf5ff"],
+        .case-study-section[style*="background:#faf5ff"],
+        .product-section[style*="background: #f8fafc"],
+        .case-study-section[style*="background: white"] {
         }
 
         .challenge-box *,
@@ -175,8 +168,41 @@
         .workflow-step *,
         .benefit-card *,
         .compliance-table td *,
-        .quote-box * {
-            color: #1a202c !important;
+        .quote-box *,
+        .demo-note *,
+        .meta-item *,
+        .case-study-section[style*="background: #faf5ff"] *,
+        .case-study-section[style*="background: white"] * {
+        }
+
+        /* Specific Badge Fixes */
+        .severity-badge {
+        }
+
+        .severity-high {
+            background: #fee2e2 !important;
+        }
+
+        .severity-high * {
+        }
+
+        .severity-medium {
+            background: #fef3c7 !important;
+        }
+
+        .severity-medium * {
+        }
+
+        .severity-low {
+            background: #dbeafe !important;
+        }
+
+        .severity-low * {
+        }
+
+        /* Ensure Headings on light backgrounds are also dark */
+        .case-study-section[style*="background: #faf5ff"] h2,
+        .case-study-section[style*="background: #faf5ff"] h3 {
         }
 
         .results-grid {
@@ -210,7 +236,7 @@
             width: 100%;
             border-collapse: collapse;
             margin: 2rem 0;
-            background: white;
+            
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             border-radius: 0.5rem;
             overflow: hidden;
@@ -227,15 +253,12 @@
         .compliance-table td {
             padding: 1rem;
             border-bottom: 1px solid #e5e7eb;
-            color: #1a202c !important;
         }
 
         .compliance-table td strong {
-            color: #111827 !important;
         }
 
         .compliance-table td * {
-            color: #1a202c !important;
         }
 
         .compliance-table tr:last-child td {
@@ -252,18 +275,15 @@
         }
 
         .severity-high {
-            background: #fee2e2;
-            color: #dc2626;
+            
         }
 
         .severity-medium {
-            background: #fef3c7;
-            color: #d97706;
+            
         }
 
         .severity-low {
-            background: #dbeafe;
-            color: #2563eb;
+            
         }
 
         .tech-stack {
@@ -283,26 +303,24 @@
         }
 
         .quote-box {
-            background: #faf5ff;
+            
             border-left: 4px solid #7c3aed;
             padding: 2rem;
             margin: 3rem 0;
             font-style: italic;
             font-size: 1.25rem;
-            color: #cbd5e1;
+            
         }
 
         .quote-author {
             font-style: normal;
             font-weight: 600;
-            color: #ffffff;
             margin-top: 1rem;
             font-size: 1rem;
         }
 
         .code-block {
             background: #1f2937;
-            color: #f1f5f9;
             padding: 1.5rem;
             border-radius: 0.5rem;
             overflow-x: auto;
@@ -391,7 +409,7 @@
             <!-- Overview -->
             <div class="case-study-section">
                 <h2>Überblick</h2>
-                <p style="font-size: 1.125rem; line-height: 1.8; color: #cbd5e1;">
+                <p style="font-size: 1.125rem; line-height: 1.8; ">
                     Für die CIC Berlin / Soonami Accelerator Demo entwickelte Berlin AI Labs eine produktionsreife
                     API-Middleware, die Mental Health Chatbot-Konversationen in Echtzeit auf Compliance mit EU AI Act,
                     DiGA (Digitale Gesundheitsanwendungen) und GDPR prüft. Das System kombiniert regelbasierte Erkennung
@@ -405,7 +423,6 @@
                 <h2>Herausforderung & Lösung</h2>
                 <div class="challenge-solution">
                     <div class="challenge-box">
-                        <h3 style="color: #dc2626; margin-top: 0;">Die Herausforderung</h3>
                         <ul style="line-height: 1.8;">
                             <li>Mental Health Apps müssen strenge EU-Regulierungen einhalten</li>
                             <li>Manuelle Compliance-Prüfung ist zeitaufwendig und fehleranfällig</li>
@@ -415,7 +432,6 @@
                         </ul>
                     </div>
                     <div class="solution-box">
-                        <h3 style="color: #7c3aed; margin-top: 0;">Die Lösung</h3>
                         <ul style="line-height: 1.8;">
                             <li>REST API mit 3 Endpoints für Validierung und Audit-Logs</li>
                             <li>6 Compliance-Regeln (regelbasiert + KI-gestützt)</li>
@@ -430,7 +446,7 @@
             <!-- Compliance Rules -->
             <div class="case-study-section">
                 <h2>6 Compliance-Regeln</h2>
-                <p style="font-size: 1.125rem; line-height: 1.8; color: #cbd5e1; margin-bottom: 2rem;">
+                <p style="font-size: 1.125rem; line-height: 1.8;  margin-bottom: 2rem;">
                     Jede Konversation wird gegen 6 kritische Compliance-Regeln geprüft. Bei Verstößen wird ein
                     Compliance-Score berechnet (0-100), wobei ≥70 als bestanden gilt.
                 </p>
@@ -549,7 +565,7 @@
             <div class="case-study-section">
                 <h2>Technische Umsetzung</h2>
                 <h3>Clean Architecture</h3>
-                <p style="font-size: 1.125rem; line-height: 1.8; color: #cbd5e1; margin-bottom: 2rem;">
+                <p style="font-size: 1.125rem; line-height: 1.8;  margin-bottom: 2rem;">
                     Das Projekt folgt SOLID-Prinzipien mit klarer Trennung zwischen Domain-Logik, Infrastruktur und
                     Anwendungsschicht.
                 </p>
@@ -647,13 +663,12 @@
 
             <!-- Demo Video -->
             <div class="case-study-section"
-                style="background: #faf5ff; padding: 3rem; border-radius: 1rem; border: 2px solid #e9d5ff;">
+                style=" padding: 3rem; border-radius: 1rem; border: 2px solid #e9d5ff;">
                 <h2 style="border: none; margin-bottom: 1rem;">Demo-Video</h2>
-                <p style="font-size: 1.125rem; margin-bottom: 2rem; color: #cbd5e1;">
+                <p style="font-size: 1.125rem; margin-bottom: 2rem; ">
                     Eine Video-Demonstration der ConvoGuard AI Funktionen wird in Kürze hier verfügbar sein.
                 </p>
                 <div style="background: #ffffff; border-radius: 0.5rem; padding: 4rem; text-align: center;">
-                    <p style="color: #9ca3af; margin: 0;">📹 Demo-Video kommt bald</p>
                 </div>
             </div>
 
@@ -661,13 +676,11 @@
             <div class="case-study-section"
                 style="text-align: center; background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); padding: 4rem; border-radius: 1rem; color: white;">
                 <h2 style="color: white; border: none;">Brauchen Sie Compliance-Automatisierung?</h2>
-                <p style="font-size: 1.25rem; margin-bottom: 2rem; color: #e9d5ff;">
                     Lassen Sie uns besprechen, wie wir Ihre regulatorischen Anforderungen in automatisierte Lösungen
                     verwandeln können.
                 </p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                     <a href="index.html#contact" class="btn btn-primary"
-                        style="background: white; color: #7c3aed;">Kostenloses Gespräch buchen</a>
                     <a href="index.html#case-studies" class="btn btn-secondary">Weitere Fallstudien</a>
                 </div>
             </div>

@@ -245,12 +245,15 @@ a:hover {
 }
 
 .btn-glass {
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.4);
     transform: translateY(-3px);
 }
 
@@ -333,13 +336,14 @@ a:hover {
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1.25rem;
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.25);
+    background: rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.4);
     border-radius: 9999px;
-    color: var(--primary-glow);
+    color: #ffffff !important;
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 2rem;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);
 }
 
 .badge-dot {
@@ -429,14 +433,14 @@ a:hover {
 .section-badge {
     display: inline-block;
     padding: 0.375rem 1rem;
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.2);
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.4);
     border-radius: 9999px;
-    color: var(--secondary);
+    color: #c084fc !important;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     margin-bottom: 1rem;
 }
 
@@ -728,11 +732,12 @@ a:hover {
 
 .skill-tag {
     padding: 0.5rem 1rem;
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.2);
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.4);
     border-radius: 9999px;
     font-size: 0.85rem;
-    color: var(--primary-glow);
+    color: #93c5fd !important;
+    font-weight: 500;
 }
 
 .about-image {
@@ -1334,4 +1339,159 @@ a:hover {
 
 .nav-link.active::after {
     width: 100%;
+}
+
+/* --- UNIVERSAL THEME MIGRATION (UTM) --- */
+/* Target all containers identified as "bright" or low-contrast and force a premium dark theme. */
+
+body .impressum-container,
+body .light-section,
+body .white-bg,
+body .benefit-card,
+body .feature-item,
+body .use-case-box,
+body .challenge-box,
+body .solution-box,
+body .problem-box,
+body .workflow-step,
+body .contact-info,
+body .trust-score-formula,
+body .formula-item,
+body .compliance-table,
+body .case-study-section,
+body .tech-stack-card,
+body .compliance-card,
+body .demo-note,
+body .quote-box,
+body .breadcrumb,
+body [style*="background"],
+body [style*="background:white"],
+body [style*="background: #ffffff"],
+body [style*="background: #faf5ff"],
+body [style*="background: #f8fafc"],
+body [style*="background: #ecfeff"],
+body [style*="background: #f0fdfa"] {
+    background: #1e293b !important;
+    /* Premium Slate-800 Card Background */
+    color: #f1f5f9 !important;
+    /* Slate-100 High-Contrast Text */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3) !important;
+    padding: 2rem !important;
+    margin-bottom: 2rem !important;
+}
+
+/* Force light text on ALL children within the UTM zones */
+body .impressum-container *,
+body .light-section *,
+body .white-bg *,
+body .benefit-card *,
+body .feature-item *,
+body .use-case-box *,
+body .challenge-box *,
+body .solution-box *,
+body .problem-box *,
+body .workflow-step *,
+body .contact-info *,
+body .trust-score-formula *,
+body .formula-item *,
+body .formula-label *,
+body .compliance-table *,
+body .case-study-section *,
+body .compliance-table td,
+body .compliance-table th,
+body [style*="background"] * {
+    color: #f1f5f9 !important;
+}
+
+/* Fix Severity Badges (Prevent white-on-light-bg) */
+body .severity-badge {
+    padding: 0.25rem 0.75rem !important;
+    border-radius: 9999px !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+    text-transform: uppercase !important;
+}
+
+body .severity-high {
+    background: rgba(239, 68, 68, 0.2) !important;
+    color: #fca5a5 !important;
+    border: 1px solid #ef4444 !important;
+}
+
+body .severity-medium {
+    background: rgba(245, 158, 11, 0.2) !important;
+    color: #fcd34d !important;
+    border: 1px solid #f59e0b !important;
+}
+
+body .severity-low {
+    background: rgba(59, 130, 246, 0.2) !important;
+    color: #93c5fd !important;
+    border: 1px solid #3b82f6 !important;
+}
+
+/* Fix Tech Tags */
+body .tech-tag {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #38bdf8 !important;
+    border: 1px solid rgba(56, 189, 248, 0.2) !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 4px !important;
+    font-size: 0.75rem !important;
+}
+
+/* Fix Form Inputs */
+body input,
+body textarea,
+body select {
+    background: #0f172a !important;
+    color: #f1f5f9 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 6px !important;
+    padding: 0.75rem !important;
+}
+
+/* Fix Warning Boxes */
+body .warning-box,
+body .demo-alert {
+    background: rgba(245, 158, 11, 0.1) !important;
+    border: 1px solid rgba(245, 158, 11, 0.3) !important;
+    color: #fbbf24 !important;
+    padding: 1rem !important;
+    border-radius: 8px !important;
+}
+
+/* Headings in UTM zones */
+body .impressum-container h1,
+body .impressum-container h2,
+body .impressum-container h3,
+body .trust-score-formula h4,
+body .case-study-section h2,
+body .case-study-section h3 {
+    color: #ffffff !important;
+    margin-top: 0 !important;
+}
+
+/* Table Headers */
+body .compliance-table th {
+    background: #334155 !important;
+    color: #ffffff !important;
+    padding: 1rem !important;
+}
+
+/* Links */
+body .impressum-container a,
+body .case-study-section a {
+    color: #818cf8 !important;
+    text-decoration: underline !important;
+}
+
+/* Muted text in UTM zones */
+body .meta-label,
+body .text-muted,
+body .formula-label,
+body .blog-date {
+    color: #94a3b8 !important;
 }

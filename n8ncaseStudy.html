@@ -14,21 +14,22 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         .product-hero {
-            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-            color: #1a202c;
+            background: linear-gradient(135deg, #050810 0%, #0f172a 100%);
+            color: #ffffff;
             padding: 8rem 0 6rem;
             text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .product-hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            color: #1a202c;
+            color: #ffffff;
         }
 
         .product-hero .subtitle {
             font-size: 1.25rem;
-            color: #374151;
+            color: #94a3b8;
             margin-bottom: 2rem;
             max-width: 700px;
             margin-left: auto;
@@ -71,9 +72,7 @@
         .product-content p,
         .product-content li,
         .product-content span:not(.meta-value, .meta-label, .logo-text, .nav-link, .btn),
-        .product-content td {
-            color: #f1f5f9 !important;
-        }
+        .product-content td {}
 
         .product-section {
             margin-bottom: 4rem;
@@ -106,29 +105,27 @@
             padding: 2rem;
             border-radius: 1rem;
             border-left: 4px solid;
-            color: #cbd5e1 !important;
+
         }
 
         .problem-box {
-            background: #fef2f2;
+            
             border-left-color: #ef4444;
         }
 
         .problem-box ul,
         .problem-box li,
         .problem-box p {
-            color: #374151 !important;
         }
 
         .solution-box {
-            background: #f0fdf4;
+            
             border-left-color: #10b981;
         }
 
         .solution-box ul,
         .solution-box li,
         .solution-box p {
-            color: #374151 !important;
         }
 
         .problem-box h4,
@@ -138,26 +135,30 @@
         }
 
         .problem-box h4 {
-            color: #dc2626 !important;
         }
 
         .solution-box h4 {
-            color: #059669 !important;
         }
 
-        /* Light-box contrast overrides */
+        /* High-Contrast Visibility Patch */
         .problem-box,
         .solution-box,
         .workflow-step,
-        .benefit-card {
-            color: #1a202c !important;
+        .benefit-card,
+        .breadcrumb,
+        .meta-item,
+        .product-section[style*="background: #f8fafc"],
+        .product-section[style*="background: white"] {
         }
 
         .problem-box *,
         .solution-box *,
         .workflow-step *,
-        .benefit-card * {
-            color: #1a202c !important;
+        .benefit-card *,
+        .breadcrumb *,
+        .meta-item *,
+        .product-section[style*="background: #f8fafc"] *,
+        .product-section[style*="background: white"] * {
         }
 
         .workflow-steps {
@@ -168,21 +169,18 @@
         }
 
         .workflow-step {
-            background: #f8fafc;
+            
             padding: 1.5rem;
             border-radius: 0.75rem;
-            border: 1px solid #e2e8f0;
+            
             position: relative;
-            color: #cbd5e1 !important;
+
         }
 
         .workflow-step h4 {
-            color: #ffffff !important;
         }
 
-        .workflow-step p {
-            color: #cbd5e1 !important;
-        }
+        .workflow-step p {}
 
         .workflow-step::before {
             content: attr(data-step);
@@ -215,7 +213,7 @@
         }
 
         .tech-tag {
-            background: #e0f2fe;
+            
             color: #0369a1;
             padding: 0.5rem 1rem;
             border-radius: 2rem;
@@ -277,7 +275,7 @@
         }
 
         .breadcrumb {
-            background: #f8fafc;
+            
             padding: 1rem 0;
             border-bottom: 1px solid #e5e7eb;
         }
@@ -470,7 +468,7 @@
             <!-- Technical -->
             <div class="product-section">
                 <h2>Technische Umsetzung</h2>
-                <p style="font-size: 1.125rem; line-height: 1.8; color: #cbd5e1; margin-bottom: 2rem;">
+                <p style="font-size: 1.125rem; line-height: 1.8;  margin-bottom: 2rem;">
                     Wir nutzen n8n als Automatisierungsplattform — Open Source, selbst gehostet und
                     DSGVO-konform. Die Workflows verbinden Ihre bestehenden Systeme ohne Programmierung.
                 </p>
@@ -484,7 +482,7 @@
                 </div>
 
                 <h3>Unterstützte Systeme</h3>
-                <ul style="line-height: 1.8; color: #cbd5e1;">
+                <ul style="line-height: 1.8; ">
                     <li><strong>CRM:</strong> HubSpot, Salesforce, Pipedrive, Notion, Airtable</li>
                     <li><strong>Lead-Quellen:</strong> Website-Formulare, LinkedIn, Google Ads, Facebook Ads, E-Mail
                     </li>
@@ -496,10 +494,10 @@
             <!-- Implementation -->
             <div class="product-section">
                 <h2>Implementierung</h2>
-                <p style="font-size: 1.125rem; line-height: 1.8; color: #cbd5e1;">
+                <p style="font-size: 1.125rem; line-height: 1.8; ">
                     Eine typische Lead-Automatisierung kann innerhalb weniger Tage eingerichtet werden:
                 </p>
-                <ol style="line-height: 2; color: #cbd5e1; margin-top: 1rem;">
+                <ol style="line-height: 2;  margin-top: 1rem;">
                     <li><strong>Analyse:</strong> Wir verstehen Ihren aktuellen Lead-Prozess</li>
                     <li><strong>Design:</strong> Wir entwerfen den automatisierten Workflow</li>
                     <li><strong>Setup:</strong> Wir richten n8n ein und verbinden Ihre Systeme</li>

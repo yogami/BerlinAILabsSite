@@ -28,7 +28,6 @@
 
         .case-study-hero .subtitle {
             font-size: 1.25rem;
-            color: #cffafe;
             margin-bottom: 2rem;
             max-width: 700px;
             margin-left: auto;
@@ -51,20 +50,17 @@
             display: block;
             font-size: 2rem;
             font-weight: 700;
-            color: #a5f3fc;
             margin-bottom: 0.25rem;
         }
 
         .meta-label {
             font-size: 0.875rem;
-            color: #e0f2fe;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .case-study-content {
             padding: 6rem 0;
-            color: #f1f5f9;
             /* Light off-white for main content on dark background */
         }
 
@@ -72,7 +68,7 @@
         .case-study-content li,
         .case-study-content span:not(.meta-value, .meta-label, .logo-text, .nav-link, .btn),
         .case-study-content td {
-            color: #f1f5f9 !important;
+            
         }
 
         .case-study-section {
@@ -81,7 +77,6 @@
 
         .case-study-section h2 {
             font-size: 2.5rem;
-            color: #ffffff;
             margin-bottom: 2rem;
             border-bottom: 3px solid #0891b2;
             padding-bottom: 0.5rem;
@@ -89,7 +84,6 @@
 
         .case-study-section h3 {
             font-size: 1.75rem;
-            color: #ffffff;
             margin-bottom: 1.5rem;
             margin-top: 2rem;
         }
@@ -106,31 +100,28 @@
             padding: 2rem;
             border-radius: 1rem;
             border-left: 4px solid;
-            color: #cbd5e1 !important;
+            
         }
 
         .challenge-box {
-            background: #fef2f2;
-            border-color: #ef4444;
+            
+            
         }
 
         .challenge-box ul,
         .challenge-box li,
         .challenge-box h3,
         .challenge-box p {
-            color: #374151 !important;
         }
 
         .solution-box {
-            background: #ecfeff;
-            border-color: #0891b2;
+            
         }
 
         .solution-box ul,
         .solution-box li,
         .solution-box h3,
         .solution-box p {
-            color: #374151 !important;
         }
 
         .feature-grid {
@@ -141,51 +132,63 @@
         }
 
         .feature-item {
-            background: #f0fdfa;
+            
             padding: 1.5rem;
             border-radius: 0.75rem;
             border: 1px solid #ccfbf1;
-            color: #1a202c !important;
         }
 
         .feature-item p {
-            color: #374151 !important;
         }
 
-        /* Light-box contrast overrides */
+        /* High-Contrast Visibility Patch */
         .challenge-box,
         .solution-box,
         .feature-item,
-        .tech-badge {
-            color: #1a202c !important;
+        .tech-badge,
+        .breadcrumb,
+        .meta-item,
+        .formula-item,
+        .demo-note,
+        .trust-score-formula,
+        .case-study-section[style*="background: white"],
+        .case-study-section[style*="background:#faf5ff"] {
         }
 
         .challenge-box *,
         .solution-box *,
-        .feature-item * {
-            color: #1a202c !important;
+        .feature-item *,
+        .breadcrumb *,
+        .meta-item *,
+        .formula-item *,
+        .demo-note *,
+        .trust-score-formula * {
+        }
+
+        .challenge-box h3,
+        .solution-box h3,
+        .formula-item h4 {
         }
 
         .feature-item h4 {
-            color: #0891b2 !important;
             margin-bottom: 0.75rem;
             font-size: 1.125rem;
         }
 
         .feature-item p {
-            color: #cbd5e1 !important;
+            
         }
 
         .trust-score-formula {
-            color: #cbd5e1 !important;
+            
         }
 
         .formula-item p {
-            color: #cbd5e1 !important;
+            
         }
 
         .trust-score-formula {
-            background: #ecfeff;
+            
             border: 2px solid #0891b2;
             border-radius: 1rem;
             padding: 2rem;
@@ -193,7 +196,6 @@
         }
 
         .trust-score-formula h4 {
-            color: #0891b2;
             margin-bottom: 1rem;
             font-size: 1.25rem;
         }
@@ -206,7 +208,7 @@
         }
 
         .formula-item {
-            background: white;
+            
             padding: 1rem;
             border-radius: 0.5rem;
             text-align: center;
@@ -215,13 +217,11 @@
         .formula-points {
             font-size: 2rem;
             font-weight: 700;
-            color: #0891b2;
             display: block;
         }
 
         .formula-label {
             font-size: 0.875rem;
-            color: #cbd5e1;
             margin-top: 0.5rem;
         }
 
@@ -247,20 +247,16 @@
             border-radius: 1rem;
             padding: 1.5rem;
             margin: 2rem 0;
-            color: #1a202c !important;
         }
 
         .demo-note * {
-            color: #1a202c !important;
         }
 
         .demo-note h4 {
-            color: #b45309;
             margin-bottom: 0.5rem;
         }
 
         .demo-note p {
-            color: #92400e;
             margin: 0;
         }
 
@@ -343,7 +339,7 @@
             <!-- Overview -->
             <div class="case-study-section">
                 <h2>Das Konzept</h2>
-                <p style="font-size: 1.125rem; line-height: 1.8; color: #cbd5e1;">
+                <p style="font-size: 1.125rem; line-height: 1.8; ">
                     Mit zunehmender Verbreitung von KI-Agenten im Gesundheitsbereich wird es für Nutzer schwieriger
                     zu erkennen, welche Systeme vertrauenswürdig und compliant sind. Das Agent Trust Protocol
                     demonstriert, wie ein standardisiertes Bewertungssystem aussehen könnte.
@@ -355,7 +351,6 @@
                 <h2>Problem & Lösungsansatz</h2>
                 <div class="challenge-solution">
                     <div class="challenge-box">
-                        <h3 style="color: #dc2626; margin-top: 0;">Das Problem</h3>
                         <ul style="line-height: 1.8;">
                             <li>Viele Health-AI-Apps ohne klare Qualitätsindikatoren</li>
                             <li>Patienten können Compliance nicht selbst überprüfen</li>
@@ -365,7 +360,6 @@
                         </ul>
                     </div>
                     <div class="solution-box">
-                        <h3 style="color: #0891b2; margin-top: 0;">Der Lösungsansatz</h3>
                         <ul style="line-height: 1.8;">
                             <li>Standardisierter TrustScore-Algorithmus (0-100)</li>
                             <li>Farbcodierte Badges für schnelle Bewertung</li>
@@ -404,16 +398,10 @@
 
                 <h3>Farbcodierte Stufen</h3>
                 <div class="feature-grid">
-                    <div class="feature-item" style="background: #d1fae5; border-color: #6ee7b7;">
-                        <h4 style="color: #065f46;">🟢 Excellent (80-100)</h4>
                         <p>Vollständig verifiziert, alle Compliance-Kriterien erfüllt</p>
                     </div>
-                    <div class="feature-item" style="background: #fef3c7; border-color: #fcd34d;">
-                        <h4 style="color: #92400e;">🟡 Good (60-79)</h4>
                         <p>Grundlegende Compliance, einige Kriterien ausstehend</p>
                     </div>
-                    <div class="feature-item" style="background: #fee2e2; border-color: #fca5a5;">
-                        <h4 style="color: #991b1b;">🔴 Needs Review (0-59)</h4>
                         <p>Unvollständige Compliance, weitere Prüfung erforderlich</p>
                     </div>
                 </div>
@@ -522,9 +510,9 @@
 
             <!-- Live Demo -->
             <div class="case-study-section"
-                style="background: #f0fdfa; padding: 3rem; border-radius: 1rem; border: 2px solid #99f6e4;">
+                style=" padding: 3rem; border-radius: 1rem; border: 2px solid #99f6e4;">
                 <h2 style="border: none; margin-bottom: 1rem;">Demo verfügbar</h2>
-                <p style="font-size: 1.125rem; margin-bottom: 2rem; color: #cbd5e1;">
+                <p style="font-size: 1.125rem; margin-bottom: 2rem; ">
                     Der Proof of Concept ist als Demo deploybar. Die Demo zeigt die Funktionalität mit
                     Beispieldaten — keine echten, verifizierten Agent-Einträge.
                 </p>
@@ -537,12 +525,10 @@
             <div class="case-study-section"
                 style="text-align: center; background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); padding: 4rem; border-radius: 1rem; color: white;">
                 <h2 style="color: white; border: none;">Interesse an einem Trust-System?</h2>
-                <p style="font-size: 1.25rem; margin-bottom: 2rem; color: #cffafe;">
                     Wir können dieses Konzept für Ihre Plattform oder Branche anpassen.
                 </p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                     <a href="index.html#contact" class="btn btn-primary"
-                        style="background: white; color: #0891b2;">Gespräch vereinbaren</a>
                     <a href="index.html#case-studies" class="btn btn-secondary">Weitere Projekte</a>
                 </div>
             </div>
