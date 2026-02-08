@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implementing the Agentic Trust Framework: A Practical Guide | Berlin AI Labs</title>
+    <meta name="description"
+        content="How we built the first reference implementation of the CSA Agentic Trust Framework with 12 open-source services covering identity, behavior, data governance, segmentation, and incident response.">
+    <meta name="author" content="Yami Gopal, Berlin AI Labs">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Implementing the Agentic Trust Framework: A Practical Guide">
+    <meta property="og:description"
+        content="The first open-source reference implementation of the CSA Agentic Trust Framework. 12 services. 5 elements. All deployed.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://berlinailabs.de/blog/implementing-atf.html">
+    <meta property="og:site_name" content="Berlin AI Labs">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Implementing the Agentic Trust Framework: A Practical Guide">
+    <meta name="twitter:description"
+        content="How we built Zero Trust for AI agents with 12 open-source services, covering all 5 ATF elements.">
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Implementing the Agentic Trust Framework: A Practical Guide",
+        "author": {
+            "@type": "Person",
+            "name": "Yami Gopal",
+            "url": "https://berlinailabs.de"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Berlin AI Labs",
+            "url": "https://berlinailabs.de"
+        },
+        "datePublished": "2026-02-09",
+        "dateModified": "2026-02-09",
+        "description": "How we built the first reference implementation of the CSA Agentic Trust Framework with 12 open-source services.",
+        "keywords": ["Agentic Trust Framework", "ATF", "Zero Trust", "AI Agent Security", "CSA", "reference implementation"],
+        "about": {
+            "@type": "Thing",
+            "name": "Agentic Trust Framework"
+        }
+    }
+    </script>
+
+    <link rel="canonical" href="https://berlinailabs.de/blog/implementing-atf.html">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            line-height: 1.7;
+        }
+
+        .code-block .keyword {
+            color: var(--secondary);
+        }
+
+        .code-block .string {
+            color: var(--accent-green);
+        }
+
+        .code-block .comment {
+            color: #6b7280;
+        }
+
+        .element-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .element-card {
+            background: rgba(20, 30, 50, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .element-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-bright);
+        }
+
+        .element-card p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .inline-link {
+            color: var(--primary-glow);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .inline-link:hover {
+            color: var(--accent);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .comparison-table th {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+        }
+
+        .comparison-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        blockquote {
+            border-left: 3px solid var(--primary);
+            padding: 0.75rem 1.25rem;
+            margin: 1.5rem 0;
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        blockquote p {
+            color: var(--text-muted);
+            font-style: italic;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-brand">
+                    <img src="../logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span>Berlin AI Labs</span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="../index.html#products" class="nav-link">Products</a></li>
+                    <li><a href="../index.html#open-source" class="nav-link">Open Source</a></li>
+                    <li><a href="../index.html#about" class="nav-link">About</a></li>
+                    <li><a href="../blog.html" class="nav-link active">Blog</a></li>
+                    <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+                    <li><a href="../index.html#contact" class="btn nav-cta btn-primary">Partner with Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <article class="blog-article">
+        <header class="article-header">
+            <div class="container">
+                <a href="../blog.html" class="back-to-blog">← Back to Blog</a>
+                <h1 class="article-title">Implementing the Agentic Trust Framework: A Practical Guide</h1>
+                <div class="article-meta">
+                    <div class="author-info">
+                        <span class="author-name">Yami Gopal</span>
+                        <span class="author-company">Berlin AI Labs</span>
+                    </div>
+                    <div class="article-details">
+                        <span class="publish-date">February 9, 2026</span>
+                        <span class="reading-time">10 min read</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="article-content">
+            <div class="container article-container">
+
+                <p class="article-intro">
+                    The Cloud Security Alliance released the <a
+                        href="https://github.com/massivescale-ai/agentic-trust-framework" target="_blank"
+                        class="inline-link">Agentic Trust Framework</a> (ATF) as a zero-trust security model for AI
+                    agents. It's an important spec. But it shipped as documentation only — no running code, no reference
+                    implementation, no way to test it against real agents. We decided to build one. This is how we did
+                    it, what we learned, and how you can validate it yourself.
+                </p>
+
+                <h2>The Problem: AI Agents Have No Zero Trust</h2>
+
+                <p>
+                    Traditional zero trust (NIST SP 800-207) was designed for human users accessing corporate resources.
+                    It answers questions like: "Is this person authorized to access this database?" and "Is this session
+                    still valid?"
+                </p>
+
+                <p>
+                    AI agents break every assumption in that model. They don't have sessions — they have continuous
+                    autonomous loops. They don't access one resource — they chain 30 API calls in sequence. They don't
+                    have a fixed intent — they adapt their actions based on intermediate results. And when they go
+                    wrong, they don't just show an error page — they can exfiltrate data, inject prompts into other
+                    agents, and make irreversible real-world decisions.
+                </p>
+
+                <p>
+                    The ATF addresses this by defining <strong>5 trust elements</strong> that every agent must satisfy:
+                </p>
+
+                <div class="element-grid">
+                    <div class="element-card">
+                        <h4>🔐 Element 1 — Identity</h4>
+                        <p>Who is this agent? Who owns it? What is its declared purpose?</p>
+                    </div>
+                    <div class="element-card">
+                        <h4>👁️ Element 2 — Behavior</h4>
+                        <p>Is the agent doing what it claims? Can we prove it cryptographically?</p>
+                    </div>
+                    <div class="element-card">
+                        <h4>🛡️ Element 3 — Data Governance</h4>
+                        <p>What data goes in? What comes out? Is PII protected?</p>
+                    </div>
+                    <div class="element-card">
+                        <h4>📊 Element 4 — Segmentation</h4>
+                        <p>Where can this agent go? What can it access? Who can it talk to?</p>
+                    </div>
+                    <div class="element-card">
+                        <h4>⚔️ Element 5 — Incident Response</h4>
+                        <p>What happens when the agent goes rogue? How fast can we contain it?</p>
+                    </div>
+                </div>
+
+                <p>
+                    The spec is well-structured. But implementing it requires solving real engineering problems that the
+                    spec intentionally leaves open. That's what we built.
+                </p>
+
+                <h2>The Architecture: 12 Services, 5 Elements</h2>
+
+                <p>
+                    Our reference implementation isn't a monolith — it's a portfolio of 12 independently deployed
+                    services, each covering part of the ATF. This mirrors how enterprises actually work: different teams
+                    own different trust functions.
+                </p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>ATF Element</th>
+                            <th>Service</th>
+                            <th>What It Does</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Identity</td>
+                            <td><a href="https://github.com/yogami/agent-trust-verifier" target="_blank"
+                                    class="inline-link">Agent Trust Verifier</a></td>
+                            <td>DID:web resolution, Verifiable Credential issuance (JWT-VC)</td>
+                        </tr>
+                        <tr>
+                            <td>Identity</td>
+                            <td><a href="https://github.com/yogami/agent-trust-protocol" target="_blank"
+                                    class="inline-link">Agent Trust Protocol</a></td>
+                            <td>Reputation scoring, compliance tracking, maturity model engine</td>
+                        </tr>
+                        <tr>
+                            <td>Behavior</td>
+                            <td><a href="https://github.com/yogami/pdp-protocol" target="_blank"
+                                    class="inline-link">Veracity Core</a></td>
+                            <td>Ed25519 Proof of Execution, hash-chain linking, Solana anchoring</td>
+                        </tr>
+                        <tr>
+                            <td>Behavior</td>
+                            <td><a href="https://github.com/yogami/agent-chain-anchor" target="_blank"
+                                    class="inline-link">Agent Chain Anchor</a></td>
+                            <td>Chain-agnostic blockchain anchoring for audit logs</td>
+                        </tr>
+                        <tr>
+                            <td>Data Governance</td>
+                            <td><a href="https://github.com/yogami/convo-guard-ai" target="_blank"
+                                    class="inline-link">ConvoGuard AI</a></td>
+                            <td>Sub-20ms ONNX firewall — prompt injection, PII, EU AI Act trails</td>
+                        </tr>
+                        <tr>
+                            <td>Data Governance</td>
+                            <td><a href="https://github.com/yogami/agent-fairness-auditor" target="_blank"
+                                    class="inline-link">Agent Fairness Auditor</a></td>
+                            <td>Bias detection, immutable audit logging</td>
+                        </tr>
+                        <tr>
+                            <td>Segmentation</td>
+                            <td><a href="https://github.com/yogami/agent-trust-protocol" target="_blank"
+                                    class="inline-link">ATF Segmentation Engine</a></td>
+                            <td>Policy-as-code, rate limiting, A2A communication controls</td>
+                        </tr>
+                        <tr>
+                            <td>Segmentation</td>
+                            <td><a href="https://github.com/yogami/agent-deadline-enforcer" target="_blank"
+                                    class="inline-link">Agent Deadline Enforcer</a></td>
+                            <td>SLA contract enforcement, breach detection</td>
+                        </tr>
+                        <tr>
+                            <td>Segmentation</td>
+                            <td><a href="https://github.com/yogami/agent-semantic-aligner" target="_blank"
+                                    class="inline-link">Agent Semantic Aligner</a></td>
+                            <td>Cross-domain vocabulary translation between agents</td>
+                        </tr>
+                        <tr>
+                            <td>Incident Response</td>
+                            <td><a href="https://github.com/yogami/agent-pentest" target="_blank"
+                                    class="inline-link">Agent Pentest</a></td>
+                            <td>41 adversarial attack vectors, Safety Score (A–F)</td>
+                        </tr>
+                        <tr>
+                            <td>Incident Response</td>
+                            <td><a href="https://github.com/yogami/agent-trust-protocol" target="_blank"
+                                    class="inline-link">ATF Incident Service</a></td>
+                            <td>Circuit breaker, kill switch, auto-containment</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    Every service is open source (MIT), tested, and deployed. You can clone any of them and run them
+                    independently. The <a href="https://github.com/yogami/atf-reference-implementation" target="_blank"
+                        class="inline-link">unified facade repository</a> ties them together with a typed registry and
+                    25 contract validation tests.
+                </p>
+
+                <h2>What the Spec Doesn't Cover (and We Built)</h2>
+
+                <p>
+                    The ATF spec defines <em>what</em> trust elements exist. It doesn't specify <em>how</em> to
+                    implement them at runtime. These are the three biggest gaps we filled:
+                </p>
+
+                <h3>1. Maturity Model Runtime</h3>
+
+                <p>
+                    The spec describes agent maturity levels (Intern, Junior, Senior, Lead, Director) but doesn't define
+                    how an agent earns promotion. We built a runtime engine with 5 concrete Promotion Gates:
+                </p>
+
+                <div class="code-block">
+                    <span class="comment">// Promotion Gate evaluation</span>
+                    <span class="keyword">const</span> gates = [
+                    { name: <span class="string">'Performance'</span>, check: accuracy &gt; 0.9 && availability &gt;
+                    0.99 },
+                    { name: <span class="string">'Security'</span>, check: pentestGrade &lt;= <span
+                        class="string">'B'</span> },
+                    { name: <span class="string">'Business Value'</span>, check: roi &gt; 0 && ownerApproved },
+                    { name: <span class="string">'Incident Record'</span>,check: criticalIncidents === 0 },
+                    { name: <span class="string">'Governance'</span>, check: securityTeam && riskCommittee },
+                    ];
+                    <span class="comment">// All gates must pass for promotion</span>
+                </div>
+
+                <p>
+                    Each gate is independently verifiable. The performance gate checks accuracy and availability over a
+                    configurable window. The security gate requires a pentest score of B or higher from the Agent
+                    Pentest tool. The business value gate requires explicit sign-off from a human business owner. This
+                    forces organizations to define their own thresholds while providing the scaffolding to evaluate
+                    them.
+                </p>
+
+                <h3>2. Segmentation & Policy Engine</h3>
+
+                <p>
+                    The spec says agents should be segmented by role and permissions. It doesn't say how. We implemented
+                    a policy-as-code engine that evaluates access requests in real time:
+                </p>
+
+                <div class="code-block">
+                    <span class="comment">// Access policy enforcement</span>
+                    <span class="keyword">const</span> result = segmentationService.evaluateAccess({
+                    agentId: <span class="string">'supply-chain-optimizer-v3'</span>,
+                    resource: <span class="string">'procurement-db/write'</span>,
+                    maturityLevel: <span class="string">'intern'</span>,
+                    requestsInWindow: 42,
+                    });
+                    <span class="comment">// → { allowed: false, reason: 'Maturity level insufficient (intern &lt;
+                        junior)' }</span>
+                </div>
+
+                <p>
+                    The engine uses the agent's maturity level, current rate limit status, and resource classification
+                    to make access decisions. Denied requests fall back to the next lowest permission level
+                    automatically — an intern denied write access still gets read access.
+                </p>
+
+                <h3>3. Incident Response Circuit Breaker</h3>
+
+                <p>
+                    When an agent starts behaving anomalously, you need to contain it before the damage spreads. We
+                    built a circuit breaker with three states (CLOSED → OPEN → HALF_OPEN) that automatically isolates
+                    agents exceeding a failure threshold, with configurable cool-down periods and gradual re-admission.
+                </p>
+
+                <h2>How to Validate It</h2>
+
+                <p>
+                    We don't ask you to trust us. We ask you to run the tests:
+                </p>
+
+                <div class="code-block">
+                    git clone https://github.com/yogami/atf-reference-implementation.git
+                    cd atf-reference-implementation
+                    npm install
+                    npm test
+                    <span class="comment"># → 25/25 contract validation tests passing</span>
+                </div>
+
+                <p>
+                    The contract tests verify: all 5 ATF elements have at least one implementation, no duplicate repos,
+                    all services have valid URLs, required capabilities exist per element, every non-infrastructure
+                    service has a documented ATF mapping, all promotion gates are represented, and deployed services use
+                    HTTPS.
+                </p>
+
+                <h2>Where This Goes Next</h2>
+
+                <p>
+                    The ATF is a v0.1.0-draft. Our implementation will evolve with the spec. Here's what we're working
+                    on:
+                </p>
+
+                <ul style="color: var(--text-muted); margin: 1rem 0 1.5rem 1.5rem; line-height: 2;">
+                    <li><strong>Interactive demo</strong> — <a href="../atf-demo.html" class="inline-link">Watch an
+                            agent navigate all 5 elements live</a></li>
+                    <li><strong>Cross-service integration tests</strong> — End-to-end flows that prove the 12 services
+                        work together</li>
+                    <li><strong>Enterprise pilot</strong> — Running the stack against real production agents with a
+                        design partner</li>
+                    <li><strong>ATF v0.2 alignment</strong> — As the spec evolves, our implementation tracks</li>
+                </ul>
+
+                <blockquote>
+                    <p>
+                        The spec says what trust looks like. The code proves it works. Both are necessary.
+                        Neither is sufficient alone.
+                    </p>
+                </blockquote>
+
+                <h2>Get Involved</h2>
+
+                <p>
+                    Everything is MIT-licensed and ready to use:
+                </p>
+
+                <ul style="color: var(--text-muted); margin: 1rem 0 1.5rem 1.5rem; line-height: 2;">
+                    <li>📦 <a href="https://github.com/yogami/atf-reference-implementation" target="_blank"
+                            class="inline-link">Reference Implementation</a> — Start here</li>
+                    <li>🎮 <a href="../atf-demo.html" class="inline-link">Interactive Demo</a> — See it in action</li>
+                    <li>📄 <a href="https://github.com/massivescale-ai/agentic-trust-framework" target="_blank"
+                            class="inline-link">ATF Spec</a> — Read the source document</li>
+                    <li>🔐 <a href="https://www.npmjs.com/package/agent-pentest" target="_blank"
+                            class="inline-link">agent-pentest on npm</a> — Test your own agents</li>
+                </ul>
+
+                <p>
+                    If you're building agent infrastructure, we'd like to talk. We're not looking for collaborators for
+                    the sake of collaboration — we're looking for teams running agents in production who need trust
+                    guarantees that aren't just slideware.
+                </p>
+
+                <div class="article-footer">
+                    <div class="author-bio">
+                        <div class="author-bio-content">
+                            <h3>About the Author</h3>
+                            <p>
+                                <strong>Yami Gopal</strong> is the founder of Berlin AI Labs, where he builds AI
+                                compliance and governance infrastructure. He has 15+ years of experience in software
+                                architecture, previously at Boehringer Ingelheim, Personio, and FlixBus. He's
+                                particularly interested in making trust for AI agents as rigorous as trust for human
+                                users.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- CTA -->
+    <section class="article-cta">
+        <div class="container">
+            <h2>Build Trust Infrastructure for Your Agents</h2>
+            <p>Let's discuss how the ATF reference implementation can work for your organization.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="../index.html#contact" class="btn btn-primary btn-glow">Get in Touch</a>
+                <a href="../atf-demo.html" class="btn btn-secondary btn-glass">Try the Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../logo.svg" alt="Berlin AI Labs" class="logo">
+                        <span class="logo-text">Berlin AI Labs</span>
+                    </div>
+                    <p class="footer-description">
+                        AI compliance and governance infrastructure for the EU AI Act era.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <ul class="footer-links">
+                        <li><a href="../ConvoGuardAI.html">ConvoGuard AI</a></li>
+                        <li><a href="https://agent-ops-mission-control-production.up.railway.app"
+                                target="_blank">AgentOps Mission Control</a></li>
+                        <li><a href="https://pdp-protocol-production.up.railway.app/.well-known/agent-card.json"
+                                target="_blank">PoE-A2A Protocol</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Open Source</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://www.npmjs.com/package/agent-pentest" target="_blank">agent-pentest
+                                (npm)</a></li>
+                        <li><a href="https://github.com/yogami/atf-reference-implementation" target="_blank">ATF
+                                Reference Implementation</a></li>
+                        <li><a href="../blog.html">Engineering Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
+                        <li><a href="tel:+4917614619226">+49 176 146 19 226</a></li>
+                        <li>Berlin, Deutschland</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="../impressum.html">Impressum</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
