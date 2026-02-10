@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         /* VERA Demo Specific Styles */
-        .atf-demo {
+        .vera-demo {
             padding: 120px 0 80px;
             min-height: 100vh;
         }
@@ -46,13 +46,13 @@
         }
 
         /* Timeline layout */
-        .atf-timeline {
+        .vera-timeline {
             position: relative;
             max-width: 900px;
             margin: 0 auto;
         }
 
-        .atf-timeline::before {
+        .vera-timeline::before {
             content: '';
             position: absolute;
             left: 32px;
@@ -69,7 +69,7 @@
             opacity: 0.3;
         }
 
-        .atf-step {
+        .vera-step {
             position: relative;
             padding-left: 80px;
             margin-bottom: 2rem;
@@ -78,12 +78,12 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .atf-step.active {
+        .vera-step.active {
             opacity: 1;
             transform: translateX(0);
         }
 
-        .atf-step.completed {
+        .vera-step.completed {
             opacity: 0.7;
             transform: translateX(0);
         }
@@ -107,13 +107,13 @@
             z-index: 2;
         }
 
-        .atf-step.active .step-marker {
+        .vera-step.active .step-marker {
             border-color: var(--primary-glow);
             color: var(--primary-glow);
             box-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
         }
 
-        .atf-step.completed .step-marker {
+        .vera-step.completed .step-marker {
             border-color: var(--accent-green);
             color: var(--accent-green);
             background: rgba(16, 185, 129, 0.1);
@@ -129,7 +129,7 @@
             cursor: pointer;
         }
 
-        .atf-step.active .step-card {
+        .vera-step.active .step-card {
             border-color: rgba(96, 165, 250, 0.3);
             background: rgba(30, 45, 70, 0.5);
         }
@@ -184,8 +184,8 @@
             display: none;
         }
 
-        .atf-step.active .step-terminal,
-        .atf-step.completed .step-terminal {
+        .vera-step.active .step-terminal,
+        .vera-step.completed .step-terminal {
             display: block;
         }
 
@@ -195,12 +195,12 @@
             transform: translateY(5px);
         }
 
-        .atf-step.active .term-line,
-        .atf-step.completed .term-line {
+        .vera-step.active .term-line,
+        .vera-step.completed .term-line {
             animation: termFadeIn 0.3s forwards;
         }
 
-        .atf-step.completed .term-line {
+        .vera-step.completed .term-line {
             opacity: 1;
             transform: translateY(0);
             animation: none;
@@ -281,7 +281,7 @@
     </nav>
 
     <!-- Demo Section -->
-    <section class="atf-demo">
+    <section class="vera-demo">
         <div class="container">
             <div class="demo-header">
                 <span class="hero-badge">
@@ -301,10 +301,10 @@
             </div>
 
             <!-- VERA Timeline -->
-            <div class="atf-timeline" id="atf-timeline">
+            <div class="vera-timeline" id="vera-timeline">
 
                 <!-- Step 1: Action -->
-                <div class="atf-step" data-step="0">
+                <div class="vera-step" data-step="0">
                     <div class="step-marker">1</div>
                     <div class="step-card" onclick="activateStep(0)">
                         <span class="step-element-badge badge-veracity">⚡ Action</span>
@@ -322,7 +322,7 @@
                 </div>
 
                 <!-- Step 2: Proof -->
-                <div class="atf-step" data-step="1">
+                <div class="vera-step" data-step="1">
                     <div class="step-marker">2</div>
                     <div class="step-card" onclick="activateStep(1)">
                         <span class="step-element-badge badge-veracity">📝 Proof</span>
@@ -340,7 +340,7 @@
                 </div>
 
                 <!-- Step 3: Broadcast -->
-                <div class="atf-step" data-step="2">
+                <div class="vera-step" data-step="2">
                     <div class="step-marker">3</div>
                     <div class="step-card" onclick="activateStep(2)">
                         <span class="step-element-badge badge-veracity">📡 Broadcast</span>
@@ -358,7 +358,7 @@
                 </div>
 
                 <!-- Step 4: Reputation -->
-                <div class="atf-step" data-step="3">
+                <div class="vera-step" data-step="3">
                     <div class="step-marker">4</div>
                     <div class="step-card" onclick="activateStep(3)">
                         <span class="step-element-badge badge-veracity">⭐ Reputation</span>
@@ -387,7 +387,7 @@
         function runDemo() {
             if (autoRunInterval) return;
             currentStep = -1;
-            document.querySelectorAll('.atf-step').forEach(s => {
+            document.querySelectorAll('.vera-step').forEach(s => {
                 s.classList.remove('active', 'completed');
             });
 
@@ -399,7 +399,7 @@
 
         function nextStep() {
             if (currentStep >= 0) {
-                const prev = document.querySelector(`.atf-step[data-step="${currentStep}"]`);
+                const prev = document.querySelector(`.vera-step[data-step="${currentStep}"]`);
                 if (prev) {
                     prev.classList.remove('active');
                     prev.classList.add('completed');
@@ -414,7 +414,7 @@
                 return;
             }
 
-            const next = document.querySelector(`.atf-step[data-step="${currentStep}"]`);
+            const next = document.querySelector(`.vera-step[data-step="${currentStep}"]`);
             if (next) next.classList.add('active');
         }
     </script>
