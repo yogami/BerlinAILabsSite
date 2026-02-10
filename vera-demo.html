@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERA Interactive Demo — Sovereign Trust in Action | Berlin AI Labs</title>
+    <meta name="description"
+        content="Interactive demo of the VERA Protocol. Watch an AI agent generate cryptographic Proof of Execution (PoE), bridge to Moltbook, and earn a verified reputation.">
+    <meta name="keywords" content="VERA Protocol, Agent Trust, PoE, Zero Trust, AI Agent Security, Berlin AI Labs">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* VERA Demo Specific Styles */
+        .atf-demo {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .demo-header h1 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .demo-spec-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .demo-spec-link:hover {
+            color: var(--primary-glow);
+        }
+
+        /* Timeline layout */
+        .atf-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .atf-timeline::before {
+            content: '';
+            position: absolute;
+            left: 32px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg,
+                    var(--primary) 0%,
+                    var(--secondary) 25%,
+                    var(--accent) 50%,
+                    var(--accent-green) 75%,
+                    var(--accent-orange) 100%);
+            border-radius: 2px;
+            opacity: 0.3;
+        }
+
+        .atf-step {
+            position: relative;
+            padding-left: 80px;
+            margin-bottom: 2rem;
+            opacity: 0.3;
+            transform: translateX(-10px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .atf-step.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .atf-step.completed {
+            opacity: 0.7;
+            transform: translateX(0);
+        }
+
+        .step-marker {
+            position: absolute;
+            left: 16px;
+            top: 0;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--bg-darker);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            transition: all 0.4s ease;
+            z-index: 2;
+        }
+
+        .atf-step.active .step-marker {
+            border-color: var(--primary-glow);
+            color: var(--primary-glow);
+            box-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
+        }
+
+        .atf-step.completed .step-marker {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            border: var(--glass-border);
+            border-radius: 1rem;
+            padding: 1.5rem 2rem;
+            backdrop-filter: var(--glass-blur);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .atf-step.active .step-card {
+            border-color: rgba(96, 165, 250, 0.3);
+            background: rgba(30, 45, 70, 0.5);
+        }
+
+        .step-card:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .step-element-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+        }
+
+        .badge-veracity {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #6ee7b7;
+        }
+
+        .step-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        /* Simulated terminal output */
+        .step-terminal {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            line-height: 1.8;
+            overflow-x: auto;
+            display: none;
+        }
+
+        .atf-step.active .step-terminal,
+        .atf-step.completed .step-terminal {
+            display: block;
+        }
+
+        .term-line {
+            display: block;
+            opacity: 0;
+            transform: translateY(5px);
+        }
+
+        .atf-step.active .term-line,
+        .atf-step.completed .term-line {
+            animation: termFadeIn 0.3s forwards;
+        }
+
+        .atf-step.completed .term-line {
+            opacity: 1;
+            transform: translateY(0);
+            animation: none;
+        }
+
+        @keyframes termFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .term-prompt {
+            color: var(--accent-green);
+        }
+
+        .term-info {
+            color: var(--primary-glow);
+        }
+
+        .term-success {
+            color: var(--accent-green);
+        }
+
+        .term-warn {
+            color: var(--accent-orange);
+        }
+
+        .demo-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .demo-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .demo-btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: var(--neon-blue);
+        }
+
+        .demo-btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">
+                    <img src="logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span>Berlin AI Labs</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html#products" class="nav-link">Products</a></li>
+                    <li><a href="index.html#open-source" class="nav-link">Open Source</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Demo Section -->
+    <section class="atf-demo">
+        <div class="container">
+            <div class="demo-header">
+                <span class="hero-badge">
+                    <span class="badge-dot"></span>
+                    VERA Protocol — Live Demo
+                </span>
+                <h1>Sovereign Trust <span class="text-gradient-electric">in 60 Seconds</span></h1>
+                <p class="hero-subtitle" style="margin-bottom: 1rem;">
+                    Watch an AI agent generate a Proof of Execution, broadcast it to the P2P network,
+                    and earn a reputation boost on Moltbook.
+                </p>
+            </div>
+
+            <!-- Controls -->
+            <div class="demo-controls">
+                <button class="demo-btn demo-btn-primary" id="btn-run" onclick="runDemo()">▶ Run Verification</button>
+            </div>
+
+            <!-- VERA Timeline -->
+            <div class="atf-timeline" id="atf-timeline">
+
+                <!-- Step 1: Action -->
+                <div class="atf-step" data-step="0">
+                    <div class="step-marker">1</div>
+                    <div class="step-card" onclick="activateStep(0)">
+                        <span class="step-element-badge badge-veracity">⚡ Action</span>
+                        <h3 class="step-title">Agent Requests Tool Execution</h3>
+                        <p class="step-description">
+                            The agent requests a tool execution from its Sovereign Node.
+                        </p>
+                        <div class="step-terminal">
+                            <span class="term-line" style="animation-delay: 0.1s"><span class="term-prompt">→</span>
+                                Agent: Execute 'stripe_charge'</span>
+                            <span class="term-line" style="animation-delay: 0.4s"><span class="term-info"> Node:</span>
+                                Generating Nonce...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Proof -->
+                <div class="atf-step" data-step="1">
+                    <div class="step-marker">2</div>
+                    <div class="step-card" onclick="activateStep(1)">
+                        <span class="step-element-badge badge-veracity">📝 Proof</span>
+                        <h3 class="step-title">Proof of Execution (PoE)</h3>
+                        <p class="step-description">
+                            Sovereign Node signs the output with Ed25519 (or ML-DSA-65).
+                        </p>
+                        <div class="step-terminal">
+                            <span class="term-line" style="animation-delay: 0.1s"><span class="term-prompt">→</span>
+                                Signing Payload...</span>
+                            <span class="term-line" style="animation-delay: 0.4s"><span class="term-success"> ✓
+                                    Signature:</span> 8f3a...c71d</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Broadcast -->
+                <div class="atf-step" data-step="2">
+                    <div class="step-marker">3</div>
+                    <div class="step-card" onclick="activateStep(2)">
+                        <span class="step-element-badge badge-veracity">📡 Broadcast</span>
+                        <h3 class="step-title">Moltbook Signal Bridge</h3>
+                        <p class="step-description">
+                            PoE is broadcast to the P2P network. Moltbook Signal Collector picks it up.
+                        </p>
+                        <div class="step-terminal">
+                            <span class="term-line" style="animation-delay: 0.1s"><span class="term-prompt">→</span>
+                                GossipSub Broadcast...</span>
+                            <span class="term-line" style="animation-delay: 0.4s"><span class="term-success"> ✓ Moltbook
+                                    Collector:</span> Received PoE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Reputation -->
+                <div class="atf-step" data-step="3">
+                    <div class="step-marker">4</div>
+                    <div class="step-card" onclick="activateStep(3)">
+                        <span class="step-element-badge badge-veracity">⭐ Reputation</span>
+                        <h3 class="step-title">Trust Score Updated</h3>
+                        <p class="step-description">
+                            The Operator validates the proof and updates the agent's global Trust Score.
+                        </p>
+                        <div class="step-terminal">
+                            <span class="term-line" style="animation-delay: 0.1s"><span class="term-prompt">→</span>
+                                Verifying Claim...</span>
+                            <span class="term-line" style="animation-delay: 0.4s"><span class="term-success"> ★ Trust
+                                    Score:</span> 0.65 -> 0.72 (+0.07)</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const TOTAL_STEPS = 4;
+        let currentStep = -1;
+        let autoRunInterval = null;
+
+        function runDemo() {
+            if (autoRunInterval) return;
+            currentStep = -1;
+            document.querySelectorAll('.atf-step').forEach(s => {
+                s.classList.remove('active', 'completed');
+            });
+
+            autoRunInterval = setInterval(() => {
+                nextStep();
+            }, 2500);
+            nextStep();
+        }
+
+        function nextStep() {
+            if (currentStep >= 0) {
+                const prev = document.querySelector(`.atf-step[data-step="${currentStep}"]`);
+                if (prev) {
+                    prev.classList.remove('active');
+                    prev.classList.add('completed');
+                }
+            }
+
+            currentStep++;
+
+            if (currentStep >= TOTAL_STEPS) {
+                clearInterval(autoRunInterval);
+                autoRunInterval = null;
+                return;
+            }
+
+            const next = document.querySelector(`.atf-step[data-step="${currentStep}"]`);
+            if (next) next.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcing VERA: The Sovereign Trust Protocol for AI Agents | Berlin AI Labs</title>
+    <meta name="description"
+        content="We have upgraded our entire infrastructure to VERA (Verified Execution & Reputation Agent). A hardened, crypto-agile Sovereign Node architecture for the post-Moltbook agent economy.">
+    <meta name="author" content="Yami Gopal, Berlin AI Labs">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Announcing VERA: The Sovereign Trust Protocol for AI Agents">
+    <meta property="og:description"
+        content="Crytpo-agile. Post-Quantum Ready. Moltbook Integrated. Meet the new standard for agentic trust.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://berlinailabs.de/blog/vera-protocol-launch.html">
+    <meta property="og:site_name" content="Berlin AI Labs">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Announcing VERA: The Sovereign Trust Protocol for AI Agents">
+    <meta name="twitter:description"
+        content="We have upgraded our entire infrastructure to VERA. Hardened security for autonomous agents.">
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Announcing VERA: The Sovereign Trust Protocol for AI Agents",
+        "author": {
+            "@type": "Person",
+            "name": "Yami Gopal",
+            "url": "https://berlinailabs.de"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Berlin AI Labs",
+            "url": "https://berlinailabs.de"
+        },
+        "datePublished": "2026-02-10",
+        "dateModified": "2026-02-10",
+        "description": "We have upgraded our entire infrastructure to VERA (Verified Execution & Reputation Agent).",
+        "keywords": ["VERA Protocol", "Agent Trust", "PoE", "Crypto Agility", "Moltbook", "Post-Quantum"],
+        "about": {
+            "@type": "Thing",
+            "name": "VERA Protocol"
+        }
+    }
+    </script>
+
+    <link rel="canonical" href="https://berlinailabs.de/blog/vera-protocol-launch.html">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            line-height: 1.7;
+        }
+
+        .code-block .keyword {
+            color: var(--secondary);
+        }
+
+        .code-block .string {
+            color: var(--accent-green);
+        }
+
+        .code-block .comment {
+            color: #6b7280;
+        }
+
+        .element-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .element-card {
+            background: rgba(20, 30, 50, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .element-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-bright);
+        }
+
+        .element-card p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .inline-link {
+            color: var(--primary-glow);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .inline-link:hover {
+            color: var(--accent);
+        }
+
+        blockquote {
+            border-left: 3px solid var(--primary);
+            padding: 0.75rem 1.25rem;
+            margin: 1.5rem 0;
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        blockquote p {
+            color: var(--text-muted);
+            font-style: italic;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-brand">
+                    <img src="../logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span>Berlin AI Labs</span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="../index.html#products" class="nav-link">Products</a></li>
+                    <li><a href="../index.html#open-source" class="nav-link">Open Source</a></li>
+                    <li><a href="../index.html#about" class="nav-link">About</a></li>
+                    <li><a href="../blog.html" class="nav-link active">Blog</a></li>
+                    <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+                    <li><a href="../index.html#contact" class="btn nav-cta btn-primary">Partner with Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <article class="blog-article">
+        <header class="article-header">
+            <div class="container">
+                <a href="../blog.html" class="back-to-blog">← Back to Blog</a>
+                <h1 class="article-title">Announcing VERA: The Sovereign Trust Protocol for AI Agents</h1>
+                <div class="article-meta">
+                    <div class="author-info">
+                        <span class="author-name">Yami Gopal</span>
+                        <span class="author-company">Berlin AI Labs</span>
+                    </div>
+                    <div class="article-details">
+                        <span class="publish-date">February 10, 2026</span>
+                        <span class="reading-time">8 min read</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="article-content">
+            <div class="container article-container">
+
+                <p class="article-intro">
+                    We've upgraded. The Agent Trust Framework (ATF) was a good start, but the agentic economy moves
+                    fast.
+                    Today, we are announcing the complete transition of our infrastructure to the <strong>VERA
+                        Protocol</strong>
+                    (Verified Execution & Reputation Agent).
+                </p>
+
+                <h2>Why VERA?</h2>
+
+                <p>
+                    The collapse of Moltbook's social layer taught us one thing: <strong>Trust must be
+                        sovereign.</strong>
+                    Reliance on centralized platform verifiers is a single point of failure. VERA decentralizes trust
+                    by embedding it directly into the agent's execution layer using cryptographic Proof of Execution
+                    (PoE).
+                </p>
+
+                <p>
+                    VERA isn't just a spec. It's running code. Our reference implementation is now fully VERA-hardened.
+                </p>
+
+                <div class="element-grid">
+                    <div class="element-card">
+                        <h4>🔒 Crypto Agility</h4>
+                        <p>Support for <strong>Ed25519</strong> and Post-Quantum <strong>ML-DSA-65</strong> signatures.
+                        </p>
+                    </div>
+                    <div class="element-card">
+                        <h4>🧾 Tool Receipts</h4>
+                        <p>Cryptographic binding of tool outputs to authorization nonces. No spoofing.</p>
+                    </div>
+                    <div class="element-card">
+                        <h4>🤝 Moltbook Bridge</h4>
+                        <p>Verified PoEs automatically boost your agent's reputation on the Moltbook engine.</p>
+                    </div>
+                </div>
+
+                <h2>The Tech Stack Upgrade</h2>
+
+                <p>
+                    We have refactored our entire 12-service suite to align with VERA's "Maturity Model" and strict
+                    schema requirements.
+                </p>
+
+                <h3>1. The Sovereign Node (pdp-protocol)</h3>
+                <p>
+                    The heart of VERA is the Sovereign Node. It's no longer just a "protocol" — it's a hardened
+                    sidecar that runs alongside your agent. It handles key management, signing, and P2P broadcasting
+                    so your agent code remains clean.
+                </p>
+                <div class="code-block">
+                    <span class="comment">// VERA 2.0 Hardened Signature</span>
+                    <span class="keyword">const</span> proof = await node.testify({
+                    action: <span class="string">'execute_tool'</span>,
+                    toolId: <span class="string">'stripe-payment'</span>,
+                    nonce: <span class="string">'0x8f2...'</span>
+                    });
+                    <span class="comment">// -> Broadcasts to Moltbook Signal Collector</span>
+                </div>
+
+                <h3>2. Post-Quantum Readiness</h3>
+                <p>
+                    Agents live forever. Their signatures shouldn't expire when quantum computers arrive. VERA includes
+                    a normative `SignatureProvider` interface that supports <strong>ML-DSA-65</strong> (Dilithium),
+                    ensuring your agent's history remains verifiable decades from now.
+                </p>
+
+                <h3>3. The Reputation Bridge</h3>
+                <p>
+                    We built a direct bridge between the VERA P2P network and the Moltbook Reputation Engine.
+                    Verified actions = Higher Trust Score. It's automated, sybil-resistant, and mathematically sound.
+                </p>
+
+                <h2>Get Started</h2>
+
+                <p>
+                    The VERA reference implementation is open source. You can deploy your own Sovereign Node today.
+                </p>
+
+                <ul style="color: var(--text-muted); margin: 1rem 0 1.5rem 1.5rem; line-height: 2;">
+                    <li>📦 <a href="https://github.com/berlinailabs/pdp-protocol" target="_blank"
+                            class="inline-link">Sovereign Node Repo</a> — Deploy on Railway</li>
+                    <li>🎮 <a href="../vera-demo.html" class="inline-link">Interactive VERA Demo</a> — See the handshake
+                    </li>
+                    <li>📄 <a href="https://github.com/massivescale-ai/vera-protocol" target="_blank"
+                            class="inline-link">VERA Paper</a> — Read the spec</li>
+                </ul>
+
+                <div class="article-footer">
+                    <div class="author-bio">
+                        <div class="author-bio-content">
+                            <h3>About the Author</h3>
+                            <p>
+                                <strong>Yami Gopal</strong> is the founder of Berlin AI Labs. He believes that for AI
+                                agents
+                                to be useful, they must first be trusted. VERA is the mathematical foundation of that
+                                trust.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- CTA -->
+    <section class="article-cta">
+        <div class="container">
+            <h2>Upgrade Your Agents to VERA</h2>
+            <p>Don't run naked in the dark forest. Give your agents a Sovereign Node.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="../index.html#contact" class="btn btn-primary btn-glow">Get in Touch</a>
+                <a href="../vera-demo.html" class="btn btn-secondary btn-glass">Try the Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../logo.svg" alt="Berlin AI Labs" class="logo">
+                        <span class="logo-text">Berlin AI Labs</span>
+                    </div>
+                    <p class="footer-description">
+                        AI compliance and governance infrastructure for the EU AI Act era.
+                        Running on VERA Protocol.
+                    </p>
+                </div>
+                <!-- Standard Footer Links -->
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <ul class="footer-links">
+                        <li><a href="../ConvoGuardAI.html">ConvoGuard AI</a></li>
+                        <li><a href="https://agent-ops-mission-control-production.up.railway.app"
+                                target="_blank">AgentOps Mission Control</a></li>
+                        <li><a href="https://pdp-protocol-production.up.railway.app/.well-known/agent-card.json"
+                                target="_blank">VERA Node</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Open Source</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/berlinailabs/pdp-protocol" target="_blank">VERA Protocol</a>
+                        </li>
+                        <li><a href="../blog.html">Engineering Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
+                        <li><a href="tel:+4917614619226">+49 176 146 19 226</a></li>
+                        <li>Berlin, Deutschland</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="../impressum.html">Impressum</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
