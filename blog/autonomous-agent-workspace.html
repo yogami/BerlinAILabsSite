@@ -69,40 +69,26 @@
                     style="width: 100%; border-radius: 12px; margin-bottom: 2rem;">
 
                 <p class="article-intro">
-                    Ever tried hiring a new bass player only to realize they don't know the difference between a minor
-                    seventh and a supermarket checkout beep? In the world of <strong>Agentic AI</strong>, bringing a new
-                    agent (or a new laptop) into your workflow usually feels just as chaotic. You clone the repo, and
-                    suddenly the agent is hallicinating rules, duplicating code, and ignoring your hard-earned TDD
-                    protocols.
+                    Ever tried hiring a new bass player only to realize they don't know the difference between a minor seventh and a supermarket checkout beep? In the world of <strong>Agentic AI</strong>, bringing a new agent (or a new laptop) into your workflow usually feels just as chaotic. You clone the repo, and suddenly the agent is hallicinating rules, duplicating code, and ignoring your hard-earned TDD protocols.
                 </p>
                 <p>
-                    At Berlin AI Labs, we decided we were done "hand-coding" our infrastructure every time we switched
-                    machines. We've built what we call the <strong>"Zero-Touch Agentic Studio"</strong>—a plug-and-play
-                    architecture where every project is tethered to a single, global "Master Brain."
+                    At Berlin AI Labs, we decided we were done "hand-coding" our infrastructure every time we switched machines. We've built what we call the <strong>"Zero-Touch Agentic Studio"</strong>—a plug-and-play architecture where every project is tethered to a single, global "Master Brain."
                 </p>
 
                 <h2>The Cacophony of Component Drift</h2>
                 <p>
-                    When you're running a multi-service studio, code duplication is the ultimate vibe-killer. We had a
-                    <code>CryptoService</code> in one repo and a slightly different <code>EncryptionUtil</code> in
-                    another. When an agent was asked to build something new, it would just invent a third one. It was
-                    like having three different drummers in the room, all playing at slightly different tempos.
+                    When you're running a multi-service studio, code duplication is the ultimate vibe-killer. We had a <code>CryptoService</code> in one repo and a slightly different <code>EncryptionUtil</code> in another. When an agent was asked to build something new, it would just invent a third one. It was like having three different drummers in the room, all playing at slightly different tempos. 
                 </p>
                 <p>
-                    We needed a <strong>Source of Truth</strong> that was louder than the agent’s internal
-                    hallucinations.
+                    We needed a <strong>Source of Truth</strong> that was louder than the agent’s internal hallucinations.
                 </p>
 
                 <h2>The Master Score: One RULES.md to Rule Them All</h2>
                 <p>
-                    Instead of having rules scattered across <code>CLAUDE.md</code>, <code>.cursorrules</code>, and
-                    <code>GEMINI.md</code> in every project, we did something radical: <strong>The Purge</strong>.
+                    Instead of having rules scattered across <code>CLAUDE.md</code>, <code>.cursorrules</code>, and <code>GEMINI.md</code> in every project, we did something radical: <strong>The Purge</strong>. 
                 </p>
                 <p>
-                    We consolidated every architectural standard, TDD protocol, and code quality gate into a single
-                    <code>RULES.md</code> file stored in a dedicated <code>berlin-ai-infra</code> repository. Now,
-                    whether I’m coding in <code>ConvoGuard</code> or <code>InstagramReelPoster</code>, there is only one
-                    Law.
+                    We consolidated every architectural standard, TDD protocol, and code quality gate into a single <code>RULES.md</code> file stored in a dedicated <code>berlin-ai-infra</code> repository. Now, whether I’m coding in <code>ConvoGuard</code> or <code>InstagramReelPoster</code>, there is only one Law.
                 </p>
 
                 <div class="code-snippet">
@@ -114,45 +100,34 @@ Duplicating code is a critical failure.</code></pre>
 
                 <h2>The "Bootstrap" Hook: Plug and Play Engineering</h2>
                 <p>
-                    The coolest part? It's now 100% portable. When I clone any project onto a new laptop, the agent sees
-                    a tiny "Architectural Anchor" in the README. It automatically runs a <code>bootstrap-infra.sh</code>
-                    script that:
+                    The coolest part? It's now 100% portable. When I clone any project onto a new laptop, the agent sees a tiny "Architectural Anchor" in the README. It automatically runs a <code>bootstrap-infra.sh</code> script that:
                 </p>
                 <ul>
                     <li>Clones the <strong>Master Brain</strong> into the parent directory.</li>
                     <li>Purges any local "shadow rules" that might cause drift.</li>
-                    <li>Sets up IDE-specific pointers so Cursor, Windsurf, and Antigravity all sing from the same sheet
-                        music.</li>
+                    <li>Sets up IDE-specific pointers so Cursor, Windsurf, and Antigravity all sing from the same sheet music.</li>
                 </ul>
                 <p>
-                    It’s the closest we’ve come to a "Zero-Touch" environment. You clone, you start the agent, and the
-                    agent installs its own constraints.
+                    It’s the closest we’ve come to a "Zero-Touch" environment. You clone, you start the agent, and the agent installs its own constraints. 
                 </p>
 
                 <h2>Live Service Discovery: The Studio Phonebook</h2>
                 <p>
-                    But how does a project on my laptop know about a microservice running live on Cloud? We solved this
-                    by treating our <strong>Studio Service Directory</strong> as a live API.
+                    But how does a project on my laptop know about a microservice running live on Cloud? We solved this by treating our <strong>Studio Service Directory</strong> as a live API. 
                 </p>
                 <p>
-                    Every time a service is verified, it registers its OpenAPI manifest with the directory. Our local
-                    agents can run a <code>sync-catalog.sh</code> script to fetch the latest "Phonebook," bridging the
-                    gap between local development and live production infrastructure.
+                    Every time a service is verified, it registers its OpenAPI manifest with the directory. Our local agents can run a <code>sync-catalog.sh</code> script to fetch the latest "Phonebook," bridging the gap between local development and live production infrastructure. 
                 </p>
 
                 <h2>Conclusion: Work Like a Musician, Code Like an Architect</h2>
                 <p>
-                    You don't want to spend your time setting up wires and tuners; you want to play the music. By
-                    automating our development environment to this degree, we've freed up our "bandwidth" to focus on
-                    what matters: building AI that actually solves problems.
+                    You don't want to spend your time setting up wires and tuners; you want to play the music. By automating our development environment to this degree, we've freed up our "bandwidth" to focus on what matters: building AI that actually solves problems.
                 </p>
                 <p>
-                    The Berlin AI studio is now a self-correcting organism. If an agent tries to drift, the "Enforcer"
-                    script catches it. If a new machine is introduced, the "Bootstrap" script tethers it.
+                    The Berlin AI studio is now a self-correcting organism. If an agent tries to drift, the "Enforcer" script catches it. If a new machine is introduced, the "Bootstrap" script tethers it. 
                 </p>
                 <p>
-                    We’ve finally reached the point where the infrastructure is invisible. And that’s when the real
-                    creativity starts.
+                    We’ve finally reached the point where the infrastructure is invisible. And that’s when the real creativity starts.
                 </p>
 
                 <div class="article-footer">
@@ -160,9 +135,7 @@ Duplicating code is a critical failure.</code></pre>
                         <div class="author-bio-content">
                             <h3>About the Author</h3>
                             <p>
-                                <strong>Yami Gopal</strong> is an AI engineer and musician based in Berlin. He believes
-                                that the best code is the code you didn't have to write because your "Brain" already
-                                knew it existed elsewhere.
+                                <strong>Yami Gopal</strong> is an AI engineer and musician based in Berlin. He believes that the best code is the code you didn't have to write because your "Brain" already knew it existed elsewhere.
                             </p>
                         </div>
                     </div>
@@ -174,8 +147,8 @@ Duplicating code is a critical failure.</code></pre>
     <!-- Related Articles or CTA -->
     <section class="article-cta">
         <div class="container">
-            <h2>Tired of your agents going rogue?</h2>
-            <p>We figured out how to tether them to one brain. Happy to show you how.</p>
+            <h2>Scalable Infrastructure for Agentic Systems</h2>
+            <p>Ready to move beyond disconnected agents and build a unified, automated studio?</p>
             <a href="../index.html#contact" class="btn btn-primary">Let's Connect</a>
         </div>
     </section>
@@ -190,8 +163,8 @@ Duplicating code is a critical failure.</code></pre>
                         <span class="logo-text">Berlin AI Labs</span>
                     </div>
                     <p class="footer-description">
-                        AI safety and compliance tools, built in Berlin.
-                        9+ products in production. DSGVO-konform, obviously.
+                        AI Innovation Lab building breakthrough products for compliance, governance, and automation.
+                        Enterprise services for German SMBs. 100% DSGVO-konform.
                     </p>
                 </div>
                 <div class="footer-section">
