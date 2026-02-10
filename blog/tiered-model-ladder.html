@@ -11,7 +11,9 @@
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
 </head>
 
@@ -65,37 +67,32 @@
             <div class="container article-container">
 
                 <p class="article-intro">
-                    Most production chat systems treat every user turn the same way: one model, same capability tier,
-                    same cost profile. But in practice, not all turns are equally important. The first few exchanges
-                    determine whether the assistant understands the goal, captures constraints, chooses the right
-                    solution approach, and establishes a structure that the rest of the conversation can follow. This
-                    article proposes a pragmatic orchestration pattern that can deliver higher quality at lower total
-                    cost.
+                    Here's something most teams get wrong: they use the same model for every single turn in a
+                    conversation. Same capability, same cost, whether the user just said "hello" or asked you to
+                    redesign their entire database schema. But the first few exchanges are where all the leverage is.
+                    That's when the assistant needs to actually understand the problem. After that? Most of the work
+                    is just following the plan. So why pay for top-tier reasoning on every single turn?
                 </p>
 
-                <h2>The Core Idea: Invest in Framing, Economize on Execution</h2>
+                <h2>The Strategy: Smart Framing, Cheap Execution</h2>
 
                 <p>
-                    In many workflows, early turns carry the highest leverage. The user explains a problem in incomplete
-                    terms. The assistant must infer missing constraints. A wrong early assumption will poison every
-                    answer that follows.
-                </p>
-
-                <p>
-                    A model with stronger reasoning capabilities is more likely to produce correct problem
-                    decomposition, surface explicit assumptions, create a structured plan, follow instructions
-                    precisely, and demonstrate better awareness of edge cases.
+                    Think about it. The user describes their problem, probably badly. The assistant has to figure out
+                    what they actually mean, fill in the gaps, spot the constraints they forgot to mention. If it gets
+                    this wrong, everything downstream is garbage. That's where you want your best model.
                 </p>
 
                 <p>
-                    Once the conversation contains a solid scaffold, models with lighter reasoning requirements can
-                    continue effectively. They can expand sections, produce variants, write code within a given
-                    architecture, generate documentation, and iterate on details.
+                    A stronger reasoning model is way better at decomposing the problem, calling out assumptions,
+                    building a structured plan, and catching edge cases. Once that scaffold exists in the conversation,
+                    a cheaper model can take over and do fine. It can expand sections, write code within the
+                    architecture
+                    that's already been decided, generate docs, iterate on details.
                 </p>
 
                 <p>
-                    This is essentially online distillation: the high reasoning model acts as a guide that seeds the
-                    conversation with quality exemplars and constraints, which lighter models then leverage.
+                    It's basically online distillation. The smart model seeds the conversation with quality, and the
+                    lighter model rides those rails.
                 </p>
 
                 <figure class="article-figure">

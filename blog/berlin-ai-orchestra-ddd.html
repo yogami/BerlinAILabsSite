@@ -11,7 +11,9 @@
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
 </head>
 
@@ -71,27 +73,26 @@
 
                 <p class="article-intro">
                     Building a single AI agent is a weekend project. Building a production-grade <strong>Agentic
-                        Suite</strong> that scales, adapts, and survives the fast-moving LLM landscape is a systematic
-                    engineering challenge. At Berlin AI Labs, we recently completed a major refactoring of our entire
-                    ecosystem—what we now call the <strong>"Berlin AI Orchestra"</strong>. By applying
-                    <strong>Domain-Driven Design (DDD)</strong> and <strong>Hexagonal Architecture</strong>, we've
-                    successfully decoupled our core logic into a set of 100% independent microservices.
+                        Suite</strong> that survives the fast-moving LLM landscape? That's a systematic engineering
+                    challenge. At Berlin AI Labs, we recently refactored our entire ecosystem—the <strong>"Berlin AI
+                        Orchestra"</strong>. We used <strong>Domain-Driven Design (DDD)</strong> and <strong>Hexagonal
+                        Architecture</strong> to decouple our core logic into 100% independent microservices.
                 </p>
 
-                <h2>The Cacophony of Coupling</h2>
+                <h2>The Coupling Problem</h2>
                 <p>
-                    Most agentic systems start as "Smart Wrappers"—monoliths where the business logic, LLM prompts, and
-                    infrastructure (like Cloudinary or vector DBs) are tightly braided. This is fine for a MVP, but in a
-                    multi-model, multi-platform environment, it becomes a maintenance nightmare.
+                    Most agentic systems start as "Smart Wrappers"—monoliths where the business logic, prompt templates,
+                    and infrastructure (Cloudinary, Vector DBs) are tightly braided together. It's fine for an MVP.
+                    It's a nightmare for a platform.
                 </p>
                 <p>
-                    When we extracted our <strong>Compliance Engine</strong>, we hit a classic architectural wall: the
-                    library was still importing the <code>Conversation</code> entity from the host application. In
-                    musical terms, our violinist was trying to read the pianist's sheet music. It worked, but you
-                    couldn't take the violinist to another gig without bringing the piano along.
+                    When we extracted our <strong>Compliance Engine</strong>, we hit a wall: the library was still
+                    importing the <code>Conversation</code> entity from the host application. In musical terms, our
+                    violinist was trying to read the pianist's sheet music. It worked, but you couldn't take the
+                    violinist to another gig without bringing the piano along.
                 </p>
 
-                <h2>Developing the Score: Bounded Contexts & Ubiquitous Language</h2>
+                <h2>Developing the Score: Bounded Contexts</h2>
                 <p>
                     The first step in DDD is identifying <strong>Bounded Contexts</strong>. A "Conversation" in a mental
                     health chatbot has different invariants than a "Conversation" in a marketing reel generator.
