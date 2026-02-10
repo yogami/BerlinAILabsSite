@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERA Protocol Whitepaper | Berlin AI Labs</title>
+    <meta name="description"
+        content="VERA: Verifiable Enforcement for Runtime Agents. A Zero Trust Reference Architecture for Autonomous AI Agents. Read the full whitepaper.">
+    <meta name="author" content="Berlin AI Labs">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="VERA Protocol Whitepaper">
+    <meta property="og:description"
+        content="A Zero Trust Reference Architecture for Autonomous AI Agents. Enforcement over documentation.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://berlinailabs.de/vera-paper.html">
+    <meta property="og:site_name" content="Berlin AI Labs">
+
+    <link rel="canonical" href="https://berlinailabs.de/vera-paper.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Mermaid JS for diagrams -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            securityLevel: 'loose'
+        });
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0f1c;
+            color: #d1d5db;
+        }
+
+        .paper-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+            background: #0f1623;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .paper-content {
+            font-family: 'Merriweather', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .paper-content h1,
+        .paper-content h2,
+        .paper-content h3 {
+            font-family: 'Fraunces', serif;
+            color: #f3f4f6;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .paper-content h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .paper-subtitle {
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.25rem;
+            color: #9ca3af;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .mermaid {
+            margin: 2rem 0;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .btn-floating {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        @media print {
+
+            .nav,
+            .footer,
+            .btn-floating {
+                display: none;
+            }
+
+            body,
+            .paper-container {
+                background: white;
+                color: black;
+                box-shadow: none;
+                border: none;
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .paper-content {
+                color: black;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">
+                    <img src="logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span>Berlin AI Labs</span>
+                </a>
+                <div class="nav-right">
+                    <a href="blog/vera-protocol-launch.html" class="nav-link">← Back to Announcement</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="paper-container">
+        <article class="paper-content">
+            <h1>VERA: Verifiable Enforcement for Runtime Agents</h1>
+            <p class="paper-subtitle">A Zero Trust Reference Architecture for Autonomous AI Agents</p>
+            <p style="text-align: center; font-style: italic; margin-bottom: 3rem; font-family: 'Inter', sans-serif;">
+                Berlin AI Labs — February 2026</p>
+
+            <hr style="border-color: rgba(255,255,255,0.1); margin: 2rem 0;">
+
+            <h2>Abstract</h2>
+            <p>AI agents take real actions with real data at machine speed. Compromised AI agents pose significant risks
+                including data exfiltration, unauthorized financial transactions, and cascading failures across
+                downstream systems, often at speeds that preclude human intervention.</p>
+            <p>The security community has responded with governance frameworks that specify what to document, what to
+                log, and what to monitor. These frameworks provide valuable guidance but leave a critical gap: none
+                define the runtime enforcement layer that makes governance verifiable.</p>
+            <p>This paper introduces <strong>VERA</strong> (Verifiable Enforcement for Runtime Agents), a zero trust
+                reference architecture for AI agents that prioritizes enforcement over documentation, cryptographic
+                proof over policy assertions, and reference implementation over specification prose.</p>
+
+            <h2>The Enforcement Gap</h2>
+            <div class="mermaid">
+                graph LR
+                subgraph "Governance Layer"
+                A[Policy Guidance] --> B[Control Categories]
+                B --> C[Compliance Mapping]
+                end
+
+                subgraph "VERA: Enforcement Layer"
+                D[Policy as Code] --> E[PDP/PEP Architecture]
+                E --> F[Runtime Enforcement]
+                F --> G[Cryptographic Proof]
+                end
+
+                C -.->|"VERA operationalizes"| D
+
+                style C fill:#4dabf7,color:#fff,stroke:#333
+                style G fill:#51cf66,color:#fff,stroke:#333
+            </div>
+
+            <h2>Architecture Overview</h2>
+            <p>VERA places a hardened enforcement plane between the agent runtime and the untrusted world. Trust is
+                never assumed; it is enforced by Policy Enforcement Points (PEPs) and verified by a cryptographic Proof
+                Engine.</p>
+
+            <div class="mermaid">
+                graph TB
+                subgraph "Untrusted Zone"
+                U[External Users/APIs]
+                RAG[RAG Corpus]
+                end
+
+                subgraph "Agent Runtime - Semi-Trusted"
+                AR[Agent Process]
+                MEM[Agent Memory]
+                end
+
+                subgraph "Enforcement Plane - Trusted"
+                PDP[Policy Decision Point]
+                PEP1[PEP: Tool Wrapper]
+                PEP2[PEP: API Gateway]
+                PEP3[PEP: Memory Guard]
+                PE[Proof Engine]
+                end
+
+                subgraph "Storage Plane - Trusted"
+                KMS[Key Management Service]
+                LOG[Tamper-Evident Log]
+                ANC[Anchor Backend]
+                end
+
+                U -->|"Input"| PEP2
+                PEP2 -->|"Validated"| AR
+                AR -->|"Tool call"| PEP1
+                PEP1 -->|"Sign"| PE
+                PE -->|"Write"| LOG
+                LOG -->|"Anchor"| ANC
+            </div>
+
+            <h2>Read the Full Specification</h2>
+            <p>The complete VERA specification, including formal security properties, threat models, and implementation
+                details for all 12 services, is available in our open source repository.</p>
+
+            <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="https://github.com/yogami/vera-reference-implementation/blob/main/VERA_PAPER.md"
+                    target="_blank" class="btn btn-primary">Read Full Paper (GitHub)</a>
+                <button onclick="window.print()" class="btn btn-secondary">Print Summary (PDF)</button>
+            </div>
+
+        </article>
+    </div>
+
+</body>
+
+</html>
