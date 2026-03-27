@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EU AI Act Compliance for AI Agents — Berlin AI Labs</title>
+    <meta name="description"
+        content="Runtime governance and compliance evidence for autonomous AI agents. Free compliance scanner, live evidence dashboard, and pilot programs for CISOs and DPOs preparing for EU AI Act enforcement August 2026.">
+    <meta name="keywords"
+        content="EU AI Act, AI compliance, CISO, DPO, AI agent governance, GDPR, runtime evidence, compliance scanner, AI security, Berlin">
+    <meta property="og:title" content="EU AI Act Compliance for AI Agents — Berlin AI Labs">
+    <meta property="og:description"
+        content="Free compliance scanner + live governance dashboard. Runtime evidence for autonomous AI agents. Built for CISOs preparing for August 2026.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://berlinailabs.de/ai-compliance.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Page-specific styles */
+        .compliance-hero {
+            padding: 140px 0 80px;
+            position: relative;
+            text-align: center;
+        }
+
+        .compliance-hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(ellipse, rgba(94, 143, 255, 0.08) 0%, rgba(255, 143, 94, 0.04) 50%, transparent 70%);
+            filter: blur(80px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .compliance-hero .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .enforcement-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            background: rgba(255, 94, 94, 0.08);
+            border: 1px solid rgba(255, 94, 94, 0.2);
+            border-radius: 99px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #FF5E5E;
+            margin-bottom: 2rem;
+            animation: pulse-badge 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-badge {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .hero-subtitle-compliance {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-cta-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn-scanner {
+            background: var(--accent-blue);
+            color: #fff;
+            box-shadow: 0 4px 0 #3d6bcc, 0 6px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-scanner:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 0 #3d6bcc, 0 8px 16px rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }
+
+        .btn-dashboard {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--accent-blue);
+        }
+
+        .btn-dashboard:hover {
+            background: rgba(94, 143, 255, 0.08);
+            color: var(--text-main);
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 5rem 0;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .problem-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .problem-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .problem-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-main);
+        }
+
+        .problem-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        .penalty-highlight {
+            font-family: 'Fraunces', serif;
+            font-size: 2rem;
+            color: #FF5E5E;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        /* Tools Section */
+        .tools-section {
+            padding: 6rem 0;
+        }
+
+        .tool-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .tool-card-large {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            transition: all 0.3s var(--ease-smooth);
+        }
+
+        .tool-card-large:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-float);
+            border-color: var(--border-highlight);
+        }
+
+        .tool-card-large .tool-preview {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: #0a0d14;
+            border-bottom: 1px solid var(--border-subtle);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card-large .tool-preview iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            pointer-events: none;
+            transform: scale(0.5);
+            transform-origin: top left;
+            width: 200%;
+            height: 200%;
+        }
+
+        .tool-preview-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.1);
+            transition: background 0.2s;
+        }
+
+        .tool-preview-overlay:hover {
+            background: rgba(0,0,0,0.3);
+        }
+
+        .tool-preview-overlay span {
+            background: var(--primary);
+            color: var(--text-inverse);
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--radius-btn);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .tool-preview-overlay:hover span {
+            opacity: 1;
+        }
+
+        .tool-card-large .tool-info {
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        .tool-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+        }
+
+        .tag-free {
+            background: rgba(94, 255, 143, 0.1);
+            color: var(--accent-green);
+            border: 1px solid rgba(94, 255, 143, 0.2);
+        }
+
+        .tag-live {
+            background: rgba(94, 143, 255, 0.1);
+            color: var(--accent-blue);
+            border: 1px solid rgba(94, 143, 255, 0.2);
+        }
+
+        .tool-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-info p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-features {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tool-features li {
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        /* Video Section */
+        .video-section {
+            padding: 5rem 0;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 2rem auto 0;
+            aspect-ratio: 16/9;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-placeholder {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 2rem;
+        }
+
+        .video-placeholder .play-icon {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            padding: 5rem 0;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .timeline {
+            max-width: 700px;
+            margin: 3rem auto 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-subtle);
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            padding-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            margin-top: 0.35rem;
+            flex-shrink: 0;
+            position: relative;
+            left: 19px;
+            z-index: 1;
+        }
+
+        .timeline-dot.urgent {
+            background: #FF5E5E;
+            box-shadow: 0 0 12px rgba(255, 94, 94, 0.4);
+        }
+
+        .timeline-dot.warning {
+            background: var(--primary);
+        }
+
+        .timeline-content {
+            padding-left: 1rem;
+        }
+
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-content h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-content p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .cta-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-card);
+            padding: 4rem 3rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-card h2 {
+            margin-bottom: 1rem;
+        }
+
+        .cta-card p {
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-showcase {
+                grid-template-columns: 1fr;
+            }
+
+            .compliance-hero {
+                padding-top: 120px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">
+                    <img src="logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span>Berlin AI Labs</span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html#products" class="nav-link">Products</a></li>
+                    <li><a href="#tools" class="nav-link">Free Tools</a></li>
+                    <li><a href="#timeline" class="nav-link">Timeline</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="#contact-cta" class="btn nav-cta btn-scanner">Scan Your Agent Free</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="compliance-hero" id="compliance-hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="enforcement-badge">
+                    <span class="badge-dot" style="background:#FF5E5E;width:8px;height:8px;border-radius:50%;display:inline-block;"></span>
+                    EU AI Act Enforcement: August 2, 2026
+                </span>
+                <h1>Your AI Agents Need <span class="text-gradient-electric">Runtime Governance</span></h1>
+                <p class="hero-subtitle-compliance">
+                    SOC 2 audits static infrastructure. The EU AI Act audits dynamic behavior.
+                    If your AI agents make autonomous decisions, you need runtime compliance evidence —
+                    not quarterly checklists.
+                </p>
+                <div class="hero-cta-row">
+                    <a href="https://ai-compliance-scanner-production.up.railway.app" target="_blank"
+                        class="btn btn-scanner" id="hero-scan-cta">Scan Your Agent Free →</a>
+                    <a href="https://vera-evidence-dashboard-production.up.railway.app" target="_blank"
+                        class="btn btn-dashboard" id="hero-dashboard-cta">See Live Dashboard</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">128</span>
+                        <span class="stat-text">Days Until Enforcement</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">€35M</span>
+                        <span class="stat-text">Max Combined Penalty</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">14.4%</span>
+                        <span class="stat-text">Agents With Full Approval</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section" id="problem">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">The Problem</span>
+                <h2>Static Compliance Can't Govern Dynamic Agents</h2>
+                <p class="section-subtitle">
+                    AI agents reason at runtime, pick tools dynamically, and cross jurisdictional boundaries
+                    without human approval. Traditional compliance frameworks weren't built for this.
+                </p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <span class="problem-icon">🎯</span>
+                    <h3>The Governance Gap</h3>
+                    <p>80.9% of enterprises have AI agents in production. Only 14.4% have full security and IT approval.</p>
+                </div>
+                <div class="problem-card">
+                    <span class="problem-icon">⚖️</span>
+                    <h3>Dual Violation Risk</h3>
+                    <p>A single autonomous API call can trigger both GDPR Art. 44 and AI Act Art. 13 violations simultaneously.</p>
+                    <span class="penalty-highlight">Up to €55M</span>
+                </div>
+                <div class="problem-card">
+                    <span class="problem-icon">🔍</span>
+                    <h3>The Evidence Problem</h3>
+                    <p>Every security vendor detects threats. None of them produce the cryptographic evidence an EU auditor would accept as proof.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="tools-section" id="tools">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Live Tools</span>
+                <h2>Try It Right Now</h2>
+                <p class="section-subtitle">
+                    No signup required. No email. See where your AI agents stand in 60 seconds.
+                </p>
+            </div>
+            <div class="tool-showcase">
+                <div class="tool-card-large">
+                    <div class="tool-preview">
+                        <iframe src="https://ai-compliance-scanner-production.up.railway.app" loading="lazy"
+                            title="AI Compliance Scanner Preview"></iframe>
+                        <a href="https://ai-compliance-scanner-production.up.railway.app" target="_blank"
+                            class="tool-preview-overlay" id="scanner-preview-link">
+                            <span>Open Scanner →</span>
+                        </a>
+                    </div>
+                    <div class="tool-info">
+                        <span class="tool-tag tag-free">Free • No Signup</span>
+                        <h3>AI Agent Compliance Scanner</h3>
+                        <p>Instant EU AI Act risk assessment for your AI agents. Scores your agent across 8 compliance
+                            dimensions with specific article-level citations.</p>
+                        <ul class="tool-features">
+                            <li>EU AI Act</li>
+                            <li>GDPR</li>
+                            <li>Risk Scoring</li>
+                            <li>Article Citations</li>
+                            <li>60 Seconds</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tool-card-large">
+                    <div class="tool-preview">
+                        <iframe src="https://vera-evidence-dashboard-production.up.railway.app" loading="lazy"
+                            title="VERA Evidence Dashboard Preview"></iframe>
+                        <a href="https://vera-evidence-dashboard-production.up.railway.app" target="_blank"
+                            class="tool-preview-overlay" id="dashboard-preview-link">
+                            <span>Open Dashboard →</span>
+                        </a>
+                    </div>
+                    <div class="tool-info">
+                        <span class="tool-tag tag-live">Live Demo</span>
+                        <h3>VERA Evidence Dashboard</h3>
+                        <p>Real-time compliance evidence trail. Every agent action is classified, signed with Ed25519,
+                            and linked into a tamper-evident proof chain.</p>
+                        <ul class="tool-features">
+                            <li>MITRE ATT&CK</li>
+                            <li>PoE Chain</li>
+                            <li>CSV Export</li>
+                            <li>Real-time</li>
+                            <li>Ed25519</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works / Video Section -->
+    <section class="video-section" id="demo-video">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">How It Works</span>
+                <h2>From Threat Detection to Compliance Evidence</h2>
+                <p class="section-subtitle">
+                    An Envoy-based sidecar classifies every agent action in under 50ms.
+                    Blocked threats and allowed actions are recorded as cryptographically signed
+                    Proof of Execution records — the audit trail your regulators will ask for.
+                </p>
+            </div>
+            <div class="video-container">
+                <div class="video-placeholder">
+                    <span class="play-icon">▶</span>
+                    <p>Demo video coming soon — <a href="https://ai-compliance-scanner-production.up.railway.app"
+                            target="_blank">try the scanner live</a> in the meantime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section" id="timeline">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Regulatory Timeline</span>
+                <h2>The Clock is Ticking</h2>
+                <p class="section-subtitle">Key enforcement dates every CISO and DPO needs to know.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">February 2, 2025</span>
+                        <h4>AI Act Chapter I & II in Force</h4>
+                        <p>Prohibited AI practices (social scoring, real-time biometrics) became enforceable.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot warning"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">August 2, 2025</span>
+                        <h4>GPAI Model Obligations</h4>
+                        <p>General-Purpose AI model providers must comply with transparency requirements.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot urgent"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">August 2, 2026 — 128 days away</span>
+                        <h4>Full AI Act Enforcement</h4>
+                        <p>High-risk AI systems must demonstrate full compliance. Runtime governance,
+                            human oversight, and transparency logging become mandatory.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot warning"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">September 11, 2026</span>
+                        <h4>Cyber Resilience Act</h4>
+                        <p>Mandatory vulnerability reporting for products with digital elements.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">August 2, 2027</span>
+                        <h4>Annex III High-Risk Extensions</h4>
+                        <p>Expanded scope: AI in critical infrastructure, education, employment, and public services.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Provide -->
+    <section class="products" id="what-we-provide">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">What We Provide</span>
+                <h2>Built for CISOs, Not for Demos</h2>
+                <p class="section-subtitle">Everything runs on EU infrastructure. Zero data egress. Sovereign by design.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card service-card-enhanced">
+                    <div class="service-icon">🛡️</div>
+                    <h3 class="service-title">Runtime Agent Firewall</h3>
+                    <p class="service-description">
+                        Envoy-based sidecar that classifies every agent action across 14 threat categories in under 50ms.
+                    </p>
+                    <ul class="service-features">
+                        <li>Prompt injection detection</li>
+                        <li>Data exfiltration blocking</li>
+                        <li>Sub-50ms latency</li>
+                    </ul>
+                </div>
+                <div class="service-card service-card-enhanced">
+                    <div class="service-icon">📜</div>
+                    <h3 class="service-title">Compliance Evidence Engine</h3>
+                    <p class="service-description">
+                        Every policy decision generates a signed, tamper-evident Proof of Execution record with EU AI Act article mapping.
+                    </p>
+                    <ul class="service-features">
+                        <li>Ed25519 signed proof chain</li>
+                        <li>MITRE ATT&CK mapping</li>
+                        <li>CSV export for auditors</li>
+                    </ul>
+                </div>
+                <div class="service-card service-card-enhanced">
+                    <div class="service-icon">🏢</div>
+                    <h3 class="service-title">1-Week Pilot Program</h3>
+                    <p class="service-description">
+                        Deploy the full stack alongside your existing agents. See real compliance evidence from day one.
+                    </p>
+                    <ul class="service-features">
+                        <li>Docker or Kubernetes</li>
+                        <li>On-premise deployment</li>
+                        <li>Dedicated engineering support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact-cta">
+        <div class="container">
+            <div class="cta-card">
+                <h2>Start With a Free Scan</h2>
+                <p>
+                    See where your AI agents stand in 60 seconds. No signup, no email,
+                    no sales call. Just your compliance score.
+                </p>
+                <div class="cta-options">
+                    <a href="https://ai-compliance-scanner-production.up.railway.app" target="_blank"
+                        class="btn btn-scanner" id="cta-scan-btn">Scan Your Agent Free →</a>
+                    <a href="mailto:sales@berlinailabs.de?subject=AI%20Agent%20Compliance%20Pilot"
+                        class="btn btn-secondary" id="cta-contact-btn">Request a Pilot</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="logo.svg" alt="Berlin AI Labs" class="logo">
+                        <span class="logo-text">Berlin AI Labs</span>
+                    </div>
+                    <p class="footer-description">
+                        Runtime governance and compliance evidence for autonomous AI agents.
+                        Made in Berlin. 100% DSGVO-konform.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Free Tools</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://ai-compliance-scanner-production.up.railway.app"
+                                target="_blank">Compliance Scanner</a></li>
+                        <li><a href="https://vera-evidence-dashboard-production.up.railway.app"
+                                target="_blank">Evidence Dashboard</a></li>
+                        <li><a href="https://www.npmjs.com/package/agent-pentest" target="_blank">agent-pentest
+                                (npm)</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="vera-paper.html">VERA Protocol Paper</a></li>
+                        <li><a href="vera-demo.html">VERA Demo</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
+                        <li><a href="tel:+4917614619226">+49 176 146 19 226</a></li>
+                        <li>Berlin, Deutschland</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Berlin AI Labs. All rights reserved. | <a href="impressum.html">Impressum</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown to August 2, 2026
+        function updateCountdown() {
+            const enforcement = new Date('2026-08-02T00:00:00+02:00');
+            const now = new Date();
+            const days = Math.ceil((enforcement - now) / (1000 * 60 * 60 * 24));
+            const el = document.querySelector('.stat-number');
+            if (el && days > 0) {
+                el.textContent = days;
+            }
+        }
+        updateCountdown();
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
