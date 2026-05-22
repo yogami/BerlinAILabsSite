@@ -665,11 +665,40 @@ a:hover {
     }
 }
 
-/* Utilities for "Glow" removal in other pages */
-.product-card-glow,
-.bg-glass,
-.btn-glow,
+/* Premium Aesthetic Utilities */
+.bg-glass {
+    background: rgba(24, 25, 32, 0.4) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.btn-glow {
+    box-shadow: 0 0 15px rgba(255, 143, 94, 0.4), 0 4px 0 #bf6a45 !important;
+    transition: all 0.3s ease;
+}
+
+.btn-glow:hover {
+    box-shadow: 0 0 25px rgba(255, 143, 94, 0.6), 0 5px 0 #bf6a45 !important;
+}
+
 .btn-glass {
-    display: none !important;
-    /* Kill the neon */
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.3s ease;
+}
+
+.btn-glass:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.product-card-glow {
+    transition: all 0.4s var(--ease-smooth);
+}
+
+.product-card-glow:hover {
+    box-shadow: 0 0 30px rgba(94, 143, 255, 0.15), var(--shadow-float);
+    border-color: rgba(94, 143, 255, 0.3);
 }

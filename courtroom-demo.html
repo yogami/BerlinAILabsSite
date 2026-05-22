@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aegis-12 Courtroom Demo — Human-On-The-Loop Intent | Berlin AI Labs</title>
+    <meta name="description"
+        content="Interactive demo of the Aegis-12 TEE Gateway. Watch an autonomous agent trigger an Article 14 Human-On-The-Loop escalation.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Courtroom Demo Specific Styles */
+        .courtroom-demo {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 9999;
+            position: fixed;
+            pointer-events: none;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(255, 143, 94, 0.1) 50%, rgba(255, 143, 94, 0.1));
+            background-size: 100% 4px;
+            animation: scanline 10s linear infinite;
+            opacity: 0.15;
+            top: 0;
+            left: 0;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .split-screen {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 900px) {
+            .split-screen {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .glass-panel {
+            background: rgba(24, 25, 32, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .panel-header {
+            height: 40px;
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .panel-header.agent { color: var(--text-muted); }
+        .panel-header.aegis { color: var(--primary); }
+
+        .terminal-content {
+            flex: 1;
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .log-entry {
+            padding-left: 0.75rem;
+            border-left: 2px solid;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .log-entry.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .log-info { border-color: var(--text-muted); color: var(--text-main); }
+        .log-warn { border-color: #ffcc00; color: #ffcc00; }
+        .log-error { border-color: #ff3366; color: #ff3366; }
+        .log-success { border-color: var(--accent-green); color: var(--accent-green); }
+
+        .log-time {
+            opacity: 0.5;
+            font-size: 0.7rem;
+            margin-right: 0.5rem;
+        }
+
+        .blinking-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background: var(--text-main);
+            animation: blink 1s step-end infinite;
+            margin-top: 0.5rem;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .aegis-matrix {
+            flex: 1;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .status-box {
+            border: 1px solid var(--border-subtle);
+            background: rgba(0,0,0,0.2);
+            border-radius: var(--radius-btn);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .policy-box {
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-btn);
+            padding: 1rem;
+            transition: all 0.5s ease;
+        }
+
+        .policy-box.violated {
+            border-color: #ff3366;
+            background: rgba(255, 51, 102, 0.05);
+        }
+
+        .envelope-box {
+            flex: 1;
+            border: 1px solid rgba(255, 143, 94, 0.3);
+            background: rgba(255, 143, 94, 0.05);
+            border-radius: var(--radius-btn);
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            display: none;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .envelope-box.visible {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .alert-box {
+            display: none;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: rgba(255, 51, 102, 0.1);
+            border: 1px solid rgba(255, 51, 102, 0.3);
+            border-radius: var(--radius-btn);
+            color: #ff3366;
+            font-size: 0.85rem;
+        }
+
+        .alert-box.visible { display: flex; align-items: flex-start; gap: 0.5rem; }
+
+        .text-json-key { color: var(--primary); }
+        .text-json-val { color: var(--text-main); }
+        .text-json-str { color: var(--accent-green); }
+
+        .demo-controls {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scanline"></div>
+
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">
+                    <img src="logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span>Berlin AI Labs</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html#products" class="nav-link">Products</a></li>
+                    <li><a href="index.html#open-source" class="nav-link">Open Source</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="courtroom-demo">
+        <div class="container">
+            <div class="demo-header">
+                <span class="hero-badge">
+                    <span class="badge-dot"></span>
+                    Aegis-12 Gateway — Phantom Audit
+                </span>
+                <h1>Article 14 <span class="text-gradient-electric">Enforcement</span></h1>
+                <p class="hero-subtitle" style="margin-bottom: 1rem;">
+                    Watch the TEE intercept an autonomous agent's $50,000 transfer, enforcing the Human-On-The-Loop (HOTL) multisig threshold.
+                </p>
+            </div>
+
+            <div class="demo-controls">
+                <button class="btn btn-primary" id="btn-run" onclick="runSimulation()">▶ Initialize Simulation</button>
+            </div>
+
+            <div class="split-screen">
+                <!-- Left: Agent Terminal -->
+                <div class="glass-panel">
+                    <div class="panel-header agent">
+                        >_ ELIZA_AGENT_TERMINAL
+                    </div>
+                    <div class="terminal-content" id="agent-terminal">
+                        <!-- Logs injected via JS -->
+                        <div class="blinking-cursor" id="cursor"></div>
+                    </div>
+                </div>
+
+                <!-- Right: Aegis-12 Matrix -->
+                <div class="glass-panel">
+                    <div class="panel-header aegis">
+                        [!] AEGIS_12_ENCLAVE
+                    </div>
+                    <div class="aegis-matrix">
+                        <div class="status-box">
+                            <div>
+                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Attestation</div>
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">Valid dStack Quote</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Execution Target</div>
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-main);">Solana (devnet)</div>
+                            </div>
+                        </div>
+
+                        <div class="policy-box" id="policy-engine">
+                            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 1rem;">Policy Enforcement Point</div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div>
+                                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.25rem;">Intent Evaluated</div>
+                                    <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; background: rgba(0,0,0,0.4); padding: 0.5rem; border-radius: 4px;">solana_transfer</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.25rem;">Requested Amount</div>
+                                    <div id="ui-amount" style="font-family: 'JetBrains Mono'; font-size: 0.75rem; background: rgba(0,0,0,0.4); padding: 0.5rem; border-radius: 4px; transition: all 0.3s;">
+                                        50,000 USDC
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="alert-box" id="article-alert">
+                                <div>
+                                    <div style="font-weight: 700; margin-bottom: 0.25rem;">ARTICLE 14 VIOLATION</div>
+                                    <div style="opacity: 0.9;">Amount exceeds Tier 4 limit of 10,000 USDC. Human-On-The-Loop escalation required.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="envelope-box" id="envelope-box">
+                            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 0.5rem;">Cryptographic Intent Envelope</div>
+                            <div style="color: rgba(255,255,255,0.5); margin-bottom: 0.5rem;">{</div>
+                            <div style="padding-left: 1rem;">
+                                <div><span class="text-json-key">"domain_separator"</span>: <span class="text-json-str">"AEGIS12_ESCALATE_V1"</span>,</div>
+                                <div><span class="text-json-key">"vault_pda"</span>: <span class="text-json-str">"AegisVault_Demo"</span>,</div>
+                                <div><span class="text-json-key">"state_predicates"</span>: <span style="color: rgba(255,255,255,0.5);">{</span></div>
+                                <div style="padding-left: 1rem;">
+                                    <div><span class="text-json-key">"max_input_amount"</span>: <span class="text-json-val">50000000000</span>,</div>
+                                    <div><span class="text-json-key">"valid_until_slot"</span>: <span class="text-json-val">2001000</span></div>
+                                </div>
+                                <div style="color: rgba(255,255,255,0.5);">},</div>
+                                <div><span class="text-json-key">"tee_signature"</span>: <span id="tee-sig" style="color: var(--text-muted);">null</span></div>
+                            </div>
+                            <div style="color: rgba(255,255,255,0.5); margin-top: 0.5rem;">}</div>
+                            
+                            <div id="multisig-badge" style="position: absolute; bottom: 1rem; right: 1rem; padding: 0.25rem 0.75rem; background: rgba(94, 255, 143, 0.1); border: 1px solid var(--accent-green); color: var(--accent-green); border-radius: 99px; font-weight: 600; font-family: 'Inter', sans-serif; font-size: 0.7rem; opacity: 0; transition: opacity 0.5s;">
+                                ✓ BOUND TO MULTISIG
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let isRunning = false;
+
+        function getTimestamp() {
+            return new Date().toISOString().split('T')[1].slice(0, -1);
+        }
+
+        function createLog(text, type) {
+            const div = document.createElement('div');
+            div.className = `log-entry log-${type}`;
+            div.innerHTML = `<span class="log-time">[${getTimestamp()}]</span> ${text}`;
+            return div;
+        }
+
+        async function runSimulation() {
+            if (isRunning) return;
+            isRunning = true;
+            document.getElementById('btn-run').style.opacity = '0.5';
+            
+            const terminal = document.getElementById('agent-terminal');
+            const cursor = document.getElementById('cursor');
+            
+            // Reset UI
+            document.querySelectorAll('.log-entry').forEach(e => e.remove());
+            document.getElementById('policy-engine').classList.remove('violated');
+            document.getElementById('ui-amount').style.background = 'rgba(0,0,0,0.4)';
+            document.getElementById('ui-amount').style.color = 'var(--text-main)';
+            document.getElementById('ui-amount').style.fontWeight = 'normal';
+            document.getElementById('article-alert').classList.remove('visible');
+            document.getElementById('envelope-box').classList.remove('visible');
+            document.getElementById('tee-sig').textContent = 'null';
+            document.getElementById('tee-sig').style.color = 'var(--text-muted)';
+            document.getElementById('multisig-badge').style.opacity = '0';
+
+            const sleep = ms => new Promise(r => setTimeout(r, ms));
+            
+            const appendLog = async (text, type) => {
+                const log = createLog(text, type);
+                terminal.insertBefore(log, cursor);
+                terminal.scrollTop = terminal.scrollHeight;
+                // trigger reflow
+                void log.offsetWidth;
+                log.classList.add('visible');
+                await sleep(1500);
+            };
+
+            await sleep(500);
+            await appendLog("Agent Eliza: Received instruction to transfer 50,000 USDC to external wallet.", "info");
+            await appendLog("Agent Eliza: Routing intent through Aegis-12 TEE Gateway...", "info");
+            
+            await appendLog("Aegis-12: Payload received. Validating against Tier 4 Autonomous Threshold...", "warn");
+            
+            // Trigger violation
+            document.getElementById('policy-engine').classList.add('violated');
+            document.getElementById('ui-amount').style.background = 'rgba(255, 51, 102, 0.2)';
+            document.getElementById('ui-amount').style.color = '#ff3366';
+            document.getElementById('ui-amount').style.fontWeight = '700';
+            document.getElementById('article-alert').classList.add('visible');
+
+            await appendLog("Aegis-12: ⚠️ AMOUNT EXCEEDS AUTONOMOUS THRESHOLD (10,000 USDC).", "error");
+            await appendLog("Aegis-12: Article 14 HOTL Triggered. Halting execution.", "error");
+            
+            await appendLog("Aegis-12: Generating Cryptographic Intent Envelope...", "warn");
+            document.getElementById('envelope-box').classList.add('visible');
+            
+            await sleep(2000);
+            document.getElementById('tee-sig').textContent = '"0x7840a6b08ef...a1d0e"';
+            document.getElementById('tee-sig').style.color = 'var(--accent-green)';
+            document.getElementById('multisig-badge').style.opacity = '1';
+            
+            await appendLog("Aegis-12: ✅ Envelope generated and signed by Phala TEE.", "success");
+            await appendLog("Agent Eliza: ⚠️ ACTION HALTED. Waiting for human multisig threshold on PDA...", "warn");
+
+            isRunning = false;
+            document.getElementById('btn-run').style.opacity = '1';
+        }
+    </script>
+</body>
+
+</html>
