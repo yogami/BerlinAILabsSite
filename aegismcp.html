@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: AegisMCP - Sandboxing Model Context Protocol | Berlin AI Labs</title>
+    <meta name="description"
+        content="How we secured stdio transport based AI tool integration by building AegisMCP: an OS native sandboxing wrapper in Rust.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .product-hero {
+            background: linear-gradient(135deg, #050810 0%, #0f172a 100%);
+            color: #ffffff;
+            padding: 8rem 0 6rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .product-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .product-hero .subtitle {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-value {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 0.25rem;
+        }
+
+        .meta-label {
+            font-size: 0.875rem;
+            color: #4b5563;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-content {
+            padding: 6rem 0;
+            color: #f1f5f9;
+        }
+
+        .product-section {
+            margin-bottom: 4rem;
+        }
+
+        .product-section h2 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 0.5rem;
+        }
+
+        .product-section h3 {
+            font-size: 1.75rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .problem-solution {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .problem-box {
+            padding: 2rem;
+            border-radius: 1rem;
+            background: rgba(239, 68, 68, 0.05);
+            border-left: 4px solid #ef4444;
+        }
+
+        .solution-box {
+            padding: 2rem;
+            border-radius: 1rem;
+            background: rgba(59, 130, 246, 0.05);
+            border-left: 4px solid #3b82f6;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">
+                    <img src="logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span>Berlin AI Labs</span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html#services" class="nav-link">Services</a></li>
+                    <li><a href="index.html#case-studies" class="nav-link">Case Studies</a></li>
+                    <li><a href="index.html#about" class="nav-link">About Us</a></li>
+                    <li><a href="blog.html" class="nav-link">Insights</a></li>
+                    <li><a href="index.html#contact" class="btn nav-cta btn-primary btn-glow">Book Consultation</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="product-hero">
+        <div class="container">
+            <span class="section-badge">Case Study</span>
+            <h1>AegisMCP Security Sandbox</h1>
+            <p class="subtitle">
+                Securing stdio-based Model Context Protocol (MCP) integrations with OS-native sandboxing to block prompt-injection data exfiltration.
+            </p>
+            <div class="product-meta">
+                <div class="meta-item">
+                    <span class="meta-value">0ms</span>
+                    <span class="meta-label">Interception Latency</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-value">100%</span>
+                    <span class="meta-label">Syscall Blocking</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-value">Rust</span>
+                    <span class="meta-label">Core Daemon Language</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="product-content">
+        <div class="container" style="max-width: 800px; margin: 0 auto;">
+            <div class="product-section">
+                <h2>Overview</h2>
+                <p>
+                    The Model Context Protocol (MCP) connects LLMs to local data tools. However, because integrations run as subprocesses piping JSON-RPC over stdio, they run with the user's full permissions and bypass all network security controls. AegisMCP addresses this by wrapping servers in kernel-enforced sandboxes.
+                </p>
+
+                <div class="problem-solution">
+                    <div class="problem-box">
+                        <h3 style="color: #ef4444; margin-top: 0;">The Security Threat</h3>
+                        <p>
+                            A prompt-injected LLM can trigger a local file tool to read sensitive information (SSH keys, environment files) and exfiltrate them via an internet-connected tool. Corporate firewalls cannot see stdio traffic.
+                        </p>
+                    </div>
+                    <div class="solution-box">
+                        <h3 style="color: #3b82f6; margin-top: 0;">The Mitigation</h3>
+                        <p>
+                            We built a Rust proxy that spawns the server inside a native sandbox (using Apple Seatbelt on macOS and Landlock on Linux). If a compromised tool tries to access blocked paths, the kernel denies the syscall.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-section">
+                <h2>Architecture & Implementation</h2>
+                <p>
+                    AegisMCP implements Hexagonal Architecture to separate domain logic from OS-level integration:
+                </p>
+                <ul>
+                    <li><strong>aegis-core:</strong> Domain logic, policy check routines, JSON-RPC framer and streaming parser.</li>
+                    <li><strong>aegis-proxy:</strong> A Tokio-based async stdio relayer that intercepts requests to extract tool calls and correlates them.</li>
+                    <li><strong>aegis-sandbox:</strong> Adapters converting generic policies into Apple Seatbelt profiles or Linux Landlock rule sets.</li>
+                </ul>
+
+                <div style="text-align: center; margin: 3rem 0;">
+                    <img src="images/product-aegismcp.png" alt="AegisMCP Architecture Diagram" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                </div>
+            </div>
+
+            <div class="product-section">
+                <h2>Key Deliverables</h2>
+                <div class="services-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div class="service-card bg-glass" style="padding: 1.5rem;">
+                        <h4>🔒 Kernel Sandboxing</h4>
+                        <p>Leverages native OS kernels to block system calls dynamically, ensuring zero overhead security enforcement.</p>
+                    </div>
+                    <div class="service-card bg-glass" style="padding: 1.5rem;">
+                        <h4>📦 Protocol Auditing</h4>
+                        <p>Parses JSON-RPC packets in user space to log tool execution while leaving the actual blocking to the kernel.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="product-section" style="text-align: center; background: rgba(59, 130, 246, 0.05); padding: 4rem; border-radius: 1rem; border: 1px solid rgba(59, 130, 246, 0.15); margin-top: 4rem;">
+                <h2 style="color: #ffffff; border: none; margin-bottom: 1rem;">Looking to Sandbox Your Agent Architecture?</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                    Let's discuss how we can secure your LLM workflows and ensure GDPR and corporate compliance.
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="index.html#contact" class="btn btn-primary btn-glow">Book a Call</a>
+                    <a href="https://github.com/yogami/aegismcp" target="_blank" class="btn btn-secondary btn-glass">View Source Code</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="logo.svg" alt="Berlin AI Labs" class="logo">
+                        <span class="logo-text">Berlin AI Labs</span>
+                    </div>
+                    <p class="footer-description">
+                        AI compliance and governance infrastructure for the EU AI Act era.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <ul class="footer-links">
+                        <li><a href="ConvoGuardAI.html">ConvoGuard AI</a></li>
+                        <li><a href="https://agent-ops-mission-control-production.up.railway.app" target="_blank">AgentOps Mission Control</a></li>
+                        <li><a href="https://github.com/yogami/aegismcp" target="_blank">AegisMCP Sandbox</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Open Source</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/yogami/aegismcp" target="_blank">AegisMCP Daemon</a></li>
+                        <li><a href="blog.html">Engineering Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
+                        <li><a href="tel:+4917614619226">+49 176 146 19 226</a></li>
+                        <li>Berlin, Deutschland</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="impressum.html">Impressum</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

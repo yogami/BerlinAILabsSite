@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Securing stdio: The Hidden Security Threat in Model Context Protocol (MCP) | Berlin AI Labs</title>
+    <meta name="description"
+        content="A detailed engineering analysis of prompt injection exfiltration vectors in stdio transport based MCP tools, and how we built AegisMCP, an OS native sandboxing daemon in Rust.">
+    <meta name="author" content="Yami Gopal, Berlin AI Labs">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Securing stdio: The Hidden Security Threat in Model Context Protocol (MCP)">
+    <meta property="og:description"
+        content="Read about stdio transport security vulnerabilities in LLM integrations and how to contain them at the syscall level using Rust.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://berlinailabs.de/blog/aegismcp-security-sandbox.html">
+    <meta property="og:site_name" content="Berlin AI Labs">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Securing stdio: The Hidden Security Threat in Model Context Protocol (MCP)">
+    <meta name="twitter:description"
+        content="How we built AegisMCP in Rust to sandbox stdio based MCP servers at the syscall level.">
+
+    <link rel="canonical" href="https://berlinailabs.de/blog/aegismcp-security-sandbox.html">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-brand">
+                    <img src="../logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span>Berlin AI Labs</span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="../index.html#services" class="nav-link">Services</a></li>
+                    <li><a href="../index.html#case-studies" class="nav-link">Case Studies</a></li>
+                    <li><a href="../index.html#about" class="nav-link">About Us</a></li>
+                    <li><a href="../blog.html" class="nav-link active">Insights</a></li>
+                    <li><a href="../index.html#contact" class="btn nav-cta btn-primary btn-glow">Book Consultation</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header-section">
+        <div class="container">
+            <div class="article-meta">
+                <span class="article-category">Security & Infrastructure</span>
+                <span class="article-date">June 24, 2026</span>
+                <span class="article-read-time">6 min read</span>
+            </div>
+            <h1 class="article-title">Securing stdio: The Hidden Security Threat in Model Context Protocol (MCP)</h1>
+            <p class="article-subtitle">
+                Most MCP servers talk over standard input and output. That means firewalls and network tools see absolutely nothing. Here is how we contained it at the syscall level using Rust.
+            </p>
+            <div class="article-author">
+                <img src="../profile-image.jpg" alt="Yami Gopal" class="author-image" style="width: 48px; height: 48px; border-radius: 50%;">
+                <div class="author-info">
+                    <span class="author-name">Yami Gopal</span>
+                    <span class="author-title">Lead Architect, Berlin AI Labs</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Content -->
+    <article class="article-content-section">
+        <div class="container">
+            <div class="article-body">
+                <p>
+                    Anthropic's Model Context Protocol (MCP) has quickly become the standard for connecting LLMs to local files, tools, and APIs. It is a fantastic protocol, but it has a major architectural blind spot that most developers are ignoring.
+                </p>
+
+                <h2>The stdio Transport Vulnerability</h2>
+                <p>
+                    Most desktop MCP integrations (like Cursor or Claude Desktop) communicate with server backends via standard input and output (stdio) transport. The host client launches the MCP server as a local subprocess and pipes JSON-RPC messages back and forth.
+                </p>
+                <p>
+                    This is convenient, but it bypasses the network stack. Your traditional network gateways, corporate firewalls, and API firewalls see absolutely zero of this traffic. 
+                </p>
+                <p>
+                    If an AI agent gets hit with a prompt injection attack, the attacker can trick a filesystem MCP server into reading sensitive local files like <code>~/.ssh/id_rsa</code> or <code>.env</code> configurations. Since the subprocess inherits your user account privileges, the operating system allows it. The exfiltration happens silently.
+                </p>
+
+                <div style="text-align: center; margin: 3rem 0;">
+                    <img src="../images/product-aegismcp.png" alt="AegisMCP Architecture Diagram" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">How AegisMCP wraps the server process and contains resource access at the kernel layer.</p>
+                </div>
+
+                <h2>Introducing AegisMCP</h2>
+                <p>
+                    To secure local tool execution, we built and open sourced <strong>AegisMCP</strong>: a lightweight, OS native sandboxing proxy written in Rust.
+                </p>
+                <p>
+                    Instead of spawning your MCP server directly, you wrap it with AegisMCP. It dynamically configures strict, process level restrictions using the host operating system's native security frameworks:
+                </p>
+                <ul>
+                    <li><strong>Apple Seatbelt</strong> (via sandbox-exec) on macOS to enforce filesystem and outbound network jailing.</li>
+                    <li><strong>Landlock LSM</strong> on Linux to restrict filesystem paths at the directory tree level.</li>
+                </ul>
+
+                <h2>Syscall Level Blocking</h2>
+                <p>
+                    AegisMCP parses incoming and outgoing JSON-RPC streams in user space for audit logging. However, the actual security enforcement happens at the OS kernel level. 
+                </p>
+                <p>
+                    If a prompt injected agent attempts to read an unauthorized directory, the kernel intercepts the system call and returns an instant <code>EPERM</code> (Operation not permitted) error. The MCP server process physically cannot access the files or transmit them over the network.
+                </p>
+
+                <h2>Get AegisMCP</h2>
+                <p>
+                    We have open sourced the codebase and written a comprehensive end to end verification test proving the mitigation.
+                </p>
+
+                <ul style="color: var(--text-muted); margin: 1rem 0 1.5rem 1.5rem; line-height: 2;">
+                    <li>📦 <a href="https://github.com/yogami/aegismcp" target="_blank" class="inline-link">GitHub Repository</a> — Inspect the code and try the demo</li>
+                    <li>📄 <a href="https://github.com/yogami/aegismcp#readme" class="inline-link">Getting Started Guide</a> — Wrap your own Cursor/Claude local tools today</li>
+                </ul>
+
+                <div class="article-footer">
+                    <div class="author-bio">
+                        <div class="author-bio-content">
+                            <h3>About the Author</h3>
+                            <p>
+                                <strong>Yami Gopal</strong> is the founder of Berlin AI Labs. We build highly reliable, compliant, and secure custom AI Agents and conversational software for enterprises.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- CTA -->
+    <section class="article-cta">
+        <div class="container">
+            <h2>Secure Your AI Fleet</h2>
+            <p>Ensure your custom agentic pipelines run in secure, sandboxed execution environments.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="../index.html#contact" class="btn btn-primary btn-glow">Hire Us to Secure Your AI</a>
+                <a href="https://github.com/yogami/aegismcp" class="btn btn-secondary btn-glass">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../logo.svg" alt="Berlin AI Labs" class="logo">
+                        <span class="logo-text">Berlin AI Labs</span>
+                    </div>
+                    <p class="footer-description">
+                        AI compliance and governance infrastructure for the EU AI Act era.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <ul class="footer-links">
+                        <li><a href="../ConvoGuardAI.html">ConvoGuard AI</a></li>
+                        <li><a href="https://agent-ops-mission-control-production.up.railway.app" target="_blank">AgentOps Mission Control</a></li>
+                        <li><a href="https://github.com/yogami/aegismcp" target="_blank">AegisMCP Sandbox</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Open Source</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/yogami/aegismcp" target="_blank">AegisMCP Daemon</a></li>
+                        <li><a href="../blog.html">Engineering Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
+                        <li><a href="tel:+4917614619226">+49 176 146 19 226</a></li>
+                        <li>Berlin, Deutschland</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="../impressum.html">Impressum</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
