@@ -1,0 +1,14 @@
+{
+  "name": "berlinailabswebsite",
+  "version": "1.0.0",
+  "description": "Berlin AI Labs Website & Enterprise AI Infrastructure",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "pg": "^8.11.3"
+  },
+  "author": "Yami Gopal",
+  "license": "MIT"
+}
