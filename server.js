@@ -10,19 +10,13 @@ const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || 'gopal.yami@gmail.com';
 const CALENDLY_URL = process.env.CALENDLY_URL || 'https://calendly.com/berlin-ai-labs/30min';
 const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
 const DATABASE_URL = process.env.DATABASE_URL || '';
+const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY || '1x000000000000000000000000000000AA';
 
 // Single-use ephemeral booking token store
 const ephemeralBookingTokens = new Map();
 
-// Rate limiting store for IP addresses (Max 3 form submissions per 10 minutes)
+// Rate limiting store for IP addresses (Max 5 form submissions per 10 minutes)
 const triageRateLimits = new Map();
-
-// Known disposable / spam email domain blacklist
-const DISPOSABLE_EMAIL_DOMAINS = new Set([
-  'tempmail.com', 'mailinator.com', 'guerrillamail.com', '10minutemail.com',
-  'trashmail.com', 'dispostable.com', 'yopmail.com', 'getnada.com', 'sharklasers.com',
-  'throwawaymail.com', 'maildrop.cc', 'tempmailo.com', 'temp-mail.org', 'crazymailing.com'
-]);
 
 // Initialize PostgreSQL Pool if DATABASE_URL exists
 let dbPool = null;
@@ -99,6 +93,47 @@ function lookupB2BCompany(ip) {
     }).on('error', () => {
       resolve({ company: 'Unknown', city: 'Unknown', country: 'Unknown', org: 'Unknown' });
     });
+  });
+}
+
+// Cloudflare Turnstile Token Verification
+function verifyTurnstileToken(token, clientIp) {
+  return new Promise((resolve) => {
+    if (!TURNSTILE_SECRET_KEY) return resolve(true);
+    if (!token) return resolve(false);
+
+    const postData = new URLSearchParams({
+      secret: TURNSTILE_SECRET_KEY,
+      response: token,
+      remoteip: clientIp
+    }).toString();
+
+    const req = https.request('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(postData)
+      }
+    }, (res) => {
+      let body = '';
+      res.on('data', chunk => body += chunk);
+      res.on('end', () => {
+        try {
+          const data = JSON.parse(body);
+          resolve(data.success === true);
+        } catch (e) {
+          resolve(false);
+        }
+      });
+    });
+
+    req.on('error', (err) => {
+      console.error('[TURNSTILE ERROR]:', err);
+      resolve(false);
+    });
+
+    req.write(postData);
+    req.end();
   });
 }
 
@@ -192,9 +227,9 @@ const server = http.createServer((req, res) => {
     }
   }
 
-  // Handle Form Triage Submission (POST /api/triage) with 4-Layer Anti-Spam Shield
+  // Handle Form Triage Submission (POST /api/triage) with Cloudflare Turnstile Verification
   if (pathname === '/api/triage' && req.method === 'POST') {
-    // Layer 1: Strict Rate Limiting per IP (Max 3 submissions per 10 minutes)
+    // Rate Limiting per IP
     const now = Date.now();
     const limitInfo = triageRateLimits.get(ip) || { count: 0, resetTime: now + 10 * 60 * 1000 };
     if (now > limitInfo.resetTime) {
@@ -204,8 +239,8 @@ const server = http.createServer((req, res) => {
     limitInfo.count += 1;
     triageRateLimits.set(ip, limitInfo);
 
-    if (limitInfo.count > 3) {
-      console.log(`[SPAM SHIELD - Berlin AI] Rate limit exceeded for IP ${ip}`);
+    if (limitInfo.count > 5) {
+      console.log(`[RATE LIMIT BLOCKED - Berlin AI] Too many requests from IP ${ip}`);
       res.writeHead(429, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ success: false, error: 'Too many requests. Please wait a few minutes.' }));
       return;
@@ -219,68 +254,26 @@ const server = http.createServer((req, res) => {
         lead.timestamp = new Date().toISOString();
         lead.ip = ip;
 
-        // Layer 2: Honeypot Trap Detection (Hidden field filled out by bots)
-        if (lead.website_url || lead.b_field || lead.phone_number_hp) {
-          console.log(`[SPAM SHIELD BLOCKED - Berlin AI] Honeypot field filled by bot from IP ${ip}`);
+        // Cloudflare Turnstile Verification
+        const turnstileToken = lead['cf-turnstile-response'] || lead.turnstileToken;
+        const isHuman = await verifyTurnstileToken(turnstileToken, ip);
+
+        if (!isHuman) {
+          console.log(`[TURNSTILE BLOCKED - Berlin AI] Bot submission failed Cloudflare Turnstile check from IP ${ip}`);
           const fakeToken = crypto.randomBytes(16).toString('hex');
           res.writeHead(200, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify({ success: true, message: 'Triage request received.', redirectUrl: `/book-session?t=${fakeToken}` }));
           return;
         }
 
-        // Layer 3: Time-Based Submission Check (Submissions faster than 2.5s are automated bots)
-        if (lead.load_time && (now - Number(lead.load_time) < 2500)) {
-          console.log(`[SPAM SHIELD BLOCKED - Berlin AI] Bot submission too fast (${now - Number(lead.load_time)}ms) from IP ${ip}`);
-          const fakeToken = crypto.randomBytes(16).toString('hex');
-          res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: true, message: 'Triage request received.', redirectUrl: `/book-session?t=${fakeToken}` }));
-          return;
-        }
-
-        // Layer 4: Email & Input Validation
-        if (!lead.email || !lead.email.includes('@')) {
+        // Basic Input Validation
+        if (!lead.name || lead.name.trim().length < 2 || !lead.email || !lead.email.includes('@') || !lead.challenge || lead.challenge.trim().length < 5) {
           res.writeHead(400, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: false, error: 'Invalid email address.' }));
+          res.end(JSON.stringify({ success: false, error: 'Please fill out all required fields.' }));
           return;
         }
 
-        const emailParts = lead.email.trim().toLowerCase().split('@');
-        const emailUser = emailParts[0];
-        const emailDomain = emailParts[1];
-
-        // Block Disposable Domains
-        if (DISPOSABLE_EMAIL_DOMAINS.has(emailDomain)) {
-          console.log(`[SPAM SHIELD BLOCKED - Berlin AI] Disposable email domain ${emailDomain} from IP ${ip}`);
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: false, error: 'Please use a valid personal or corporate email address.' }));
-          return;
-        }
-
-        // Block Dot-Stuffed Gmail Spam Aliases (e.g. pr.an.a.bh.ue.code1@gmail.com has 5 dots)
-        const dotCount = (emailUser.match(/\./g) || []).length;
-        if (emailDomain.includes('gmail') && dotCount >= 3) {
-          console.log(`[SPAM SHIELD BLOCKED - Berlin AI] Dot-stuffed Gmail alias ${lead.email} from IP ${ip}`);
-          const fakeToken = crypto.randomBytes(16).toString('hex');
-          res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: true, message: 'Triage request received.', redirectUrl: `/book-session?t=${fakeToken}` }));
-          return;
-        }
-
-        // Enforce Strict Minimum Text Length (Blank / 0-char challenge fields rejected)
-        if (!lead.name || lead.name.trim().length < 2) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: false, error: 'Please enter a valid name.' }));
-          return;
-        }
-
-        if (!lead.challenge || lead.challenge.trim().length < 8) {
-          console.log(`[SPAM SHIELD BLOCKED - Berlin AI] Empty or insufficient challenge text from ${lead.email}`);
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: false, error: 'Please describe your inquiry in at least 8 characters.' }));
-          return;
-        }
-
-        console.log('🚨 VERIFIED LEGITIMATE BERLIN AI LABS LEAD CAPTURED:', lead);
+        console.log('🚨 VERIFIED LEGITIMATE HUMAN BERLIN AI LABS LEAD CAPTURED:', lead);
 
         // Store Lead into PostgreSQL
         if (dbPool) {
