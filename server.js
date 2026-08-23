@@ -244,7 +244,11 @@ const server = http.createServer((req, res) => {
           return;
         }
 
-        const emailDomain = lead.email.split('@')[1]?.toLowerCase();
+        const emailParts = lead.email.trim().toLowerCase().split('@');
+        const emailUser = emailParts[0];
+        const emailDomain = emailParts[1];
+
+        // Block Disposable Domains
         if (DISPOSABLE_EMAIL_DOMAINS.has(emailDomain)) {
           console.log(`[SPAM SHIELD BLOCKED - Berlin AI] Disposable email domain ${emailDomain} from IP ${ip}`);
           res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -252,9 +256,27 @@ const server = http.createServer((req, res) => {
           return;
         }
 
-        if (!lead.name || lead.name.trim().length < 2 || !lead.challenge || lead.challenge.trim().length < 5) {
+        // Block Dot-Stuffed Gmail Spam Aliases (e.g. pr.an.a.bh.ue.code1@gmail.com has 5 dots)
+        const dotCount = (emailUser.match(/\./g) || []).length;
+        if (emailDomain.includes('gmail') && dotCount >= 3) {
+          console.log(`[SPAM SHIELD BLOCKED - Berlin AI] Dot-stuffed Gmail alias ${lead.email} from IP ${ip}`);
+          const fakeToken = crypto.randomBytes(16).toString('hex');
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: true, message: 'Triage request received.', redirectUrl: `/book-session?t=${fakeToken}` }));
+          return;
+        }
+
+        // Enforce Strict Minimum Text Length (Blank / 0-char challenge fields rejected)
+        if (!lead.name || lead.name.trim().length < 2) {
           res.writeHead(400, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: false, error: 'Please fill out all required fields.' }));
+          res.end(JSON.stringify({ success: false, error: 'Please enter a valid name.' }));
+          return;
+        }
+
+        if (!lead.challenge || lead.challenge.trim().length < 8) {
+          console.log(`[SPAM SHIELD BLOCKED - Berlin AI] Empty or insufficient challenge text from ${lead.email}`);
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: false, error: 'Please describe your inquiry in at least 8 characters.' }));
           return;
         }
 
