@@ -14,6 +14,16 @@ const DATABASE_URL = process.env.DATABASE_URL || '';
 // Single-use ephemeral booking token store
 const ephemeralBookingTokens = new Map();
 
+// Rate limiting store for IP addresses (Max 3 form submissions per 10 minutes)
+const triageRateLimits = new Map();
+
+// Known disposable / spam email domain blacklist
+const DISPOSABLE_EMAIL_DOMAINS = new Set([
+  'tempmail.com', 'mailinator.com', 'guerrillamail.com', '10minutemail.com',
+  'trashmail.com', 'dispostable.com', 'yopmail.com', 'getnada.com', 'sharklasers.com',
+  'throwawaymail.com', 'maildrop.cc', 'tempmailo.com', 'temp-mail.org', 'crazymailing.com'
+]);
+
 // Initialize PostgreSQL Pool if DATABASE_URL exists
 let dbPool = null;
 if (DATABASE_URL) {
@@ -182,8 +192,25 @@ const server = http.createServer((req, res) => {
     }
   }
 
-  // Handle Form Triage Submission (POST /api/triage)
+  // Handle Form Triage Submission (POST /api/triage) with 4-Layer Anti-Spam Shield
   if (pathname === '/api/triage' && req.method === 'POST') {
+    // Layer 1: Strict Rate Limiting per IP (Max 3 submissions per 10 minutes)
+    const now = Date.now();
+    const limitInfo = triageRateLimits.get(ip) || { count: 0, resetTime: now + 10 * 60 * 1000 };
+    if (now > limitInfo.resetTime) {
+      limitInfo.count = 0;
+      limitInfo.resetTime = now + 10 * 60 * 1000;
+    }
+    limitInfo.count += 1;
+    triageRateLimits.set(ip, limitInfo);
+
+    if (limitInfo.count > 3) {
+      console.log(`[SPAM SHIELD - Berlin AI] Rate limit exceeded for IP ${ip}`);
+      res.writeHead(429, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, error: 'Too many requests. Please wait a few minutes.' }));
+      return;
+    }
+
     let body = '';
     req.on('data', chunk => { body += chunk.toString(); });
     req.on('end', async () => {
@@ -191,8 +218,47 @@ const server = http.createServer((req, res) => {
         const lead = JSON.parse(body);
         lead.timestamp = new Date().toISOString();
         lead.ip = ip;
-        
-        console.log('🚨 NEW BERLIN AI LABS LEAD CAPTURED:', lead);
+
+        // Layer 2: Honeypot Trap Detection (Hidden field filled out by bots)
+        if (lead.website_url || lead.b_field || lead.phone_number_hp) {
+          console.log(`[SPAM SHIELD BLOCKED - Berlin AI] Honeypot field filled by bot from IP ${ip}`);
+          const fakeToken = crypto.randomBytes(16).toString('hex');
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: true, message: 'Triage request received.', redirectUrl: `/book-session?t=${fakeToken}` }));
+          return;
+        }
+
+        // Layer 3: Time-Based Submission Check (Submissions faster than 2.5s are automated bots)
+        if (lead.load_time && (now - Number(lead.load_time) < 2500)) {
+          console.log(`[SPAM SHIELD BLOCKED - Berlin AI] Bot submission too fast (${now - Number(lead.load_time)}ms) from IP ${ip}`);
+          const fakeToken = crypto.randomBytes(16).toString('hex');
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: true, message: 'Triage request received.', redirectUrl: `/book-session?t=${fakeToken}` }));
+          return;
+        }
+
+        // Layer 4: Email & Input Validation
+        if (!lead.email || !lead.email.includes('@')) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: false, error: 'Invalid email address.' }));
+          return;
+        }
+
+        const emailDomain = lead.email.split('@')[1]?.toLowerCase();
+        if (DISPOSABLE_EMAIL_DOMAINS.has(emailDomain)) {
+          console.log(`[SPAM SHIELD BLOCKED - Berlin AI] Disposable email domain ${emailDomain} from IP ${ip}`);
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: false, error: 'Please use a valid personal or corporate email address.' }));
+          return;
+        }
+
+        if (!lead.name || lead.name.trim().length < 2 || !lead.challenge || lead.challenge.trim().length < 5) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: false, error: 'Please fill out all required fields.' }));
+          return;
+        }
+
+        console.log('🚨 VERIFIED LEGITIMATE BERLIN AI LABS LEAD CAPTURED:', lead);
 
         // Store Lead into PostgreSQL
         if (dbPool) {
