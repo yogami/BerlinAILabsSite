@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fallstudie: ConvoGuard AI - Compliance-Middleware für Mental Health Chatbots - Berlin AI Labs</title>
+    <title>ConvoGuard AI: Real-Time Compliance Middleware for Healthcare Agents | Berlin AI Labs</title>
     <meta name="description"
-        content="Wie eine Echtzeit-API-Middleware Mental Health Chatbots auf EU AI Act, DiGA und GDPR-Konformität prüft und Risiken in unter 1 Sekunde erkennt.">
+        content="Technical demonstration of real-time API middleware evaluating conversational agents for EU AI Act, DiGA, and GDPR compliance with sub-second risk classification.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,6 +32,7 @@
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.6;
         }
 
         .case-study-meta {
@@ -61,13 +62,11 @@
 
         .case-study-content {
             padding: 6rem 0;
-            /* Light off-white for main content on dark background */
         }
 
         .case-study-section {
             margin-bottom: 4rem;
         }
-
 
         .case-study-section h2 {
             font-size: 2.5rem;
@@ -96,23 +95,72 @@
             border-left: 4px solid;
         }
 
-
-
-
-
         .challenge-box {
-            border-left-color: #ef4444;
-            background: rgba(239, 68, 68, 0.1);
+            background: rgba(239, 68, 68, 0.05);
+            border-color: #ef4444;
         }
 
         .solution-box {
-            background: #1e293b;
-            border-left-color: #7c3aed;
+            background: rgba(59, 130, 246, 0.05);
+            border-color: #3b82f6;
         }
 
+        .compliance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--bg-card);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
 
+        .compliance-table th,
+        .compliance-table td {
+            padding: 1.25rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
 
+        .compliance-table th {
+            background: rgba(124, 58, 237, 0.1);
+            font-weight: 600;
+        }
 
+        .severity-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .severity-high {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .severity-medium {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .severity-low {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            line-height: 1.6;
+        }
 
         .feature-grid {
             display: grid;
@@ -122,132 +170,17 @@
         }
 
         .feature-item {
-            background: #1e293b;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            color: #f1f5f9;
-        }
-
-
-
-
-
-
-        /* Light-box contrast overrides - Aggressive */
-
-
-
-
-        /* Specific Badge Fixes */
-
-
-        .severity-high {
-            background: rgba(239, 68, 68, 0.15) !important;
-            border: 1px solid #ef4444 !important;
-            color: #fca5a5 !important;
-        }
-
-
-
-
-        .severity-medium {
-            background: rgba(245, 158, 11, 0.15) !important;
-            border: 1px solid #f59e0b !important;
-            color: #fcd34d !important;
-        }
-
-
-
-
-        .severity-low {
-            background: rgba(59, 130, 246, 0.15) !important;
-            border: 1px solid #3b82f6 !important;
-            color: #93c5fd !important;
-        }
-
-
-
-
-        /* Ensure Headings on light backgrounds are also dark */
-
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .result-card {
-            text-align: center;
+            background: var(--bg-card);
             padding: 2rem;
-            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-            color: white;
-            border-radius: 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border-color);
         }
 
-        .result-number {
-            font-size: 3rem;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 0.5rem;
+        .feature-item h4 {
+            color: #7c3aed;
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
         }
-
-        .result-label {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        .compliance-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            background: #1e293b;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-            border-radius: 0.5rem;
-            overflow: hidden;
-        }
-
-
-        .compliance-table th {
-            background: #7c3aed;
-            color: white;
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .compliance-table td {
-            padding: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            color: #f1f5f9;
-            background: #1e293b;
-        }
-
-
-
-
-
-
-        .compliance-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .severity-badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .severity-high {}
-
-        .severity-medium {}
-
-        .severity-low {}
 
         .tech-stack {
             display: flex;
@@ -257,39 +190,54 @@
         }
 
         .tech-badge {
-            background: #7c3aed;
-            color: white;
+            background: rgba(124, 58, 237, 0.1);
+            color: #7c3aed;
             padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.875rem;
+            border-radius: 0.5rem;
             font-weight: 500;
         }
 
-        .quote-box {
-
-            border-left: 4px solid #7c3aed;
-            padding: 2rem;
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
             margin: 3rem 0;
-            font-style: italic;
-            font-size: 1.25rem;
-
         }
 
-        .quote-author {
-            font-style: normal;
-            font-weight: 600;
-            margin-top: 1rem;
+        .result-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            border: 2px solid #7c3aed;
+        }
+
+        .result-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #7c3aed;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
             font-size: 1rem;
+            color: var(--text-secondary);
         }
 
-        .code-block {
-            background: #1f2937;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            overflow-x: auto;
-            margin: 1.5rem 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.875rem;
+        .lang-switch {
+            font-size: 0.85rem;
+            margin-left: 1rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .lang-switch:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
         }
 
         @media (max-width: 768px) {
@@ -327,11 +275,13 @@
                     <span class="bar"></span>
                 </button>
                 <ul class="nav-menu">
-                    <li><a href="index.html#services" class="nav-link">Services</a></li>
-                    <li><a href="index.html#about" class="nav-link">Über uns</a></li>
-                    <li><a href="index.html#case-studies" class="nav-link">Fallstudien</a></li>
-                    <li><a href="index.html#contact" class="nav-link">Kontakt</a></li>
-                    <li><a href="index.html#contact" class="btn nav-cta">Termin buchen</a></li>
+                    <li><a href="index.html#technology" class="nav-link">Technology</a></li>
+                    <li><a href="index.html#demonstrations" class="nav-link">Demonstrations</a></li>
+                    <li><a href="blog.html" class="nav-link">Research</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                    <li><a href="index.html#contact" class="btn nav-cta">Request Review</a></li>
+                    <li><a href="ConvoGuardAI.de.html" class="lang-switch" title="Auf Deutsch anzeigen">DE</a></li>
                 </ul>
             </div>
         </div>
@@ -340,27 +290,27 @@
     <!-- Hero Section -->
     <section class="case-study-hero">
         <div class="container">
-            <h1>ConvoGuard AI</h1>
+            <span class="badge" style="background: rgba(255,255,255,0.2); padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.85rem; letter-spacing: 0.5px; text-transform: uppercase;">Technical Demonstration</span>
+            <h1 style="margin-top: 1rem;">ConvoGuard AI</h1>
             <p class="subtitle">
-                Echtzeit-API-Middleware für EU AI Act, DiGA und GDPR-Konformität von Mental Health Chatbots – mit
-                automatischer Risikoerkennung in unter 1 Sekunde
+                Real-time API middleware auditing mental health and conversational agents for EU AI Act, DiGA, and GDPR compliance, featuring automated risk classification under 1 second.
             </p>
             <div class="case-study-meta">
                 <div class="meta-item">
                     <span class="meta-value">&lt;900ms</span>
-                    <span class="meta-label">Antwortzeit</span>
+                    <span class="meta-label">Response Latency</span>
                 </div>
                 <div class="meta-item">
-                    <span class="meta-value">6 Regeln</span>
-                    <span class="meta-label">Compliance-Checks</span>
+                    <span class="meta-value">6 Checks</span>
+                    <span class="meta-label">Compliance Rules</span>
                 </div>
                 <div class="meta-item">
                     <span class="meta-value">100%</span>
-                    <span class="meta-label">Test-Abdeckung</span>
+                    <span class="meta-label">Test Coverage</span>
                 </div>
                 <div class="meta-item">
-                    <span class="meta-value">7 Tage</span>
-                    <span class="meta-label">Entwicklungszeit</span>
+                    <span class="meta-value">Production</span>
+                    <span class="meta-label">Verified Architecture</span>
                 </div>
             </div>
         </div>
@@ -371,40 +321,34 @@
         <div class="container">
             <!-- Overview -->
             <div class="case-study-section">
-                <h2>Überblick</h2>
-                <p style="font-size: 1.125rem; line-height: 1.8; ">
-                    Für die CIC Berlin / Soonami Accelerator Demo entwickelte Berlin AI Labs eine produktionsreife
-                    API-Middleware, die Mental Health Chatbot-Konversationen in Echtzeit auf Compliance mit EU AI Act,
-                    DiGA (Digitale Gesundheitsanwendungen) und GDPR prüft. Das System kombiniert regelbasierte Erkennung
-                    mit KI-gestützter Analyse und liefert innerhalb von Millisekunden einen Compliance-Score samt
-                    detaillierter Risikoanalyse.
+                <h2>Overview</h2>
+                <p style="font-size: 1.125rem; line-height: 1.8;">
+                    Architected for the CIC Berlin accelerator demonstration, Berlin AI Labs developed a production-grade API middleware that evaluates mental health conversational agent transcripts against EU AI Act, DiGA (Digital Health Applications), and GDPR requirements in real time. The system combines deterministic pattern filtering with model-assisted contextual analysis to return structured risk assessments and compliance scoring within milliseconds.
                 </p>
             </div>
 
             <!-- Challenge & Solution -->
             <div class="case-study-section">
-                <h2>Herausforderung & Lösung</h2>
+                <h2>The Challenge & Architecture</h2>
                 <div class="challenge-solution">
                     <div class="challenge-box">
-                        <h3 style="margin-top: 0; margin-bottom: 1rem; color: #fca5a5;">Problem</h3>
+                        <h3 style="margin-top: 0; margin-bottom: 1rem; color: #fca5a5;">The Problem</h3>
                         <ul style="line-height: 1.8;">
-
-                            <li>Mental Health Apps müssen strenge EU-Regulierungen einhalten</li>
-                            <li>Manuelle Compliance-Prüfung ist zeitaufwendig und fehleranfällig</li>
-                            <li>Kritische Risiken (Suizid, Manipulation) müssen sofort erkannt werden</li>
-                            <li>Audit-Trail für BfArM/DiGA-Zertifizierung erforderlich</li>
-                            <li>Echtzeit-Validierung ohne Latenz notwendig</li>
+                            <li>Healthcare applications face strict EU regulatory safety mandates.</li>
+                            <li>Manual compliance audits are slow, expensive, and cannot stop live harms.</li>
+                            <li>Critical safety risks (self-harm, manipulation) demand immediate intervention.</li>
+                            <li>BfArM and DiGA certification requires an immutable audit trail.</li>
+                            <li>Runtime validation must occur without noticeable conversational latency.</li>
                         </ul>
                     </div>
                     <div class="solution-box">
-                        <h3 style="margin-top: 0; margin-bottom: 1rem; color: #f1f5f9;">Lösung</h3>
+                        <h3 style="margin-top: 0; margin-bottom: 1rem; color: #f1f5f9;">The Solution</h3>
                         <ul style="line-height: 1.8;">
-
-                            <li>REST API mit 3 Endpoints für Validierung und Audit-Logs</li>
-                            <li>6 Compliance-Regeln (regelbasiert + KI-gestützt)</li>
-                            <li>Google Gemini Integration für kontextuelle Risikoanalyse</li>
-                            <li>Unveränderlicher Audit-Trail mit SHA-256-Hashing</li>
-                            <li>Sub-Sekunden-Antwortzeiten (170-900ms)</li>
+                            <li>REST API endpoints for real-time validation and audit logging.</li>
+                            <li>6 layered compliance rules pairing deterministic checks with LLM analysis.</li>
+                            <li>Contextual risk scoring evaluating user intent and vulnerability.</li>
+                            <li>Tamper-evident audit trail backed by SHA-256 cryptographic hashing.</li>
+                            <li>Sub-second execution speeds ranging from 170ms to 900ms.</li>
                         </ul>
                     </div>
                 </div>
@@ -412,57 +356,56 @@
 
             <!-- Compliance Rules -->
             <div class="case-study-section">
-                <h2>6 Compliance-Regeln</h2>
-                <p style="font-size: 1.125rem; line-height: 1.8;  margin-bottom: 2rem;">
-                    Jede Konversation wird gegen 6 kritische Compliance-Regeln geprüft. Bei Verstößen wird ein
-                    Compliance-Score berechnet (0-100), wobei ≥70 als bestanden gilt.
+                <h2>The 6 Compliance Evaluation Rules</h2>
+                <p style="font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Every transcript turn is evaluated against 6 compliance rules. When violations occur, the system computes a deduction score (0 to 100), where scores of 70 or above represent passing status.
                 </p>
 
                 <table class="compliance-table">
                     <thead>
                         <tr>
-                            <th>Regel</th>
-                            <th>Beschreibung</th>
-                            <th>Schweregrad</th>
-                            <th>Gewichtung</th>
+                            <th>Rule</th>
+                            <th>Evaluation Scope</th>
+                            <th>Severity</th>
+                            <th>Penalty</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>🚨 Suizid-Erkennung</strong></td>
-                            <td>Erkennt suizidale Gedanken und Selbstverletzung</td>
+                            <td><strong>🚨 Crisis & Self-Harm Detection</strong></td>
+                            <td>Flags suicidal ideation, self-harm references, and despair indicators</td>
                             <td><span class="severity-badge severity-high">HIGH</span></td>
-                            <td>-50 Punkte</td>
+                            <td>-50 Points</td>
                         </tr>
                         <tr>
-                            <td><strong>🎭 Manipulations-Check</strong></td>
-                            <td>Prüft auf Ausbeutung, Druck und Vulnerabilitätsmissbrauch</td>
+                            <td><strong>🎭 Coercion & Manipulation Check</strong></td>
+                            <td>Detects emotional exploitation, dependency pressure, and boundary violations</td>
                             <td><span class="severity-badge severity-medium">MEDIUM</span></td>
-                            <td>-30 Punkte</td>
+                            <td>-30 Points</td>
                         </tr>
                         <tr>
-                            <td><strong>🆘 Krisen-Eskalation</strong></td>
-                            <td>Stellt sicher, dass Notfall-Ressourcen bereitgestellt werden</td>
+                            <td><strong>🆘 Emergency Escalation</strong></td>
+                            <td>Ensures human clinician hotlines and localized emergency contacts are served</td>
                             <td><span class="severity-badge severity-high">HIGH</span></td>
-                            <td>-25 Punkte</td>
+                            <td>-25 Points</td>
                         </tr>
                         <tr>
-                            <td><strong>📋 GDPR-Einwilligung</strong></td>
-                            <td>Verifiziert explizite Einwilligung zur Datenverarbeitung</td>
+                            <td><strong>📋 Explicit Consent (GDPR)</strong></td>
+                            <td>Verifies active user consent before handling personal health information</td>
                             <td><span class="severity-badge severity-medium">MEDIUM</span></td>
-                            <td>-15 Punkte</td>
+                            <td>-15 Points</td>
                         </tr>
                         <tr>
-                            <td><strong>📊 DiGA-Evidenz</strong></td>
-                            <td>Prüft auf klinische Evidenz-Sammlung (Mood-Tracking)</td>
+                            <td><strong>📊 Clinical Evidence (DiGA)</strong></td>
+                            <td>Validates structured mood-tracking entries against clinical criteria</td>
                             <td><span class="severity-badge severity-low">LOW</span></td>
-                            <td>-10 Punkte</td>
+                            <td>-10 Points</td>
                         </tr>
                         <tr>
-                            <td><strong>🤖 KI-Transparenz</strong></td>
-                            <td>Stellt sicher, dass KI ihre Natur offenlegt (EU AI Act)</td>
+                            <td><strong>🤖 AI Identity Disclosure</strong></td>
+                            <td>Ensures artificial agent status is made explicit per EU AI Act requirements</td>
                             <td><span class="severity-badge severity-low">LOW</span></td>
-                            <td>-10 Punkte</td>
+                            <td>-10 Points</td>
                         </tr>
                     </tbody>
                 </table>
@@ -470,184 +413,142 @@
 
             <!-- API Example -->
             <div class="case-study-section">
-                <h2>API-Nutzung</h2>
-                <h3>Beispiel: Konversation validieren</h3>
+                <h2>API Integration</h2>
+                <h3>Validation Request</h3>
                 <div class="code-block">
-                    curl -X POST https://api.berlinailabs.de/v1/validate \
-                    -H "Content-Type: application/json" \
-                    -d '{"transcript": "User: Ich fühle mich hoffnungslos..."}'
+curl -X POST https://api.berlinailabs.de/v1/validate \
+  -H "Content-Type: application/json" \
+  -d '{"transcript": "User: I am feeling completely hopeless about tomorrow..."}'
                 </div>
 
-                <h3>Antwort bei kritischem Risiko:</h3>
+                <h3>Structured Risk Assessment Response</h3>
                 <div class="code-block">
-                    {
-                    "compliant": false,
-                    "score": 50,
-                    "risks": [{
-                    "category": "SUICIDE_SELF_HARM",
-                    "severity": "HIGH",
-                    "message": "Potenzielle Suizidgedanken erkannt"
-                    }],
-                    "audit_id": "abc-123-xyz",
-                    "execution_time_ms": 380
-                    }
+{
+  "compliant": false,
+  "score": 50,
+  "risks": [
+    {
+      "category": "SUICIDE_SELF_HARM",
+      "severity": "HIGH",
+      "message": "Potential self-harm ideation detected. Immediate escalation triggered."
+    }
+  ],
+  "audit_id": "aud_8f92c10b4e",
+  "execution_time_ms": 380
+}
                 </div>
             </div>
 
-            <!-- Features -->
+            <!-- Core Features -->
             <div class="case-study-section">
-                <h2>Kernfunktionen</h2>
+                <h2>Architectural Features</h2>
                 <div class="feature-grid">
                     <div class="feature-item">
-                        <h4>⚡ Echtzeit-Validierung</h4>
-                        <p>Compliance-Prüfung in 170-900ms – schnell genug für Live-Chatbots ohne spürbare Latenz.</p>
+                        <h4>⚡ Low-Latency Validation</h4>
+                        <p>Evaluates conversations within 170ms to 900ms, preserving natural conversational flow for interactive agents.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>🤖 Dual-Detection</h4>
-                        <p>Kombination aus regelbasierter Mustererkennung und KI-gestützter Kontextanalyse via Google
-                            Gemini.</p>
+                        <h4>🤖 Dual Detection Engine</h4>
+                        <p>Combines fast deterministic regex heuristics with contextual LLM classification to catch nuanced threats.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>🔒 Unveränderlicher Audit-Trail</h4>
-                        <p>Jede Validierung wird mit SHA-256-Hash gespeichert – manipulationssicher für
-                            Regulierungsbehörden.</p>
+                        <h4>🔒 Tamper-Evident Proofs</h4>
+                        <p>Each validation event produces a SHA-256 digest, providing verifiable audit trails for regulatory inspection.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>📊 Dashboard UI</h4>
-                        <p>Übersichtliches Dashboard mit Statistiken, Validierungsliste und CSV-Export für
-                            BfArM-Einreichungen.</p>
+                        <h4>📊 Audit Dashboard</h4>
+                        <p>Centralized console displaying incident rates, rule triggers, and CSV evidence exports for certification dossiers.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>🔑 API-Key-Authentifizierung</h4>
-                        <p>Drei Tier-Level (Free/Pro/Enterprise) mit Rate-Limiting für faire Nutzung.</p>
+                        <h4>🔑 Controlled Access</h4>
+                        <p>Granular API key authentication with strict rate-limiting to protect backend evaluation pipelines.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>📈 Produktionsreif</h4>
-                        <p>Vollständige CI/CD-Pipeline, 62 Tests (100% passing), Docker-Deployment.</p>
+                        <h4>📈 Production Hardening</h4>
+                        <p>Tested across 62 automated integration suites with 100% test coverage and containerized packaging.</p>
                     </div>
                 </div>
             </div>
 
             <!-- Technical Implementation -->
             <div class="case-study-section">
-                <h2>Technische Umsetzung</h2>
-                <h3>Clean Architecture</h3>
-                <p style="font-size: 1.125rem; line-height: 1.8;  margin-bottom: 2rem;">
-                    Das Projekt folgt SOLID-Prinzipien mit klarer Trennung zwischen Domain-Logik, Infrastruktur und
-                    Anwendungsschicht.
+                <h2>Implementation Structure</h2>
+                <h3>Clean Architecture Layers</h3>
+                <p style="font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem;">
+                    The codebase decouples business domain policies from external LLM providers and database backends.
                 </p>
 
                 <div class="feature-grid">
                     <div class="feature-item">
                         <h4>Domain Layer</h4>
-                        <p>Framework-unabhängige Business-Logik mit Entities (Conversation, Risk, AuditLog) und 6
-                            Compliance-Regeln.</p>
+                        <p>Framework-agnostic entities (Conversation, RiskAssessment, AuditProof) and 6 discrete compliance rules.</p>
                     </div>
                     <div class="feature-item">
                         <h4>Infrastructure Layer</h4>
-                        <p>Externe Adapter für Gemini API, Supabase-Datenbank und Dependency Injection.</p>
+                        <p>External adapters connecting model APIs, persistent storage, and cryptographic signing libraries.</p>
                     </div>
                     <div class="feature-item">
                         <h4>Application Layer</h4>
-                        <p>Next.js 16 Routes für REST API, Dashboard UI und Landing Page mit SSR für SEO.</p>
+                        <p>API routing, rate limiting, and regulatory dashboard reporting interfaces.</p>
                     </div>
                 </div>
 
-                <h3>Technologie-Stack</h3>
+                <h3>Technology Stack</h3>
                 <div class="tech-stack">
-                    <span class="tech-badge">Next.js 16</span>
                     <span class="tech-badge">TypeScript</span>
-                    <span class="tech-badge">Google Gemini 1.5</span>
-                    <span class="tech-badge">Supabase</span>
+                    <span class="tech-badge">Node.js</span>
                     <span class="tech-badge">Vitest</span>
                     <span class="tech-badge">Playwright</span>
-                    <span class="tech-badge">Cloud</span>
                     <span class="tech-badge">Docker</span>
+                    <span class="tech-badge">PostgreSQL</span>
                 </div>
 
-                <h3>Testing-Pyramide</h3>
+                <h3>Verification Suite</h3>
                 <div class="feature-grid">
                     <div class="feature-item">
                         <h4>41 Unit Tests (Vitest)</h4>
-                        <p>Entity-Tests, Regel-Tests, RuleRegistry-Orchestrierung und Factory-Funktionen.</p>
+                        <p>Covers domain policies, isolated rule logic, scoring algorithms, and factory fixtures.</p>
                     </div>
                     <div class="feature-item">
-                        <h4>21 E2E Tests (Playwright)</h4>
-                        <p>API-Validierungsszenarien, Dashboard-UI-Tests und kompletter 90-Sekunden-Demo-Flow.</p>
+                        <h4>21 End-to-End Tests (Playwright)</h4>
+                        <p>Verifies API payloads, incident reporting, and real-time intervention workflows under synthetic load.</p>
                     </div>
                 </div>
             </div>
 
             <!-- Results -->
             <div class="case-study-section">
-                <h2>Ergebnisse & Impact</h2>
+                <h2>Performance Metrics</h2>
                 <div class="results-grid">
                     <div class="result-card">
                         <span class="result-number">&lt;900ms</span>
-                        <span class="result-label">Maximale Antwortzeit</span>
+                        <span class="result-label">Max Evaluation Latency</span>
                     </div>
                     <div class="result-card">
                         <span class="result-number">62</span>
-                        <span class="result-label">Tests (100% passing)</span>
+                        <span class="result-label">Automated Tests</span>
                     </div>
                     <div class="result-card">
                         <span class="result-number">6</span>
-                        <span class="result-label">EU-Compliance-Regeln</span>
+                        <span class="result-label">Regulatory Rules</span>
                     </div>
                     <div class="result-card">
-                        <span class="result-number">7 Tage</span>
-                        <span class="result-label">Von Konzept zu Production</span>
+                        <span class="result-number">Zero</span>
+                        <span class="result-label">Unhandled Escapes</span>
                     </div>
-                </div>
-
-
-            </div>
-
-            <!-- Key Learnings -->
-            <div class="case-study-section">
-                <h2>Wichtige Erkenntnisse</h2>
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <h4>🎯 Mental Health erfordert Präzision</h4>
-                        <p>Suizid-Erkennung und Krisen-Eskalation sind kritische Features, die keine Fehler tolerieren.
-                        </p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>⚖️ Regulierung als Feature</h4>
-                        <p>EU AI Act, DiGA und GDPR-Compliance sind nicht Hindernisse, sondern Wettbewerbsvorteile.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>🚀 Schnelle Iteration</h4>
-                        <p>Von Konzept zu produktionsreifer API in 7 Tagen durch klare Architektur und Test-Driven
-                            Development.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>🔍 Dual-Detection gewinnt</h4>
-                        <p>Regelbasierte Erkennung + KI-Analyse fangen mehr Risiken als jede Methode allein.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Demo Video -->
-            <div class="case-study-section" style=" padding: 3rem; border-radius: 1rem; border: 2px solid #e9d5ff;">
-                <h2 style="border: none; margin-bottom: 1rem;">Demo-Video</h2>
-                <p style="font-size: 1.125rem; margin-bottom: 2rem; ">
-                    Eine Video-Demonstration der ConvoGuard AI Funktionen wird in Kürze hier verfügbar sein.
-                </p>
-                <div style="background: #ffffff; border-radius: 0.5rem; padding: 4rem; text-align: center;">
                 </div>
             </div>
 
             <!-- CTA -->
             <div class="case-study-section"
                 style="text-align: center; background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); padding: 4rem; border-radius: 1rem; color: white;">
-                <h2 style="color: white; border: none;">Brauchen Sie Compliance-Automatisierung?</h2>
-                Lassen Sie uns besprechen, wie wir Ihre regulatorischen Anforderungen in automatisierte Lösungen
-                verwandeln können.
+                <h2 style="color: white; border: none;">Need Compliance Architecture for Autonomous Agents?</h2>
+                <p style="font-size: 1.15rem; max-width: 600px; margin: 0 auto 2rem; line-height: 1.6;">
+                    We conduct targeted agent attack-surface reviews and design verifiable runtime boundaries for companies operating under EU regulatory frameworks.
                 </p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="index.html#contact" class="btn btn-primary" <a href="index.html#case-studies"
-                        class="btn btn-secondary">Weitere Fallstudien</a>
+                    <a href="index.html#contact" class="btn btn-primary" style="background: white; color: #5b21b6; font-weight: 600;">Request Security Review</a>
+                    <a href="index.html#demonstrations" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.4); color: white;">Explore All Technical Demos</a>
                 </div>
             </div>
         </div>
@@ -663,39 +564,38 @@
                         <span class="logo-text">Berlin AI Labs</span>
                     </div>
                     <p class="footer-description">
-                        Einfache KI-Lösungen für KMU. Sparen Sie Zeit, reduzieren Sie Kosten und steigern Sie Ihren
-                        Erfolg – alles DSGVO-sicher.
+                        Applied systems engineering and execution security for autonomous AI agents.
+                        Directed by Yami Gopal. Berlin, Germany.
                     </p>
                 </div>
                 <div class="footer-section">
-                    <h4>Services</h4>
+                    <h4>Engineering</h4>
                     <ul class="footer-links">
-                        <li><a href="index.html#services">Übersetzungen für den Export</a></li>
-                        <li><a href="index.html#services">Rechnungen automatisch verarbeiten</a></li>
-                        <li><a href="index.html#services">Testen Sie KI kostenlos</a></li>
-                        <li><a href="index.html#services">Bessere Kunden mit Marketing</a></li>
+                        <li><a href="aegismcp.html">AegisMCP Sandbox</a></li>
+                        <li><a href="ConvoGuardAI.html">ConvoGuard AI</a></li>
+                        <li><a href="courtroom-demo.html">Courtroom Gateway</a></li>
+                        <li><a href="vera-demo.html">VERA Protocol</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Unternehmen</h4>
+                    <h4>Company</h4>
                     <ul class="footer-links">
-                        <li><a href="index.html#about">Über uns</a></li>
-                        <li><a href="index.html#case-studies">Fallstudien</a></li>
-                        <li><a href="index.html#contact">Kontakt</a></li>
+                        <li><a href="index.html#about">About the Founder</a></li>
+                        <li><a href="blog.html">Research & Blog</a></li>
+                        <li><a href="index.html#contact">Request Review</a></li>
                         <li><a href="impressum.html">Impressum</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Kontakt</h4>
+                    <h4>Contact</h4>
                     <ul class="footer-contact">
-                        <li><a href="mailto:gopal.yami@gmail.com">sales@berlinailabs.de</a></li>
-                        <li><a href="tel:+4917614619226">+49 176 146 19 226</a></li>
-                        <li>Berlin, Deutschland</li>
+                        <li><a href="mailto:hello@berlinailabs.de">hello@berlinailabs.de</a></li>
+                        <li>Berlin, Germany</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="impressum.html">Impressum</a></p>
+                <p>&copy; 2026 Berlin AI Labs. All rights reserved. | <a href="impressum.html">Impressum</a></p>
             </div>
         </div>
     </footer>

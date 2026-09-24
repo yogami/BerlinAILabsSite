@@ -1,18 +1,39 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | Berlin AI Labs</title>
+    <title>Research & Architecture Papers | Berlin AI Labs</title>
     <meta name="description"
-        content="Insights on AI engineering, automation, and building reliable software systems. From the Berlin AI Labs team.">
+        content="Original research on agent execution security, OS process jailing, domain-driven design, and autonomous distributed pipelines. Directed by Yami Gopal in Berlin.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .track-header {
+            margin: 4rem 0 2rem 0;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .track-badge {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+        .track-title {
+            font-size: 1.6rem;
+            margin-top: 0.25rem;
+            color: var(--text-main);
+        }
+    </style>
 </head>
 
 <body>
@@ -30,33 +51,39 @@
                     <span class="bar"></span>
                 </button>
                 <ul class="nav-menu">
-                    <li><a href="index.html#products" class="nav-link">Products</a></li>
-                    <li><a href="index.html#open-source" class="nav-link">Open Source</a></li>
+                    <li><a href="index.html#technology" class="nav-link">Technology</a></li>
+                    <li><a href="index.html#demonstrations" class="nav-link">Demonstrations</a></li>
+                    <li><a href="blog.html" class="nav-link active">Research</a></li>
                     <li><a href="index.html#about" class="nav-link">About</a></li>
-                    <li><a href="blog.html" class="nav-link active">Blog</a></li>
                     <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-                    <li><a href="index.html#products" class="btn nav-cta btn-primary">Explore Products</a></li>
+                    <li><a href="index.html#contact" class="btn nav-cta btn-primary">Request Review</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Blog Header -->
-    <section class="blog-header">
+    <!-- Research Header -->
+    <section class="blog-header" style="padding: 120px 0 40px;">
         <div class="container">
-            <div class="section-header">
-                <span class="section-badge">Insights</span>
-                <h1 class="section-title">Blog</h1>
+            <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <span class="section-badge">Systems Research</span>
+                <h1 class="section-title">Research & Architecture Papers</h1>
                 <p class="section-subtitle">
-                    Insights on AI engineering, automation, and building reliable software systems
+                    Original engineering research on agent execution security, OS process jailing, domain-driven design, and autonomous distributed pipelines.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Blog Posts Grid -->
-    <section class="blog-posts">
+    <!-- Research Papers & Articles -->
+    <section class="blog-posts" style="padding-bottom: 6rem;">
         <div class="container">
+
+            <!-- Track 1: Agent Execution Security & Runtime Governance -->
+            <div class="track-header" style="margin-top: 1rem;">
+                <span class="track-badge">Track 01</span>
+                <h2 class="track-title">Agent Execution Security & Runtime Governance</h2>
+            </div>
             <div class="blog-grid">
                 <!-- AegisMCP Blog Post -->
                 <a href="blog/aegismcp-security-sandbox.html" class="blog-card">
@@ -68,9 +95,9 @@
                             <span class="blog-date">June 24, 2026</span>
                             <span class="blog-reading-time">6 min read</span>
                         </div>
-                        <h2 class="blog-card-title">Securing stdio: The Hidden Security Threat in Model Context Protocol (MCP)</h2>
+                        <h3 class="blog-card-title">Securing stdio: The Hidden Security Threat in Model Context Protocol (MCP)</h3>
                         <p class="blog-card-excerpt">
-                            Most MCP integrations communicate over stdio, bypassing corporate network gateways entirely. Here is how we contained prompt injection exfiltration at the syscall level using Rust.
+                            Most MCP integrations communicate over stdio, bypassing corporate network gateways. Here is how we contained prompt-injection exfiltration at the syscall level using Rust.
                         </p>
                         <div class="blog-card-author">
                             <span class="author-name">Yami Gopal</span>
@@ -83,17 +110,66 @@
                 <a href="blog/vera-protocol-launch.html" class="blog-card">
                     <div class="blog-card-image"
                         style="background: var(--bg-surface); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center;">
-                        <span style="font-size: 4rem;">⚖️</span>
+                        <span style="font-size: 3.5rem;">⚖️</span>
                     </div>
                     <div class="blog-card-content">
                         <div class="blog-card-meta">
                             <span class="blog-date">February 10, 2026</span>
                             <span class="blog-reading-time">8 min read</span>
                         </div>
-                        <h2 class="blog-card-title">Announcing VERA: The Sovereign Trust Protocol for AI Agents</h2>
+                        <h3 class="blog-card-title">Announcing VERA: The Sovereign Trust Protocol for AI Agents</h3>
                         <p class="blog-card-excerpt">
-                            The Agent Trust Framework has evolved. Meet VERA: A crypto-agile, Moltbook-integrated,
-                            sovereign trust standard for the agentic economy.
+                            Meet VERA: a cryptographic, Ed25519-signed trust standard providing non-repudiable audit receipts for autonomous agent actions.
+                        </p>
+                        <div class="blog-card-author">
+                            <span class="author-name">Yami Gopal</span>
+                            <span class="author-company">Berlin AI Labs</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Autonomous Agent Workspace -->
+                <a href="blog/autonomous-agent-workspace.html" class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="https://res.cloudinary.com/djol0rpn5/image/upload/v1767700496/blog-posts/agentic-studio-brain.jpg"
+                            alt="Autonomous Agent Studio brain orchestration">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span class="blog-date">January 6, 2026</span>
+                            <span class="blog-reading-time">8 min read</span>
+                        </div>
+                        <h3 class="blog-card-title">The Autonomous Workspace: Zero-Touch Infrastructure for Agent Fleets</h3>
+                        <p class="blog-card-excerpt">
+                            How we architected a development environment tethered to a shared memory brain, isolating agent processes while maintaining deterministic state.
+                        </p>
+                        <div class="blog-card-author">
+                            <span class="author-name">Yami Gopal</span>
+                            <span class="author-company">Berlin AI Labs</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Track 2: Systems Architecture & Domain-Driven Design -->
+            <div class="track-header">
+                <span class="track-badge">Track 02</span>
+                <h2 class="track-title">Systems Architecture & Domain-Driven Design</h2>
+            </div>
+            <div class="blog-grid">
+                <!-- Agentic Symphony DDD -->
+                <a href="blog/berlin-ai-orchestra-ddd.html" class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="images/blog-orchestra-ddd.png" alt="Agentic Symphony DDD visualization">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span class="blog-date">January 3, 2026</span>
+                            <span class="blog-reading-time">15 min read</span>
+                        </div>
+                        <h3 class="blog-card-title">Orchestrating the Agentic Symphony: DDD-Driven Microservice Independence</h3>
+                        <p class="blog-card-excerpt">
+                            Applying Domain-Driven Design and Hexagonal Architecture to build decoupled agent swarms that scale without state corruption.
                         </p>
                         <div class="blog-card-author">
                             <span class="author-name">Yami Gopal</span>
@@ -112,12 +188,9 @@
                             <span class="blog-date">January 13, 2026</span>
                             <span class="blog-reading-time">12 min read</span>
                         </div>
-                        <h2 class="blog-card-title">The Master Score: Engineering Agentic Harmony with Precise Protocols
-                        </h2>
+                        <h3 class="blog-card-title">The Master Score: Engineering Agentic Harmony with Precise Protocols</h3>
                         <p class="blog-card-excerpt">
-                            Moving beyond simple automation towards a synchronized architectural symphony. How the
-                            Master Score
-                            keeps our fleet of autonomous agents in perfect tune.
+                            Moving beyond ad-hoc prompts towards synchronized architecture. How bounded contexts and clear schemas keep autonomous systems reliable.
                         </p>
                         <div class="blog-card-author">
                             <span class="author-name">Yami Gopal</span>
@@ -126,88 +199,19 @@
                     </div>
                 </a>
 
-                <a href="blog/autonomous-agent-workspace.html" class="blog-card">
+                <!-- AI Engineering Best Practices -->
+                <a href="blog/ai-engineering-best-practices.html" class="blog-card">
                     <div class="blog-card-image">
-                        <img src="https://res.cloudinary.com/djol0rpn5/image/upload/v1767700496/blog-posts/agentic-studio-brain.jpg"
-                            alt="Autonomous Agent Studio brain orchestration">
+                        <img src="images/blog-ai-engineering.png" alt="AI Engineering Best Practices visualization">
                     </div>
                     <div class="blog-card-content">
                         <div class="blog-card-meta">
-                            <span class="blog-date">January 6, 2026</span>
-                            <span class="blog-reading-time">8 min read</span>
+                            <span class="blog-date">December 25, 2024</span>
+                            <span class="blog-reading-time">12 min read</span>
                         </div>
-                        <h2 class="blog-card-title">The Plug-and-Play Agentic Studio: How We Automated Our Sanity</h2>
+                        <h3 class="blog-card-title">AI Engineering Best Practices: Building Reliable Systems with Craftsmanship</h3>
                         <p class="blog-card-excerpt">
-                            How Berlin AI Labs built an autonomous development environment where agents are tethered to
-                            a single global brain, enabling zero-touch infrastructure.
-                        </p>
-                        <div class="blog-card-author">
-                            <span class="author-name">Yami Gopal</span>
-                            <span class="author-company">Berlin AI Labs</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="blog/unleash-your-inner-artist.html" class="blog-card">
-                    <div class="blog-card-image">
-                        <img src="images/blog-inner-artist.png" alt="Unleash Your Inner Artist visualization">
-                    </div>
-                    <div class="blog-card-content">
-                        <div class="blog-card-meta">
-                            <span class="blog-date">January 3, 2026</span>
-                            <span class="blog-reading-time">5 min read</span>
-                        </div>
-                        <h2 class="blog-card-title">Unleash Your Inner Artist: Stopping the 'Nerd-Loop' with
-                            Self-Healing AI</h2>
-                        <p class="blog-card-excerpt">
-                            Life is for living, not for debugging 500 errors at 3 AM. How our self-healing AI loop frees
-                            you from the screen and back into the arms of creativity.
-                        </p>
-                        <div class="blog-card-author">
-                            <span class="author-name">Yami Gopal</span>
-                            <span class="author-company">Berlin AI Labs</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Agentic Symphony DDD -->
-                <a href="blog/berlin-ai-orchestra-ddd.html" class="blog-card">
-                    <div class="blog-card-image">
-                        <img src="images/blog-orchestra-ddd.png" alt="Agentic Symphony DDD visualization">
-                    </div>
-                    <div class="blog-card-content">
-                        <div class="blog-card-meta">
-                            <span class="blog-date">January 3, 2026</span>
-                            <span class="blog-reading-time">15 min read</span>
-                        </div>
-                        <h2 class="blog-card-title">Orchestrating the Agentic Symphony: A Deep Dive into DDD-Driven
-                            Microservice Independence</h2>
-                        <p class="blog-card-excerpt">
-                            How we applied Domain-Driven Design and Hexagonal Architecture to build a portable,
-                            decoupled Agentic Suite that scales with human-like nuance.
-                        </p>
-                        <div class="blog-card-author">
-                            <span class="author-name">Yami Gopal</span>
-                            <span class="author-company">Berlin AI Labs</span>
-                        </div>
-                    </div>
-                </a>
-
-
-                <!-- Setlist Architecture -->
-                <a href="blog/sota-video-architecture.html" class="blog-card">
-                    <div class="blog-card-image">
-                        <img src="images/blog-setlist-arch.png" alt="Setlist Architecture visualization">
-                    </div>
-                    <div class="blog-card-content">
-                        <div class="blog-card-meta">
-                            <span class="blog-date">December 31, 2024</span>
-                            <span class="blog-reading-time">10 min read</span>
-                        </div>
-                        <h2 class="blog-card-title">From URL to Video: The Setlist Architecture</h2>
-                        <p class="blog-card-excerpt">
-                            How a musician turned engineer used the concept of a 'Setlist' to stop AI from hallucinating
-                            and build a video generator that actually works.
+                            Structured planning, acceptance test-driven development, and architectural verification. Practical discipline for production AI systems.
                         </p>
                         <div class="blog-card-author">
                             <span class="author-name">Yami Gopal</span>
@@ -226,35 +230,100 @@
                             <span class="blog-date">December 25, 2024</span>
                             <span class="blog-reading-time">10 min read</span>
                         </div>
-                        <h2 class="blog-card-title">Improving LLM Response Quality with a Tiered Model Ladder</h2>
+                        <h3 class="blog-card-title">Improving LLM Response Quality with a Tiered Model Ladder</h3>
                         <p class="blog-card-excerpt">
-                            How to orchestrate multiple LLM capability tiers for higher quality at lower cost. Start
-                            with
-                            high reasoning models for framing, then transition to lightweight models for execution.
+                            Orchestrating model capability tiers for cost and latency optimization. Heavy reasoning models frame the problem; lightweight models execute.
                         </p>
                         <div class="blog-card-author">
-                            <span class="author-name">Chris Igel</span>
+                            <span class="author-name">Chris Igel & Yami Gopal</span>
+                            <span class="author-company">Berlin AI Labs</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Track 3: Applied Pipelines, Multimodal & Compliance -->
+            <div class="track-header">
+                <span class="track-badge">Track 03</span>
+                <h2 class="track-title">Applied Pipelines, Multimodal & Compliance</h2>
+            </div>
+            <div class="blog-grid">
+                <!-- SOTA Video Architecture -->
+                <a href="blog/sota-video-architecture.html" class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="images/blog-setlist-arch.png" alt="Setlist Architecture visualization">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span class="blog-date">December 31, 2024</span>
+                            <span class="blog-reading-time">10 min read</span>
+                        </div>
+                        <h3 class="blog-card-title">From URL to Video: The Setlist Architecture</h3>
+                        <p class="blog-card-excerpt">
+                            How a musician turned systems engineer used structured cues to constrain video generation pipelines and eliminate visual drift.
+                        </p>
+                        <div class="blog-card-author">
+                            <span class="author-name">Yami Gopal</span>
                             <span class="author-company">Berlin AI Labs</span>
                         </div>
                     </div>
                 </a>
 
-                <!-- AI Engineering -->
-                <a href="blog/ai-engineering-best-practices.html" class="blog-card">
+                <!-- Instagram Reels Pipeline -->
+                <a href="blog/automate-instagram-reels-berlin.html" class="blog-card">
                     <div class="blog-card-image">
-                        <img src="images/blog-ai-engineering.png" alt="AI Engineering Best Practices visualization">
+                        <img src="images/blog-reels-automation.png" alt="Automate Instagram Reels video pipeline">
                     </div>
                     <div class="blog-card-content">
                         <div class="blog-card-meta">
-                            <span class="blog-date">December 25, 2024</span>
-                            <span class="blog-reading-time">12 min read</span>
+                            <span class="blog-date">December 29, 2024</span>
+                            <span class="blog-reading-time">7 min read</span>
                         </div>
-                        <h2 class="blog-card-title">AI Engineering Best Practices: Building Reliable Systems with
-                            Craftsmanship</h2>
+                        <h3 class="blog-card-title">Multimodal Video Pipeline: Automated Ingestion & Rendering Queues</h3>
                         <p class="blog-card-excerpt">
-                            How structured planning, test driven development, and code quality standards create AI
-                            systems
-                            you can trust. A practical guide from our engineering team.
+                            Whisper speech transcription, autonomous scene cuts, and distributed GPU rendering workers for high-volume video processing.
+                        </p>
+                        <div class="blog-card-author">
+                            <span class="author-name">Yami Gopal</span>
+                            <span class="author-company">Berlin AI Labs</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- GDPR Chatbot Compliance -->
+                <a href="blog/gdpr-chatbot-compliance-berlin.html" class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="images/blog-gdpr-compliance.png" alt="GDPR Chatbot Compliance architecture">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span class="blog-date">December 27, 2024</span>
+                            <span class="blog-reading-time">9 min read</span>
+                        </div>
+                        <h3 class="blog-card-title">Zero-Data-Retention: Engineering GDPR-Compliant Conversational AI</h3>
+                        <p class="blog-card-excerpt">
+                            Architectural patterns for DSGVO and DiGA compliance. Memory redaction, pseudonymization proxies, and local European inference boundaries.
+                        </p>
+                        <div class="blog-card-author">
+                            <span class="author-name">Yami Gopal</span>
+                            <span class="author-company">Berlin AI Labs</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Unleash Your Inner Artist -->
+                <a href="blog/unleash-your-inner-artist.html" class="blog-card">
+                    <div class="blog-card-image">
+                        <img src="images/blog-inner-artist.png" alt="Unleash Your Inner Artist visualization">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span class="blog-date">January 3, 2026</span>
+                            <span class="blog-reading-time">5 min read</span>
+                        </div>
+                        <h3 class="blog-card-title">Stopping the Debug Loop with Self-Healing Autonomous Agents</h3>
+                        <p class="blog-card-excerpt">
+                            Automated error recovery and execution loop containment. Freeing engineering focus by letting agents self-correct runtime exceptions.
                         </p>
                         <div class="blog-card-author">
                             <span class="author-name">Yami Gopal</span>
@@ -263,20 +332,21 @@
                     </div>
                 </a>
             </div>
+
         </div>
     </section>
 
-    <!-- Newsletter CTA -->
+    <!-- Technical Engagement CTA -->
     <section class="funding-cta">
         <div class="container">
-            <div class="funding-content">
-                <h2 class="funding-title">Stay Updated</h2>
-                <p class="funding-description">
-                    Get insights on AI engineering, compliance, and automation delivered to your inbox.
+            <div class="funding-content bg-glass" style="padding: 4rem; border-radius: 24px; text-align: center; border: 1px solid var(--border-highlight);">
+                <h2 class="funding-title" style="margin-bottom: 1rem;">Collaborate on Systems R&D</h2>
+                <p class="funding-description" style="max-width: 650px; margin: 0 auto 2rem; color: var(--text-muted);">
+                    We partner with infrastructure teams and engineering leaders to test agent isolation boundaries, conduct threat modeling, and deploy deterministic runtime safeguards.
                 </p>
-                <div class="funding-cta-buttons">
-                    <a href="index.html#contact" class="btn btn-primary btn-glow">Contact Us</a>
-                    <a href="index.html#products" class="btn btn-secondary btn-glass">Explore Products</a>
+                <div class="funding-cta-buttons" style="display: flex; gap: 1rem; justify-content: center;">
+                    <a href="index.html#contact" class="btn btn-primary btn-glow btn-large">Request Attack-Surface Review</a>
+                    <a href="mailto:contact@berlinailabs.de" class="btn btn-secondary btn-glass">Email Yami Directly</a>
                 </div>
             </div>
         </div>
@@ -285,56 +355,44 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-content" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;">
                 <div class="footer-section">
-                    <div class="footer-logo">
-                        <img src="logo.svg" alt="Berlin AI Labs" class="logo">
-                        <span class="logo-text">Berlin AI Labs</span>
+                    <div class="footer-logo" style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                        <img src="logo.svg" alt="Berlin AI Labs" class="logo" style="height: 24px;">
+                        <span class="logo-text" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.2rem;">Berlin AI Labs</span>
                     </div>
-                    <p class="footer-description">
-                        AI compliance and governance infrastructure for the EU AI Act era.
-                        9+ production products. 100% DSGVO-konform. Made in Berlin.
+                    <p class="footer-description" style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                        Founder-led applied systems practice for agent execution security and verifiable compliance. Directed by Yami Gopal in Berlin.
                     </p>
                 </div>
                 <div class="footer-section">
-                    <h4>Products</h4>
-                    <ul class="footer-links">
-                        <li><a href="ConvoGuardAI.html">ConvoGuard AI</a></li>
-                        <li><a href="https://agent-ops-mission-control-production.up.railway.app"
-                                target="_blank">AgentOps Mission Control</a></li>
-                        <li><a href="https://pdp-protocol-production.up.railway.app/.well-known/agent-card.json"
-                                target="_blank">PoE-A2A Protocol</a></li>
+                    <h4>Technology</h4>
+                    <ul class="footer-links" style="list-style: none; padding: 0;">
+                        <li><a href="index.html#technology">OS Kernel Sandboxing</a></li>
+                        <li><a href="index.html#technology">Execution Proofs (VERA)</a></li>
+                        <li><a href="index.html#technology">Article 14 Human Gates</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Open Source</h4>
-                    <ul class="footer-links">
-                        <li><a href="https://www.npmjs.com/package/agent-pentest" target="_blank">agent-pentest
-                                (npm)</a></li>
-                        <li><a href="https://github.com/yogami/pdp-protocol" target="_blank">PoE-A2A on GitHub</a></li>
-                        <li><a href="blog.html">Engineering Blog</a></li>
+                    <h4>Demonstrations</h4>
+                    <ul class="footer-links" style="list-style: none; padding: 0;">
+                        <li><a href="ConvoGuardAI.html">ConvoGuard AI</a></li>
+                        <li><a href="https://agentops.berlinailabs.de" target="_blank">AgentOps</a></li>
+                        <li><a href="courtroom-demo.html">Aegis-12 Gateway</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Company</h4>
-                    <ul class="footer-links">
-                        <li><a href="index.html#about">About</a></li>
-                        <li><a href="blog.html">Blog</a></li>
+                    <ul class="footer-links" style="list-style: none; padding: 0;">
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="blog.html">Insights Blog</a></li>
                         <li><a href="index.html#contact">Contact</a></li>
                         <li><a href="impressum.html">Impressum</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <ul class="footer-contact">
-                        <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
-                        <li><a href="tel:+4917614619226">+49 176 146 19 226</a></li>
-                        <li>Berlin, Deutschland</li>
-                    </ul>
-                </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="impressum.html">Impressum</a></p>
+            <div class="footer-bottom" style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle); text-align: center; font-size: 0.85rem; color: var(--text-muted);">
+                <p>&copy; 2026 Berlin AI Labs. All rights reserved. | <a href="impressum.html" style="color: inherit; text-decoration: underline;">Impressum</a></p>
             </div>
         </div>
     </footer>

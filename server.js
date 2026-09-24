@@ -213,6 +213,45 @@ const server = http.createServer((req, res) => {
   const pathname = parsedUrl.pathname;
   const ip = clientIp.split(',')[0].trim();
 
+  // Branded Subdomain Reverse Proxy (Zero Client Exposure)
+  const SUBDOMAIN_TARGETS = {
+    'agentops.berlinailabs.de': 'agent-ops-mission-control-production.up.railway.app',
+    'canary.berlinailabs.de': 'ai-canary-production.up.railway.app',
+    'scanner.berlinailabs.de': 'ai-compliance-scanner-production.up.railway.app',
+    'evidence.berlinailabs.de': 'vera-evidence-dashboard-production.up.railway.app',
+    'pdp.berlinailabs.de': 'pdp-protocol-production.up.railway.app'
+  };
+
+  const hostname = host.split(':')[0].toLowerCase();
+  const proxyTarget = SUBDOMAIN_TARGETS[hostname];
+
+  if (proxyTarget) {
+    const proxyHeaders = { ...req.headers };
+    proxyHeaders['host'] = proxyTarget;
+    proxyHeaders['x-forwarded-host'] = host;
+    proxyHeaders['x-forwarded-for'] = clientIp;
+
+    const proxyReq = https.request({
+      hostname: proxyTarget,
+      port: 443,
+      path: req.url,
+      method: req.method,
+      headers: proxyHeaders
+    }, (proxyRes) => {
+      res.writeHead(proxyRes.statusCode, proxyRes.headers);
+      proxyRes.pipe(res);
+    });
+
+    proxyReq.on('error', (err) => {
+      console.error('[SUBDOMAIN PROXY ERROR]:', err.message);
+      res.writeHead(502, { 'Content-Type': 'text/plain' });
+      res.end('Gateway Error: Unable to reach demo service.');
+    });
+
+    req.pipe(proxyReq);
+    return;
+  }
+
   // Server-Side B2B Visitor Event Logging into PostgreSQL
   if (!pathname.match(/\.(css|js|png|jpg|jpeg|webp|svg|ico)$/)) {
     if (dbPool) {

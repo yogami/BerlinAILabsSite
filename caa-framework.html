@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAA — Compliant Agent Architecture | Berlin AI Labs</title>
+    <title>CAA: Compliant Agent Architecture | Berlin AI Labs</title>
     <meta name="description" content="The Compliant Agent Architecture (CAA) is an open reference framework for building AI agents that generate compliance evidence by construction. 6 architectural principles for runtime governance.">
-    <meta property="og:title" content="CAA — Compliant Agent Architecture">
+    <meta property="og:title" content="CAA: Compliant Agent Architecture">
     <meta property="og:description" content="6 architectural principles for building AI agents that are compliant by construction. Open framework by Berlin AI Labs.">
     <meta property="og:type" content="article">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -352,12 +352,12 @@
 
 <nav>
     <div class="nav-inner">
-        <a href="/" class="logo">Berlin <span>AI</span> Labs</a>
+        <a href="index.html" class="logo">Berlin <span>AI</span> Labs</a>
         <div class="nav-links">
             <a href="#principles">Principles</a>
             <a href="#implementation">Implementation</a>
             <a href="#mapping">Standards Mapping</a>
-            <a href="https://ai-compliance-scanner-production.up.railway.app" target="_blank">Scanner</a>
+            <a href="https://scanner.berlinailabs.de" target="_blank">Scanner</a>
         </div>
     </div>
 </nav>
@@ -366,7 +366,7 @@
     <div class="badge">Open Reference Architecture</div>
     <h1>Compliant Agent Architecture</h1>
     <p class="subtitle">
-        Six architectural principles for building AI agents that generate compliance evidence by construction — not bolted on after deployment.
+        Six architectural principles for building AI agents that generate compliance evidence by construction, not bolted on after deployment.
     </p>
     <p class="version">CAA v0.1 · March 2026 · Berlin AI Labs</p>
 </section>
@@ -375,7 +375,7 @@
 
     <h2>The Problem</h2>
     <p>
-        AI agents are indeterministic by nature. They reason about goals, choose tools at runtime, and chain services in ways nobody anticipated. Every existing compliance framework — SOC 2, ISO 27001, HIPAA — was designed to audit <strong>static systems with predictable behavior</strong>.
+        AI agents are indeterministic by nature. They reason about goals, choose tools at runtime, and chain services in ways nobody anticipated. Every existing compliance framework (SOC 2, ISO 27001, HIPAA) was designed to audit <strong>static systems with predictable behavior</strong>.
     </p>
     <p>
         The EU AI Act creates a fundamentally different requirement. It asks: <strong>What was your AI system allowed to do? What did it actually do? What human controls were active at the moment of decision?</strong>
@@ -389,7 +389,7 @@
 
     <div class="quote">
         <p>"The real challenge is not proving what happened, but constraining what is allowed before execution."</p>
-        <div class="attribution">— Recurring theme from 31 compliance professionals discussing AI agent governance</div>
+        <div class="attribution">Recurring theme from 31 compliance professionals discussing AI agent governance</div>
     </div>
 
     <h2>Design Philosophy</h2>
@@ -397,9 +397,9 @@
         CAA borrows from three fields that have solved analogous problems:
     </p>
     <ol>
-        <li><strong>Banking Model Risk (SR 11-7)</strong> — The only compliance framework that validates <em>output behavior</em>, not just infrastructure. CAA applies this thinking to agents.</li>
-        <li><strong>Capability-Based Security</strong> — Instead of asking "what should this agent NOT do," CAA asks "what is this agent architecturally ABLE to do." Unforgeable capability tokens, not ACL policies.</li>
-        <li><strong>Cryptographic Attestation</strong> — Every claim of compliance must be backed by a tamper-evident, independently verifiable record. If you can't verify it, it's not evidence.</li>
+        <li><strong>Banking Model Risk (SR 11-7)</strong>: The only compliance framework that validates <em>output behavior</em>, not just infrastructure. CAA applies this thinking to agents.</li>
+        <li><strong>Capability-Based Security</strong>: Instead of asking "what should this agent NOT do," CAA asks "what is this agent architecturally ABLE to do." Unforgeable capability tokens, not ACL policies.</li>
+        <li><strong>Cryptographic Attestation</strong>: Every claim of compliance must be backed by a tamper-evident, independently verifiable record. If you can't verify it, it's not evidence.</li>
     </ol>
 
     <h2 id="principles">The Six Principles</h2>
@@ -506,7 +506,7 @@
     <div class="principle">
         <div class="principle-number">05</div>
         <h3>Human Override Proof</h3>
-        <div class="one-liner">Prove a human could have stopped it — at every moment.</div>
+        <div class="one-liner">Prove a human could have stopped it at every moment.</div>
         <p>
             At every point during agent execution, the system must maintain a <strong>verifiable record of which human controls were active, what override capabilities existed, and who held the authority to intervene</strong>.
         </p>
@@ -524,14 +524,14 @@
         <h3>Deterministic Scope Binding</h3>
         <div class="one-liner">The agent cannot expand its own authority.</div>
         <p>
-            Agent behavior is bounded by <strong>configuration, not by prompting</strong>. The agent cannot modify its own capability manifest. It cannot escalate its permissions. It cannot invoke tools that were not declared at initialization. Scope expansion requires a new manifest — which requires human approval and generates a new attestation chain.
+            Agent behavior is bounded by <strong>configuration, not by prompting</strong>. The agent cannot modify its own capability manifest. It cannot escalate its permissions. It cannot invoke tools that were not declared at initialization. Scope expansion requires a new manifest, which requires human approval and generates a new attestation chain.
         </p>
         <p>
             This principle directly addresses the indeterminism problem. The agent's <em>reasoning</em> may be non-deterministic, but its <em>scope of action</em> is not. The set of things it can do is fixed. How it decides which of those things to do is where the intelligence lives.
         </p>
         <div class="mapping">
             <span class="tag tag-euai">EU AI Act Art. 9 (Risk Management)</span>
-            <span class="tag tag-euai">EU AI Act Art. 15 (Accuracy & Robustness)</span>
+            <span class="tag tag-euai">EU AI Act Art. 15 (Accuracy & Cybersecurity)</span>
             <span class="tag tag-aiuc">AIUC-1 B: Security</span>
             <span class="tag tag-sr">SR 11-7 (Ongoing Monitoring)</span>
         </div>
@@ -558,48 +558,48 @@
                 <td class="check">✓</td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
-                <td class="cross">—</td>
+                <td class="cross">&times;</td>
             </tr>
             <tr>
                 <td>AI governance process</td>
-                <td class="cross">—</td>
+                <td class="cross">&times;</td>
                 <td class="check">✓</td>
                 <td class="check">✓</td>
-                <td class="cross">—</td>
+                <td class="cross">&times;</td>
             </tr>
             <tr>
                 <td>Adversarial testing</td>
-                <td class="cross">—</td>
-                <td class="cross">—</td>
+                <td class="cross">&times;</td>
+                <td class="cross">&times;</td>
                 <td class="check">✓</td>
-                <td class="cross">—</td>
+                <td class="cross">&times;</td>
             </tr>
             <tr>
                 <td><strong>Runtime behavioral evidence</strong></td>
-                <td class="cross">—</td>
-                <td class="cross">—</td>
-                <td class="cross">—</td>
+                <td class="cross">&times;</td>
+                <td class="cross">&times;</td>
+                <td class="cross">&times;</td>
                 <td class="check">✓</td>
             </tr>
             <tr>
                 <td><strong>Architectural enforcement</strong></td>
-                <td class="cross">—</td>
-                <td class="cross">—</td>
-                <td class="cross">—</td>
+                <td class="cross">&times;</td>
+                <td class="cross">&times;</td>
+                <td class="cross">&times;</td>
                 <td class="check">✓</td>
             </tr>
             <tr>
                 <td><strong>Evidence sovereignty</strong></td>
-                <td class="cross">—</td>
-                <td class="cross">—</td>
-                <td class="cross">—</td>
+                <td class="cross">&times;</td>
+                <td class="cross">&times;</td>
+                <td class="cross">&times;</td>
                 <td class="check">✓</td>
             </tr>
             <tr>
                 <td><strong>Capability-bounded agents</strong></td>
-                <td class="cross">—</td>
-                <td class="cross">—</td>
-                <td class="cross">—</td>
+                <td class="cross">&times;</td>
+                <td class="cross">&times;</td>
+                <td class="cross">&times;</td>
                 <td class="check">✓</td>
             </tr>
         </tbody>
@@ -612,32 +612,32 @@
 
     <h3>Reference Stack</h3>
     <ol>
-        <li><strong>SemaProof</strong> — Open-source agent firewall. Implements Capability Declaration (Principle 1) and Execution Attestation (Principle 2) as an Envoy sidecar. Sub-50ms latency.</li>
-        <li><strong>VERA Evidence Dashboard</strong> — Visualizes the execution record chain. Maps evidence to EU AI Act articles and AIUC-1 domains for auditor review.</li>
-        <li><strong>CAA Scanner</strong> — Free self-assessment that scores your agent architecture against the six CAA principles.</li>
+        <li><strong>SemaProof</strong>: Open-source agent firewall. Implements Capability Declaration (Principle 1) and Execution Attestation (Principle 2) as an Envoy sidecar. Sub-50ms latency.</li>
+        <li><strong>VERA Evidence Dashboard</strong>: Visualizes the execution record chain. Maps evidence to EU AI Act articles and AIUC-1 domains for auditor review.</li>
+        <li><strong>CAA Scanner</strong>: Free self-assessment that scores your agent architecture against the six CAA principles.</li>
     </ol>
 
     <div class="cta-section">
         <h2>Assess Your Agent Architecture</h2>
         <p style="color: var(--text-secondary); margin-bottom: 0;">Score your AI agent's compliance readiness against the CAA principles and EU AI Act in 60 seconds.</p>
         <div class="cta-links">
-            <a href="https://ai-compliance-scanner-production.up.railway.app" class="cta-btn primary" target="_blank">Run the Free Scanner</a>
-            <a href="https://vera-evidence-dashboard-production.up.railway.app" class="cta-btn secondary" target="_blank">See the Evidence Dashboard</a>
+            <a href="https://scanner.berlinailabs.de" class="cta-btn primary" target="_blank">Run the Free Scanner</a>
+            <a href="https://evidence.berlinailabs.de" class="cta-btn secondary" target="_blank">See the Evidence Dashboard</a>
         </div>
     </div>
 
     <h2>Contributing</h2>
     <p>
-        CAA is an open framework. It will evolve as the regulatory landscape changes and as the community identifies gaps. If you work in AI governance, model risk, or agent infrastructure and see something wrong or missing, we want to hear from you.
+        CAA is an open framework. It will evolve as regulatory requirements evolve and as the community identifies gaps. If you work in AI governance, model risk, or agent infrastructure and see something wrong or missing, we want to hear from you.
     </p>
     <p>
-        Reach out: <a href="https://www.linkedin.com/in/yami-g-b170294" style="color: var(--accent-blue);">Yami G on LinkedIn</a> · <a href="mailto:gopal.yami@gmail.com" style="color: var(--accent-blue);">gopal.yami@gmail.com</a>
+        Reach out: <a href="https://www.linkedin.com/in/yami-g-b170294" style="color: var(--accent-blue);">Yami G on LinkedIn</a> · <a href="mailto:contact@berlinailabs.de" style="color: var(--accent-blue);">contact@berlinailabs.de</a>
     </p>
 
 </section>
 
 <footer>
-    <p>CAA v0.1 · March 2026 · <a href="/">Berlin AI Labs</a></p>
+    <p>CAA v0.1 · March 2026 · <a href="index.html">Berlin AI Labs</a></p>
     <p style="margin-top: 0.5rem;">This framework is published under CC BY-SA 4.0. Cite freely. Build on it.</p>
 </footer>
 

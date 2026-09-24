@@ -31,13 +31,13 @@
                     <span class="bar"></span>
                     <span class="bar"></span>
                 </button>
-                <ul class="nav-menu">
-                    <li><a href="../index.html#products" class="nav-link">Products</a></li>
-                    <li><a href="../index.html#services" class="nav-link">Services</a></li>
+                                <ul class="nav-menu">
+                    <li><a href="../index.html#technology" class="nav-link">Technology</a></li>
+                    <li><a href="../index.html#demonstrations" class="nav-link">Demonstrations</a></li>
+                    <li><a href="../blog.html" class="nav-link active">Research</a></li>
                     <li><a href="../index.html#about" class="nav-link">About</a></li>
-                    <li><a href="../blog.html" class="nav-link active">Blog</a></li>
                     <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
-                    <li><a href="../index.html#contact" class="btn nav-cta btn-primary">Partner with Us</a></li>
+                    <li><a href="../index.html#contact" class="btn nav-cta btn-primary">Request Review</a></li>
                 </ul>
             </div>
         </div>
@@ -73,15 +73,15 @@
 
                 <p class="article-intro">
                     Building a single AI agent is a weekend project. Building a production-grade <strong>Agentic
-                        Suite</strong> that survives the fast-moving LLM landscape? That's a systematic engineering
-                    challenge. At Berlin AI Labs, we recently refactored our entire ecosystem—the <strong>"Berlin AI
+                        Suite</strong> that survives the fast-moving LLM ecosystem? That's a systematic engineering
+                    challenge. At Berlin AI Labs, we recently refactored our entire ecosystem, named the <strong>"Berlin AI
                         Orchestra"</strong>. We used <strong>Domain-Driven Design (DDD)</strong> and <strong>Hexagonal
                         Architecture</strong> to decouple our core logic into 100% independent microservices.
                 </p>
 
                 <h2>The Coupling Problem</h2>
                 <p>
-                    Most agentic systems start as "Smart Wrappers"—monoliths where the business logic, prompt templates,
+                    Most agentic systems start as "Smart Wrappers", monoliths where the business logic, prompt templates,
                     and infrastructure (Cloudinary, Vector DBs) are tightly braided together. It's fine for an MVP.
                     It's a nightmare for a platform.
                 </p>
@@ -96,7 +96,7 @@
                 <p>
                     The first step in DDD is identifying <strong>Bounded Contexts</strong>. A "Conversation" in a mental
                     health chatbot has different invariants than a "Conversation" in a marketing reel generator.
-                    However, for our <strong>AgentOps Suite</strong>, we needed a shared vocabulary—a <strong>Ubiquitous
+                    However, for our <strong>AgentOps Suite</strong>, we needed a shared vocabulary: a <strong>Ubiquitous
                         Language</strong>.
                 </p>
                 <p>
@@ -134,7 +134,7 @@ export interface Conversation {
                         interactions for bias and toxicity, keeping the performance ethical.</li>
                     <li><strong>The Percussion (Deadline Enforcer):</strong> Monitors SLA compliance. If an agent misses
                         a beat (timeout or latency spike), the enforcer triggers an intervention.</li>
-                    <li><strong>The Conductor (Capability Broker):</strong> A dynamic discovery service that routes
+                    <li><strong>The Conductor (Capability Broker):</strong> An automated discovery service that routes
                         tasks to the most efficient agent based on real-time availability and specialized scores.</li>
                 </ul>
 
@@ -155,7 +155,7 @@ export interface Conversation {
                 <h2>Verification: Characterization Tests</h2>
                 <p>
                     You don't refactor an orchestra while they're playing a concert without a safety net. Before moving
-                    any code, we wrote <strong>Characterization Tests</strong>—lock-in tests that record the current
+                    any code, we wrote <strong>Characterization Tests</strong>: lock-in tests that record the current
                     behavior of the system.
                 </p>
                 <p>
@@ -207,52 +207,42 @@ export interface Conversation {
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
+                            <div class="footer-section">
                     <div class="footer-logo">
                         <img src="../logo.svg" alt="Berlin AI Labs" class="logo">
                         <span class="logo-text">Berlin AI Labs</span>
                     </div>
                     <p class="footer-description">
-                        AI Innovation Lab building breakthrough products for compliance, governance, and automation.
-                        Enterprise services for German SMBs. 100% DSGVO-konform.
+                        Runtime execution security and verifiable compliance for autonomous AI agents.
                     </p>
                 </div>
                 <div class="footer-section">
-                    <h4>Products</h4>
+                    <h4>Demonstrations</h4>
                     <ul class="footer-links">
                         <li><a href="../ConvoGuardAI.html">ConvoGuard AI</a></li>
-                        <li><a href="../AgentTrustProtocol.html">AgentOps Suite</a></li>
+                        <li><a href="https://agentops.berlinailabs.de" target="_blank">AgentOps</a></li>
+                        <li><a href="../courtroom-demo.html">Aegis-12 Gateway</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Services</h4>
+                    <h4>Navigation</h4>
                     <ul class="footer-links">
-                        <li><a href="../index.html#services">Übersetzungen</a></li>
-                        <li><a href="../index.html#services">Rechnungsverarbeitung</a></li>
-                        <li><a href="../index.html#services">Lead Automation</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul class="footer-links">
+                        <li><a href="../index.html#technology">Technology</a></li>
+                        <li><a href="../index.html#demonstrations">Demonstrations</a></li>
+                        <li><a href="../blog.html">Research</a></li>
                         <li><a href="../index.html#about">About</a></li>
-                        <li><a href="../blog.html">Blog</a></li>
-                        <li><a href="../index.html#contact">Contact</a></li>
-                        <li><a href="../impressum.html">Impressum</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Contact</h4>
                     <ul class="footer-contact">
-                        <li><a href="mailto:sales@berlinailabs.de">sales@berlinailabs.de</a></li>
-                        <li><a href="tel:+4917614619226">+49 176 146 19 226</a></li>
-                        <li>Berlin, Deutschland</li>
+                        <li><a href="mailto:contact@berlinailabs.de">contact@berlinailabs.de</a></li>
+                        <li>Berlin, Germany</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Berlin AI Labs. Alle Rechte vorbehalten. | <a href="../impressum.html">Impressum</a></p>
+                <p>&copy; 2026 Berlin AI Labs. All rights reserved. | <a href="../impressum.html">Impressum</a></p>
             </div>
         </div>
     </footer>

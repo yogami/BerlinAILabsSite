@@ -4,3 +4,7 @@ node_modules/
 # Agent Context Injections
 .agent_rules.md
 .agent_catalog.md
+
+.DS_Store
+.railway_home/
+.railway_tmp/
