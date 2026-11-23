@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Berlin AI Labs | Autonomous Agent Runtimes, Kernels & Execution Harnesses</title>
+    <title>Berlin AI Labs | Agent Harnessing, Execution Kernels & Runtime Engineering</title>
     <meta name="description"
-        content="Independent systems research lab directed by Yami Gopal in Berlin. Architecting deterministic execution harnesses, agent kernels, distributed multi-agent swarms, and OS-level sandboxing.">
+        content="Independent agentic engineering lab in Berlin directed by Yami Gopal. Building deterministic agent execution harnesses, step-budgeted kernels, in-flight OTLP agent steering, tri-state memory airlocks, and knowledge-graph verifiers.">
     <meta name="keywords"
-        content="Agent Harness, Agent Kernel, Autonomous Agent Runtime, MCP Security, Multi-Agent DDD, Rust Systems, seccomp, Berlin">
+        content="Agent Harnessing, Agentic Engineering, Agent Kernel, In-Flight Agent Steering, Knowledge Graph Verification, Hybrid RAG, MCP Sandbox, Rust Systems, Berlin AI Labs">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,8 +33,9 @@
                     <span class="bar"></span>
                 </button>
                 <ul class="nav-menu">
-                    <li><a href="#architecture" class="nav-link">Architecture</a></li>
-                    <li><a href="#demonstrations" class="nav-link">Demonstrations</a></li>
+                    <li><a href="#architecture" class="nav-link">Harness Architecture</a></li>
+                    <li><a href="#demonstrations" class="nav-link">Core Systems</a></li>
+                    <li><a href="#applied-systems" class="nav-link">Applied Archive</a></li>
                     <li><a href="blog.html" class="nav-link">Research</a></li>
                     <li><a href="#about" class="nav-link">About</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -50,160 +51,160 @@
             <div class="hero-content">
                 <span class="hero-badge">
                     <span class="badge-dot"></span>
-                    Berlin AI Labs · Systems Architecture & Research
+                    Berlin AI Labs · Agentic Systems Engineering Lab
                 </span>
-                <h1 class="hero-title">Autonomous Agent Runtimes, <span class="text-gradient-electric">Kernels & Execution Harnesses</span>
+                <h1 class="hero-title">Agent Harnessing, <span class="text-gradient-electric">Execution Kernels &amp; In-Flight Steering</span>
                 </h1>
                 <p class="hero-subtitle">
-                    Architecting deterministic execution environments: process lifecycle, memory trees, tool orchestration, OS-level sandboxing, and verifiable runtime governance. Directed by Yami Gopal.
+                    <code>Agent = Model + Harness</code>. We engineer the deterministic runtime layer around stochastic models: step-budgeted finite state machines, OpenTelemetry in-flight steering, tri-state memory quarantine airlocks, multi-hop knowledge graphs, and OS-level tool sandboxes. Directed by Yami Gopal in Berlin.
                 </p>
                 <div class="hero-cta">
-                    <a href="#architecture" class="btn btn-primary btn-glow btn-large">Inspect Runtime Architecture</a>
-                    <a href="blog.html" class="btn btn-secondary btn-glass">Research & Architecture Papers</a>
+                    <a href="agent-kernel.html" class="btn btn-primary btn-glow btn-large">Inspect Agent Kernel (`agent_kernel`)</a>
+                    <a href="blog/agent-harness-steering-graphs.html" class="btn btn-secondary btn-glass">Read "The Missing Compiler" Paper</a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat">
-                        <span class="stat-number">Deterministic</span>
-                        <span class="stat-text">Execution Harness</span>
+                        <span class="stat-number">7-State FSM</span>
+                        <span class="stat-text">Step-Budgeted Harness</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number">Sub-50ms</span>
-                        <span class="stat-text">Kernel Sandboxing</span>
+                        <span class="stat-number">0.0%</span>
+                        <span class="stat-text">Poisoned Memory Writes</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number">DDD</span>
-                        <span class="stat-text">Multi-Agent Swarms</span>
+                        <span class="stat-number">0.025ms</span>
+                        <span class="stat-text">3-Hop Graph Check</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number">Ed25519</span>
-                        <span class="stat-text">Cryptographic Proofs</span>
+                        <span class="stat-number">&lt;1ms</span>
+                        <span class="stat-text">MCP Syscall Framing</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- The Agent Runtime Stack -->
+    <!-- The Agent Harness Architecture -->
     <section class="services" id="architecture">
         <span id="technology"></span>
         <span id="services"></span>
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">Runtime Stack</span>
-                <h2 class="section-title">The Production Agent Runtime Platform</h2>
+                <span class="section-badge">Agentic Engineering</span>
+                <h2 class="section-title">The Six-Layer Agent Execution Harness</h2>
                 <p class="section-subtitle">
-                    Three interconnected subsystems: the execution harness, distributed swarm coordination, and hardware-enforced runtime governance.
+                    Coding agents rely on compilers and test suites to catch errors. For agents operating in complex domains (pharma product specs, medical device traceability, and infrastructure control), the harness is the compiler.
                 </p>
             </div>
             <div class="services-grid">
-                <!-- Pillar 1: Agent Kernels & Harnesses -->
+                <!-- Pillar 1: Step-Budgeted Kernels & In-Flight Steering -->
                 <div class="service-card service-card-enhanced bg-glass">
                     <div class="service-icon" style="font-size: 2rem; margin-bottom: 1rem;">⚙️</div>
-                    <h3 class="service-title">Agent Kernels & Harnesses</h3>
+                    <h3 class="service-title">Kernels &amp; In-Flight Agent Steering</h3>
                     <p class="service-description">
-                        Deterministic process execution, tool dispatch boundaries, memory context trees, and self-healing error recovery loops. Controls how models interact with state, compute, and external dependencies.
+                        Replacing unconstrained prompt loops with a 7-state Finite State Machine (`COMPOSE_CONTEXT` to `PERSIST_EPISODE`). OpenTelemetry span hooks intercept intermediate emissions and inject targeted steering corrections while context is hot in the KV cache.
                     </p>
                     <ul class="service-features" style="list-style-type: none; padding: 0; margin-top: 1.25rem; color: var(--text-muted); font-size: 0.9rem;">
-                        <li style="margin-bottom: 0.5rem;">🔄 Self-healing execution loops and state rollback</li>
-                        <li style="margin-bottom: 0.5rem;">🌳 Hierarchical memory and context window pruning</li>
-                        <li>⚡ Deterministic tool dispatch and schema validation</li>
+                        <li style="margin-bottom: 0.5rem;">🎯 Bounded 2-retry hot-context steering loops</li>
+                        <li style="margin-bottom: 0.5rem;">🛑 Hard step (`max_steps=5`), token, USD, and cycle breakers</li>
+                        <li>📦 Pluggable YAML Domain Pack (`DomainPack`) policy manifests</li>
                     </ul>
                 </div>
 
-                <!-- Pillar 2: Distributed Multi-Agent Orchestration -->
+                <!-- Pillar 2: Tri-State Memory Airlocks & Knowledge Graphs -->
                 <div class="service-card service-card-enhanced bg-glass">
-                    <div class="service-icon" style="font-size: 2rem; margin-bottom: 1rem;">🎼</div>
-                    <h3 class="service-title">Multi-Agent Orchestration</h3>
+                    <div class="service-icon" style="font-size: 2rem; margin-bottom: 1rem;">🕸️</div>
+                    <h3 class="service-title">Memory Airlocks &amp; Knowledge Graphs</h3>
                     <p class="service-description">
-                        Applying Domain-Driven Design and Hexagonal Architecture to multi-agent swarms. Separating bounded contexts, managing asynchronous event sourcing, and cascading through tiered model capability ladders.
+                        Preventing long-horizon state poisoning through a Tri-State Memory Quarantine (`episodes` → `fact_quarantine` → `semantic_facts`). Pairing Hybrid RAG (`BM25` + Dense Cosine + Reciprocal Rank Fusion $k=60$) with bidirectional Knowledge Graph adjacency traversal to intercept conflicting facts before database writes.
                     </p>
                     <ul class="service-features" style="list-style-type: none; padding: 0; margin-top: 1.25rem; color: var(--text-muted); font-size: 0.9rem;">
-                        <li style="margin-bottom: 0.5rem;">🏛️ Bounded contexts and domain event sourcing</li>
-                        <li style="margin-bottom: 0.5rem;">🪜 Tiered model routing from fast heuristics to deep reasoning</li>
-                        <li>🤝 Resilient multi-agent handoffs without context drift</li>
+                        <li style="margin-bottom: 0.5rem;">🔒 Verification Air-Lock (`confidence &ge; 0.85` + span provenance)</li>
+                        <li style="margin-bottom: 0.5rem;">⚡ 0.025ms $k$-hop blast-radius traversal (ISO 14971 / SmPCs)</li>
+                        <li>🧪 Pre-flight fact contradiction gates in Pytest eval harnesses</li>
                     </ul>
                 </div>
 
-                <!-- Pillar 3: Execution Sandboxing & Governance -->
+                <!-- Pillar 3: OS Sandboxing & Multi-Agent DDD -->
                 <div class="service-card service-card-enhanced bg-glass">
                     <div class="service-icon" style="font-size: 2rem; margin-bottom: 1rem;">🛡️</div>
-                    <h3 class="service-title">Sandboxing & Governance</h3>
+                    <h3 class="service-title">OS Sandboxing &amp; DDD Swarms</h3>
                     <p class="service-description">
-                        Containing tool execution at the operating system and hardware boundary. Restricting stdio-based MCP tools via native Linux seccomp/Landlock, attesting execution in hardware TEEs, and signing audit traces.
+                        Enforcing execution boundaries at the operating system kernel and across distributed multi-agent bounded contexts. Jailing `stdio` MCP servers in Rust via Linux `seccomp`/`Landlock` and signing runtime audit trails with Ed25519 keys.
                     </p>
                     <ul class="service-features" style="list-style-type: none; padding: 0; margin-top: 1.25rem; color: var(--text-muted); font-size: 0.9rem;">
-                        <li style="margin-bottom: 0.5rem;">📦 Sub-50ms process jailing (Apple Seatbelt / Linux seccomp)</li>
-                        <li style="margin-bottom: 0.5rem;">✍️ Cryptographic Ed25519 execution proofs (VERA)</li>
-                        <li>⚖️ Article 14 human oversight and multisig approval gates</li>
+                        <li style="margin-bottom: 0.5rem;">🦀 Sub-millisecond Rust process jailing (Seatbelt / Landlock)</li>
+                        <li style="margin-bottom: 0.5rem;">🏛️ Hexagonal Ports &amp; Adapters with monotonic eval gates</li>
+                        <li>✍️ Ed25519 cryptographic execution proofs (VERA)</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Production Systems & Interactive Demos -->
+    <!-- Primary Flagship Systems: Agent Harnessing & Runtime Control -->
     <section class="products" id="demonstrations">
         <span id="case-studies"></span>
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">Interactive Systems</span>
-                <h2 class="section-title">Production Systems & Demonstrations</h2>
+                <span class="section-badge">Core Flagship Systems</span>
+                <h2 class="section-title">Agent Harnesses, Kernels &amp; Control Planes</h2>
                 <p class="section-subtitle">
-                    Interactive prototypes, compliance middleware, and runtime governance control planes built by the lab.
+                    Production-grade execution kernels, in-flight steering engines, and OS-level sandboxes built inside the lab.
                 </p>
             </div>
             <div class="products-grid">
+                <a href="agent-kernel.html" class="product-card product-card-featured product-card-glow">
+                    <div class="product-image">
+                        <img src="images/hero-abstract.png" alt="Agent Kernel Architecture">
+                    </div>
+                    <div class="product-content">
+                        <span class="product-tag">Flagship Execution Harness</span>
+                        <h3 class="product-title">Agent Kernel (`agent_kernel`)</h3>
+                        <p class="product-description">
+                            Framework-free Python 3.12 execution harness featuring a 7-state FSM, Tri-State Memory Quarantine (0.0% contradiction writes in Synthea stress tests), Hybrid RRF RAG, 25-microsecond Knowledge Graph traversal, and 165 automated Pytest regression gates.
+                        </p>
+                        <span class="product-link">Inspect Kernel Specification →</span>
+                    </div>
+                </a>
+                <a href="blog/agent-harness-steering-graphs.html" class="product-card product-card-glow">
+                    <div class="product-image">
+                        <img src="images/blog-ai-engineering.png" alt="In-Flight Agent Steering & Pharma/MedTech Graphs">
+                    </div>
+                    <div class="product-content">
+                        <span class="product-tag">In-Flight Steering &amp; Ontologies</span>
+                        <h3 class="product-title">Steering &amp; Graph Verifier</h3>
+                        <p class="product-description">
+                            Runtime compiler for regulated specs (80-page Pharma SmPC dossiers, SNOMED/MedDRA ontologies, and ISO 14971 risk graphs). Intercepts OTLP spans for bounded 2-retry hot-context steering.
+                        </p>
+                        <span class="product-link">Read Architecture Paper →</span>
+                    </div>
+                </a>
                 <a href="aegismcp.html" class="product-card product-card-glow">
                     <div class="product-image">
                         <img src="images/product-aegismcp.png" alt="AegisMCP Sandbox">
                     </div>
                     <div class="product-content">
                         <span class="product-tag">Model Context Protocol Security</span>
-                        <h3 class="product-title">AegisMCP Sandbox</h3>
+                        <h3 class="product-title">AegisMCP Kernel Sandbox</h3>
                         <p class="product-description">
-                            OS-native sandboxing proxy in Rust securing Anthropic's Model Context Protocol (MCP). Shields host filesystems and local sockets from prompt injection.
+                            OS-native sandboxing proxy written in Rust for Anthropic's Model Context Protocol (`stdio`). Blocks prompt-injection filesystem and socket exfiltration at the kernel syscall boundary.
                         </p>
-                        <span class="product-link">Inspect Architecture →</span>
+                        <span class="product-link">Inspect Rust Architecture →</span>
                     </div>
                 </a>
-                <a href="courtroom-demo.html" class="product-card product-card-glow">
-                    <div class="product-image">
-                        <img src="images/product-promo.png" alt="Aegis-12 TEE Gateway">
-                    </div>
-                    <div class="product-content">
-                        <span class="product-tag">EU AI Act Security</span>
-                        <h3 class="product-title">Aegis-12 TEE Gateway</h3>
-                        <p class="product-description">
-                            Interactive hardware-enforced runtime verification. Watch an enclave intercept a 50,000 USDC transfer and enforce Article 14 multisig approval.
-                        </p>
-                        <span class="product-link">Launch Simulation →</span>
-                    </div>
-                </a>
-                <a href="ConvoGuardAI.html" class="product-card product-card-featured product-card-glow">
-                    <div class="product-image">
-                        <img src="images/product-convoguard.png" alt="ConvoGuard AI">
-                    </div>
-                    <div class="product-content">
-                        <span class="product-tag">Healthcare Compliance</span>
-                        <h3 class="product-title">ConvoGuard AI Middleware</h3>
-                        <p class="product-description">
-                            Real-time compliance API for conversational health agents. Sub-20ms latency boundaries, GDPR pseudonymization, and 100% crisis detection recall.
-                        </p>
-                        <span class="product-link">Read Case Study →</span>
-                    </div>
-                </a>
-                <a href="https://agentops.berlinailabs.de" target="_blank"
+                <a href="AgentTrustProtocol.html"
                     class="product-card product-card-glow">
                     <div class="product-image">
-                        <img src="images/product-agentops.png" alt="AgentOps Mission Control">
+                        <img src="images/product-agentops.png" alt="AgentOps & Trust Scoring Architecture">
                     </div>
                     <div class="product-content">
-                        <span class="product-tag">Agent Governance</span>
-                        <h3 class="product-title">AgentOps Mission Control</h3>
+                        <span class="product-tag">Fleet Governance &amp; Scoring</span>
+                        <h3 class="product-title">AgentOps &amp; Trust Protocol</h3>
                         <p class="product-description">
-                            Fleet governance console for autonomous agents featuring real-time compliance tracking, emergency kill switches, and execution telemetry.
+                            Runtime governance and risk-scoring architecture for autonomous agent fleets with trace inspection, step-budget tracking, and cryptographic audit receipts.
                         </p>
-                        <span class="product-link">View Live Dashboard →</span>
+                        <span class="product-link">Inspect Governance Study →</span>
                     </div>
                 </a>
             </div>
@@ -214,18 +215,26 @@
     <section class="services" id="research" style="background: rgba(15, 18, 25, 0.6); padding: 5rem 0;">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">Systems Research</span>
-                <h2 class="section-title">Featured Research & Engineering Essays</h2>
+                <span class="section-badge">Lab Publications</span>
+                <h2 class="section-title">Featured Research &amp; Engineering Papers</h2>
                 <p class="section-subtitle">
-                    In-depth architectural analysis on agent runtime isolation, domain-driven design, and model capability routing.
+                    Technical papers on in-flight agent steering, knowledge-graph verification, OS syscall jailing, and multi-agent Domain-Driven Design.
                 </p>
             </div>
-            <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+            <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));">
                 <div class="service-card service-card-enhanced bg-glass">
-                    <span class="product-tag" style="background: rgba(255, 143, 94, 0.15); color: var(--primary) !important;">Security Paper</span>
+                    <span class="product-tag" style="background: rgba(255, 143, 94, 0.15); color: var(--primary) !important;">Agent Harnessing</span>
+                    <h3 class="service-title" style="margin-top: 0.75rem;">The Missing Compiler: In-Flight Steering &amp; Graph Traceability</h3>
+                    <p class="service-description">
+                        Why non-coding agents suffer from completeness decay on 80-page pharmaceutical SmPCs and ISO 14971 dossiers, and how OTLP span hooks + Tri-State Memory Airlocks restore determinism.
+                    </p>
+                    <a href="blog/agent-harness-steering-graphs.html" class="product-link" style="margin-top: 1rem; display: inline-block;">Read Technical Essay →</a>
+                </div>
+                <div class="service-card service-card-enhanced bg-glass">
+                    <span class="product-tag" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa !important;">Syscall Isolation</span>
                     <h3 class="service-title" style="margin-top: 0.75rem;">Securing stdio: The Hidden Security Threat in MCP</h3>
                     <p class="service-description">
-                        Most MCP integrations communicate over stdio, bypassing corporate network gateways. Here is how we contained prompt-injection exfiltration at the syscall level using Rust.
+                        Local MCP tools communicate over unmonitored stdio pipes with full user privileges. Here is how we isolated tool processes at the syscall boundary in Rust.
                     </p>
                     <a href="blog/aegismcp-security-sandbox.html" class="product-link" style="margin-top: 1rem; display: inline-block;">Read Technical Essay →</a>
                 </div>
@@ -233,49 +242,65 @@
                     <span class="product-tag" style="background: rgba(94, 143, 255, 0.15); color: #818cf8 !important;">Distributed Architecture</span>
                     <h3 class="service-title" style="margin-top: 0.75rem;">Domain-Driven Design for Multi-Agent Swarms</h3>
                     <p class="service-description">
-                        Applying Domain-Driven Design and Hexagonal Architecture to build decoupled agent swarms that maintain deterministic state without corruption.
+                        Applying Bounded Contexts and Hexagonal Ports &amp; Adapters to build decoupled agent swarms Verified across 305+ characterization tests with zero regressions.
                     </p>
                     <a href="blog/berlin-ai-orchestra-ddd.html" class="product-link" style="margin-top: 1rem; display: inline-block;">Read Technical Essay →</a>
                 </div>
-                <div class="service-card service-card-enhanced bg-glass">
-                    <span class="product-tag" style="background: rgba(46, 213, 115, 0.15); color: #34d399 !important;">Model Routing</span>
-                    <h3 class="service-title" style="margin-top: 0.75rem;">Improving Quality with a Tiered Model Ladder</h3>
-                    <p class="service-description">
-                        Orchestrating model capability tiers for cost and latency optimization. Heavy reasoning models frame the problem; lightweight models execute.
-                    </p>
-                    <a href="blog/tiered-model-ladder.html" class="product-link" style="margin-top: 1rem; display: inline-block;">Read Technical Essay →</a>
-                </div>
             </div>
             <div style="text-align: center; margin-top: 3rem;">
-                <a href="blog.html" class="btn btn-secondary btn-glass">Explore All 11 Engineering Essays in Research Archive →</a>
+                <a href="blog.html" class="btn btn-secondary btn-glass">Explore All 12 Engineering Papers in Research Archive →</a>
             </div>
         </div>
     </section>
 
-    <!-- Applied Systems & Engineering Archive -->
+    <!-- Secondary Tier: Applied Systems, Compliance Middleware & Multimodal Pipelines -->
     <section class="products" id="applied-systems" style="padding: 5rem 0;">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">Applied Systems Archive</span>
-                <h2 class="section-title">Applied Systems & Engineering Prototypes</h2>
+                <span class="section-badge">Secondary Lab Systems &amp; Archive</span>
+                <h2 class="section-title">Applied Governance, Compliance &amp; Multimodal Prototypes</h2>
                 <p class="section-subtitle">
-                    Earlier distributed pipelines, multimodal engines, and failure injection systems architected by the lab.
+                    Additional production prototypes, interactive policy gate simulators, healthcare compliance middleware, and distributed media pipelines built at Berlin AI Labs.
                 </p>
             </div>
-            <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+            <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));">
                 <div class="service-card service-card-enhanced bg-glass">
-                    <span class="product-tag">Failure Injection</span>
-                    <h3 class="service-title" style="margin-top: 0.75rem;">AI Canary Monitoring System</h3>
+                    <span class="product-tag">Interactive Policy Simulator</span>
+                    <h3 class="service-title" style="margin-top: 0.75rem;">Aegis-12 Policy Gate Simulator</h3>
                     <p class="service-description">
-                        Synthetic probe execution, runtime failure injection, and automated model drift detection across production agent deployments.
+                        Client-side WebCrypto simulator demonstrating how runtime policy gates intercept high-value tool calls, evaluate transaction thresholds, and enforce Article 14 human-in-the-loop approvals.
                     </p>
-                    <a href="https://canary.berlinailabs.de" target="_blank" class="product-link" style="margin-top: 1rem; display: inline-block;">Launch Live Canary →</a>
+                    <a href="courtroom-demo.html" class="product-link" style="margin-top: 1rem; display: inline-block;">Launch Policy Simulator →</a>
+                </div>
+                <div class="service-card service-card-enhanced bg-glass">
+                    <span class="product-tag">Healthcare Guardrails</span>
+                    <h3 class="service-title" style="margin-top: 0.75rem;">ConvoGuard AI Middleware</h3>
+                    <p class="service-description">
+                        Two-tier clinical conversation validator pairing &lt;5ms deterministic regex heuristics with 170ms to 900ms contextual LLM evaluation across 62 automated Vitest/Playwright tests.
+                    </p>
+                    <a href="ConvoGuardAI.html" class="product-link" style="margin-top: 1rem; display: inline-block;">Read System Study →</a>
+                </div>
+                <div class="service-card service-card-enhanced bg-glass">
+                    <span class="product-tag">Cryptographic Provenance</span>
+                    <h3 class="service-title" style="margin-top: 0.75rem;">CAA (Compliant Agent Architecture) &amp; VERA</h3>
+                    <p class="service-description">
+                        Six architectural principles for compliant-by-construction agents paired with Ed25519-signed Proof-of-Execution (PoE) audit trails.
+                    </p>
+                    <a href="caa-framework.html" class="product-link" style="margin-top: 1rem; display: inline-block;">Inspect CAA Framework →</a>
+                </div>
+                <div class="service-card service-card-enhanced bg-glass">
+                    <span class="product-tag">Monotonic Evaluation</span>
+                    <h3 class="service-title" style="margin-top: 0.75rem;">Self-Healing Canary &amp; Eval Harness</h3>
+                    <p class="service-description">
+                        Counterfactual root-cause attribution (`ops/self_healer.py`) and monotonic non-regression gating across frozen `golden`, `dev`, and `holdout` evaluation splits.
+                    </p>
+                    <a href="agent-kernel.html#benchmarks" class="product-link" style="margin-top: 1rem; display: inline-block;">Inspect Evaluation Benchmarks →</a>
                 </div>
                 <div class="service-card service-card-enhanced bg-glass">
                     <span class="product-tag">Multimodal Video Pipeline</span>
-                    <h3 class="service-title" style="margin-top: 0.75rem;">Multimodal Video Processing Pipeline</h3>
+                    <h3 class="service-title" style="margin-top: 0.75rem;">ReelBerlin Multimodal Video Engine</h3>
                     <p class="service-description">
-                        Autonomous scene segmentation, Whisper speech transcription, and GPU rendering queues for long-form video understanding and clip extraction.
+                        Automated video synthesis pipeline featuring Whisper speech alignment, scene segmentation, and distributed GPU rendering queues.
                     </p>
                     <a href="blog/sota-video-architecture.html" class="product-link" style="margin-top: 1rem; display: inline-block;">Read Pipeline Architecture →</a>
                 </div>
@@ -285,7 +310,7 @@
                     <p class="service-description">
                         Deterministic retry loops, dead-letter queues, and state synchronization across distributed worker nodes in n8n and Python.
                     </p>
-                    <a href="n8ncaseStudy.html" class="product-link" style="margin-top: 1rem; display: inline-block;">View Orchestration Case Study →</a>
+                    <a href="n8ncaseStudy.html" class="product-link" style="margin-top: 1rem; display: inline-block;">View Orchestration Study →</a>
                 </div>
             </div>
         </div>
@@ -297,16 +322,16 @@
             <div class="trust-content">
                 <div class="trust-stats">
                     <div class="trust-stat">
-                        <span class="trust-icon">🛡️</span>
-                        <span class="trust-label">EU AI Act Ready</span>
+                        <span class="trust-icon">⚙️</span>
+                        <span class="trust-label">Deterministic FSM Kernels</span>
                     </div>
                     <div class="trust-stat">
-                        <span class="trust-icon">⚡</span>
-                        <span class="trust-label">Sub-50ms Sandboxing</span>
+                        <span class="trust-icon">🕸️</span>
+                        <span class="trust-label">25µs Graph Verification</span>
                     </div>
                     <div class="trust-stat">
-                        <span class="trust-icon">🔒</span>
-                        <span class="trust-label">DSGVO-Konform</span>
+                        <span class="trust-icon">🦀</span>
+                        <span class="trust-label">Rust Syscall Sandboxing</span>
                     </div>
                     <div class="trust-stat">
                         <span class="trust-icon">🇩🇪</span>
@@ -322,48 +347,48 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <span class="section-badge">The Architect</span>
-                    <h2 class="section-title">Systems Architecture & Research, <br>Directed by Yami Gopal</h2>
+                    <span class="section-badge">The Lab</span>
+                    <h2 class="section-title">Independent Agentic Systems Lab, <br>Directed by Yami Gopal</h2>
                     <p class="about-description">
-                        I direct Berlin AI Labs as an independent systems research lab focused on autonomous agent runtimes, kernels, and execution security.
+                        Berlin AI Labs is an independent systems engineering and research lab in Berlin dedicated to the runtime architecture of autonomous agents.
                     </p>
                     <p class="about-description">
-                        With fifteen years of background designing carrier-grade distributed systems, high-throughput financial backends, and low-level software infrastructure across Europe, I focus on the hard engineering layer: how to make autonomous agents deterministic, isolated, and production-viable.
+                        Grounded in twenty years of systems engineering, our work focuses on the deterministic harness layer around stochastic models. Yami began in enterprise software engineering in the US at Tallan, led agile delivery and extreme programming (XP) engineering teams at Hike, Personio, and Boehringer Ingelheim, and has spent the last four years building AI systems and execution harnesses in Berlin.
                     </p>
                     <p class="about-description">
-                        Available for Principal and Staff Systems Engineering roles, founding engineer opportunities, and high-impact technical advisory.
+                        Today, the lab builds open-source execution kernels (`agent_kernel`), clinical guardrail engines (`ConvoGuard AI`), and OS-level MCP sandboxes (`AegisMCP`), benchmarked against regulated domain specifications and verified with 165 automated Pytest regression gates.
                     </p>
                     <div class="about-skills">
-                        <div class="skill-tag">Agent Runtime Architecture</div>
-                        <div class="skill-tag">Agent Kernel & Harness Design</div>
-                        <div class="skill-tag">Rust Systems Engineering</div>
-                        <div class="skill-tag">OS Sandboxing (seccomp / Landlock)</div>
-                        <div class="skill-tag">Distributed Multi-Agent DDD</div>
-                        <div class="skill-tag">Cryptographic Proof Chains</div>
+                        <div class="skill-tag">Agent Harness &amp; Kernel Design</div>
+                        <div class="skill-tag">In-Flight OTLP Agent Steering</div>
+                        <div class="skill-tag">Knowledge Graph Traceability</div>
+                        <div class="skill-tag">Hybrid RAG (BM25 + Dense + RRF)</div>
+                        <div class="skill-tag">Rust OS Sandboxing (seccomp / Landlock)</div>
+                        <div class="skill-tag">Automated Pytest Eval Suites</div>
                     </div>
-                    <a href="#contact" class="btn btn-primary btn-glow" style="margin-top: 2rem;">Initiate Technical Discussion</a>
+                    <a href="#contact" class="btn btn-primary btn-glow" style="margin-top: 2rem;">Get in Touch</a>
                 </div>
                 <div class="about-image">
-                    <img src="images/yami-profile.png" alt="Yami Gopal - Principal Systems Architect" class="profile-image">
+                    <img src="images/yami-profile.png" alt="Yami Gopal - Berlin AI Labs" class="profile-image">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Technical Collaboration & Inquiries Section -->
+    <!-- Open-Ended Lab Contact Section -->
     <section class="contact" id="contact" style="padding: 6rem 0;">
         <div class="container">
             <div class="contact-content" style="text-align: center; max-width: 680px; margin: 0 auto;">
-                <span class="section-badge">Direct Connection</span>
-                <h2 class="section-title">Initiate Technical Discussion</h2>
+                <span class="section-badge">Open Channel</span>
+                <h2 class="section-title">Get in Touch</h2>
                 <p class="contact-description" style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.6;">
-                    Direct access to Yami Gopal for Principal and Staff engineering roles, founding infrastructure discussions, and agent runtime architecture advisory.
+                    Whether you want to exchange notes on agent harnessing and execution kernels, discuss our research papers and benchmarks, or connect on any other topic, feel free to reach out directly.
                 </p>
                 
                 <div style="background: rgba(24, 25, 32, 0.6); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 2rem; margin-top: 2rem; text-align: left;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1rem; margin-bottom: 1.25rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem;">
                         <div>
-                            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">Principal Systems Architect</div>
+                            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">Lab Director</div>
                             <div style="font-weight: 600; color: var(--text-main);">Yami Gopal</div>
                         </div>
                         <div style="text-align: right;">
@@ -373,15 +398,16 @@
                     </div>
 
                     <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1.5rem;">
-                        <a href="mailto:contact@berlinailabs.de?subject=Technical%20Inquiry%20%2F%20Engineering%20Discussion" class="btn btn-primary btn-glow" style="flex: 1; min-width: 220px; text-align: center;">Send Technical Inquiry</a>
-                        <a href="#" onclick="openCalendly(); return false;" class="btn btn-secondary btn-glass" style="flex: 1; min-width: 220px; text-align: center;">Schedule Architecture Discussion</a>
+                        <a href="mailto:contact@berlinailabs.de" class="btn btn-primary btn-glow" style="flex: 1; min-width: 200px; text-align: center;">Email the Lab</a>
+                        <a href="https://www.linkedin.com/in/yami-g-b170294/" target="_blank" class="btn btn-secondary btn-glass" style="flex: 1; min-width: 200px; text-align: center;">Connect on LinkedIn</a>
+                        <a href="https://github.com/yogami" target="_blank" class="btn btn-secondary btn-glass" style="flex: 1; min-width: 200px; text-align: center;">GitHub (@yogami)</a>
                     </div>
                 </div>
 
-                <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
+                <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-muted);">
+                    <a href="agent-kernel.html" style="color: inherit; text-decoration: underline;">Agent Kernel Specification →</a>
+                    <a href="blog/agent-harness-steering-graphs.html" style="color: inherit; text-decoration: underline;">In-Flight Steering Paper →</a>
                     <a href="vera-paper.html" style="color: inherit; text-decoration: underline;">VERA Protocol Whitepaper →</a>
-                    <a href="courtroom-demo.html" style="color: inherit; text-decoration: underline;">Article 14 Interactive Gate →</a>
-                    <a href="blog.html" style="color: inherit; text-decoration: underline;">11 Engineering Research Papers →</a>
                 </div>
             </div>
         </div>
@@ -397,31 +423,32 @@
                         <span class="logo-text" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.2rem;">Berlin AI Labs</span>
                     </div>
                     <p class="footer-description" style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
-                        Independent systems research lab directed by Yami Gopal in Berlin. Architecting deterministic execution harnesses, agent kernels, and runtime governance.
+                        Independent systems research and engineering lab directed by Yami Gopal in Berlin. Architecting deterministic agent harnesses, execution kernels, and runtime verification systems.
                     </p>
                 </div>
                 <div class="footer-section">
-                    <h4>Architecture</h4>
+                    <h4>Core Harness</h4>
                     <ul class="footer-links" style="list-style: none; padding: 0;">
-                        <li><a href="#architecture">Agent Kernels & Harnesses</a></li>
-                        <li><a href="#architecture">Multi-Agent Orchestration</a></li>
-                        <li><a href="#architecture">Sandboxing & Governance</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Demonstrations</h4>
-                    <ul class="footer-links" style="list-style: none; padding: 0;">
+                        <li><a href="agent-kernel.html">Agent Kernel (`agent_kernel`)</a></li>
+                        <li><a href="blog/agent-harness-steering-graphs.html">In-Flight Agent Steering</a></li>
                         <li><a href="aegismcp.html">AegisMCP Sandbox</a></li>
-                        <li><a href="courtroom-demo.html">Aegis-12 Gateway</a></li>
-                        <li><a href="ConvoGuardAI.html">ConvoGuard AI</a></li>
-                        <li><a href="https://agentops.berlinailabs.de" target="_blank">AgentOps Mission Control</a></li>
+                        <li><a href="AgentTrustProtocol.html">AgentOps &amp; Trust Protocol</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Company</h4>
+                    <h4>Applied Systems</h4>
                     <ul class="footer-links" style="list-style: none; padding: 0;">
-                        <li><a href="#about">About Yami</a></li>
-                        <li><a href="blog.html">Research Papers</a></li>
+                        <li><a href="courtroom-demo.html">Aegis-12 Policy Gate</a></li>
+                        <li><a href="ConvoGuardAI.html">ConvoGuard AI</a></li>
+                        <li><a href="AgentTrustProtocol.html">CAA &amp; VERA Protocol</a></li>
+                        <li><a href="n8ncaseStudy.html">Distributed Workflows</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Lab</h4>
+                    <ul class="footer-links" style="list-style: none; padding: 0;">
+                        <li><a href="#about">About the Lab</a></li>
+                        <li><a href="blog.html">Research Archive</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li><a href="impressum.html">Impressum</a></li>
                     </ul>

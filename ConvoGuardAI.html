@@ -280,7 +280,7 @@
                     <li><a href="blog.html" class="nav-link">Research</a></li>
                     <li><a href="index.html#about" class="nav-link">About</a></li>
                     <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-                    <li><a href="index.html#contact" class="btn nav-cta">Request Review</a></li>
+                    <li><a href="index.html#contact" class="btn nav-cta">Get in Touch</a></li>
                     <li><a href="ConvoGuardAI.de.html" class="lang-switch" title="Auf Deutsch anzeigen">DE</a></li>
                 </ul>
             </div>
@@ -416,7 +416,8 @@
                 <h2>API Integration</h2>
                 <h3>Validation Request</h3>
                 <div class="code-block">
-curl -X POST https://api.berlinailabs.de/v1/validate \
+# Example self-hosted ConvoGuard endpoint:
+curl -X POST http://localhost:8080/v1/validate \
   -H "Content-Type: application/json" \
   -d '{"transcript": "User: I am feeling completely hopeless about tomorrow..."}'
                 </div>
@@ -542,13 +543,13 @@ curl -X POST https://api.berlinailabs.de/v1/validate \
             <!-- CTA -->
             <div class="case-study-section"
                 style="text-align: center; background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); padding: 4rem; border-radius: 1rem; color: white;">
-                <h2 style="color: white; border: none;">Need Compliance Architecture for Autonomous Agents?</h2>
+                <h2 style="color: white; border: none;">Exchange Notes on Clinical Guardrail Harnesses</h2>
                 <p style="font-size: 1.15rem; max-width: 600px; margin: 0 auto 2rem; line-height: 1.6;">
-                    We conduct targeted agent attack-surface reviews and design verifiable runtime boundaries for companies operating under EU regulatory frameworks.
+                    Interested in two-stage (<5ms regex + contextual LLM) validation gates, deterministic crisis interception, or agent harness architecture? Reach out directly.
                 </p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="index.html#contact" class="btn btn-primary" style="background: white; color: #5b21b6; font-weight: 600;">Request Security Review</a>
-                    <a href="index.html#demonstrations" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.4); color: white;">Explore All Technical Demos</a>
+                    <a href="index.html#contact" class="btn btn-primary" style="background: white; color: #5b21b6; font-weight: 600;">Get in Touch</a>
+                    <a href="agent-kernel.html" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.4); color: white;">Explore Agent Kernel</a>
                 </div>
             </div>
         </div>
@@ -582,7 +583,7 @@ curl -X POST https://api.berlinailabs.de/v1/validate \
                     <ul class="footer-links">
                         <li><a href="index.html#about">About the Founder</a></li>
                         <li><a href="blog.html">Research & Blog</a></li>
-                        <li><a href="index.html#contact">Request Review</a></li>
+                        <li><a href="index.html#contact">Get in Touch</a></li>
                         <li><a href="impressum.html">Impressum</a></li>
                     </ul>
                 </div>

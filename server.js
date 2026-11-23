@@ -141,6 +141,8 @@ const MIME_TYPES = {
   '.html': 'text/html; charset=UTF-8',
   '.css': 'text/css; charset=UTF-8',
   '.js': 'application/javascript; charset=UTF-8',
+  '.txt': 'text/plain; charset=UTF-8',
+  '.xml': 'application/xml; charset=UTF-8',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
@@ -367,25 +369,57 @@ const server = http.createServer((req, res) => {
     }
   }
 
+  // Collapse recursive /blog/blog/... spider-trap paths
+  if (pathname.startsWith('/blog/blog/')) {
+    const collapsed = pathname.replace(/^(\/blog)+/, '/blog');
+    let checkPath = collapsed;
+    if (!path.extname(checkPath)) {
+      checkPath = checkPath + '.html';
+    }
+    const resolvedCollapsed = path.resolve(__dirname, '.' + checkPath);
+    const rawCollapsed = path.resolve(__dirname, '.' + collapsed);
+    if (
+      (resolvedCollapsed.startsWith(__dirname + path.sep) && fs.existsSync(resolvedCollapsed) && fs.statSync(resolvedCollapsed).isFile()) ||
+      (rawCollapsed.startsWith(__dirname + path.sep) && fs.existsSync(rawCollapsed) && fs.statSync(rawCollapsed).isFile())
+    ) {
+      res.writeHead(301, { 'Location': collapsed });
+      res.end();
+      return;
+    }
+    res.writeHead(404, { 'Content-Type': 'text/html; charset=UTF-8' });
+    res.end('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>404 Not Found | Berlin AI Labs</title></head><body style="font-family:sans-serif;background:#0a0b10;color:#e2e8f0;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;"><div style="text-align:center;padding:2rem;"><h1>404 - Page Not Found</h1><p>The requested path does not exist.</p><p><a href="/" style="color:#60a5fa;">Return to Berlin AI Labs</a></p></div></body></html>');
+    return;
+  }
+
   // Static File Serving & Clean Path Routing
-  let filePath = path.join(__dirname, 'index.html');
-  if (pathname !== '/') {
+  let filePath = null;
+  if (pathname === '/' || pathname === '/index.html' || pathname === '/index') {
+    filePath = path.join(__dirname, 'index.html');
+  } else if (pathname === '/blog' || pathname === '/blog/') {
+    filePath = path.join(__dirname, 'blog.html');
+  } else {
     let cleanPath = pathname;
     if (!path.extname(pathname)) {
       cleanPath = pathname + '.html';
     }
-    const potentialPath = path.join(__dirname, cleanPath);
-    if (fs.existsSync(potentialPath) && fs.statSync(potentialPath).isFile()) {
+    const potentialPath = path.resolve(__dirname, '.' + cleanPath);
+    if (potentialPath.startsWith(__dirname + path.sep) && fs.existsSync(potentialPath) && fs.statSync(potentialPath).isFile()) {
       filePath = potentialPath;
     } else {
-      const rawPath = path.join(__dirname, pathname);
-      if (fs.existsSync(rawPath) && fs.statSync(rawPath).isFile()) {
+      const rawPath = path.resolve(__dirname, '.' + pathname);
+      if (rawPath.startsWith(__dirname + path.sep) && fs.existsSync(rawPath) && fs.statSync(rawPath).isFile()) {
         filePath = rawPath;
       }
     }
   }
 
-  if (!filePath.startsWith(__dirname)) {
+  if (!filePath) {
+    res.writeHead(404, { 'Content-Type': 'text/html; charset=UTF-8' });
+    res.end('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>404 Not Found | Berlin AI Labs</title></head><body style="font-family:sans-serif;background:#0a0b10;color:#e2e8f0;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;"><div style="text-align:center;padding:2rem;"><h1>404 - Page Not Found</h1><p>The requested path does not exist.</p><p><a href="/" style="color:#60a5fa;">Return to Berlin AI Labs</a></p></div></body></html>');
+    return;
+  }
+
+  if (!filePath.startsWith(__dirname + path.sep)) {
     res.writeHead(403, { 'Content-Type': 'text/plain' });
     res.end('Forbidden');
     return;

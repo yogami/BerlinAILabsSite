@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Missing Compiler: In-Flight Agent Steering and Knowledge Graph Traceability | Berlin AI Labs</title>
+    <meta name="description"
+        content="Why domain agents in pharmaceutical SmPC extraction and ISO 14971 compliance fail without a runtime compiler, and how OpenTelemetry in-flight steering, tri-state memory airlocks, and knowledge graphs restore determinism.">
+    <meta name="author" content="Yami Gopal, Berlin AI Labs">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav bg-glass">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="nav-brand">
+                    <img src="../logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span>Berlin AI Labs</span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="../index.html#architecture" class="nav-link">Architecture</a></li>
+                    <li><a href="../index.html#demonstrations" class="nav-link">Systems</a></li>
+                    <li><a href="../blog.html" class="nav-link active">Research</a></li>
+                    <li><a href="../index.html#about" class="nav-link">About</a></li>
+                    <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+                    <li><a href="../index.html#contact" class="btn nav-cta btn-primary btn-glow">Get in Touch</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <article class="blog-article">
+        <header class="article-header">
+            <div class="container">
+                <a href="../blog.html" class="back-to-blog">← Back to Research Archive</a>
+                <h1 class="article-title">The Missing Compiler: In-Flight Agent Steering and Knowledge Graph Traceability for Regulated Domains</h1>
+                <div class="article-meta">
+                    <div class="author-info">
+                        <span class="author-name">Yami Gopal</span>
+                        <span class="author-company">Berlin AI Labs</span>
+                    </div>
+                    <div class="article-details">
+                        <span class="publish-date">October 15, 2026</span>
+                        <span class="reading-time">14 min read</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Article Content -->
+        <div class="article-content">
+            <div class="container article-container">
+
+                <p class="article-intro">
+                    Every autonomous system follows one structural identity: <code>Agent = Model + Harness</code>. In software engineering agents, the compiler, static type checker, and test runner provide an automatic deterministic harness. When a model invents a nonexistent struct field in Rust or breaks an interface contract in TypeScript, the compiler rejects the syntax tree within milliseconds and emits a precise line number. Domain agents operating outside software engineering have no native compiler.
+                </p>
+
+                <h2>1. What Happens Without a Runtime Compiler</h2>
+                <p>
+                    Consider two concrete domain tasks we engineered harnesses for in our lab. The first parses 80-page pharmaceutical Summary of Product Characteristics (SmPC) regulatory dossiers to populate structured drug-safety graphs (mapping active substances, posology, contraindications, and adverse reactions to SNOMED CT and MedDRA ontologies). The second maintains end-to-end Design History File traceability for Class IIb and Class III medical devices under EU MDR and ISO 14971.
+                </p>
+                <p>
+                    When an unconstrained language model processes these documents through a standard prompt-and-tool loop, three failure modes appear consistently across runs:
+                </p>
+
+                <ul>
+                    <li>
+                        <strong>Completeness Decay (Underextraction):</strong> On a multi-page clinical table listing 48 distinct adverse reactions across organ classes, raw models routinely extract 32 to 36 entries and terminate the JSON array early. Nothing crashes. The JSON is syntactically valid, so a basic schema parser marks the run as a success while 25% of the regulatory record is silently dropped.
+                    </li>
+                    <li>
+                        <strong>Ungrounded Attribute Synthesis:</strong> When a table cell spans a page boundary or uses nested footnotes for pediatric dosing intervals, the model interpolates plausible numbers rather than flagging an ambiguous span.
+                    </li>
+                    <li>
+                        <strong>Ontology Resolution Drift:</strong> Clinical text uses surface phrasing such as "elevated blood sugar" or "transient renal impairment." Without deterministic entity resolution against MedDRA or SNOMED CT concept IDs, the agent creates duplicate nodes that fracture downstream graph queries.
+                    </li>
+                </ul>
+
+                <h2>2. Why Prompt Stuffing Fails: Attention Dilution</h2>
+                <p>
+                    The instinctive reaction to domain extraction errors is to append more rules to the system prompt. After a few weeks of production incidents, teams end up with a 15,000-token system prompt containing dozens of negative constraints, edge-case tables, and formatting warnings.
+                </p>
+                <p>
+                    That approach hits an immediate wall. Transformer attention degrades across long middle contexts. When 80 pages of PDF markdown compete with 40 pages of static prompt instructions, adherence to individual edge-case rules drops sharply, latency climbs on every turn, and fixing one rule regressions another.
+                </p>
+                <p>
+                    Instead of front-loading every possible domain exception into the static prompt, we moved domain enforcement out of the prompt and into the execution harness. We keep the initial system instructions minimal and apply contextual verification rules in-flight only when the agent touches a specific entity class or tool boundary.
+                </p>
+
+                <h2>3. The Six-Layer Agent Harness Architecture</h2>
+                <p>
+                    In <a href="../agent-kernel.html"><code>agent_kernel</code></a>, we organize runtime control into six composable layers that surround the model:
+                </p>
+
+                <div class="code-snippet">
+                    <pre><code>┌──────────────────────────────────────────────────────────────────────┐
+│  1. WORKFLOWS     Bounded 7-State FSM (Step, Token &amp; USD Budgets)    │
+│  2. SKILLS        Typed Pydantic/JSON Schemas + Span Provenance      │
+│  3. HOOKS         OpenTelemetry (traceparent) Span Interceptors      │
+│  4. GUARDRAILS    Tri-State Memory Airlock &amp; Ontology Validators     │
+│  5. REVIEW LOOPS  In-Flight Steering (Capped at 2 Hot-Context Retries)│
+│  6. ESCALATION    Quarantine Queue with Side-by-Side Span Diffs      │
+└──────────────────────────────────────────────────────────────────────┘</code></pre>
+                </div>
+
+                <h3>In-Flight Agent Steering via OpenTelemetry Hooks</h3>
+                <p>
+                    During the <code>VALIDATE_OUTPUT</code> state of our finite state machine, the agent emits a structured candidate payload before any database commit occurs. An OpenTelemetry span processor intercepts the candidate payload and runs deterministic domain validators against both the source document AST and the target ontology.
+                </p>
+                <p>
+                    For pharmaceutical SmPC extraction, the validator compares the count of table rows in the parsed layout tree (extracted via Docling / PyMuPDF structural blocks) against the number of emitted JSON entities, verifies that every quoted <code>source_span</code> exists verbatim at the reported character offsets (<code>char_start..char_end</code>), and resolves clinical terms against a local SNOMED CT / MedDRA lookup index.
+                </p>
+                <p>
+                    When the validator detects that 12 rows were skipped on page 44, or that a term failed ontology resolution, it does not abort the run or accept partial data. It injects a targeted, four-line steering prompt back into the active conversation state while the document remains hot in the model's KV cache:
+                </p>
+
+                <div class="code-snippet">
+                    <pre><code>[HARNESS STEERING INTERVENTION · RETRY 1/2]
+Section 4.8 Table 2 (Page 44, rows 37-48) contains 12 unextracted table rows
+under 'Hepatobiliary disorders' and 'Renal and urinary disorders'.
+Emit only the missing AdverseReaction entities with verbatim char_start..char_end
+offsets, or emit ExplicitAbstention if the rows are header dividers.</code></pre>
+                </div>
+
+                <p>
+                    Because the correction arrives only when needed and points to exact structural coordinates, even smaller, faster models recover missing entities without losing precision. We cap steering loops strictly at 2 retries. If a candidate still fails validation on the second retry, the harness transitions deterministically to <code>PERSIST_EPISODE</code> with status <code>QUARANTINED_FOR_HUMAN_REVIEW</code>.
+                </p>
+
+                <h2>4. Tri-State Memory Quarantine: Stopping State Poisoning</h2>
+                <p>
+                    Multi-agent and long-horizon workflows fail catastrophically when an early hallucination is written into shared long-term memory. Once a false claim enters a vector store or relational table, subsequent retrieval steps read it back as established fact.
+                </p>
+                <p>
+                    Our harness (`core/memory_promoter.py` backed by SQLite in `infrastructure/sqlite_fact_store.py` or PostgreSQL via `domain/ports.py`) enforces a strict Tri-State Memory Airlock:
+                </p>
+                <ol>
+                    <li><strong><code>episodes</code> (Immutable Audit Log):</strong> Every raw model generation, tool call, steering intervention, and latency trace is recorded append-only.</li>
+                    <li><strong><code>fact_quarantine</code> (Staging Airlock):</strong> Candidate domain facts extracted during an episode land here first with `PENDING` status. They are invisible to standard agent retrieval queries.</li>
+                    <li><strong><code>semantic_facts</code> (Promoted Store):</strong> A fact moves from quarantine to <code>semantic_facts</code> only after passing closed Pydantic schema validation, semantic neighborhood contradiction checks, confidence thresholding (<code>score &ge; 0.85</code>), and causal consistency checks against the domain Structural Causal Model.</li>
+                </ol>
+                <p>
+                    In our live frontier model evaluation (`ops/run_abc_clinical_eval_v2.py` across $N=12$ multi-hop clinical encounters), un-gated models and generic ReAct harnesses wrote contradictory claims into active memory in 33.3% of encounters, and in our 100-record longitudinal Synthea stress test (`ops/benchmark.py`, 200 encounters), un-gated RAG suffered a 12.5% contradiction rate. The Tri-State Memory Airlock trapped all 25 conflicting assertions in `fact_quarantine`, reducing active memory contradictions to 0.0%.
+                </p>
+
+                <h2>5. Knowledge Graph Traceability &amp; 25-Microsecond Blast-Radius Analysis</h2>
+                <p>
+                    Hybrid retrieval (combining dense cosine embeddings with sparse BM25 lexical search via Reciprocal Rank Fusion $k=60$ in `infrastructure/hybrid_rag.py`) solves passage lookup. It does not solve transitive dependency analysis.
+                </p>
+                <p>
+                    In medical device compliance (ISO 14971 and IEC 62304), regulatory state is a directed graph:
+                </p>
+                <div class="code-snippet">
+                    <pre><code>ProductRequirement (REQ-104: Infusion Pump Flow Rate Controller)
+  └── exposes_hazard ──&gt; Hazard (HAZ-019: Over-infusion &gt; 5% tolerance)
+        ├── leads_to ──&gt; HazardousSituation (SIT-008: Bolus overdose during titration)
+        └── mitigated_by ──&gt; RiskControl (RC-042: Dual-channel hardware watchdog timer)
+              └── verified_by ──&gt; VerificationProtocol (VP-211: Fault-injection bench test)</code></pre>
+                </div>
+                <p>
+                    When an engineer modifies <code>REQ-104</code> or updates a firmware parameter via webhook, asking a vector database "which verification protocols are invalidated by this requirement change?" fails because <code>VP-211</code> shares almost no lexical or semantic overlap with the high-level requirement text.
+                </p>
+                <p>
+                    <code>agent_kernel</code> (`core/graph_memory.py`) maintains an in-memory bidirectional adjacency index (with Radon Cyclomatic Complexity $\le 3$ across all 22 code blocks). Before any state-mutating tool call executes, the harness traverses $k$-hop transitive paths in 0.025 milliseconds (25 microseconds at P95), pairs that structural traversal with a Pearlian $do(X)$ interventional simulation on the domain's Structural Causal Model (`core/causal_graph.py`), and blocks any tool execution that triggers a downstream hazard or contraindication.
+                </p>
+
+                <h2>6. Decoupling Mechanism from Policy</h2>
+                <p>
+                    The central design rule of <a href="../agent-kernel.html"><code>agent_kernel</code></a> is borrowed directly from operating system design: separate mechanism from policy. The Python execution engine knows how to enforce step budgets, intercept OpenTelemetry spans, run Reciprocal Rank Fusion, quarantine unverified facts, and traverse $k$-hop graphs. It knows nothing about pharmaceutical SmPCs, ISO 14971 hazards, or power-grid transformers until it loads a declarative YAML <code>DomainPack</code> at startup.
+                </p>
+                <p>
+                    By treating the execution harness as a deterministic compiler around a stochastic reasoning core, we can deploy small, low-latency models on complex regulatory and engineering workflows without sacrificing auditability or safety invariants.
+                </p>
+
+                <div class="article-footer">
+                    <div class="author-bio">
+                        <div class="author-bio-content">
+                            <h3>About the Author</h3>
+                            <p>
+                                <strong>Yami Gopal</strong> directs Berlin AI Labs, an independent systems engineering lab in Berlin focused on deterministic agent harnesses, execution kernels, OS-level tool sandboxing, and verifiable runtime governance.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Related Systems CTA -->
+    <section class="article-cta">
+        <div class="container">
+            <h2>Explore the Agent Kernel Specification</h2>
+            <p>Inspect the 7-state finite state machine, YAML DomainPack schemas, and empirical A/B/C ablation benchmarks.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+                <a href="../agent-kernel.html" class="btn btn-primary btn-glow">View Agent Kernel Architecture</a>
+                <a href="../index.html#contact" class="btn btn-secondary btn-glass">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../logo.svg" alt="Berlin AI Labs" class="logo">
+                        <span class="logo-text">Berlin AI Labs</span>
+                    </div>
+                    <p class="footer-description">
+                        Independent systems engineering lab building deterministic agent harnesses, kernels, and runtime verification infrastructure.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Core Systems</h4>
+                    <ul class="footer-links">
+                        <li><a href="../agent-kernel.html">Agent Kernel</a></li>
+                        <li><a href="../aegismcp.html">AegisMCP Sandbox</a></li>
+                        <li><a href="../ConvoGuardAI.html">ConvoGuard AI</a></li>
+                        <li><a href="../courtroom-demo.html">Aegis-12 Gateway</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#architecture">Architecture</a></li>
+                        <li><a href="../index.html#demonstrations">Systems</a></li>
+                        <li><a href="../blog.html">Research</a></li>
+                        <li><a href="../index.html#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:contact@berlinailabs.de">contact@berlinailabs.de</a></li>
+                        <li>Berlin, Germany</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Berlin AI Labs. All rights reserved. | <a href="../impressum.html">Impressum</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>

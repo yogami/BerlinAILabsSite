@@ -308,7 +308,7 @@
                     <li><a href="blog.html" class="nav-link">Research</a></li>
                     <li><a href="index.html#about" class="nav-link">About</a></li>
                     <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-                    <li><a href="index.html#contact" class="btn nav-cta btn-primary">Request Review</a></li>
+                    <li><a href="index.html#contact" class="btn nav-cta btn-primary">Get in Touch</a></li>
                 </ul>
             </div>
         </div>
@@ -319,30 +319,37 @@
             <div class="demo-header">
                 <span class="hero-badge">
                     <span class="badge-dot"></span>
-                    Aegis-12 Gateway: Runtime Policy Gate
+                    Aegis-12 Gateway: Interactive Policy Gate Simulator
                 </span>
-                <h1>Article 14 <span class="text-gradient-electric">Enforcement</span></h1>
-                <p class="hero-subtitle" style="margin-bottom: 1rem; max-width: 720px; margin-left: auto; margin-right: auto;">
-                    Interactive simulation of hardware-enforced agent containment. Watch the enclave evaluate intent, halt a 50,000 USDC transfer, and bind the execution payload to human multisig approval.
+                <h1>Article 14 <span class="text-gradient-electric">Runtime Gate Simulator</span></h1>
+                <p class="hero-subtitle" style="margin-bottom: 1rem; max-width: 760px; margin-left: auto; margin-right: auto;">
+                    Interactive client-side protocol simulator using browser WebCrypto (`crypto.subtle`). Test how the policy gate evaluates transaction thresholds: autonomous execution below 10,000 USDC versus Article 14 human multisig escalation above 10,000 USDC.
                 </p>
             </div>
 
-            <div class="demo-console-bar">
-                <div class="console-meta">
+            <div class="demo-console-bar" style="flex-wrap: wrap; gap: 1rem;">
+                <div class="console-meta" style="flex-wrap: wrap;">
                     <div class="console-item">
                         <span class="status-dot pulse"></span>
-                        <span>ENCLAVE: ONLINE (eu-central-1)</span>
+                        <span>MODE: CLIENT-SIDE WEBCRYPTO SIMULATOR</span>
                     </div>
                     <div class="console-item">
-                        <span>POLICY: TIER-4-HOTL</span>
+                        <span>AUTONOMOUS LIMIT: 10,000 USDC</span>
                     </div>
                     <div class="console-item">
-                        <span>ATTESTATION: DSTACK-SGX</span>
+                        <label for="sim-amount-input" style="color: #cbd5e1;">TEST AMOUNT (USDC):</label>
+                        <input id="sim-amount-input" type="number" value="50000" min="100" max="10000000" step="500"
+                            style="background: #090c13; color: #34d399; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.25rem 0.5rem; width: 110px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
                     </div>
                 </div>
-                <button class="btn btn-primary" id="btn-run" onclick="runSimulation()" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">
-                    ▶ Run Enclave Simulation
-                </button>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <button class="btn btn-secondary" onclick="document.getElementById('sim-amount-input').value=2500; runSimulation();" style="padding: 0.45rem 0.85rem; font-size: 0.78rem;">
+                        Test 2,500 USDC (Auto Pass)
+                    </button>
+                    <button class="btn btn-primary" id="btn-run" onclick="runSimulation()" style="padding: 0.45rem 1.1rem; font-size: 0.82rem;">
+                        ▶ Evaluate &amp; Sign Envelope
+                    </button>
+                </div>
             </div>
 
             <div class="split-screen">
@@ -356,13 +363,13 @@
                             </div>
                             <span class="panel-title">AGENT PROCESS TELEMETRY</span>
                         </div>
-                        <span class="panel-badge" id="telemetry-badge">PID: 4892 · IDLE</span>
+                        <span class="panel-badge" id="telemetry-badge">SIMULATOR · READY</span>
                     </div>
                     <div class="terminal-content" id="agent-terminal">
-                        <div class="log-entry visible log-info" style="opacity: 0.7;">
+                        <div class="log-entry visible log-info" style="opacity: 0.85;">
                             <span class="log-time">[READY]</span>
                             <span class="log-tag">INIT</span>
-                            <span>Node.js Eliza agent process online. Click 'Run Enclave Simulation' above.</span>
+                            <span>Enter a USDC transfer amount above (e.g. 2,500 vs 50,000) and click 'Evaluate &amp; Sign Envelope'.</span>
                         </div>
                         <div class="blinking-cursor" id="cursor"></div>
                     </div>
@@ -378,17 +385,17 @@
                             </div>
                             <span class="panel-title">AEGIS-12 POLICY ENFORCEMENT POINT</span>
                         </div>
-                        <span class="panel-badge live">HARDWARE TEE</span>
+                        <span class="panel-badge live">WEBCRYPTO P-256</span>
                     </div>
                     <div class="aegis-matrix">
                         <div class="status-box">
                             <div>
-                                <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Enclave Attestation</div>
-                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #e2e8f0; margin-top: 0.25rem;">Valid dStack SGX Quote</div>
+                                <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Signing Engine</div>
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #e2e8f0; margin-top: 0.25rem;">Browser WebCrypto (SHA-256 / ECDSA)</div>
                             </div>
                             <div style="text-align: right;">
-                                <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Execution Target</div>
-                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #e2e8f0; margin-top: 0.25rem;">Solana (Devnet Vault)</div>
+                                <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Policy Rule</div>
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #e2e8f0; margin-top: 0.25rem;">Max Autonomous &le; 10,000 USDC</div>
                             </div>
                         </div>
 
@@ -398,7 +405,7 @@
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
                                 <div>
                                     <div style="font-size: 0.68rem; color: #94a3b8; margin-bottom: 0.25rem;">Intent Type</div>
-                                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; background: #090c13; padding: 0.5rem 0.65rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); color: #e2e8f0;">solana_transfer</div>
+                                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; background: #090c13; padding: 0.5rem 0.65rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); color: #e2e8f0;">treasury_transfer</div>
                                 </div>
                                 <div>
                                     <div style="font-size: 0.68rem; color: #94a3b8; margin-bottom: 0.25rem;">Requested Amount</div>
@@ -409,32 +416,28 @@
                             </div>
 
                             <div class="alert-box" id="article-alert">
-                                <div style="font-size: 1rem; line-height: 1;">🛡️</div>
+                                <div style="font-size: 1rem; line-height: 1;" id="alert-icon">🛡️</div>
                                 <div>
-                                    <div style="font-weight: 600; color: #f87171; margin-bottom: 0.15rem;">ARTICLE 14 ESCALATION TRIGGERED</div>
-                                    <div>Amount exceeds autonomous limit (10,000 USDC). Direct execution blocked. Requiring 2-of-3 human multisig approval before broadcast.</div>
+                                    <div style="font-weight: 600; color: #f87171; margin-bottom: 0.15rem;" id="alert-title">ARTICLE 14 ESCALATION TRIGGERED</div>
+                                    <div id="alert-desc">Amount exceeds autonomous limit (10,000 USDC). Direct execution blocked. Requiring 2-of-3 human multisig approval before broadcast.</div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="envelope-box" id="envelope-box">
-                            <div style="font-size: 0.72rem; text-transform: uppercase; color: #94a3b8; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Cryptographic Intent Envelope</div>
+                            <div style="font-size: 0.72rem; text-transform: uppercase; color: #94a3b8; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 0.5rem;">Cryptographic Intent Envelope (Real SHA-256 &amp; Signature)</div>
                             <div style="color: rgba(255,255,255,0.4); margin-bottom: 0.25rem;">{</div>
                             <div style="padding-left: 1rem;">
-                                <div><span class="text-json-key">"domain_separator"</span>: <span class="text-json-str">"AEGIS12_ESCALATE_V1"</span>,</div>
-                                <div><span class="text-json-key">"vault_pda"</span>: <span class="text-json-str">"AegisVault_Demo"</span>,</div>
-                                <div><span class="text-json-key">"state_predicates"</span>: <span style="color: rgba(255,255,255,0.4);">{</span></div>
-                                <div style="padding-left: 1rem;">
-                                    <div><span class="text-json-key">"max_input_amount"</span>: <span class="text-json-val">50000000000</span>,</div>
-                                    <div><span class="text-json-key">"valid_until_slot"</span>: <span class="text-json-val">2001000</span></div>
-                                </div>
-                                <div style="color: rgba(255,255,255,0.4);">},</div>
-                                <div><span class="text-json-key">"tee_signature"</span>: <span id="tee-sig" style="color: #64748b;">null</span></div>
+                                <div><span class="text-json-key">"domain_separator"</span>: <span class="text-json-str" id="env-domain">"AEGIS12_ESCALATE_V1"</span>,</div>
+                                <div><span class="text-json-key">"amount_base_units"</span>: <span class="text-json-val" id="env-amount">50000000000</span>,</div>
+                                <div><span class="text-json-key">"policy_decision"</span>: <span class="text-json-str" id="env-decision">"REQUIRE_HUMAN_MULTISIG"</span>,</div>
+                                <div><span class="text-json-key">"payload_sha256"</span>: <span class="text-json-val" id="env-hash">"computing..."</span>,</div>
+                                <div><span class="text-json-key">"webcrypto_signature"</span>: <span id="tee-sig" style="color: #64748b;">null</span></div>
                             </div>
                             <div style="color: rgba(255,255,255,0.4); margin-top: 0.25rem;">}</div>
                             
                             <div id="multisig-badge" style="position: absolute; bottom: 0.85rem; right: 0.85rem; padding: 0.25rem 0.65rem; background: rgba(52, 211, 153, 0.1); border: 1px solid #34d399; color: #34d399; border-radius: 99px; font-weight: 600; font-family: 'Inter', sans-serif; font-size: 0.7rem; opacity: 0; transition: opacity 0.4s;">
-                                ✓ BOUND TO MULTISIG
+                                ✓ SIGNED VIA WEBCRYPTO
                             </div>
                         </div>
                     </div>
@@ -452,30 +455,30 @@
                         <span class="logo-text" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.2rem;">Berlin AI Labs</span>
                     </div>
                     <p class="footer-description" style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
-                        Founder-led applied systems practice for agent execution security and verifiable compliance. Directed by Yami Gopal in Berlin.
+                        Independent systems research and engineering lab in Berlin, directed by Yami Gopal.
                     </p>
                 </div>
                 <div class="footer-section">
-                    <h4>Technology</h4>
+                    <h4>Core Harness</h4>
                     <ul class="footer-links" style="list-style: none; padding: 0;">
-                        <li><a href="index.html#technology">OS Kernel Sandboxing</a></li>
-                        <li><a href="index.html#technology">Execution Proofs (VERA)</a></li>
-                        <li><a href="index.html#technology">Article 14 Human Gates</a></li>
+                        <li><a href="agent-kernel.html">Agent Kernel (`agent_kernel`)</a></li>
+                        <li><a href="aegismcp.html">AegisMCP Sandbox</a></li>
+                        <li><a href="vera-paper.html">VERA Protocol</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Demonstrations</h4>
+                    <h4>Systems</h4>
                     <ul class="footer-links" style="list-style: none; padding: 0;">
                         <li><a href="ConvoGuardAI.html">ConvoGuard AI</a></li>
-                        <li><a href="https://agentops.berlinailabs.de" target="_blank">AgentOps</a></li>
-                        <li><a href="courtroom-demo.html">Aegis-12 Gateway</a></li>
+                        <li><a href="AgentTrustProtocol.html">AgentOps &amp; Trust Protocol</a></li>
+                        <li><a href="courtroom-demo.html">Aegis-12 Simulator</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Company</h4>
+                    <h4>Lab</h4>
                     <ul class="footer-links" style="list-style: none; padding: 0;">
-                        <li><a href="index.html#about">About Us</a></li>
-                        <li><a href="blog.html">Insights Blog</a></li>
+                        <li><a href="index.html#about">About the Lab</a></li>
+                        <li><a href="blog.html">Research Archive</a></li>
                         <li><a href="index.html#contact">Contact</a></li>
                         <li><a href="impressum.html">Impressum</a></li>
                     </ul>
@@ -501,24 +504,53 @@
             return div;
         }
 
+        function bufToHex(buffer) {
+            return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function computeWebCryptoProof(payloadObj) {
+            const canonical = JSON.stringify(payloadObj);
+            const enc = new TextEncoder().encode(canonical);
+            const hashBuf = await window.crypto.subtle.digest('SHA-256', enc);
+            const hashHex = '0x' + bufToHex(hashBuf);
+
+            const keyPair = await window.crypto.subtle.generateKey(
+                { name: 'ECDSA', namedCurve: 'P-256' },
+                true,
+                ['sign', 'verify']
+            );
+            const sigBuf = await window.crypto.subtle.sign(
+                { name: 'ECDSA', hash: { name: 'SHA-256' } },
+                keyPair.privateKey,
+                enc
+            );
+            const sigHex = '0x' + bufToHex(sigBuf);
+            return { hashHex, sigHex };
+        }
+
         async function runSimulation() {
             if (isRunning) return;
             isRunning = true;
+            const amountInput = document.getElementById('sim-amount-input');
+            const rawAmount = Math.max(1, Number(amountInput.value) || 50000);
+            const formattedAmount = rawAmount.toLocaleString('en-US') + ' USDC';
+            const isEscalated = rawAmount > 10000;
+
             const btn = document.getElementById('btn-run');
             const badge = document.getElementById('telemetry-badge');
             btn.style.opacity = '0.5';
-            btn.textContent = 'Simulating...';
+            btn.textContent = 'Evaluating...';
             if (badge) {
                 badge.className = 'panel-badge live';
-                badge.textContent = 'PID: 4892 · STREAM ACTIVE';
+                badge.textContent = 'SIMULATOR · EVALUATING';
             }
             
             const terminal = document.getElementById('agent-terminal');
             const cursor = document.getElementById('cursor');
             
-            // Reset UI
             document.querySelectorAll('.log-entry').forEach(e => e.remove());
             document.getElementById('policy-engine').classList.remove('violated');
+            document.getElementById('ui-amount').textContent = formattedAmount;
             document.getElementById('ui-amount').style.background = '#090c13';
             document.getElementById('ui-amount').style.color = '#e2e8f0';
             document.getElementById('ui-amount').style.fontWeight = 'normal';
@@ -536,43 +568,65 @@
                 terminal.scrollTop = terminal.scrollHeight;
                 void log.offsetWidth;
                 log.classList.add('visible');
-                await sleep(1400);
+                await sleep(450);
             };
 
-            await sleep(400);
-            await appendLog("Received external agent instruction: transfer 50,000 USDC to third-party settlement wallet.", "INTENT", "info");
-            await appendLog("Intercepting payload via Aegis-12 local sidecar proxy...", "INTERCEPT", "info");
-            await appendLog("Dispatching intent verification request to hardware enclave (dStack SGX)...", "ENCLAVE", "info");
-            
-            await appendLog("Enclave evaluating intent against Tier 4 Autonomous limit (10,000 USDC)...", "EVAL", "warn");
-            
-            // Trigger violation
-            document.getElementById('policy-engine').classList.add('violated');
-            document.getElementById('ui-amount').style.background = 'rgba(239, 68, 68, 0.15)';
-            document.getElementById('ui-amount').style.color = '#f87171';
-            document.getElementById('ui-amount').style.fontWeight = '700';
-            document.getElementById('article-alert').classList.add('visible');
+            await appendLog(`Agent proposed tool call: treasury_transfer(${formattedAmount}).`, "INTENT", "info");
+            await appendLog("Evaluating against autonomous policy threshold (max_autonomous = 10,000 USDC)...", "POLICY", "info");
 
-            await appendLog("Threshold breach: 50,000 USDC exceeds maximum autonomous allowance.", "BREACH", "error");
-            await appendLog("EU AI Act Article 14 gate triggered. Outbound broadcast rejected.", "HALTED", "error");
-            
-            await appendLog("Synthesizing Cryptographic Intent Envelope for multisig escalation...", "ENVELOPE", "warn");
+            const baseUnits = Math.round(rawAmount * 1000000);
+            const decision = isEscalated ? "REQUIRE_HUMAN_MULTISIG" : "AUTONOMOUS_EXECUTION_APPROVED";
+            const domainSep = isEscalated ? "AEGIS12_ESCALATE_V1" : "AEGIS12_AUTO_EXEC_V1";
+
+            document.getElementById('env-domain').textContent = `"${domainSep}"`;
+            document.getElementById('env-amount').textContent = String(baseUnits);
+            document.getElementById('env-decision').textContent = `"${decision}"`;
+
+            if (isEscalated) {
+                document.getElementById('policy-engine').classList.add('violated');
+                document.getElementById('ui-amount').style.background = 'rgba(239, 68, 68, 0.15)';
+                document.getElementById('ui-amount').style.color = '#f87171';
+                document.getElementById('ui-amount').style.fontWeight = '700';
+                document.getElementById('alert-title').textContent = 'ARTICLE 14 ESCALATION TRIGGERED';
+                document.getElementById('alert-title').style.color = '#f87171';
+                document.getElementById('alert-desc').textContent = `Requested ${formattedAmount} exceeds 10,000 USDC autonomous ceiling. Direct execution blocked; binding intent to 2-of-3 human multisig.`;
+                document.getElementById('article-alert').classList.add('visible');
+
+                await appendLog(`Threshold breach: ${formattedAmount} > 10,000 USDC autonomous limit.`, "BREACH", "error");
+                await appendLog("Direct execution blocked. Escalating to Article 14 human multisig queue.", "HALTED", "warn");
+            } else {
+                document.getElementById('ui-amount').style.background = 'rgba(16, 185, 129, 0.15)';
+                document.getElementById('ui-amount').style.color = '#34d399';
+                document.getElementById('ui-amount').style.fontWeight = '700';
+                document.getElementById('alert-title').textContent = 'AUTONOMOUS TIER APPROVED';
+                document.getElementById('alert-title').style.color = '#34d399';
+                document.getElementById('alert-desc').textContent = `Requested ${formattedAmount} is within the 10,000 USDC autonomous allowance. Proceeding with signed audit receipt.`;
+                document.getElementById('article-alert').classList.add('visible');
+
+                await appendLog(`Policy check passed: ${formattedAmount} <= 10,000 USDC autonomous limit.`, "PASS", "success");
+            }
+
             document.getElementById('envelope-box').classList.add('visible');
-            
-            await sleep(1800);
-            document.getElementById('tee-sig').textContent = '"0x7840a6b08ef...a1d0e"';
+            const { hashHex, sigHex } = await computeWebCryptoProof({
+                domain_separator: domainSep,
+                amount_base_units: baseUnits,
+                policy_decision: decision
+            });
+
+            document.getElementById('env-hash').textContent = `"${hashHex.slice(0, 22)}...${hashHex.slice(-8)}"`;
+            document.getElementById('tee-sig').textContent = `"${sigHex.slice(0, 22)}...${sigHex.slice(-8)}"`;
             document.getElementById('tee-sig').style.color = '#34d399';
             document.getElementById('multisig-badge').style.opacity = '1';
-            
-            await appendLog("Envelope signed by hardware enclave key. Bound to PDA escrow.", "SIGNED", "success");
-            await appendLog("Agent process execution suspended. Awaiting human multisig signature to proceed.", "WAIT_HOTL", "warn");
+
+            await appendLog(`Computed SHA-256 payload digest: ${hashHex.slice(0, 18)}...`, "SHA256", "info");
+            await appendLog(`Signed envelope via WebCrypto ECDSA P-256: ${sigHex.slice(0, 18)}...`, "SIGNED", "success");
 
             isRunning = false;
             btn.style.opacity = '1';
-            btn.textContent = '▶ Re-run Enclave Simulation';
+            btn.textContent = '▶ Evaluate & Sign Envelope';
             if (badge) {
                 badge.className = 'panel-badge';
-                badge.textContent = 'PID: 4892 · SUSPENDED (HOTL)';
+                badge.textContent = isEscalated ? 'STATE · ESCALATED (HOTL)' : 'STATE · EXECUTED (AUTO)';
             }
         }
     </script>

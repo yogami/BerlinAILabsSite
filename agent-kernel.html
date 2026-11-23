@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Kernel: Deterministic Execution Harness &amp; Memory Airlock | Berlin AI Labs</title>
+    <meta name="description"
+        content="Architectural specification and verified empirical benchmarks of the Berlin AI Labs Agent Execution Kernel (agent_kernel): 7-state finite state machine, tri-state memory quarantine airlock, hybrid RRF retrieval, 25-microsecond knowledge graph traversal, and Pearlian causal gates.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .kernel-hero {
+            background: radial-gradient(circle at 50% 0%, rgba(255, 143, 94, 0.12) 0%, rgba(12, 13, 18, 0.98) 70%);
+            color: #ffffff;
+            padding: 9rem 0 5rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .kernel-hero h1 {
+            font-size: clamp(2.4rem, 4.5vw, 3.75rem);
+            line-height: 1.12;
+            margin-bottom: 1.25rem;
+            color: var(--text-main);
+        }
+
+        .kernel-hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 840px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .equation-banner {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+            background: rgba(24, 26, 36, 0.85);
+            border: 1px solid rgba(255, 143, 94, 0.35);
+            padding: 0.85rem 1.75rem;
+            border-radius: 999px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+        }
+
+        .equation-banner .op {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .meta-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 1.25rem;
+            max-width: 960px;
+            margin: 2.5rem auto 0;
+        }
+
+        .meta-box {
+            background: rgba(24, 26, 36, 0.7);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1.25rem 1rem;
+            text-align: center;
+        }
+
+        .meta-box .val {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.55rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .meta-box .lbl {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+        }
+
+        .spec-container {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 4.5rem 1.5rem;
+        }
+
+        .spec-section {
+            margin-bottom: 4.5rem;
+        }
+
+        .spec-section h2 {
+            font-size: 2rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            padding-bottom: 0.65rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .spec-section h3 {
+            font-size: 1.35rem;
+            color: var(--text-main);
+            margin: 2rem 0 0.85rem;
+        }
+
+        .spec-section p {
+            color: var(--text-muted);
+            font-size: 1.03rem;
+            line-height: 1.75;
+            margin-bottom: 1.15rem;
+        }
+
+        .fsm-pipeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 0.9rem;
+            margin: 2rem 0;
+        }
+
+        .fsm-node {
+            background: rgba(20, 22, 31, 0.9);
+            border: 1px solid var(--border-subtle);
+            border-left: 3px solid var(--primary);
+            border-radius: 10px;
+            padding: 1rem 1.1rem;
+        }
+
+        .fsm-node .step-idx {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .fsm-node .state-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-main);
+            display: block;
+            margin-bottom: 0.45rem;
+        }
+
+        .fsm-node p {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin: 0;
+            color: var(--text-muted);
+        }
+
+        .plane-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .plane-card {
+            background: rgba(20, 22, 31, 0.78);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 1.75rem;
+        }
+
+        .plane-card .plane-tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.73rem;
+            text-transform: uppercase;
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            background: rgba(255, 143, 94, 0.14);
+            color: var(--primary);
+            margin-bottom: 0.85rem;
+        }
+
+        .plane-card h4 {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin: 0 0 0.65rem;
+        }
+
+        .plane-card p {
+            font-size: 0.93rem;
+            line-height: 1.62;
+            margin-bottom: 0.9rem;
+        }
+
+        .code-block {
+            background: #0b0d13;
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 1.35rem 1.5rem;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.84rem;
+            line-height: 1.65;
+            color: #e2e8f0;
+            margin: 1.5rem 0;
+        }
+
+        .benchmark-table-wrap {
+            overflow-x: auto;
+            margin: 1.75rem 0;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            background: rgba(16, 18, 26, 0.85);
+        }
+
+        .benchmark-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            text-align: left;
+        }
+
+        .benchmark-table th {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-main);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            padding: 1rem 1.15rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .benchmark-table td {
+            padding: 0.95rem 1.15rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+        }
+
+        .benchmark-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .benchmark-table .highlight-row td {
+            color: var(--text-main);
+            font-weight: 500;
+            background: rgba(255, 143, 94, 0.07);
+        }
+
+        .disclosure-box {
+            background: rgba(94, 143, 255, 0.06);
+            border-left: 3px solid #818cf8;
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            margin-top: 1.25rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        .disclosure-box strong {
+            color: var(--text-main);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav bg-glass">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="nav-brand">
+                    <img src="logo.svg" alt="Berlin AI Labs" class="logo">
+                    <span>Berlin AI Labs</span>
+                </a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html#architecture" class="nav-link">Harness Architecture</a></li>
+                    <li><a href="index.html#demonstrations" class="nav-link active">Core Systems</a></li>
+                    <li><a href="blog.html" class="nav-link">Research</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                    <li><a href="index.html#contact" class="btn nav-cta btn-primary btn-glow">Get in Touch</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="kernel-hero">
+        <div class="container" style="text-align: center;">
+            <div class="equation-banner">
+                <span>Agent</span>
+                <span class="op">=</span>
+                <span>Model</span>
+                <span class="op">+</span>
+                <span>Execution Harness</span>
+            </div>
+            <h1>Agent Kernel (`agent_kernel`)</h1>
+            <p class="subtitle">
+                A framework-free execution kernel written in Python 3.12 with Pydantic v2 contracts, SQLite append-only episodic storage, a 7-state finite state machine, a Tri-State Memory Quarantine write gate, Hybrid RRF retrieval, an in-memory bidirectional Knowledge Graph, and Pearlian Structural Causal Models. Verified across 165 automated `pytest` tests.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
+                <a href="#fsm-harness" class="btn btn-primary btn-glow">Inspect State Machine</a>
+                <a href="#benchmarks" class="btn btn-secondary btn-glass">View Empirical Benchmarks</a>
+                <a href="blog/agent-harness-steering-graphs.html" class="btn btn-secondary btn-glass">Read "The Missing Compiler" Essay →</a>
+            </div>
+            <div class="meta-strip">
+                <div class="meta-box">
+                    <span class="val">7-State</span>
+                    <span class="lbl">Bounded FSM (`max_steps=5`)</span>
+                </div>
+                <div class="meta-box">
+                    <span class="val">0.025ms</span>
+                    <span class="lbl">3-Hop Graph Traversal</span>
+                </div>
+                <div class="meta-box">
+                    <span class="val">0.0%</span>
+                    <span class="lbl">Contradiction Memory Writes</span>
+                </div>
+                <div class="meta-box">
+                    <span class="val">RRF k=60</span>
+                    <span class="lbl">Hybrid BM25 + Dense RAG</span>
+                </div>
+                <div class="meta-box">
+                    <span class="val">165 Tests</span>
+                    <span class="lbl">Pytest Verification Suite</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specification -->
+    <div class="spec-container">
+
+        <!-- Section 1: Core Engineering Premise -->
+        <div class="spec-section" id="premise">
+            <h2>1. Why Non-Coding Agents Need a Runtime Compiler</h2>
+            <p>
+                Software coding agents benefit from a built-in deterministic oracle: the compiler, static type checker, and unit test suite. When a coding agent invents a method signature, `rustc` or `pytest` halts execution immediately and returns a stack trace with line numbers.
+            </p>
+            <p>
+                Agents operating in clinical decision support, medical device compliance (EU MDR, ISO 14971), or pharmaceutical product specification parsing (80-page Summary of Product Characteristics / SmPC dossiers) lack a natural compiler. Without an external execution harness, generic ReAct tool loops exhibit three recurring failure modes:
+            </p>
+            <ul style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.75; margin-bottom: 1.25rem;">
+                <li><strong>The ReAct Tooling Paradox:</strong> Generic harnesses provide verification tools, but tool invocation remains probabilistic. When the model assumes a clinical order or specification is safe, it skips invoking the verification tool entirely.</li>
+                <li><strong>Long-Horizon Memory Poisoning:</strong> Stateless or flat-RAG harnesses write verbal denials, noisy measurements, or hallucinated attributes straight into active semantic memory, corrupting subsequent turns.</li>
+                <li><strong>Multi-Hop Blind Spots:</strong> Standard dense vector search fails when safety depends on transitive ontological chains (for example, `Augmentin -> contains_ingredient -> Amoxicillin -> cross_reacts_with -> Cephalexin`).</li>
+            </ul>
+            <p>
+                We built `agent_kernel` using Hexagonal Architecture (`domain/ports.py`) to enforce deterministic runtime invariants around stochastic language models while keeping domain policies decoupled in declarative config packs (`config/packs/vN/` and `policies/*.json`).
+            </p>
+        </div>
+
+        <!-- Section 2: Step-Budgeted FSM & In-Flight Steering -->
+        <div class="spec-section" id="fsm-harness">
+            <h2>2. Step-Budgeted Finite State Machine (`core/execution_loop.py`)</h2>
+            <p>
+                The inner loop of `agent_kernel` (`core/execution_loop.py` and `domain/state_machine.py`) forbids open-ended `while True` tool recursion. Every turn executes inside an explicit seven-state machine with a fail-closed error transition (`FAIL_CLOSED`), governed by hard step limits (default `max_steps = 5` raising `BudgetExceededError`), token and USD cost ceilings, and a signature cycle detector that raises `LoopDetectedError` if an identical `(tool_name, canonical_args)` invocation repeats.
+            </p>
+
+            <div class="fsm-pipeline">
+                <div class="fsm-node">
+                    <span class="step-idx">State 01</span>
+                    <span class="state-name">COMPOSE_CONTEXT</span>
+                    <p>`core/context_ram.py` assembles promoted `semantic_facts` (wrapped in untrusted data delimiters), Hybrid RAG chunks, and causal DAG state.</p>
+                </div>
+                <div class="fsm-node">
+                    <span class="step-idx">State 02</span>
+                    <span class="state-name">MODEL_CALL</span>
+                    <p>`infrastructure/llm_adapter.py` dispatches structured reasoning with active config pack rules and span telemetry (`ops/telemetry.py`).</p>
+                </div>
+                <div class="fsm-node">
+                    <span class="step-idx">State 03</span>
+                    <span class="state-name">VALIDATE_TOOL_CALL</span>
+                    <p>Validates closed Pydantic v2 tool schemas (`tools/registry.py`) and checks sliding-window signature history for loop cycles.</p>
+                </div>
+                <div class="fsm-node">
+                    <span class="step-idx">State 04</span>
+                    <span class="state-name">INTERVENTIONAL_GATE</span>
+                    <p>`core/causal_gate.py` &amp; `core/graph_memory.py` execute pre-flight multi-hop graph assertions and Pearlian $do(X)$ causal simulations.</p>
+                </div>
+                <div class="fsm-node">
+                    <span class="step-idx">State 05</span>
+                    <span class="state-name">EXECUTE_TOOL</span>
+                    <p>Runs sandboxed tool handlers (`core/sandbox/`) with path-traversal guards, network isolation, and deterministic audit logging.</p>
+                </div>
+                <div class="fsm-node">
+                    <span class="step-idx">State 06</span>
+                    <span class="state-name">VALIDATE_OUTPUT</span>
+                    <p>`core/guardrails.py` enforces PHI/PII output redaction (`PAT-*`, `MRN:*`), citation checks, and bounded In-Flight Agent Steering retries.</p>
+                </div>
+                <div class="fsm-node">
+                    <span class="step-idx">State 07</span>
+                    <span class="state-name">PERSIST_EPISODE</span>
+                    <p>Writes immutable turn trace to `episodes` (`sqlite_episode_store.py`) and routes candidate facts into `fact_quarantine`.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: The Six Operational Planes -->
+        <div class="spec-section" id="planes">
+            <h2>3. Core Kernel Subsystems &amp; File Architecture</h2>
+            <div class="plane-grid">
+                <div class="plane-card">
+                    <span class="plane-tag">Memory Plane · `core/memory_promoter.py`</span>
+                    <h4>Tri-State Memory Quarantine</h4>
+                    <p>
+                        To prevent unverified model assertions from poisoning future context, persistence (`infrastructure/sqlite_fact_store.py`) is split across three isolated tables:
+                    </p>
+                    <ul style="color: var(--text-muted); font-size: 0.88rem; padding-left: 1.2rem; line-height: 1.65;">
+                        <li><code>episodes</code>: Append-only immutable log of raw turns and tool calls.</li>
+                        <li><code>fact_quarantine</code>: Staging airlock where all candidate extractions land with `PENDING` status. Retrieval queries never read quarantine.</li>
+                        <li><code>semantic_facts</code>: Promoted store. Promotion requires passing closed Pydantic schema validation, semantic neighborhood contradiction checks, confidence thresholding (`score &ge; 0.85`), and SCM causal consistency verification.</li>
+                    </ul>
+                </div>
+
+                <div class="plane-card">
+                    <span class="plane-tag">Retrieval Plane · `infrastructure/hybrid_rag.py`</span>
+                    <h4>Hybrid RAG with RRF ($k=60$)</h4>
+                    <p>
+                        Dense embeddings miss exact clinical or regulatory codes (`ICD-10 I10`, `ISO-14971-7.4`, `SNOMED:73211009`). Our retrieval engine combines:
+                    </p>
+                    <ul style="color: var(--text-muted); font-size: 0.88rem; padding-left: 1.2rem; line-height: 1.65;">
+                        <li>BM25 sparse lexical indexing for exact identifier and dosage matching.</li>
+                        <li>Dense cosine vector index (`infrastructure/vector_index.py`) with metadata filtering.</li>
+                        <li>Reciprocal Rank Fusion ($k = 60$) merging lexical and dense rankings, paired with cross-encoder reranking in enterprise adapters.</li>
+                        <li>Strict provenance formatting attaching document, section, paragraph, and table coordinates to every retrieved chunk.</li>
+                    </ul>
+                </div>
+
+                <div class="plane-card">
+                    <span class="plane-tag">Graph Plane · `core/graph_memory.py`</span>
+                    <h4>25-Microsecond Knowledge Graph</h4>
+                    <p>
+                        `core/graph_memory.py` implements an in-memory bidirectional adjacency index (forward and reverse maps) with Radon Cyclomatic Complexity $\le 3$ across all 22 code blocks.
+                    </p>
+                    <p style="margin-bottom: 0;">
+                        Before any tool executes, the graph gate traverses 1-to-3 hop transitive paths (such as brand-to-ingredient and drug-class cross-reactivity chains) in `0.025ms` (25 microseconds), while path-filtering preserves non-hazardous edges (`treats`) with a 0.0% false-positive rate on clean controls.
+                    </p>
+                </div>
+
+                <div class="plane-card">
+                    <span class="plane-tag">Causal Plane · `core/causal_graph.py`</span>
+                    <h4>Pearlian Structural Causal Gate</h4>
+                    <p>
+                        `core/causal_graph.py` and `core/causal_reasoner.py` implement Judea Pearl's three-level causal hierarchy:
+                    </p>
+                    <ul style="color: var(--text-muted); font-size: 0.88rem; padding-left: 1.2rem; line-height: 1.65;">
+                        <li><strong>Level 2 Interventional $do(X = x)$:</strong> Mutilates the causal DAG $G_{\bar{X}}$ by severing incoming arrows to $X$, simulating downstream organ stress or system load before physical tool execution.</li>
+                        <li><strong>Level 3 Counterfactuals:</strong> Runs the 3-step Abduction $\rightarrow$ Action $\rightarrow$ Prediction algorithm on failed episodes to isolate minimal root causes.</li>
+                    </ul>
+                </div>
+
+                <div class="plane-card">
+                    <span class="plane-tag">Policy Plane · `core/policy_engine.py`</span>
+                    <h4>Declarative Domain Packs</h4>
+                    <p>
+                        Mechanism is strictly separated from domain policy. The kernel loads versioned configuration packs (`config/packs/vN/`) and declarative policy manifests (`policies/clinical_contraindications.json`, `policies/renal_dosing.json`, `policies/fintech_trading_rules.json`).
+                    </p>
+                    <p style="margin-bottom: 0;">
+                        In enterprise deployments, the same Hexagonal ports (`domain/ports.py`) bind to YAML Domain Packs for ISO 14971 medical device traceability and pharmaceutical SmPC extraction with OpenTelemetry in-flight steering.
+                    </p>
+                </div>
+
+                <div class="plane-card">
+                    <span class="plane-tag">Outer Loop · `ops/self_healer.py`</span>
+                    <h4>Monotonic Self-Healing Evaluator</h4>
+                    <p>
+                        `ops/self_healer.py` diagnoses failed traces on `evals/dev/`, uses counterfactual attribution to propose a candidate config pack (`config/packs/vN+1/`), and runs `ops/eval_runner.py` across three frozen splits:
+                    </p>
+                    <p style="margin-bottom: 0;">
+                        `evals/golden/` (0% regression allowed), `evals/dev/` (diagnostic target), and `evals/holdout/` (sealed generalization set). Candidate packs commit only if both `golden` and `holdout` pass; otherwise the healer rolls back automatically.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Hexagonal Project Structure & Domain Pack Spec -->
+        <div class="spec-section" id="domain-pack">
+            <h2>4. Kernel Repository Layout &amp; Declarative Domain Pack (`DomainPack`)</h2>
+            <p>
+                Below is the verified Hexagonal directory layout of `agent_kernel` alongside an example declarative Domain Pack manifest illustrating how ontology edges and in-flight steering rules are specified:
+            </p>
+            <div class="code-block"><pre>agent_kernel/
+├── domain/                      # Pure business logic &amp; typed Pydantic v2 contracts
+│   ├── models.py                # Turn, Episode, CandidateFact, SemanticFact
+│   ├── ports.py                 # Protocol interfaces (LLMProvider, Stores, Tools)
+│   └── state_machine.py         # 7-state FSM transitions &amp; BudgetExceeded/LoopDetected errors
+├── core/                        # Kernel orchestration services
+│   ├── execution_loop.py        # Step-budgeted FSM engine (max_steps=5, loop breaker)
+│   ├── memory_promoter.py       # Tri-State admission gate (Quarantine -&gt; Validate -&gt; Promote)
+│   ├── graph_memory.py          # 0.025ms bidirectional adjacency Knowledge Graph
+│   ├── causal_graph.py          # Pearlian SCM DAGs, do(X) mutilation, Level 3 counterfactuals
+│   ├── policy_engine.py         # Declarative policy evaluation engine
+│   └── guardrails.py            # Deterministic PHI/PII output firewall &amp; steering hooks
+├── infrastructure/              # Pluggable adapters implementing domain/ports.py
+│   ├── sqlite_episode_store.py  # Append-only immutable episode log
+│   ├── sqlite_fact_store.py     # Tri-state tables (episodes, fact_quarantine, semantic_facts)
+│   ├── hybrid_rag.py            # BM25 + Dense Cosine + Reciprocal Rank Fusion (k=60)
+│   └── mcp_server.py            # Anthropic Model Context Protocol (JSON-RPC 2.0) server
+├── ops/                         # Evaluation, Prometheus telemetry &amp; Self-Healer
+│   ├── run_abc_clinical_eval_v2.py # Live frontier LLM A/B/C evaluation runner
+│   ├── benchmark.py             # 100-record Synthea longitudinal stress simulator
+│   └── self_healer.py           # Monotonic golden/dev/holdout non-regression healer
+└── tests/                       # 165 passing pytest unit &amp; integration tests (~5s)</pre></div>
+
+            <h3>Enterprise YAML Domain Pack Extension (ISO 14971 / Pharma SmPCs)</h3>
+            <p>
+                Because `domain/ports.py` abstracts storage and policy evaluation behind Python `Protocol` interfaces, scaling from local SQLite + JSON policies (`policies/*.json`) to enterprise regulatory graphs requires only a declarative YAML Domain Pack manifest:
+            </p>
+            <div class="code-block"><pre>domain_name: "medtech_iso14971_traceability"
+version: "2.1.0"
+
+ontology:
+  entity_types: [ProductRequirement, Hazard, HazardousSituation, Harm, RiskControl, VerificationProtocol]
+  allowed_relations:
+    - [ProductRequirement, exposes_hazard, Hazard]
+    - [Hazard, mitigated_by, RiskControl]
+    - [RiskControl, verified_by, VerificationProtocol]
+
+memory_airlock:
+  min_confidence: 0.85
+  require_verbatim_span_citation: true
+  mandatory_trace_links:
+    Hazard: ["mitigated_by"]
+    RiskControl: ["verified_by"]
+
+in_flight_steering:
+  max_retries: 2
+  validators:
+    - rule: "no_unmitigated_high_severity_hazard"
+      severity: "BLOCKING"
+      correction_template: &gt;
+        Hazard {{entity_id}} has severity={{severity}} but no linked RiskControl edge.
+        Re-scan section {{section_ref}} for mitigation controls or mark status=QUARANTINED.</pre></div>
+        </div>
+
+        <!-- Section 5: Authentic Empirical Benchmarks -->
+        <div class="spec-section" id="benchmarks">
+            <h2>5. Empirical Benchmarks &amp; Methodological Disclosures</h2>
+            <p>
+                We evaluate `agent_kernel` across three distinct test harnesses in the repository (`ops/run_abc_clinical_eval_v2.py`, `ops/benchmark.py`, and `ops/run_multihop_cell_b.py`). To maintain strict scientific integrity, live frontier API measurements are reported separately from deterministic pipeline simulations.
+            </p>
+
+            <h3>5.1 Live Frontier LLM Head-to-Head Evaluation (`ABC_CLINICAL_EVALUATION_V2.md`)</h3>
+            <p>
+                Executed against live frontier model APIs (`AsyncGeminiAdapter` running `gemini-3.5-flash-lite`) across $N = 12$ multi-hop clinical encounters (`evals/mtsamples/mtsamples_v2.jsonl`) containing planted temporal contradictions, renal dosing constraints, and multi-drug interactions:
+            </p>
+
+            <div class="benchmark-table-wrap">
+                <table class="benchmark-table">
+                    <thead>
+                        <tr>
+                            <th>Evaluation Metric (Live API, N=12)</th>
+                            <th>Track A: Raw Frontier LLM</th>
+                            <th>Track B: Generic ReAct Harness</th>
+                            <th>Track C: `agent_kernel`</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Memory Contradiction Writes</strong> (Lower is better)</td>
+                            <td>33.3%</td>
+                            <td>33.3%</td>
+                            <td><strong>0.0%</strong> (Quarantined)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Drug Contraindication Escapes</strong> (Lower is better)</td>
+                            <td>0.0%</td>
+                            <td>8.3% (Skipped tool call)</td>
+                            <td><strong>0.0%</strong> (Pre-flight Graph Gate)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PHI / PII Data Exposure Rate</strong> (Lower is better)</td>
+                            <td>8.3%</td>
+                            <td>8.3%</td>
+                            <td><strong>0.0%</strong> (Output Firewall)</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>Median End-to-End Turn Latency (P50)</strong></td>
+                            <td>7.3s</td>
+                            <td>18.7s</td>
+                            <td><strong>5.4s</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="disclosure-box">
+                <strong>Why Track B (Generic ReAct Harness) Escaped on Contraindications (8.3%):</strong> In Track B, the agent was provided with drug-interaction lookup tools, but tool invocation was left to the LLM's probabilistic choice. When the model assumed a prescription was benign, it bypassed tool execution entirely. In Track C (`agent_kernel`), `INTERVENTIONAL_GATE` runs deterministically in the state machine before any output is emitted, eliminating probabilistic tool-skipping and cutting P50 latency from 18.7s to 5.4s by avoiding multi-turn ReAct meandering.
+            </div>
+
+            <h3>5.2 High-Volume Longitudinal Pipeline Simulation (`BENCHMARK_REPORT.md`)</h3>
+            <p>
+                To profile memory table growth, loop breaking, and admission control overhead across 100 multi-encounter Synthea patient records (200 encounters) without incurring live LLM token spend, `ops/benchmark.py` runs a deterministic pipeline stress test:
+            </p>
+
+            <div class="benchmark-table-wrap">
+                <table class="benchmark-table">
+                    <thead>
+                        <tr>
+                            <th>Simulation Metric (100 Records / 200 Encounters)</th>
+                            <th>System A: Flat Un-Gated RAG</th>
+                            <th>System A+: Schema-Checked</th>
+                            <th>System B: `agent_kernel`</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Fact Contradiction Rate in Active Memory</strong></td>
+                            <td>12.5%</td>
+                            <td>12.5%</td>
+                            <td><strong>0.0%</strong> (25 items trapped in quarantine)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Schema Breakage Rate</strong></td>
+                            <td>12.5%</td>
+                            <td>0.0%</td>
+                            <td><strong>0.0%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Simulated PII / PHI Leakage Rate</strong></td>
+                            <td>100.0%</td>
+                            <td>87.5%</td>
+                            <td><strong>0.0%</strong> (`DeidentifyTextTool` + Firewall)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Runaway Loop Incidents</strong></td>
+                            <td>12.5%</td>
+                            <td>0.0%</td>
+                            <td><strong>0.0%</strong> (`max_steps=5` + Cycle Breaker)</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>Algorithmic State-Machine Overhead (p95)</strong></td>
+                            <td>15.0 ms</td>
+                            <td>10.0 ms</td>
+                            <td><strong>7.7 ms</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>5.3 Multi-Hop Knowledge Graph Ablation &amp; Audit (`MULTIHOP_GRAPH_ABLATION_REPORT.md`)</h3>
+            <p>
+                Evaluated across 20 clinical fixtures in `evals/multihop/dataset.json` testing 1-hop direct allergies, 2-hop brand-to-ingredient links (`Augmentin -> Amoxicillin`), 3-hop class cross-reactivity, and 5 clean controls:
+            </p>
+
+            <div class="benchmark-table-wrap">
+                <table class="benchmark-table">
+                    <thead>
+                        <tr>
+                            <th>Graph Traversal Dimension (N=20 Fixtures)</th>
+                            <th>Cell A: 1-Hop Flat Lookup</th>
+                            <th>Cell B: `core/graph_memory.py` (k-Hop)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1-Hop Direct Allergy Interception</strong></td>
+                            <td>100.0% (5/5)</td>
+                            <td><strong>100.0% (5/5)</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2-Hop Brand-to-Ingredient Interception</strong></td>
+                            <td>0.0% (0/5)</td>
+                            <td><strong>100.0% (5/5)</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3-Hop Class Cross-Reactivity Interception</strong></td>
+                            <td>0.0% (0/5)</td>
+                            <td><strong>100.0% (5/5)</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Clean Control False Positive Rate</strong></td>
+                            <td>0.0% (0/5)</td>
+                            <td><strong>0.0% (0/5)</strong></td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>Median In-Memory Traversal Latency (P50 / P95)</strong></td>
+                            <td>0.0224 ms (P50)</td>
+                            <td><strong>0.0052 ms (P50) / 0.025 ms (P95)</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="disclosure-box">
+                <strong>Mandatory Methodological Disclosure (`MULTIHOP_GRAPH_ABLATION_REPORT.md`):</strong> `core/graph_memory.py` resolves 3-hop relational paths in 25 microseconds (P95) with zero false positives on clean controls. However, as documented in our repository's internal audit report, Cell A in this 20-fixture micro-benchmark only ingested patient chart facts (`chart_facts`) and performed a 1-hop string equality check (`fact.object.lower() == prompt_drug.lower()`), whereas Cell B was populated with the brand-to-ingredient and class cross-reactivity ontology triples. If those same ontology triples are loaded into a relational SQLite/PostgreSQL schema and queried with a 3-way `JOIN` or `WITH RECURSIVE` CTE, relational SQL also achieves 100% recall on 2-hop and 3-hop paths. The architectural advantage of `core/graph_memory.py` is ergonomics and sub-25-microsecond in-memory adjacency traversal for arbitrary $k$-hop paths without writing multi-join SQL per hop depth.
+            </div>
+        </div>
+
+        <!-- Bottom Navigation / Open Lab Discussion -->
+        <div class="spec-section" style="text-align: center; background: rgba(24, 26, 36, 0.75); padding: 3.5rem 2rem; border-radius: 16px; border: 1px solid var(--border-subtle); margin-top: 4rem;">
+            <h2 style="border: none; margin-bottom: 0.75rem;">Discuss Runtime Harnesses or Inspect Our Papers</h2>
+            <p style="max-width: 640px; margin: 0 auto 2rem;">
+                Have questions about our step-budgeted FSM, Tri-State Memory Quarantine, or Knowledge Graph verification gates? Reach out directly for architectural discussions or research exchange.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="index.html#contact" class="btn btn-primary btn-glow">Get in Touch</a>
+                <a href="blog/agent-harness-steering-graphs.html" class="btn btn-secondary btn-glass">Read "The Missing Compiler" Essay</a>
+                <a href="blog.html" class="btn btn-secondary btn-glass">All Lab Research Papers</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;">
+                <div class="footer-section">
+                    <div class="footer-logo" style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                        <img src="logo.svg" alt="Berlin AI Labs" class="logo" style="height: 24px;">
+                        <span class="logo-text" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.2rem;">Berlin AI Labs</span>
+                    </div>
+                    <p class="footer-description" style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                        Independent systems research and engineering lab in Berlin, directed by Yami Gopal. Building deterministic agent harnesses, execution kernels, and runtime verification systems.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Core Harness</h4>
+                    <ul class="footer-links" style="list-style: none; padding: 0;">
+                        <li><a href="agent-kernel.html">Agent Kernel Spec</a></li>
+                        <li><a href="blog/agent-harness-steering-graphs.html">In-Flight Steering</a></li>
+                        <li><a href="aegismcp.html">AegisMCP Sandbox</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Lab Systems</h4>
+                    <ul class="footer-links" style="list-style: none; padding: 0;">
+                        <li><a href="courtroom-demo.html">Aegis-12 Policy Gate Simulator</a></li>
+                        <li><a href="ConvoGuardAI.html">ConvoGuard AI</a></li>
+                        <li><a href="caa-framework.html">CAA Framework</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Lab</h4>
+                    <ul class="footer-links" style="list-style: none; padding: 0;">
+                        <li><a href="index.html#about">About the Lab</a></li>
+                        <li><a href="blog.html">Research Archive</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="impressum.html">Impressum</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom" style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle); text-align: center; font-size: 0.85rem; color: var(--text-muted);">
+                <p>&copy; 2026 Berlin AI Labs. All rights reserved. | <a href="impressum.html" style="color: inherit; text-decoration: underline;">Impressum</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

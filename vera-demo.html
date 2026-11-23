@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VERA Interactive Demo: Sovereign Trust in Action | Berlin AI Labs</title>
     <meta name="description"
-        content="Interactive demo of the VERA Protocol. Watch an AI agent generate cryptographic Proof of Execution (PoE), bridge to Moltbook, and earn a verified reputation.">
+        content="Interactive client-side WebCrypto simulator of the VERA Protocol. Inspect how an AI agent generates a cryptographic Proof of Execution (PoE) with SHA-256 and ECDSA P-256.">
     <meta name="keywords" content="VERA Protocol, Agent Trust, PoE, Zero Trust, AI Agent Security, Berlin AI Labs">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -231,9 +231,38 @@
 
         .demo-controls {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             gap: 1rem;
-            margin-bottom: 3rem;
+            max-width: 720px;
+            margin: 0 auto 3rem;
+        }
+
+        .payload-input-box {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 0.75rem;
+            padding: 0.9rem 1rem;
+        }
+
+        .payload-input-box label {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .payload-input-box input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 0.4rem;
+            padding: 0.55rem 0.75rem;
+            color: var(--text-bright);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
         }
 
         .demo-btn {
@@ -276,12 +305,11 @@
                     <span class="bar"></span>
                 </button>
                 <ul class="nav-menu">
-                    <li><a href="index.html#technology" class="nav-link">Technology</a></li>
-                    <li><a href="index.html#demonstrations" class="nav-link">Demonstrations</a></li>
+                    <li><a href="index.html#featured-project" class="nav-link">Agent Kernel</a></li>
+                    <li><a href="index.html#technology" class="nav-link">Secondary Systems</a></li>
                     <li><a href="blog.html" class="nav-link">Research</a></li>
                     <li><a href="index.html#about" class="nav-link">About</a></li>
                     <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-                    <li><a href="index.html#contact" class="btn nav-cta btn-primary">Request Review</a></li>
                 </ul>
             </div>
         </div>
@@ -293,18 +321,23 @@
             <div class="demo-header">
                 <span class="hero-badge">
                     <span class="badge-dot"></span>
-                    VERA Protocol: Live Demo
+                    VERA Protocol: Client-Side Proof-of-Execution (PoE) Simulator
                 </span>
-                <h1>Sovereign Trust <span class="text-gradient-electric">in 60 Seconds</span></h1>
+                <h1>Cryptographic Execution Receipts <span class="text-gradient-electric">in Browser WebCrypto</span></h1>
                 <p class="hero-subtitle" style="margin-bottom: 1rem;">
-                    Watch an AI agent generate a Proof of Execution, broadcast it to the P2P network,
-                    and earn a reputation boost on Moltbook.
+                    Edit the tool-call JSON payload below and run the verifier. Your browser generates a fresh 128-bit nonce, hashes the canonical envelope with SHA-256, signs the receipt with an ephemeral ECDSA P-256 keypair, and verifies the signature locally.
                 </p>
+                <a href="AgentTrustProtocol.html" class="demo-spec-link">Read the full VERA Architecture Whitepaper →</a>
             </div>
 
             <!-- Controls -->
             <div class="demo-controls">
-                <button class="demo-btn demo-btn-primary" id="btn-run" onclick="runDemo()">▶ Run Verification</button>
+                <div class="payload-input-box">
+                    <label for="poe-tool-input">Tool Call Payload (Editable JSON):</label>
+                    <input id="poe-tool-input" type="text"
+                        value='{"tool":"stripe_charge","amount_eur":420,"merchant":"berlin_ai_labs","currency":"EUR"}'>
+                </div>
+                <button class="demo-btn demo-btn-primary" id="btn-run" onclick="runDemo()">▶ Sign &amp; Verify Receipt (WebCrypto)</button>
             </div>
 
             <!-- VERA Timeline -->
@@ -314,16 +347,16 @@
                 <div class="vera-step" data-step="0">
                     <div class="step-marker">1</div>
                     <div class="step-card" onclick="activateStep(0)">
-                        <span class="step-element-badge badge-veracity">⚡ Action</span>
-                        <h3 class="step-title">Agent Requests Tool Execution</h3>
+                        <span class="step-element-badge badge-veracity">⚡ Action Envelope</span>
+                        <h3 class="step-title">Canonical Tool Intent &amp; Nonce Generation</h3>
                         <p class="step-description">
-                            The agent requests a tool execution from its Sovereign Node.
+                            The harness binds the tool invocation arguments to a CSPRNG 128-bit nonce and ISO-8601 timestamp to prevent replay attacks.
                         </p>
                         <div class="step-terminal">
-                            <span class="term-line" style="animation-delay: 0.1s"><span class="term-prompt">→</span>
-                                Agent: Execute 'stripe_charge'</span>
-                            <span class="term-line" style="animation-delay: 0.4s"><span class="term-info"> Node:</span>
-                                Generating Nonce...</span>
+                            <span class="term-line" id="step0-line1" style="animation-delay: 0.1s"><span class="term-prompt">→</span>
+                                Payload: {"tool":"stripe_charge","amount_eur":420}</span>
+                            <span class="term-line" id="step0-line2" style="animation-delay: 0.3s"><span class="term-info"> Nonce (128-bit):</span>
+                                Waiting for WebCrypto...</span>
                         </div>
                     </div>
                 </div>
@@ -332,34 +365,34 @@
                 <div class="vera-step" data-step="1">
                     <div class="step-marker">2</div>
                     <div class="step-card" onclick="activateStep(1)">
-                        <span class="step-element-badge badge-veracity">📝 Proof</span>
-                        <h3 class="step-title">Proof of Execution (PoE)</h3>
+                        <span class="step-element-badge badge-veracity">📝 Proof of Execution</span>
+                        <h3 class="step-title">SHA-256 Digest &amp; ECDSA P-256 Signature</h3>
                         <p class="step-description">
-                            Sovereign Node signs the output with Ed25519 (or ML-DSA-65).
+                            <code>window.crypto.subtle</code> computes the SHA-256 digest of the canonical envelope and signs it with an ephemeral ECDSA P-256 private key (production specification supports Ed25519 and post-quantum ML-DSA-65).
                         </p>
                         <div class="step-terminal">
-                            <span class="term-line" style="animation-delay: 0.1s"><span class="term-prompt">→</span>
-                                Signing Payload...</span>
-                            <span class="term-line" style="animation-delay: 0.4s"><span class="term-success"> ✓
-                                    Signature:</span> 8f3a...c71d</span>
+                            <span class="term-line" id="step1-line1" style="animation-delay: 0.1s"><span class="term-prompt">→</span>
+                                SHA-256 Digest: computing...</span>
+                            <span class="term-line" id="step1-line2" style="animation-delay: 0.3s"><span class="term-success"> ✓
+                                    ECDSA Signature:</span> computing...</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Step 3: Broadcast -->
+                <!-- Step 3: Verification -->
                 <div class="vera-step" data-step="2">
                     <div class="step-marker">3</div>
                     <div class="step-card" onclick="activateStep(2)">
-                        <span class="step-element-badge badge-veracity">📡 Broadcast</span>
-                        <h3 class="step-title">Moltbook Signal Bridge</h3>
+                        <span class="step-element-badge badge-veracity">📡 Peer Verification</span>
+                        <h3 class="step-title">Public-Key Verification &amp; Audit Append</h3>
                         <p class="step-description">
-                            PoE is broadcast to the P2P network. Moltbook Signal Collector picks it up.
+                            An independent verifier checks the signature against the agent's public key JWK via <code>crypto.subtle.verify()</code> before appending the receipt to the hash-chained audit log.
                         </p>
                         <div class="step-terminal">
-                            <span class="term-line" style="animation-delay: 0.1s"><span class="term-prompt">→</span>
-                                GossipSub Broadcast...</span>
-                            <span class="term-line" style="animation-delay: 0.4s"><span class="term-success"> ✓ Moltbook
-                                    Collector:</span> Received PoE</span>
+                            <span class="term-line" id="step2-line1" style="animation-delay: 0.1s"><span class="term-prompt">→</span>
+                                Public Key JWK (x): computing...</span>
+                            <span class="term-line" id="step2-line2" style="animation-delay: 0.3s"><span class="term-success"> ✓
+                                    crypto.subtle.verify():</span> waiting...</span>
                         </div>
                     </div>
                 </div>
@@ -368,16 +401,16 @@
                 <div class="vera-step" data-step="3">
                     <div class="step-marker">4</div>
                     <div class="step-card" onclick="activateStep(3)">
-                        <span class="step-element-badge badge-veracity">⭐ Reputation</span>
-                        <h3 class="step-title">Trust Score Updated</h3>
+                        <span class="step-element-badge badge-veracity">⭐ Trust Accounting</span>
+                        <h3 class="step-title">Deterministic Reputation Update</h3>
                         <p class="step-description">
-                            The Operator validates the proof and updates the agent's global Trust Score.
+                            Upon valid cryptographic verification, the local state machine increments the agent's verified execution count and updates its bounded trust score.
                         </p>
                         <div class="step-terminal">
-                            <span class="term-line" style="animation-delay: 0.1s"><span class="term-prompt">→</span>
-                                Verifying Claim...</span>
-                            <span class="term-line" style="animation-delay: 0.4s"><span class="term-success"> ★ Trust
-                                    Score:</span> 0.65 -> 0.72 (+0.07)</span>
+                            <span class="term-line" id="step3-line1" style="animation-delay: 0.1s"><span class="term-prompt">→</span>
+                                Verified Receipts in Session: 0</span>
+                            <span class="term-line" id="step3-line2" style="animation-delay: 0.3s"><span class="term-success"> ★ Trust
+                                    Score:</span> 0.650 -> 0.720 (+0.070)</span>
                         </div>
                     </div>
                 </div>
@@ -390,17 +423,89 @@
         const TOTAL_STEPS = 4;
         let currentStep = -1;
         let autoRunInterval = null;
+        let verifiedSessionCount = 0;
+        let trustScore = 0.65;
 
-        function runDemo() {
-            if (autoRunInterval) return;
+        function toHex(buffer) {
+            return Array.from(new Uint8Array(buffer))
+                .map(b => b.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        function activateStep(stepIdx) {
+            document.querySelectorAll('.vera-step').forEach((el, idx) => {
+                el.classList.remove('active', 'completed');
+                if (idx < stepIdx) el.classList.add('completed');
+                if (idx === stepIdx) el.classList.add('active');
+            });
+            currentStep = stepIdx;
+        }
+
+        async function runDemo() {
+            if (autoRunInterval) {
+                clearInterval(autoRunInterval);
+                autoRunInterval = null;
+            }
             currentStep = -1;
             document.querySelectorAll('.vera-step').forEach(s => {
                 s.classList.remove('active', 'completed');
             });
 
+            const rawPayload = document.getElementById('poe-tool-input').value.trim();
+            const nonceBytes = new Uint8Array(16);
+            window.crypto.getRandomValues(nonceBytes);
+            const nonceHex = toHex(nonceBytes);
+            const timestamp = new Date().toISOString();
+
+            const canonicalEnvelope = JSON.stringify({
+                payload: rawPayload,
+                nonce: nonceHex,
+                timestamp: timestamp
+            });
+
+            const encoder = new TextEncoder();
+            const data = encoder.encode(canonicalEnvelope);
+            const hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
+            const sha256Hex = toHex(hashBuffer);
+
+            const keyPair = await window.crypto.subtle.generateKey(
+                { name: 'ECDSA', namedCurve: 'P-256' },
+                true,
+                ['sign', 'verify']
+            );
+            const sigBuffer = await window.crypto.subtle.sign(
+                { name: 'ECDSA', hash: { name: 'SHA-256' } },
+                keyPair.privateKey,
+                data
+            );
+            const sigHex = toHex(sigBuffer);
+            const isValid = await window.crypto.subtle.verify(
+                { name: 'ECDSA', hash: { name: 'SHA-256' } },
+                keyPair.publicKey,
+                sigBuffer,
+                data
+            );
+            const pubJwk = await window.crypto.subtle.exportKey('jwk', keyPair.publicKey);
+
+            verifiedSessionCount += 1;
+            const prevScore = trustScore;
+            trustScore = Math.min(0.99, +(trustScore + 0.07 * (1 - trustScore)).toFixed(3));
+
+            document.getElementById('step0-line1').innerHTML = `<span class="term-prompt">→</span> Envelope: ${rawPayload.slice(0, 68)}${rawPayload.length > 68 ? '...' : ''}`;
+            document.getElementById('step0-line2').innerHTML = `<span class="term-info"> Nonce (128-bit CSPRNG):</span> ${nonceHex}`;
+
+            document.getElementById('step1-line1').innerHTML = `<span class="term-prompt">→</span> SHA-256: ${sha256Hex}`;
+            document.getElementById('step1-line2').innerHTML = `<span class="term-success"> ✓ ECDSA-P256 Sig:</span> ${sigHex.slice(0, 32)}...${sigHex.slice(-24)}`;
+
+            document.getElementById('step2-line1').innerHTML = `<span class="term-prompt">→</span> Ephemeral PubKey (P-256 x): ${pubJwk.x}`;
+            document.getElementById('step2-line2').innerHTML = `<span class="term-success"> ✓ crypto.subtle.verify():</span> ${isValid} (deterministic match)`;
+
+            document.getElementById('step3-line1').innerHTML = `<span class="term-prompt">→</span> Verified Session Receipts: ${verifiedSessionCount}`;
+            document.getElementById('step3-line2').innerHTML = `<span class="term-success"> ★ Trust Score:</span> ${prevScore.toFixed(3)} -> ${trustScore.toFixed(3)}`;
+
             autoRunInterval = setInterval(() => {
                 nextStep();
-            }, 2500);
+            }, 900);
             nextStep();
         }
 
