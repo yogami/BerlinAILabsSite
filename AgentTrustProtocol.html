@@ -424,7 +424,7 @@
                     </div>
                 </div>
 
-                <h3>Farbcodierte Stufen</h3>
+                <h3>Color-Coded Trust Tiers</h3>
                 <table class="compliance-table">
                     <thead>
                         <tr>
@@ -554,14 +554,55 @@
                 </div>
             </div>
 
-            <!-- Live Demo -->
-            <div class="case-study-section" style="padding: 3rem; border-radius: 1rem; border: 2px solid #99f6e4;">
-                <h2 style="border: none; margin-bottom: 1rem;">Demonstrator Available</h2>
-                <p style="font-size: 1.125rem; margin-bottom: 2rem;">
-                    The proof-of-concept demonstrator runs with mock agent records to show scoring mechanics and API integration.
+            <!-- Interactive TrustScore Calculator Sandbox -->
+            <div class="case-study-section" id="trust-score-sandbox" style="padding: 2.5rem; border-radius: 1rem; border: 2px solid rgba(8, 145, 178, 0.45); background: rgba(17, 24, 39, 0.85);">
+                <h2 style="border: none; margin-bottom: 0.75rem;">Interactive TrustScore Calculator &amp; Directory Sandbox</h2>
+                <p style="font-size: 1.05rem; margin-bottom: 1.5rem; color: #cbd5e1;">
+                    Select a reference agent record or toggle verification attributes below to compute the normalized TrustScore and generate a SHA-256 attestation JSON payload in Browser WebCrypto.
                 </p>
+
+                <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                    <button type="button" onclick="loadTrustAgentPreset('clinical')" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.5rem 0.9rem; border-color: #14b8a6; color: #5eead4;">Clinical Triage Assistant v2 (High)</button>
+                    <button type="button" onclick="loadTrustAgentPreset('smpc')" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.5rem 0.9rem; border-color: #f59e0b; color: #fcd34d;">SmPC Regulatory Extractor (Medium)</button>
+                    <button type="button" onclick="loadTrustAgentPreset('scraper')" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.5rem 0.9rem; border-color: #ef4444; color: #fca5a5;">Unverified External Scraper (Low)</button>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                    <label style="display: flex; align-items: center; gap: 0.6rem; background: #0f172a; padding: 0.85rem 1rem; border-radius: 0.5rem; border: 1px solid #334155; cursor: pointer;">
+                        <input type="checkbox" id="ts-verified" checked onchange="updateTrustScoreSandbox()">
+                        <span>Verified Agent (+40 pts)</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.6rem; background: #0f172a; padding: 0.85rem 1rem; border-radius: 0.5rem; border: 1px solid #334155; cursor: pointer;">
+                        <input type="checkbox" id="ts-gdpr" checked onchange="updateTrustScoreSandbox()">
+                        <span>GDPR Compliant (+25 pts)</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.6rem; background: #0f172a; padding: 0.85rem 1rem; border-radius: 0.5rem; border: 1px solid #334155; cursor: pointer;">
+                        <input type="checkbox" id="ts-domain" checked onchange="updateTrustScoreSandbox()">
+                        <span>Domain Standards (+30 pts)</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.6rem; background: #0f172a; padding: 0.85rem 1rem; border-radius: 0.5rem; border: 1px solid #334155; cursor: pointer;">
+                        <input type="checkbox" id="ts-uptime" checked onchange="updateTrustScoreSandbox()">
+                        <span>Availability &gt;97% (+20 pts)</span>
+                    </label>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
+                    <div>
+                        <span style="font-size: 0.85rem; color: #94a3b8; display: block;">Selected Agent ID</span>
+                        <strong id="ts-agent-id" style="font-family: monospace; color: #f8fafc;">clinical-triage-v2</strong>
+                    </div>
+                    <div>
+                        <span style="font-size: 0.85rem; color: #94a3b8; display: block;">Normalized Score</span>
+                        <strong id="ts-score-display" style="font-size: 1.5rem; color: #5eead4;">100 / 100</strong>
+                    </div>
+                    <span id="ts-tier-badge" class="severity-badge severity-high">HIGH · Fully Verified</span>
+                </div>
+
+                <pre id="ts-json-output" style="background: #0b0f19; color: #cbd5e1; padding: 1rem; border-radius: 0.5rem; border: 1px solid #334155; font-size: 0.85rem; overflow-x: auto; margin-bottom: 1.5rem;"></pre>
+
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <a href="index.html#contact" class="btn btn-primary" style="background: #0891b2;">Get in Touch</a>
+                    <a href="https://github.com/yogami/agent-trust-protocol" target="_blank" class="btn btn-primary" style="background: #0891b2;">View Source on GitHub</a>
+                    <a href="vera-demo.html" class="btn btn-secondary" style="border-color: #14b8a6; color: #5eead4;">Test VERA Cryptographic PoE Verifier</a>
                 </div>
             </div>
 
@@ -624,6 +665,76 @@
         </div>
     </footer>
 
+    <script>
+        const TRUST_PRESETS = {
+            clinical: { id: 'clinical-triage-v2', verified: true, gdpr: true, domain: true, uptime: true },
+            smpc: { id: 'smpc-reg-extractor', verified: true, gdpr: true, domain: false, uptime: false },
+            scraper: { id: 'unverified-ext-scraper', verified: false, gdpr: false, domain: false, uptime: true }
+        };
+
+        let activeTrustAgentId = 'clinical-triage-v2';
+
+        function loadTrustAgentPreset(key) {
+            const p = TRUST_PRESETS[key];
+            if (!p) return;
+            activeTrustAgentId = p.id;
+            document.getElementById('ts-verified').checked = p.verified;
+            document.getElementById('ts-gdpr').checked = p.gdpr;
+            document.getElementById('ts-domain').checked = p.domain;
+            document.getElementById('ts-uptime').checked = p.uptime;
+            updateTrustScoreSandbox();
+        }
+
+        async function updateTrustScoreSandbox() {
+            const verified = document.getElementById('ts-verified').checked;
+            const gdpr = document.getElementById('ts-gdpr').checked;
+            const domain = document.getElementById('ts-domain').checked;
+            const uptime = document.getElementById('ts-uptime').checked;
+
+            const raw = (verified ? 40 : 0) + (gdpr ? 25 : 0) + (domain ? 30 : 0) + (uptime ? 20 : 0);
+            const normalized = Math.round((raw / 115) * 100);
+
+            let tier = 'LOW';
+            let statusText = 'Incomplete';
+            let badgeClass = 'severity-badge severity-low';
+            let scoreColor = '#fca5a5';
+
+            if (normalized >= 75) {
+                tier = 'HIGH';
+                statusText = 'Fully Verified';
+                badgeClass = 'severity-badge severity-high';
+                scoreColor = '#5eead4';
+            } else if (normalized >= 50) {
+                tier = 'MEDIUM';
+                statusText = 'Basic Compliance';
+                badgeClass = 'severity-badge severity-medium';
+                scoreColor = '#fcd34d';
+            }
+
+            document.getElementById('ts-agent-id').textContent = activeTrustAgentId;
+            const scoreEl = document.getElementById('ts-score-display');
+            scoreEl.textContent = `${normalized} / 100 (${raw}/115 pts)`;
+            scoreEl.style.color = scoreColor;
+
+            const badgeEl = document.getElementById('ts-tier-badge');
+            badgeEl.textContent = `${tier} · ${statusText}`;
+            badgeEl.className = badgeClass;
+
+            const record = {
+                agent_id: activeTrustAgentId,
+                raw_points: raw,
+                max_points: 115,
+                normalized_trust_score: normalized,
+                tier,
+                checks: { verified, gdpr, domain_standards: domain, high_availability: uptime }
+            };
+            const buf = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(record)));
+            record.attestation_sha256 = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+            document.getElementById('ts-json-output').textContent = JSON.stringify(record, null, 2);
+        }
+
+        updateTrustScoreSandbox();
+    </script>
     <script src="script.js"></script>
 </body>
 

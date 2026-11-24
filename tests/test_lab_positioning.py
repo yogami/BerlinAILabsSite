@@ -123,6 +123,7 @@ class TestBerlinAILabsPositioning(unittest.TestCase):
             "tools.berlinailabs.de",
             "api.berlinailabs.de",
             "npmjs.com/package/agent-pentest",
+            "github.com/berlinailabs/pdp-protocol",
         ]
         unbacked_claims = [
             "ZK-proofs",
@@ -135,6 +136,10 @@ class TestBerlinAILabsPositioning(unittest.TestCase):
         ] + [
             os.path.join("blog", f)
             for f in os.listdir(os.path.join(ROOT_DIR, "blog"))
+            if f.endswith(".html")
+        ] + [
+            os.path.join("compare", f)
+            for f in os.listdir(os.path.join(ROOT_DIR, "compare"))
             if f.endswith(".html")
         ]
         for rel_path in html_files:
@@ -175,6 +180,17 @@ class TestBerlinAILabsPositioning(unittest.TestCase):
                 f"{simulator_page} must use real browser WebCrypto (window.crypto.subtle)",
             )
 
+        sandbox_requirements = {
+            "ConvoGuardAI.html": ("runConvoGuardSandbox", "https://github.com/yogami/convo-guard-ai"),
+            "AgentTrustProtocol.html": ("updateTrustScoreSandbox", "https://github.com/yogami/agent-trust-protocol"),
+            "agent-kernel.html": ("runKernelSandbox", "https://github.com/yogami/agent-kernel"),
+            "aegismcp.html": ("runAegisMcpSandbox", "https://github.com/yogami/aegismcp"),
+        }
+        for page, (fn_name, repo_url) in sandbox_requirements.items():
+            page_html = self._read(page)
+            self.assertIn(fn_name, page_html, f"{page} must include interactive sandbox function {fn_name}")
+            self.assertIn(repo_url, page_html, f"{page} must link to GitHub repo {repo_url}")
+
     def test_no_consulting_agency_or_overt_job_ad_signals_across_site(self):
         banned_agency_or_job_phrases = [
             "sales@berlinailabs.de",
@@ -194,6 +210,10 @@ class TestBerlinAILabsPositioning(unittest.TestCase):
         ] + [
             os.path.join("blog", f)
             for f in os.listdir(os.path.join(ROOT_DIR, "blog"))
+            if f.endswith(".html")
+        ] + [
+            os.path.join("compare", f)
+            for f in os.listdir(os.path.join(ROOT_DIR, "compare"))
             if f.endswith(".html")
         ]
         for rel_path in html_files:

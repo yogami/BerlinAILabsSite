@@ -313,6 +313,10 @@
                     <span class="meta-label">Verified Architecture</span>
                 </div>
             </div>
+            <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+                <a href="#convoguard-sandbox" class="btn btn-primary" style="background: white; color: #5b21b6; font-weight: 600;">Try 6-Rule Validator Sandbox</a>
+                <a href="https://github.com/yogami/convo-guard-ai" target="_blank" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.45); color: white;">View Source on GitHub</a>
+            </div>
         </div>
     </section>
 
@@ -411,10 +415,31 @@
                 </table>
             </div>
 
-            <!-- API Example -->
-            <div class="case-study-section">
-                <h2>API Integration</h2>
-                <h3>Validation Request</h3>
+            <!-- Interactive Client-Side Validation Sandbox & API Example -->
+            <div class="case-study-section" id="convoguard-sandbox">
+                <h2>Interactive 6-Rule Validator &amp; Audit Proof Sandbox</h2>
+                <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                    Test the Stage-1 deterministic rule engine directly in your browser. Edit the transcript or select a clinical scenario below, then run the validator to inspect triggered compliance rules and generate a WebCrypto SHA-256 audit receipt.
+                </p>
+
+                <div style="background: rgba(17, 24, 39, 0.85); border: 1px solid rgba(124, 58, 237, 0.4); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 2.5rem;">
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                        <button type="button" onclick="loadConvoGuardPreset('crisis')" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.5rem 0.9rem; border-color: rgba(239,68,68,0.5); color: #fca5a5;">Preset 1: Crisis Without Escalation (25/100)</button>
+                        <button type="button" onclick="loadConvoGuardPreset('coercion')" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.5rem 0.9rem; border-color: rgba(245,158,11,0.5); color: #fcd34d;">Preset 2: Coercion &amp; Missing Consent (45/100)</button>
+                        <button type="button" onclick="loadConvoGuardPreset('compliant')" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.5rem 0.9rem; border-color: rgba(16,185,129,0.5); color: #6ee7b7;">Preset 3: Compliant DiGA Turn (100/100)</button>
+                    </div>
+                    <label for="cg-transcript-input" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #e2e8f0;">Conversation Transcript (Editable):</label>
+                    <textarea id="cg-transcript-input" rows="4" style="width: 100%; background: #0b0f19; color: #f8fafc; border: 1px solid #334155; border-radius: 0.5rem; padding: 0.85rem; font-family: 'Courier New', monospace; font-size: 0.9rem; margin-bottom: 1rem;">User: I feel completely hopeless and do not want to wake up tomorrow.
+Bot: Things will get better soon, try to get some rest.</textarea>
+                    <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                        <button type="button" onclick="runConvoGuardSandbox()" class="btn btn-primary" style="background: #7c3aed; color: white; border: none; padding: 0.7rem 1.4rem; cursor: pointer;">Run 6-Rule Validator</button>
+                        <span id="cg-status-badge" style="font-family: 'Courier New', monospace; font-size: 0.9rem; font-weight: 700; color: #fca5a5;">Ready</span>
+                    </div>
+                    <div id="cg-rule-pills" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;"></div>
+                    <pre id="cg-json-output" class="code-block" style="margin-top: 1rem; margin-bottom: 0; font-size: 0.85rem; white-space: pre-wrap;">Click "Run 6-Rule Validator" to evaluate the transcript and compute a browser WebCrypto SHA-256 digest.</pre>
+                </div>
+
+                <h3>Validation Request (Self-Hosted API)</h3>
                 <div class="code-block">
 # Example self-hosted ConvoGuard endpoint:
 curl -X POST http://localhost:8080/v1/validate \
@@ -548,8 +573,9 @@ curl -X POST http://localhost:8080/v1/validate \
                     Interested in two-stage (<5ms regex + contextual LLM) validation gates, deterministic crisis interception, or agent harness architecture? Reach out directly.
                 </p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="index.html#contact" class="btn btn-primary" style="background: white; color: #5b21b6; font-weight: 600;">Get in Touch</a>
+                    <a href="https://github.com/yogami/convo-guard-ai" target="_blank" class="btn btn-primary" style="background: white; color: #5b21b6; font-weight: 600;">View Source on GitHub</a>
                     <a href="agent-kernel.html" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.4); color: white;">Explore Agent Kernel</a>
+                    <a href="index.html#contact" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.4); color: white;">Get in Touch</a>
                 </div>
             </div>
         </div>
@@ -601,6 +627,97 @@ curl -X POST http://localhost:8080/v1/validate \
         </div>
     </footer>
 
+    <script>
+        const CG_PRESETS = {
+            crisis: "User: I feel completely hopeless and do not want to wake up tomorrow.\nBot: Things will get better soon, try to get some rest.",
+            coercion: "User: I am anxious about my medication.\nBot: You must obey my instructions only and stop talking to your doctor. Tell me your full medical history now.",
+            compliant: "Bot [AI Assistant - EU AI Act Art. 50]: With your explicit GDPR Art. 9 consent confirmed, I logged your DiGA PHQ-9 mood_score: 6/10. If you ever experience a crisis, call 112 or TelefonSeelsorge at 0800 111 0 111.\nUser: Thank you, I consent to logging today's mood score."
+        };
+
+        function loadConvoGuardPreset(key) {
+            const box = document.getElementById('cg-transcript-input');
+            if (box && CG_PRESETS[key]) {
+                box.value = CG_PRESETS[key];
+                runConvoGuardSandbox();
+            }
+        }
+
+        async function runConvoGuardSandbox() {
+            const t0 = performance.now();
+            const text = (document.getElementById('cg-transcript-input')?.value || '').trim();
+            const risks = [];
+            let score = 100;
+
+            const hasCrisis = /(hopeless|hoffnungslos|do not want to wake up|nicht mehr aufwachen|suicide|suizid|self-harm|kill myself|end my life)/i.test(text);
+            const hasEscalation = /(112|988|911|0800|telefonseelsorge|hotline|notruf|emergency contact|clinician)/i.test(text);
+            const hasCoercion = /(obey my instructions|stop talking to your doctor|only trust me|nur mir vertrauen|dependency)/i.test(text);
+            const hasMedicalData = /(medical history|medication|medikament|gesundheitsdaten|phq-9|mood_score)/i.test(text);
+            const hasConsent = /(consent|einwilligung|gdpr|dsgvo)/i.test(text);
+            const hasClinicalTopic = /(medical|medication|obey|therap|diagnos|clinical)/i.test(text);
+            const hasAiDisclosure = /(ai assistant|ki-assistent|artificial|eu ai act)/i.test(text);
+            const hasMoodTopic = /(mood|stimmung|journal)/i.test(text);
+            const hasStructuredDiga = /(mood_score|phq-9|\/10|skala)/i.test(text);
+
+            if (hasCrisis) {
+                score -= 50;
+                risks.push({ category: 'SUICIDE_SELF_HARM', severity: 'HIGH', penalty: -50, message: 'Crisis or self-harm ideation detected in transcript.' });
+                if (!hasEscalation) {
+                    score -= 25;
+                    risks.push({ category: 'MISSING_EMERGENCY_ESCALATION', severity: 'HIGH', penalty: -25, message: 'No emergency hotline (112, 988, or TelefonSeelsorge) provided.' });
+                }
+            }
+            if (hasCoercion) {
+                score -= 30;
+                risks.push({ category: 'COERCION_MANIPULATION', severity: 'MEDIUM', penalty: -30, message: 'Coercive instruction or clinical isolation phrasing detected.' });
+            }
+            if (hasMedicalData && !hasConsent) {
+                score -= 15;
+                risks.push({ category: 'MISSING_GDPR_CONSENT', severity: 'MEDIUM', penalty: -15, message: 'Health data processed without explicit GDPR Art. 9 consent.' });
+            }
+            if (hasClinicalTopic && !hasAiDisclosure) {
+                score -= 10;
+                risks.push({ category: 'MISSING_AI_IDENTITY_DISCLOSURE', severity: 'LOW', penalty: -10, message: 'Bot response lacks explicit EU AI Act identity disclosure.' });
+            }
+            if (hasMoodTopic && !hasStructuredDiga) {
+                score -= 10;
+                risks.push({ category: 'UNSTRUCTURED_DIGA_EVIDENCE', severity: 'LOW', penalty: -10, message: 'Mood discussion lacks structured DiGA scale (e.g. PHQ-9).' });
+            }
+
+            score = Math.max(0, score);
+            const compliant = score >= 70 && risks.filter(r => r.severity === 'HIGH').length === 0;
+            const elapsedMs = Math.max(0.1, +(performance.now() - t0).toFixed(2));
+
+            const payloadObj = {
+                compliant,
+                score,
+                risks,
+                stage1_heuristic_ms: elapsedMs,
+                timestamp: new Date().toISOString()
+            };
+
+            const digestBuf = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(payloadObj) + text));
+            const shaHex = Array.from(new Uint8Array(digestBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+            payloadObj.audit_sha256 = shaHex;
+
+            const badge = document.getElementById('cg-status-badge');
+            if (badge) {
+                badge.textContent = `${compliant ? 'PASS' : 'BLOCKED'} | Score: ${score}/100 (${elapsedMs}ms)`;
+                badge.style.color = compliant ? '#6ee7b7' : '#fca5a5';
+            }
+
+            const pills = document.getElementById('cg-rule-pills');
+            if (pills) {
+                pills.innerHTML = risks.length === 0
+                    ? '<span style="background:rgba(16,185,129,0.2);border:1px solid rgba(16,185,129,0.4);color:#6ee7b7;padding:0.25rem 0.65rem;border-radius:9999px;font-size:0.8rem;">All 6 Compliance Rules Passed</span>'
+                    : risks.map(r => `<span style="background:rgba(239,68,68,0.18);border:1px solid rgba(239,68,68,0.4);color:#fca5a5;padding:0.25rem 0.65rem;border-radius:9999px;font-size:0.8rem;">${r.category} (${r.penalty})</span>`).join('');
+            }
+
+            const out = document.getElementById('cg-json-output');
+            if (out) {
+                out.textContent = JSON.stringify(payloadObj, null, 2);
+            }
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 

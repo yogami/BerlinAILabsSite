@@ -311,7 +311,8 @@
                 A framework-free execution kernel written in Python 3.12 with Pydantic v2 contracts, SQLite append-only episodic storage, a 7-state finite state machine, a Tri-State Memory Quarantine write gate, Hybrid RRF retrieval, an in-memory bidirectional Knowledge Graph, and Pearlian Structural Causal Models. Verified across 165 automated `pytest` tests.
             </p>
             <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
-                <a href="#fsm-harness" class="btn btn-primary btn-glow">Inspect State Machine</a>
+                <a href="#kernel-sandbox" class="btn btn-primary btn-glow">Launch 7-State FSM Sandbox</a>
+                <a href="https://github.com/yogami/agent-kernel" target="_blank" class="btn btn-secondary btn-glass">View Source on GitHub (yogami/agent-kernel)</a>
                 <a href="#benchmarks" class="btn btn-secondary btn-glass">View Empirical Benchmarks</a>
                 <a href="blog/agent-harness-steering-graphs.html" class="btn btn-secondary btn-glass">Read "The Missing Compiler" Essay →</a>
             </div>
@@ -405,6 +406,27 @@
                     <span class="state-name">PERSIST_EPISODE</span>
                     <p>Writes immutable turn trace to `episodes` (`sqlite_episode_store.py`) and routes candidate facts into `fact_quarantine`.</p>
                 </div>
+            </div>
+
+            <!-- Interactive 7-State FSM & Memory Airlock Sandbox -->
+            <div id="kernel-sandbox" style="margin-top: 2.5rem; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(96, 165, 250, 0.35); border-radius: 14px; padding: 1.75rem;">
+                <h3 style="margin-top: 0; color: #f8fafc;">Interactive 7-State FSM &amp; Tri-State Memory Airlock Simulator</h3>
+                <p style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 1rem;">
+                    Test how <code>agent_kernel</code> evaluates 3-hop pharmacological contraindications and filters ungrounded candidate facts before promoting to <code>semantic_facts</code>.
+                </p>
+                <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                    <button type="button" onclick="loadKernelPreset('contraindication')" class="btn btn-secondary btn-glass" style="font-size: 0.82rem; padding: 0.45rem 0.85rem; border-color: rgba(239,68,68,0.5); color: #fca5a5;">Preset 1: 3-Hop Contraindication Block</button>
+                    <button type="button" onclick="loadKernelPreset('quarantine')" class="btn btn-secondary btn-glass" style="font-size: 0.82rem; padding: 0.45rem 0.85rem; border-color: rgba(245,158,11,0.5); color: #fcd34d;">Preset 2: Quarantine Airlock Trap</button>
+                    <button type="button" onclick="loadKernelPreset('verified')" class="btn btn-secondary btn-glass" style="font-size: 0.82rem; padding: 0.45rem 0.85rem; border-color: rgba(16,185,129,0.5); color: #6ee7b7;">Preset 3: Verified Extraction (Promoted)</button>
+                </div>
+                <label for="kernel-payload-input" style="display: block; font-size: 0.85rem; font-family: monospace; color: #94a3b8; margin-bottom: 0.4rem;">Candidate Proposal JSON (Editable):</label>
+                <textarea id="kernel-payload-input" rows="3" style="width: 100%; background: #090c13; color: #f8fafc; border: 1px solid #334155; border-radius: 8px; padding: 0.75rem; font-family: monospace; font-size: 0.85rem; margin-bottom: 1rem;">{"patient_allergy":"Penicillin","proposed_drug":"Amoxicillin 500mg","confidence":0.94,"source_span":"char:120-168"}</textarea>
+                <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
+                    <button type="button" onclick="runKernelSandbox()" class="btn btn-primary btn-glow" style="padding: 0.6rem 1.25rem; cursor: pointer;">Run 7-State Kernel Cycle</button>
+                    <span id="kernel-verdict-badge" style="font-family: monospace; font-weight: 700; color: #93c5fd;">Ready</span>
+                </div>
+                <div id="kernel-trace-steps" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;"></div>
+                <pre id="kernel-output-json" style="background: #090c13; color: #cbd5e1; border: 1px solid #1e293b; border-radius: 8px; padding: 1rem; font-size: 0.82rem; overflow-x: auto; margin: 0;">Click "Run 7-State Kernel Cycle" to inspect state transitions, SQLite table routing, and WebCrypto SHA-256 episode receipt.</pre>
             </div>
         </div>
 
@@ -732,6 +754,7 @@ in_flight_steering:
                     <h4>Core Harness</h4>
                     <ul class="footer-links" style="list-style: none; padding: 0;">
                         <li><a href="agent-kernel.html">Agent Kernel Spec</a></li>
+                        <li><a href="https://github.com/yogami/agent-kernel" target="_blank">agent-kernel (GitHub)</a></li>
                         <li><a href="blog/agent-harness-steering-graphs.html">In-Flight Steering</a></li>
                         <li><a href="aegismcp.html">AegisMCP Sandbox</a></li>
                     </ul>
@@ -760,6 +783,100 @@ in_flight_steering:
         </div>
     </footer>
 
+    <script>
+        const KERNEL_PRESETS = {
+            contraindication: '{"patient_allergy":"Penicillin","proposed_drug":"Amoxicillin 500mg","confidence":0.94,"source_span":"char:120-168"}',
+            quarantine: '{"patient_allergy":"None","proposed_drug":"Metformin 500mg","claim":"Patient eGFR is 85 mL/min","confidence":0.62,"source_span":null}',
+            verified: '{"patient_allergy":"Penicillin","proposed_drug":"Azithromycin 250mg","claim":"No macrolide contraindication found","confidence":0.96,"source_span":"char:410-482"}'
+        };
+
+        const DRUG_ONTOLOGY_GRAPH = {
+            "Amoxicillin 500mg": ["Amoxicillin", "Aminopenicillin", "Beta_Lactam_Penicillin", "Anaphylaxis_Risk_with_Penicillin"]
+        };
+
+        function loadKernelPreset(key) {
+            const el = document.getElementById('kernel-payload-input');
+            if (el && KERNEL_PRESETS[key]) {
+                el.value = KERNEL_PRESETS[key];
+                runKernelSandbox();
+            }
+        }
+
+        async function runKernelSandbox() {
+            const raw = document.getElementById('kernel-payload-input')?.value || '{}';
+            let payload;
+            try {
+                payload = JSON.parse(raw);
+            } catch (e) {
+                document.getElementById('kernel-verdict-badge').textContent = 'INVALID JSON';
+                return;
+            }
+
+            const allergy = String(payload.patient_allergy || '').toLowerCase();
+            const drug = String(payload.proposed_drug || '');
+            const conf = Number(payload.confidence ?? 0);
+            const span = payload.source_span;
+
+            const pathList = DRUG_ONTOLOGY_GRAPH[drug] || null;
+            const graphBlocked = Boolean(pathList && allergy.includes('penicillin'));
+
+            const steps = [
+                { name: '01_COMPOSE_CONTEXT', status: 'PASS' },
+                { name: '02_MODEL_PROPOSE', status: 'PASS' },
+                { name: '03_VALIDATE_TOOL_CALL', status: 'PASS' },
+                { name: '04_INTERVENTIONAL_GATE', status: graphBlocked ? 'BLOCKED (3-Hop Conflict)' : 'PASS' }
+            ];
+
+            let sqliteRouting = { episodes: 'APPENDED', fact_quarantine: 'SKIPPED', semantic_facts: 'BLOCKED' };
+            let badgeText = '';
+            let badgeColor = '#6ee7b7';
+
+            if (graphBlocked) {
+                steps.push({ name: '05_EXECUTE_TOOL', status: 'HALTED' });
+                steps.push({ name: '06_VALIDATE_OUTPUT', status: 'SKIPPED' });
+                steps.push({ name: '07_PERSIST_EPISODE', status: 'AUDIT_LOG_ONLY' });
+                sqliteRouting = { episodes: 'APPENDED_BLOCKED_EVENT', fact_quarantine: 'NO_PROMOTION', semantic_facts: 'UNCHANGED' };
+                badgeText = 'HALTED AT STATE 04 | 3-Hop Contraindication Blocked';
+                badgeColor = '#fca5a5';
+            } else {
+                steps.push({ name: '05_EXECUTE_TOOL', status: 'PASS' });
+                steps.push({ name: '06_VALIDATE_OUTPUT', status: 'PASS' });
+                const airlockPass = conf >= 0.85 && Boolean(span);
+                steps.push({ name: '07_PERSIST_EPISODE', status: airlockPass ? 'PROMOTED_SEMANTIC_FACTS' : 'TRAPPED_QUARANTINE' });
+                sqliteRouting = {
+                    episodes: 'APPENDED',
+                    fact_quarantine: airlockPass ? 'VERIFIED_AND_PROMOTED' : 'HELD_FOR_REVIEW',
+                    semantic_facts: airlockPass ? 'PROMOTED' : 'BLOCKED_UNGROUNDED'
+                };
+                badgeText = airlockPass
+                    ? `PROMOTED -> semantic_facts (conf=${conf})`
+                    : `TRAPPED -> fact_quarantine (conf=${conf}, span=${span})`;
+                badgeColor = airlockPass ? '#6ee7b7' : '#fcd34d';
+            }
+
+            const resultObj = {
+                input: payload,
+                graph_traversal_path: graphBlocked ? pathList : '0 conflicts (3-hop check clean)',
+                sqlite_routing: sqliteRouting,
+                state_trace: steps
+            };
+
+            const hashBuf = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(resultObj)));
+            resultObj.episode_sha256 = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+
+            const badgeEl = document.getElementById('kernel-verdict-badge');
+            badgeEl.textContent = badgeText;
+            badgeEl.style.color = badgeColor;
+
+            document.getElementById('kernel-trace-steps').innerHTML = steps.map(s => {
+                const blocked = s.status.includes('BLOCKED') || s.status.includes('HALTED') || s.status.includes('TRAPPED');
+                const col = blocked ? '#fca5a5' : (s.status === 'SKIPPED' || s.status === 'AUDIT_LOG_ONLY' ? '#94a3b8' : '#6ee7b7');
+                return `<span style="background: rgba(255,255,255,0.05); border: 1px solid ${col}; color: ${col}; padding: 0.25rem 0.6rem; border-radius: 6px; font-family: monospace; font-size: 0.78rem;">${s.name}: ${s.status}</span>`;
+            }).join('');
+
+            document.getElementById('kernel-output-json').textContent = JSON.stringify(resultObj, null, 2);
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 

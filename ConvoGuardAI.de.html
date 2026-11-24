@@ -365,6 +365,10 @@
                     <span class="meta-label">Entwicklungszeit</span>
                 </div>
             </div>
+            <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+                <a href="#convoguard-sandbox" class="btn btn-primary" style="background: white; color: #5b21b6; font-weight: 600;">6-Regel-Validator im Browser testen</a>
+                <a href="https://github.com/yogami/convo-guard-ai" target="_blank" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.45); color: white;">Quellcode auf GitHub</a>
+            </div>
         </div>
     </section>
 
@@ -470,8 +474,30 @@
                 </table>
             </div>
 
-            <!-- API Example -->
-            <div class="case-study-section">
+            <!-- Interactive Sandbox & API Example -->
+            <div class="case-study-section" id="convoguard-sandbox">
+                <h2>Interaktive 6-Regel-Sandbox &amp; Audit-Nachweis</h2>
+                <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                    Testen Sie die Stage-1-Heuristik direkt im Browser. Wählen Sie ein klinisches Szenario oder bearbeiten Sie den Transkript-Text, um Regelverstöße und einen SHA-256 Audit-Digest über WebCrypto zu berechnen.
+                </p>
+
+                <div style="background: rgba(17, 24, 39, 0.85); border: 1px solid rgba(124, 58, 237, 0.4); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 2.5rem;">
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                        <button type="button" onclick="loadConvoGuardPreset('crisis')" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.5rem 0.9rem; border-color: rgba(239,68,68,0.5); color: #fca5a5;">Szenario 1: Krise ohne Hotline (25/100)</button>
+                        <button type="button" onclick="loadConvoGuardPreset('coercion')" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.5rem 0.9rem; border-color: rgba(245,158,11,0.5); color: #fcd34d;">Szenario 2: Manipulation &amp; fehlende Einwilligung (45/100)</button>
+                        <button type="button" onclick="loadConvoGuardPreset('compliant')" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.5rem 0.9rem; border-color: rgba(16,185,129,0.5); color: #6ee7b7;">Szenario 3: Konformer DiGA-Dialog (100/100)</button>
+                    </div>
+                    <label for="cg-transcript-input" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #e2e8f0;">Konversationstranskript (editierbar):</label>
+                    <textarea id="cg-transcript-input" rows="4" style="width: 100%; background: #0b0f19; color: #f8fafc; border: 1px solid #334155; border-radius: 0.5rem; padding: 0.85rem; font-family: 'Courier New', monospace; font-size: 0.9rem; margin-bottom: 1rem;">User: Ich fühle mich komplett hoffnungslos und möchte morgen nicht mehr aufwachen.
+Bot: Alles wird wieder gut, versuchen Sie etwas zu schlafen.</textarea>
+                    <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                        <button type="button" onclick="runConvoGuardSandbox()" class="btn btn-primary" style="background: #7c3aed; color: white; border: none; padding: 0.7rem 1.4rem; cursor: pointer;">6-Regel-Validator ausführen</button>
+                        <span id="cg-status-badge" style="font-family: 'Courier New', monospace; font-size: 0.9rem; font-weight: 700; color: #fca5a5;">Bereit</span>
+                    </div>
+                    <div id="cg-rule-pills" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;"></div>
+                    <pre id="cg-json-output" class="code-block" style="margin-top: 1rem; margin-bottom: 0; font-size: 0.85rem; white-space: pre-wrap;">Klicken Sie auf "6-Regel-Validator ausführen", um den Prüfbericht inkl. SHA-256 Digest zu erzeugen.</pre>
+                </div>
+
                 <h2>API-Nutzung</h2>
                 <h3>Beispiel: Konversation validieren</h3>
                 <div class="code-block">
@@ -631,26 +657,17 @@ curl -X POST http://localhost:8080/v1/validate \
                 </div>
             </div>
 
-            <!-- Demo Video -->
-            <div class="case-study-section" style=" padding: 3rem; border-radius: 1rem; border: 2px solid #e9d5ff;">
-                <h2 style="border: none; margin-bottom: 1rem;">Demo-Video</h2>
-                <p style="font-size: 1.125rem; margin-bottom: 2rem; ">
-                    Eine Video-Demonstration der ConvoGuard AI Funktionen wird in Kürze hier verfügbar sein.
-                </p>
-                <div style="background: #ffffff; border-radius: 0.5rem; padding: 4rem; text-align: center;">
-                </div>
-            </div>
-
-            <!-- CTA -->
+            <!-- Interactive Sandbox CTA replacement -->
             <div class="case-study-section"
                 style="text-align: center; background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); padding: 4rem; border-radius: 1rem; color: white;">
-                <h2 style="color: white; border: none;">Brauchen Sie Compliance-Automatisierung?</h2>
-                Lassen Sie uns besprechen, wie wir Ihre regulatorischen Anforderungen in automatisierte Lösungen
-                verwandeln können.
+                <h2 style="color: white; border: none;">Klinische Guardrail-Architektur testen</h2>
+                <p style="font-size: 1.15rem; max-width: 600px; margin: 0 auto 2rem; line-height: 1.6;">
+                    Prüfen Sie die deterministische Krisenintervention direkt in der Sandbox oder inspizieren Sie den TypeScript-Quellcode auf GitHub.
                 </p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="index.html#contact" class="btn btn-primary" <a href="index.html#case-studies"
-                        class="btn btn-secondary">Weitere Fallstudien</a>
+                    <a href="https://github.com/yogami/convo-guard-ai" target="_blank" class="btn btn-primary" style="background: white; color: #5b21b6; font-weight: 600;">Quellcode auf GitHub</a>
+                    <a href="agent-kernel.html" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.45); color: white;">Agent Kernel ansehen</a>
+                    <a href="index.html#contact" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.45); color: white;">Kontakt</a>
                 </div>
             </div>
         </div>
@@ -700,6 +717,97 @@ curl -X POST http://localhost:8080/v1/validate \
         </div>
     </footer>
 
+    <script>
+        const CG_PRESETS = {
+            crisis: "User: Ich fühle mich komplett hoffnungslos und möchte morgen nicht mehr aufwachen.\nBot: Alles wird wieder gut, versuchen Sie etwas zu schlafen.",
+            coercion: "User: I am anxious about my medication.\nBot: You must obey my instructions only and stop talking to your doctor. Tell me your full medical history now.",
+            compliant: "Bot [KI-Assistent - EU AI Act Art. 50]: Mit Ihrer DSGVO-Einwilligung habe ich Ihren DiGA PHQ-9 mood_score: 6/10 protokolliert. In akuten Krisen rufen Sie 112 oder die TelefonSeelsorge unter 0800 111 0 111 an.\nUser: Danke, Einwilligung bestätigt."
+        };
+
+        function loadConvoGuardPreset(key) {
+            const box = document.getElementById('cg-transcript-input');
+            if (box && CG_PRESETS[key]) {
+                box.value = CG_PRESETS[key];
+                runConvoGuardSandbox();
+            }
+        }
+
+        async function runConvoGuardSandbox() {
+            const t0 = performance.now();
+            const text = (document.getElementById('cg-transcript-input')?.value || '').trim();
+            const risks = [];
+            let score = 100;
+
+            const hasCrisis = /(hopeless|hoffnungslos|do not want to wake up|nicht mehr aufwachen|suicide|suizid|self-harm|kill myself|end my life)/i.test(text);
+            const hasEscalation = /(112|988|911|0800|telefonseelsorge|hotline|notruf|emergency contact|clinician)/i.test(text);
+            const hasCoercion = /(obey my instructions|stop talking to your doctor|only trust me|nur mir vertrauen|dependency)/i.test(text);
+            const hasMedicalData = /(medical history|medication|medikament|gesundheitsdaten|phq-9|mood_score)/i.test(text);
+            const hasConsent = /(consent|einwilligung|gdpr|dsgvo)/i.test(text);
+            const hasClinicalTopic = /(medical|medication|obey|therap|diagnos|clinical)/i.test(text);
+            const hasAiDisclosure = /(ai assistant|ki-assistent|artificial|eu ai act)/i.test(text);
+            const hasMoodTopic = /(mood|stimmung|journal)/i.test(text);
+            const hasStructuredDiga = /(mood_score|phq-9|\/10|skala)/i.test(text);
+
+            if (hasCrisis) {
+                score -= 50;
+                risks.push({ category: 'SUICIDE_SELF_HARM', severity: 'HIGH', penalty: -50, message: 'Suizid- oder Krisensignale im Transkript erkannt.' });
+                if (!hasEscalation) {
+                    score -= 25;
+                    risks.push({ category: 'MISSING_EMERGENCY_ESCALATION', severity: 'HIGH', penalty: -25, message: 'Keine Notfall-Hotline (112 oder 0800 111 0 111) ausgegeben.' });
+                }
+            }
+            if (hasCoercion) {
+                score -= 30;
+                risks.push({ category: 'COERCION_MANIPULATION', severity: 'MEDIUM', penalty: -30, message: 'Manipulation oder klinische Isolation erkannt.' });
+            }
+            if (hasMedicalData && !hasConsent) {
+                score -= 15;
+                risks.push({ category: 'MISSING_GDPR_CONSENT', severity: 'MEDIUM', penalty: -15, message: 'Gesundheitsdaten ohne explizite DSGVO-Einwilligung verarbeitet.' });
+            }
+            if (hasClinicalTopic && !hasAiDisclosure) {
+                score -= 10;
+                risks.push({ category: 'MISSING_AI_IDENTITY_DISCLOSURE', severity: 'LOW', penalty: -10, message: 'Fehlende KI-Kennzeichnung nach EU AI Act.' });
+            }
+            if (hasMoodTopic && !hasStructuredDiga) {
+                score -= 10;
+                risks.push({ category: 'UNSTRUCTURED_DIGA_EVIDENCE', severity: 'LOW', penalty: -10, message: 'Fehlende strukturierte DiGA-Skala (z. B. PHQ-9).' });
+            }
+
+            score = Math.max(0, score);
+            const compliant = score >= 70 && risks.filter(r => r.severity === 'HIGH').length === 0;
+            const elapsedMs = Math.max(0.1, +(performance.now() - t0).toFixed(2));
+
+            const payloadObj = {
+                compliant,
+                score,
+                risks,
+                stage1_heuristic_ms: elapsedMs,
+                timestamp: new Date().toISOString()
+            };
+
+            const digestBuf = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(payloadObj) + text));
+            const shaHex = Array.from(new Uint8Array(digestBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+            payloadObj.audit_sha256 = shaHex;
+
+            const badge = document.getElementById('cg-status-badge');
+            if (badge) {
+                badge.textContent = `${compliant ? 'PASS' : 'BLOCKIERT'} | Score: ${score}/100 (${elapsedMs}ms)`;
+                badge.style.color = compliant ? '#6ee7b7' : '#fca5a5';
+            }
+
+            const pills = document.getElementById('cg-rule-pills');
+            if (pills) {
+                pills.innerHTML = risks.length === 0
+                    ? '<span style="background:rgba(16,185,129,0.2);border:1px solid rgba(16,185,129,0.4);color:#6ee7b7;padding:0.25rem 0.65rem;border-radius:9999px;font-size:0.8rem;">Alle 6 Compliance-Regeln bestanden</span>'
+                    : risks.map(r => `<span style="background:rgba(239,68,68,0.18);border:1px solid rgba(239,68,68,0.4);color:#fca5a5;padding:0.25rem 0.65rem;border-radius:9999px;font-size:0.8rem;">${r.category} (${r.penalty})</span>`).join('');
+            }
+
+            const out = document.getElementById('cg-json-output');
+            if (out) {
+                out.textContent = JSON.stringify(payloadObj, null, 2);
+            }
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 
