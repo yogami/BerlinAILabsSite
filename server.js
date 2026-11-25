@@ -149,7 +149,8 @@ const MIME_TYPES = {
   '.webp': 'image/webp',
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon',
-  '.json': 'application/json'
+  '.json': 'application/json',
+  '.pdf': 'application/pdf'
 };
 
 // Helper: Send email notification via Resend API over HTTPS

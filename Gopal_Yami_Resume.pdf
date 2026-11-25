@@ -1,0 +1,475 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<<
+/Producer (macOS Version 15\0563\0561 \050Build 24D70\051 Quartz PDFContext)
+/Title (Yami Gopal \055 CV)
+/Author (Yami Gopal)
+/Creator (Pages)
+/CreationDate (D\07220261125151306Z00\04700\047)
+/ModDate (D\07220261125151306Z00\04700\047)
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Count 2
+/Kids [ 4 0 R 10 0 R ]
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+4 0 obj
+<<
+/Contents 5 0 R
+/MediaBox [ 0 0 595.2756 841.8898 ]
+/Resources <<
+/Font 6 0 R
+/ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+/Parent 2 0 R
+>>
+endobj
+5 0 obj
+<<
+/Length 6860
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 46 771.8898 cm
+q
+.066667 .066667 .066667 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 196.6178 0 Td (Yami Gopal) Tj T* -196.6178 0 Td ET
+Q
+Q
+q
+1 0 0 1 46 755.8898 cm
+q
+.266667 .266667 .266667 rg
+BT 1 0 0 1 0 3 Tm /F1 9 Tf 12 TL 128.5538 0 Td (Berlin, Germany | +49 163 337 7537 | gopal.yami@gmail.com) Tj T* -128.5538 0 Td ET
+Q
+Q
+q
+1 0 0 1 46 733.8898 cm
+q
+.266667 .266667 .266667 rg
+BT 1 0 0 1 0 3 Tm /F1 9 Tf 12 TL 38.7113 0 Td (LinkedIn: https://www.linkedin.com/in/yami-g-b170294/ | GitHub: https://github.com/yogami | berlinailabs.de) Tj T* -38.7113 0 Td ET
+Q
+Q
+q
+1 0 0 1 46 719.8898 cm
+Q
+q
+1 0 0 1 46 692.8898 cm
+q
+.066667 .066667 .066667 rg
+BT 1 0 0 1 0 3 Tm /F2 12 Tf 15 TL (SUMMARY) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 687.8898 cm
+q
+1 w
+1 J
+.133333 .133333 .133333 RG
+n 0 0 m 503.2756 0 l S
+Q
+Q
+q
+1 0 0 1 46 573.8898 cm
+q
+BT 1 0 0 1 0 98.5 Tm 13.5 TL /F1 9.5 Tf .133333 .133333 .133333 rg (Principal AI Architect and Backend Systems Engineer with twenty years of software delivery alongside four years) Tj T* (building production Python 3.12 \(FastAPI, Pydantic v2, asyncio\) and PostgreSQL agent systems. Architected) Tj T* /F2 9.5 Tf (agent_kernel) Tj /F1 9.5 Tf ( as a deterministic seven-state agent runtime with explicit tool-calling contracts and structured output) Tj T* (validation alongside ) Tj /F2 9.5 Tf (OpenTelemetry) Tj /F1 9.5 Tf ( span tracing plus hard token and USD cost circuit-breakers. Built hybrid ) Tj /F2 9.5 Tf (BM25 +) Tj T* (pgvector) Tj /F1 9.5 Tf ( retrieval and document verification pipelines on ) Tj /F2 9.5 Tf (PostgreSQL) Tj /F1 9.5 Tf ( automating complex regulatory and enterprise) Tj T* (data reconciliation. Previously automated 350+ CI/CD compliance verification checks on AWS at Boehringer Ingelheim) Tj T* (X after contract-first OpenAPI API architecture at Personio GmbH and high-concurrency PostgreSQL/Redis engineering) Tj T* (at Hike Messenger. Permanent EU work authorization in Berlin; native English \(C2\) and German \(A2\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 563.8898 cm
+Q
+q
+1 0 0 1 46 536.8898 cm
+q
+.066667 .066667 .066667 rg
+BT 1 0 0 1 0 3 Tm /F2 12 Tf 15 TL (PROFESSIONAL EXPERIENCE) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 531.8898 cm
+q
+1 w
+1 J
+.133333 .133333 .133333 RG
+n 0 0 m 503.2756 0 l S
+Q
+Q
+q
+1 0 0 1 46 512.8898 cm
+q
+BT 1 0 0 1 0 3 Tm 13 TL /F2 10 Tf .066667 .066667 .066667 rg (Principal AI Architect & Founder | Berlin AI Labs) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 498.8898 cm
+q
+.266667 .266667 .266667 rg
+BT 1 0 0 1 0 3 Tm /F3 9 Tf 12 TL (Berlin, Germany | Sep 2022 to Present) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 427.3898 cm
+q
+BT 1 0 0 1 14 58 Tm -10 0 Td 13.5 TL /F1 9.5 Tf .133333 .133333 .133333 rg (\177 Architected ) Tj /F2 9.5 Tf (agent_kernel) Tj /F1 9.5 Tf ( \(berlinailabs.de/agent-kernel.html\) as a framework-free Python 3.12 and FastAPI runtime) Tj T* 10 0 Td (executing multi-step tool-using agent workflows inside a deterministic seven-state finite state machine capped at five) Tj T* (steps with hard token and USD cost circuit-breakers. Managed prompts and tool permissions as versioned YAML) Tj T* /F2 9.5 Tf (DomainPack) Tj /F1 9.5 Tf ( manifests while instrumenting every model turn with ) Tj /F2 9.5 Tf (OpenTelemetry) Tj /F1 9.5 Tf ( span hooks and a ) Tj /F2 9.5 Tf (Tri-State) Tj T* (Memory Quarantine) Tj /F1 9.5 Tf ( write gate to prevent unverified outputs from mutating PostgreSQL state.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 369.3898 cm
+q
+BT 1 0 0 1 14 44.5 Tm -10 0 Td 13.5 TL /F1 9.5 Tf .133333 .133333 .133333 rg (\177 Built end-to-end ) Tj /F2 9.5 Tf (Python) Tj /F1 9.5 Tf ( \() Tj /F2 9.5 Tf (FastAPI) Tj /F1 9.5 Tf (\) and ) Tj /F2 9.5 Tf (TypeScript) Tj /F1 9.5 Tf ( document extraction pipelines backed by hybrid ) Tj /F2 9.5 Tf (BM25 +) Tj T* 10 0 Td (pgvector) Tj /F1 9.5 Tf ( retrieval on ) Tj /F2 9.5 Tf (PostgreSQL) Tj /F1 9.5 Tf ( for German commercial property managers reconciling multi-format utility) Tj T* (invoices into DATEV and DOMUS accounting ledgers, shrinking manual data verification from 8 hours down to 15) Tj T* (minutes.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 324.8898 cm
+q
+BT 1 0 0 1 14 31 Tm -10 0 Td 13.5 TL /F1 9.5 Tf .133333 .133333 .133333 rg (\177 Engineered ) Tj /F2 9.5 Tf (ConvoGuard AI) Tj /F1 9.5 Tf ( \(berlinailabs.de/ConvoGuardAI.html\) as a real-time compliance evaluation middleware) Tj T* 10 0 Td (validating conversational turns in 170ms to 900ms via /v1/validate against six ) Tj /F2 9.5 Tf (EU AI Act) Tj /F1 9.5 Tf ( and ) Tj /F2 9.5 Tf (DiGA) Tj /F1 9.5 Tf ( alongside ) Tj /F2 9.5 Tf (GDPR) Tj /F1 9.5 Tf  T* (regulatory rules with a SHA-256 tamper-evident audit trail.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 280.3898 cm
+q
+BT 1 0 0 1 14 31 Tm -10 0 Td 13.5 TL /F1 9.5 Tf .133333 .133333 .133333 rg (\177 Delivered ) Tj /F2 9.5 Tf (AIVoiceTranslator) Tj /F1 9.5 Tf ( for live instruction at Benedict School over bidirectional streaming WebSockets under) Tj T* 10 0 Td (350ms Time-to-First-Token alongside automated multi-step intake and scheduling workflows for local service) Tj T* (businesses.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 261.3898 cm
+q
+BT 1 0 0 1 0 3 Tm 13 TL /F2 10 Tf .066667 .066667 .066667 rg (Senior Technical Delivery Lead & Systems Engineer | Boehringer Ingelheim X) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 247.3898 cm
+q
+.266667 .266667 .266667 rg
+BT 1 0 0 1 0 3 Tm /F3 9 Tf 12 TL (Ingelheim am Rhein, Germany | Apr 2020 to Sep 2022) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 202.8898 cm
+q
+.133333 .133333 .133333 rg
+BT 1 0 0 1 14 31 Tm /F1 9.5 Tf 13.5 TL -10 0 Td (\177 Four-day manual security and regulatory reviews stalled releases across three digital-health squads. Partnered with) Tj T* 10 0 Td (Compliance to automate 350+ Python verification checks inside GitHub Actions CI/CD pipelines validating) Tj T* (requirement traceability and AWS eu-central-1 IAM/encryption rules in 15 minutes.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 171.8898 cm
+q
+.133333 .133333 .133333 rg
+BT 1 0 0 1 14 17.5 Tm /F1 9.5 Tf 13.5 TL -10 0 Td (\177 Guided engineering squads on containerized Docker microservices running on AWS alongside PostgreSQL query) Tj T* 10 0 Td (latency debugging and pair-programming design reviews.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 152.8898 cm
+q
+BT 1 0 0 1 0 3 Tm 13 TL /F2 10 Tf .066667 .066667 .066667 rg (Technical Delivery Lead & API Architect | Personio GmbH) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 138.8898 cm
+q
+.266667 .266667 .266667 rg
+BT 1 0 0 1 0 3 Tm /F3 9 Tf 12 TL (Munich, Germany | Jul 2019 to Jan 2020) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 94.38976 cm
+q
+.133333 .133333 .133333 rg
+BT 1 0 0 1 14 31 Tm /F1 9.5 Tf 13.5 TL -10 0 Td (\177 Defined contract-first OpenAPI YAML schemas with mock REST servers and automated contract validation across) Tj T* 10 0 Td (Core HR and Payroll alongside Recruiting squads during a Java microservices split. Eliminated direct SQL) Tj T* (cross-service reads while shrinking cross-squad integration lead time from 5 weeks to 3 weeks.) Tj T* ET
+Q
+Q
+ 
+
+endstream
+endobj
+6 0 obj
+<<
+/F1 7 0 R
+/F2 8 0 R
+/F3 9 0 R
+>>
+endobj
+7 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+8 0 obj
+<<
+/BaseFont /Helvetica-Bold
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+9 0 obj
+<<
+/BaseFont /Helvetica-Oblique
+/Encoding /WinAnsiEncoding
+/Name /F3
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+10 0 obj
+<<
+/Contents 11 0 R
+/MediaBox [ 0 0 595.2756 841.8898 ]
+/Resources <<
+/Font 6 0 R
+/ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+/Parent 2 0 R
+>>
+endobj
+11 0 obj
+<<
+/Length 6084
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 46 782.8898 cm
+q
+BT 1 0 0 1 0 3 Tm 13 TL /F2 10 Tf .066667 .066667 .066667 rg (Agile Coach & Delivery Manager | FlixBus) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 768.8898 cm
+q
+.266667 .266667 .266667 rg
+BT 1 0 0 1 0 3 Tm /F3 9 Tf 12 TL (Berlin, Germany | Sep 2018 to Feb 2019) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 737.8898 cm
+q
+.133333 .133333 .133333 rg
+BT 1 0 0 1 14 17.5 Tm /F1 9.5 Tf 13.5 TL -10 0 Td (\177 Directed cross-squad technical delivery and release coordination for Berlin engineering teams across consumer) Tj T* 10 0 Td (mobility services.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 718.8898 cm
+q
+BT 1 0 0 1 0 3 Tm 13 TL /F2 10 Tf .066667 .066667 .066667 rg (Agile Coach & Technical Delivery Lead | Yara Digital Lab) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 704.8898 cm
+q
+.266667 .266667 .266667 rg
+BT 1 0 0 1 0 3 Tm /F3 9 Tf 12 TL (Berlin, Germany | Sep 2017 to Aug 2018) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 687.3898 cm
+q
+.133333 .133333 .133333 rg
+BT 1 0 0 1 14 4 Tm /F1 9.5 Tf 13.5 TL -10 0 Td (\177 Guided Berlin engineering squads on delivery architecture and cloud release cadence for digital agritech platforms.) Tj T* 10 0 Td ET
+Q
+Q
+q
+1 0 0 1 46 668.3898 cm
+q
+BT 1 0 0 1 0 3 Tm 13 TL /F2 10 Tf .066667 .066667 .066667 rg (Engineering Lead & Backend Systems Manager | Hike Messenger) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 654.3898 cm
+q
+.266667 .266667 .266667 rg
+BT 1 0 0 1 0 3 Tm /F3 9 Tf 12 TL (New Delhi, India | Jan 2016 to Jul 2017) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 623.3898 cm
+q
+BT 1 0 0 1 14 17.5 Tm -10 0 Td 13.5 TL /F1 9.5 Tf .133333 .133333 .133333 rg (\177 Led backend squads running high-concurrency asynchronous services across ) Tj /F2 9.5 Tf (PostgreSQL) Tj /F1 9.5 Tf ( and ) Tj /F2 9.5 Tf (Redis) Tj /F1 9.5 Tf ( clusters) Tj T* 10 0 Td (serving millions of daily active users at 99.99% uptime.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 592.3898 cm
+q
+.133333 .133333 .133333 rg
+BT 1 0 0 1 14 17.5 Tm /F1 9.5 Tf 13.5 TL -10 0 Td (\177 Split read and write connection pools in production to eliminate evening 9 PM tail-latency bursts, restoring sub-200ms) Tj T* 10 0 Td (response times while reducing live production incidents by 60%.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 573.3898 cm
+q
+.066667 .066667 .066667 rg
+BT 1 0 0 1 0 3 Tm /F2 10 Tf 13 TL (Agile Coach \(Consultant\) | John Deere) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 559.3898 cm
+q
+.266667 .266667 .266667 rg
+BT 1 0 0 1 0 3 Tm /F3 9 Tf 12 TL (Pune, India | Aug 2013 to Apr 2015) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 541.8898 cm
+q
+.133333 .133333 .133333 rg
+BT 1 0 0 1 14 4 Tm /F1 9.5 Tf 13.5 TL -10 0 Td (\177 Coached distributed engineering teams on iterative delivery planning and sprint predictability.) Tj T* 10 0 Td ET
+Q
+Q
+q
+1 0 0 1 46 522.8898 cm
+q
+.066667 .066667 .066667 rg
+BT 1 0 0 1 0 3 Tm /F2 10 Tf 13 TL (Agile Trainer, Technical Project Manager \(Consultant\) | Springer Science+Business Media) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 508.8898 cm
+q
+.266667 .266667 .266667 rg
+BT 1 0 0 1 0 3 Tm /F3 9 Tf 12 TL (Pune, India | Oct 2011 to May 2013) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 491.3898 cm
+q
+.133333 .133333 .133333 rg
+BT 1 0 0 1 14 4 Tm /F1 9.5 Tf 13.5 TL -10 0 Td (\177 Coordinated technical delivery across publishing platform engineering squads.) Tj T* 10 0 Td ET
+Q
+Q
+q
+1 0 0 1 46 472.3898 cm
+q
+BT 1 0 0 1 0 3 Tm 13 TL /F2 10 Tf .066667 .066667 .066667 rg (Senior Software Engineer & Backend Consultant | Tallan Inc.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 458.3898 cm
+q
+.266667 .266667 .266667 rg
+BT 1 0 0 1 0 3 Tm /F3 9 Tf 12 TL (Irvine, CA, USA | Dec 2003 to Oct 2011) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 427.3898 cm
+q
+BT 1 0 0 1 14 17.5 Tm -10 0 Td 13.5 TL /F1 9.5 Tf .133333 .133333 .133333 rg (\177 Owned client-facing system architecture and enterprise SQL Server financial ETL integrations in Java and C#/.NET) Tj T* 10 0 Td (for ) Tj /F2 9.5 Tf (Cashcall) Tj /F1 9.5 Tf ( alongside ) Tj /F2 9.5 Tf (Ingram Micro) Tj /F1 9.5 Tf ( plus ) Tj /F2 9.5 Tf (Disney) Tj /F1 9.5 Tf ( \(as well as Talbots and FedEx Kinkos\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 419.3898 cm
+Q
+q
+1 0 0 1 46 392.3898 cm
+q
+.066667 .066667 .066667 rg
+BT 1 0 0 1 0 3 Tm /F2 12 Tf 15 TL (TECHNICAL SKILLS) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 387.3898 cm
+q
+1 w
+1 J
+.133333 .133333 .133333 RG
+n 0 0 m 503.2756 0 l S
+Q
+Q
+q
+1 0 0 1 46 340.8898 cm
+q
+BT 1 0 0 1 14 31 Tm -10 0 Td 13.5 TL /F1 9.5 Tf .133333 .133333 .133333 rg (\177 ) Tj /F2 9.5 Tf (Applied AI & Python Backend:) Tj /F1 9.5 Tf ( Python 3.12 \(FastAPI, Pydantic v2, asyncio\), Deterministic Agent Control Loops) Tj T* 10 0 Td (\(agent_kernel\), Hybrid RAG \(BM25 + pgvector\), Tool-Using Agents & Structured Outputs, OpenTelemetry Span) Tj T* (Tracing & Cost Circuit-Breakers, YAML Policy Manifests.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 309.8898 cm
+q
+BT 1 0 0 1 14 17.5 Tm -10 0 Td 13.5 TL /F1 9.5 Tf .133333 .133333 .133333 rg (\177 ) Tj /F2 9.5 Tf (Data, Cloud & Full-Stack:) Tj /F1 9.5 Tf ( PostgreSQL, Redis, Docker, AWS, GCP, GitHub Actions CI/CD, TypeScript, Node.js,) Tj T* 10 0 Td (React, OpenAPI & REST APIs, Java, C#/.NET, SQL, WebSockets.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 292.3898 cm
+q
+BT 1 0 0 1 14 4 Tm -10 0 Td 13.5 TL /F1 9.5 Tf .133333 .133333 .133333 rg (\177 ) Tj /F2 9.5 Tf (Languages:) Tj /F1 9.5 Tf ( English \(Native C2\), German \(A2\).) Tj T* 10 0 Td ET
+Q
+Q
+q
+1 0 0 1 46 284.3898 cm
+Q
+q
+1 0 0 1 46 257.3898 cm
+q
+BT 1 0 0 1 0 3 Tm 15 TL /F2 12 Tf .066667 .066667 .066667 rg (EDUCATION & CERTIFICATIONS) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 252.3898 cm
+q
+1 w
+1 J
+.133333 .133333 .133333 RG
+n 0 0 m 503.2756 0 l S
+Q
+Q
+q
+1 0 0 1 46 219.3898 cm
+q
+BT 1 0 0 1 14 17.5 Tm -10 0 Td 13.5 TL /F1 9.5 Tf .133333 .133333 .133333 rg (\177 ) Tj /F2 9.5 Tf (MS, Electrical & Computer Engineering) Tj /F1 9.5 Tf (, Tennessee Technological University, USA \(2003\) | ) Tj /F2 9.5 Tf (BE, Electrical) Tj T* 10 0 Td (Engineering) Tj /F1 9.5 Tf (, COEP Technological University, Pune \(2000\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 46 188.3898 cm
+q
+BT 1 0 0 1 14 17.5 Tm -10 0 Td 13.5 TL /F1 9.5 Tf .133333 .133333 .133333 rg (\177 ) Tj /F2 9.5 Tf (Certifications:) Tj /F1 9.5 Tf ( Certified Agile Leadership \(CAL\), Certified ScrumMaster \(CSM\), Sun Certified Java Programmer) Tj T* 10 0 Td (\(SCJP\)) Tj T* ET
+Q
+Q
+ 
+
+endstream
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000015 00000 n 
+0000000272 00000 n 
+0000000338 00000 n 
+0000000387 00000 n 
+0000000586 00000 n 
+0000007498 00000 n 
+0000007549 00000 n 
+0000007656 00000 n 
+0000007768 00000 n 
+0000007883 00000 n 
+0000008084 00000 n 
+trailer
+<<
+/Size 12
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+14221
+%%EOF
